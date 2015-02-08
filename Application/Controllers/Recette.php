@@ -32,6 +32,7 @@ class Recette extends \Library\Controller\Controller{
 
 
 		$this->setDataView(array(
+			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
 			"recettes" => $recettes->response
 			));
