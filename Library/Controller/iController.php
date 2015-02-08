@@ -4,6 +4,6 @@ namespace Library\Controller;
 
 interface iController{
 
-	public function indexAction();
+	//public function indexAction();
 	
 }
