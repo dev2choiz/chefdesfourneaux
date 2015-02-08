@@ -40,11 +40,17 @@ class Recette extends \Library\Controller\Controller{
 	}
 
 	public function chefAction(){
-
+		$this->setDataView(array(
+			"pageTitle" => "Recettes de chef",
+			"tinyMCE" => $this->tinyMCE->getSource()
+		));
 	}
 
 	public function santeAction(){
-		
+		$this->setDataView(array(
+			"pageTitle" => "Recette santé, régime, cuisine légère",
+			"tinyMCE" => $this->tinyMCE->getSource()
+		));
 	}
 
 
