@@ -21,18 +21,21 @@
         <div class="blog-masthead">
             <div class="container">
                 <nav class="blog-nav">
-                    <a class="blog-nav-item active" href="#">Accueil</a>
-                    <a class="blog-nav-item" href="#">Categories</a>
-                    <a class="blog-nav-item" href="#">Recettes de chef</a>
-                    <a class="blog-nav-item" href="#">forme et santé</a>
-                    <a class="blog-nav-item" href="#">livres</a>
-                    <a class="blog-nav-item" href="#">Restaurants</a>
-                    <a class="blog-nav-item" href="#">Video tuto</a>
+                    <a class="blog-nav-item active" href="<?=LINK_ROOT?>">Accueil</a>
+                    <a class="blog-nav-item" href="<?=LINK_ROOT.'recette/categorie'?>">Categories</a>
+                    <a class="blog-nav-item" href="<?=LINK_ROOT.'recette/chef'?>">Recettes de chef</a>
+                    <a class="blog-nav-item" href="<?=LINK_ROOT.'recette/sante'?>">forme et santé</a>
+                    <a class="blog-nav-item" href="<?=LINK_ROOT.'vente/livre'?>">livres</a>
+                    <a class="blog-nav-item" href="<?=LINK_ROOT.'vente/restaurant'?>">Restaurants</a>
+                    <a class="blog-nav-item" href="<?=LINK_ROOT.'video/index'?>">Video tuto</a>
+                    <?php if((!empty($_SESSION['user'])) && $_SESSION['user']['role'] == "admin"): ?>
+                        <a class="blog-nav-item" href="<?=LINK_ROOT.'admin/index'?>">Administration du site</a>
+                    <?php endif; ?>
                 </nav>
                 <nav  class="blog-nav blog-nav-right">
                     <?php if(empty($_SESSION['user'])): ?>
                         <a class="blog-nav-item" href="<?=LINK_ROOT.'user/login'?>">Connexion</a>
-                    <?php else: ?>
+                    <?php else :?>
                         <a class="blog-nav-item" href="<?=LINK_ROOT.'user/profil'?>">
                             <span class="glyphicon glyphicon-user"></span>
                         </a>

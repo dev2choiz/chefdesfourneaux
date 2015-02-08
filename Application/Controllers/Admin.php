@@ -2,7 +2,7 @@
 
 namespace Application\Controllers;
 
-class Recette extends \Library\Controller\Controller{
+class Admin extends \Library\Controller\Controller{
 
 	private $message;
 	private $tinyMCE;
@@ -14,39 +14,10 @@ class Recette extends \Library\Controller\Controller{
 		$this->tinyMCE=new \Library\TinyMCE\tinyMCE();
 	}
 
-	public function categorieAction(){
-		//echo "indexdjkl".LINK_ROOT."recette/creer"; die();
-		//$this->setRedirect(LINK_ROOT."recette/creer");
-		
-		$modelRecette 	= new \Application\Models\Recette('localhost');
-		$recettes 		= $modelRecette->getRecettes() ;	//interroge le webservice
-		//var_dump($recettes);
 
-		if(empty($recettes->response)){
-			$this->message->addError("aucune recette !");
-		}elseif ($recettes->apiError ) {
-			$this->message->addError($user->apiErrorMessage);
-		}elseif ( $recettes->serverError ) {
-			$this->message->addError($user->serverErrorMessage);
-		}
-
-
-		$this->setDataView(array(
-			"message" => $this->message->showMessages(),
-			"recettes" => $recettes->response
-			));
-
-	}
-
-	public function chefAction(){
-
-	}
-
-	public function santeAction(){
+	public function indexAction(){
 		
 	}
-
-
 
 	public function creerAction(){
 		//echo "creer    ".LINK_ROOT."recette/creer";
@@ -132,6 +103,14 @@ class Recette extends \Library\Controller\Controller{
 		
 
 		$this->setDataView(array("categories" =>  $cat));
+	}
+
+	public function mettreajourAction(){
+
+	}
+
+	public function supprimerAction(){
+
 	}
 
 
