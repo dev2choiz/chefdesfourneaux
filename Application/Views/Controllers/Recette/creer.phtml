@@ -1,0 +1,81 @@
+<?=$tinyMCE?>
+<?=$message?>
+<form class="" method="post" border="1">
+    <h2 class="form-signin-heading">
+    	<?=$pageTitle?>
+    </h2>
+    <textarea name="value" autofocus style="width: 100%;"></textarea>
+    
+    <table>
+      <tr><td>categorie</td>
+        <td>
+          <select name="id_cat">
+            <?php foreach ($categories as $categorie) {?>
+                <option value="<?=$categorie['id_cat']?>"><?=$categorie['value']?></option> 
+
+            <?php } ?>
+          </select>
+        </td></tr>      
+      
+
+
+      <tr><td>temps de cuisson</td><td><input type="text"  name="tps_cuisson"></td></tr>
+      <tr><td>cout</td><td><input type="text"  name="cout"  /></td></tr>
+      <tr>
+        <td>difficulté</td>
+        <td><select name="difficulte">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          </select></td>
+      </tr>
+      <tr>
+        <td>type
+        </td><td>
+          <select name="type">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select> c'est quoi le type?
+        </td></tr>
+    </table>
+    
+    
+    <label for="diabete">diabete</label>
+    <input type="checkbox" name="diabete" id="diabete" value="">
+    
+    <label for="ble">ble</label>
+    <input type="checkbox" name="ble" id="ble" value="">
+
+    <label for="lait">lait</label>
+    <input type="checkbox" name="lait" id="lait" value="">
+
+    <label for="oeuf">oeuf</label>
+    <input type="checkbox" name="oeuf" id="oeuf" value="">
+
+    <label for="arachide">arachide</label>
+    <input type="checkbox" name="arachide" id="arachide" value="">
+
+    <label for="soja">soja</label>
+    <input type="checkbox" name="soja" id="soja" value="">
+
+    <label for="gluten">gluten</label>
+    <input type="checkbox" name="gluten" id="gluten" value="">
+
+
+
+
+
+
+    <input type="hidden"  name="id_livre"  value="1">
+    <input type="hidden"  name="id_resto"  value="1">
+
+    <BR>
+    <button name="btn" class="btn btn-lg btn-primary" type="submit"><?=$pageTitle?></button><BR>
+    <a href="<?=LINK_ROOT?>">Retour à l'accueil</a> - 
+    
+</form>

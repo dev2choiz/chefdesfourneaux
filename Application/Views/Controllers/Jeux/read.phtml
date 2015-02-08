@@ -1,0 +1,20 @@
+<?php if(!empty($listeJeux)): foreach ($listeJeux as $jeu): ?>
+
+	<div class="blog-post">
+	    <h2 class="blog-post-title"><?=$jeu->nom?></h2>
+	    <p class="blog-post-meta"><?=date("F j, Y",strtotime($jeu->update))?></p>
+	    <p>
+	    	<?=$jeu->description?>
+	    </p>
+	    <h3>Properties</h3>
+	    <ul>
+	    	<li>Support : <?=$jeu->value_support?></li>
+	    	<li>Genre : <?=$jeu->value_genre?></li>
+	    	<li>Age : <?=$jeu->value_age?></li>
+	    </ul>
+	 </div>
+
+
+<?php endforeach; else: ?>
+	<div>Aucun jeu</div>
+<?php endif; ?>

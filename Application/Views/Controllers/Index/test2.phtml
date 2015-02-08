@@ -1,0 +1,13 @@
+<h1>controller:index, action:test2</h1>
+
+
+<?php if(!empty($listJeux)): foreach ($listJeux as $jeu): ?>
+	<div>
+		<h2><?=$jeu->nom?></h2>
+		<p><?=$jeu->description?></p>
+	</div>
+<?php endforeach; else: ?>
+	<div>Aucun jeu</div>
+<?php endif; ?>
+
+

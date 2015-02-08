@@ -1,0 +1,17 @@
+CREATE VIEW viewjeux AS
+SELECT
+jeux.id,
+jeux.id_support,
+jeux.id_genre,
+jeux.id_age,
+jeux.nom,
+jeux.description,
+jeux.`update`,
+table_support.`value` AS value_support,
+table_genre.`value` AS value_genre,
+table_age.`value` AS value_age
+FROM
+jeux
+LEFT JOIN properties AS table_support ON table_support.id = jeux.id_support AND table_support.type = "support"
+LEFT JOIN properties AS table_genre ON table_genre.id = jeux.id_genre AND table_genre.type = 'genre'
+LEFT JOIN properties AS table_age ON table_age.id = jeux.id_age AND table_age.type = 'age'

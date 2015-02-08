@@ -1,0 +1,21 @@
+<!--?=$message?-->
+<?php 
+
+
+var_dump($recettes);
+foreach($recettes as $recette){ ?>
+
+	<div style='border: 1px solid #000'>
+		recette : <?=$recette->value?>
+		iduser:<?=$recette->id_user?><BR/>
+		idcategorie:<?=$recette->id_cat?>
+	</div>
+	
+<?php } ?>
+	
+
+
+    <a href="<?=LINK_ROOT?>">Retour à l'accueil</a> - 
+	
+</form>
+
