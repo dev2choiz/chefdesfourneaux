@@ -1,5 +1,5 @@
 <?php
-//changmnt sur error victoiiiiiiiiiire
+
 namespace Application\Controllers;
 
 class Error extends \Library\Controller\Controller{
