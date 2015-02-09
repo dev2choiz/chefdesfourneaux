@@ -1,5 +1,5 @@
 <?php
-//a supprimer
+//a effacer
 namespace Application\Controllers;
 
 class Jeux extends \Library\Controller\Controller{

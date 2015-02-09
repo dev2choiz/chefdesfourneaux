@@ -21,7 +21,7 @@ class Admin extends \Library\Controller\Controller{
 
 	public function creerAction(){
 		//echo "creer    ".LINK_ROOT."recette/creer";
-		if(empty($_SESSION['user'])){
+		if($_SESSION['user']['role'] !== "admin"){
 			header('location: '.LINK_ROOT);
 			die();
 		}
@@ -106,11 +106,17 @@ class Admin extends \Library\Controller\Controller{
 	}
 
 	public function mettreajourAction(){
-
+		if($_SESSION['user']['role'] !== "admin"){
+			header('location: '.LINK_ROOT);
+			die();
+		}
 	}
 
 	public function supprimerAction(){
-
+		if($_SESSION['user']['role'] !== "admin"){
+			header('location: '.LINK_ROOT);
+			die();
+		}
 	}
 
 
@@ -118,8 +124,4 @@ class Admin extends \Library\Controller\Controller{
 	public function logoutAction(){
 		session_unset();
 	}
-
-
-
-	
 }
