@@ -1,5 +1,5 @@
 <?php
-
+// Let's go to the beach
 namespace Library\Controller;
 
 abstract class Controller implements iController
