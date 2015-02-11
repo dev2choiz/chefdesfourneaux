@@ -34,7 +34,7 @@ class Admin extends \Library\Controller\Controller{
 
 		
 		if(isset($_POST['btn'])){
-			var_dump($_POST);
+			//var_dump($_POST);
 			
 			if(empty($_POST['value'])){
 				$this->message->addError("Recette vide !");
@@ -56,12 +56,15 @@ class Admin extends \Library\Controller\Controller{
 
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			$res =$modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
-			//echo $res;
-			//var_dump( $_POST);
 
-			if ($res>0 ) {
+			$res=get_object_vars(json_decode($res) );
+			$res=$res['response'];
+			
+			if ($res > 0 ) {
 				//header('location: '.LINK_ROOT.'recette');
 				//die();
+				
+				
 				
 				$modelIngredient 	= new \Application\Models\Ingredient('localhost');
 
