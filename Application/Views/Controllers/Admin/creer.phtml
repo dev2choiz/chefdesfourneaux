@@ -75,6 +75,18 @@
     <input type="checkbox" name="gluten" id="gluten" value="">
 
 
+    <table>
+        <tr><td>Ingredients</td></tr>
+            <tr><td>
+                
+                <select  name="allingredients" multiple="multiple" size="8">
+                  <?php foreach ($ingredients as $ingredient) {?>
+                      <option value="<?=$ingredient['id_ingredient']?>"><?=$ingredient['value']?></option> 
+                  <?php } ?>
+                </select>
+            </td>
+        </tr>      
+
 
 
 
