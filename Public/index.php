@@ -20,16 +20,6 @@ $config::readSettings();
 
 
 /**
- * Connexion a la base de donnée
- */
-$DB = \Library\Model\Connexion::getInstance();
-$DB::addConnexion("localhost", $DB::connectDB('localhost', 'fourneaux', 'root', ''));
-
-
-
-
-
-/**
  * Chargement du Router
  */
 $router = \Library\Router\Router::getInstance();
