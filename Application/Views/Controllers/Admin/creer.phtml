@@ -1,6 +1,35 @@
 <?=$tinyMCE?>
 <?=$message?>
-<form class="" method="post" border="1">
+<script type="text/javascript">
+    function ajouterIngredient(){
+        var val=$( "#allingredients option:selected" ).val();
+        var lab=$( "#allingredients option:selected" ).text();
+        if($('#allingredients option').length!==0 ){
+            $('#ingredients').append('<option value="'+val+'" selected="selected">'+lab+'</option>');
+            $('#allingredients option:selected').remove();
+        }
+    }
+
+    function retirerIngredient(){
+        var val=$( "#ingredients option:selected" ).val();
+        var lab=$( "#ingredients option:selected" ).text();
+        if($('#ingredients option').length!==0 ){
+            $('#allingredients').append('<option value="'+val+'" selected="selected">'+lab+'</option>');
+            $('#ingredients option:selected').remove();
+        }
+    }
+
+    function preparatif(){
+        //selectionne tout
+        $('#ingredients option').prop('selected', true);
+    }
+
+</script>
+
+
+
+
+<form class="" method="post" border="1" onsubmit="preparatif();">
     <h2 class="form-signin-heading">
         <?=$pageTitle?>
     </h2>
@@ -76,26 +105,32 @@
 
 
     <table>
-        <tr><td>Ingredients</td></tr>
+        <tr><td collspan="2">Ingredients</td></tr>
             <tr><td>
                 
-                <select  name="allingredients" multiple="multiple" size="8">
+                <select  id="allingredients" multiple size="8"   onclick="ajouterIngredient();"  style="min-width:150px;">
                   <?php foreach ($ingredients as $ingredient) {?>
-                      <option value="<?=$ingredient['id_ingredient']?>"><?=$ingredient['value']?></option> 
+                      <option value="<?=$ingredient['id_ingredient']?>" ><?=$ingredient['value']?></option> 
                   <?php } ?>
                 </select>
             </td>
+            <td>
+                <select id="ingredients"  name="ingredients[]" multiple size="8"   onclick="retirerIngredient();"  style="min-width:150px;">
+                    
+                </select>
+            </td>
+
         </tr>      
+    </table>
 
 
 
 
-
-    <input type="hidden"  name="id_livre"  value="1">
+    <input type="hidden"  name="id_livre"  value="1"m  style="min-width:150px;">
     <input type="hidden"  name="id_resto"  value="1">
 
     <BR>
     <button name="btn" class="btn btn-lg btn-primary" type="submit"><?=$pageTitle?></button><BR>
     <a href="<?=LINK_ROOT?>">Retour à l'accueil</a> - 
 
-</form>
+</form  style="min-width:150px;">
