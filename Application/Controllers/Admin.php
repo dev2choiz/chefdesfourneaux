@@ -10,6 +10,7 @@ class Admin extends \Library\Controller\Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->setLayout("carousel");
+		$this->setLayout("blog");
 		$this->message = new \Library\Message\Message();
 		$this->tinyMCE=new \Library\TinyMCE\tinyMCE();
 	}
@@ -33,7 +34,8 @@ class Admin extends \Library\Controller\Controller{
 
 		
 		if(isset($_POST['btn'])){
-
+			var_dump($_POST);die();
+			
 			if(empty($_POST['value'])){
 				$this->message->addError("Recette vide !");
 			}
@@ -81,28 +83,29 @@ class Admin extends \Library\Controller\Controller{
 		
 
 		$cat=$modelCategorie->convEnTab($cat);
-		//var_dump($cat);
-
-		/*array (size=4)
-	      0 => 
-	        object(stdClass)[11]
-	          public 'id_cat' => int 1
-	          public 'value' => string 'Cuisine du monde' (length=16)
-	      1 => 
-	        object(stdClass)[12]
-	          public 'id_cat' => int 2
-	          public 'value' => string 'Cuisine authentique' (length=19)
-	      2 => 
-	        object(stdClass)[13]
-	          public 'id_cat' => int 3
-	          public 'value' => string 'SantÃ©' (length=6)
-	      3 => 
-	        object(stdClass)[14]
-	          public 'id_cat' => int 4
-	          public 'value' => string 'VÃ©gÃ©tarien' (length=12)*/
-		
 
 		$this->setDataView(array("categories" =>  $cat));
+
+
+
+
+		//recherche des ingredients
+		$modelIngredient 	= new \Application\Models\Ingredient('localhost');
+		$ing=$modelIngredient->getIngredients();
+
+
+		$ing=$ing->response;
+
+
+		$ing=$modelIngredient->convEnTab($ing);
+
+
+		$this->setDataView(array("ingredients" =>  $ing));
+
+
+
+
+
 	}
 
 	public function mettreajourAction(){
