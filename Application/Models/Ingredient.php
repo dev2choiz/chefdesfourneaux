@@ -44,7 +44,7 @@ class Ingredient extends \Library\Model\Model{
 			        'service' 				=> 'ingredient',
 			        'method' 				=> 'insertingredients',
 			        'ingredients'			=>	json_encode($tabIngred),
-			        'id_ingredient'			=>	$recette
+			        'id_recette'			=>	$recette
 	  	);
 
 		$opts = array('http' =>

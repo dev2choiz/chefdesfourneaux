@@ -21,6 +21,7 @@ class Admin extends \Library\Controller\Controller{
 	}
 
 	public function creerAction(){
+
 		//echo "creer    ".LINK_ROOT."recette/creer";
 		if($_SESSION['user']['role'] !== "admin"){
 			header('location: '.LINK_ROOT);
@@ -34,7 +35,7 @@ class Admin extends \Library\Controller\Controller{
 
 		
 		if(isset($_POST['btn'])){
-			//var_dump($_POST);
+			
 			
 			if(empty($_POST['value'])){
 				$this->message->addError("Recette vide !");
@@ -56,8 +57,9 @@ class Admin extends \Library\Controller\Controller{
 
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			$res =$modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
-
-			$res=get_object_vars(json_decode($res) );
+			//echo $res;
+			//var_dump($res);die();
+			$res=get_object_vars(json_decode($res)) ;
 			$res=$res['response'];
 			
 			if ($res > 0 ) {
@@ -67,10 +69,10 @@ class Admin extends \Library\Controller\Controller{
 				
 				
 				$modelIngredient 	= new \Application\Models\Ingredient('localhost');
-				
+				var_dump($_POST);
 				$res =$modelIngredient->insertIngredients($_POST["ingredients"], $res );
-				echo $res;
-				var_dump($res);die();
+				
+				var_dump($res,'dgjk');
 			}else{
 				$this->message->addError($user->apiErrorMessage);
 				$this->message->addError($user->serverErrorMessage.$res);
