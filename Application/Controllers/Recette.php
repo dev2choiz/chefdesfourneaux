@@ -14,7 +14,7 @@ class Recette extends \Library\Controller\Controller{
 		$this->tinyMCE=new \Library\TinyMCE\tinyMCE();
 	}
 
-	public function categorieAction(){
+	public function indexAction(){
 		//echo "indexdjkl".LINK_ROOT."recette/creer"; die();
 		//$this->setRedirect(LINK_ROOT."recette/creer");
 		
