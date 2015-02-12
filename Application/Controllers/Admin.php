@@ -51,14 +51,15 @@ class Admin extends \Library\Controller\Controller{
 
 			unset($_POST['btn'], $listMessage);
 
-			
 
 
+			$ingreds=$_POST["ingredients"];		unset($_POST["ingredients"]);
+			$unites=$_POST["unites"];			unset($_POST["unites"]):
 
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			$res =$modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
 			//echo $res;
-			//var_dump($res);die();
+			var_dump($res,$_POST);die();
 			$res=get_object_vars(json_decode($res)) ;
 			$res=$res['response'];
 			
@@ -68,11 +69,13 @@ class Admin extends \Library\Controller\Controller{
 				
 				
 				
-				$modelIngredient 	= new \Application\Models\Ingredient('localhost');
+				$modelListeIngredient 	= new \Application\Models\ListeIngredient('localhost');
 				var_dump($_POST);
-				$res =$modelIngredient->insertIngredients($_POST["ingredients"], $res );
+				$res =$modelListeIngredient->insertListeIngredients($ingreds, $unites , $res );
 				
 				var_dump($res,'dgjk');
+
+
 			}else{
 				$this->message->addError($user->apiErrorMessage);
 				$this->message->addError($user->serverErrorMessage.$res);
