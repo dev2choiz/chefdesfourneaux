@@ -67,9 +67,10 @@ class Admin extends \Library\Controller\Controller{
 				
 				
 				$modelIngredient 	= new \Application\Models\Ingredient('localhost');
-
+				
 				$res =$modelIngredient->insertIngredients($_POST["ingredients"], $res );
 				echo $res;
+				var_dump($res);die();
 			}else{
 				$this->message->addError($user->apiErrorMessage);
 				$this->message->addError($user->serverErrorMessage.$res);
