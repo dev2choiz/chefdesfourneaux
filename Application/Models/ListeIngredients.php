@@ -39,11 +39,12 @@ class Ingredient extends \Library\Model\Model{
 		
 	}
 
-	public function insertIngredients($tabIngred, $recette){
+	public function insertListeIngredients($tabIngreds, unites, $recette){
 		$data =array(
-			        'service' 				=> 'ingredient',
+			        'service' 				=> 'listeingredient',
 			        'method' 				=> 'insertingredients',
-			        'ingredients'			=>	json_encode($tabIngred),
+			        'ingredients'			=>	json_encode($tabIngreds),
+			        'unites'				=>	json_encode($unites),
 			        'id_recette'			=>	$recette
 	  	);
 
