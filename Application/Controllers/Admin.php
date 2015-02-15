@@ -21,7 +21,7 @@ class Admin extends \Library\Controller\Controller{
 	}
 
 	public function creerAction(){
-
+		//var_dump($_POST);
 		//echo "creer    ".LINK_ROOT."recette/creer";
 		if($_SESSION['user']['role'] !== "admin"){
 			header('location: '.LINK_ROOT);
@@ -54,13 +54,15 @@ class Admin extends \Library\Controller\Controller{
 
 
 			$ingreds=$_POST["ingredients"];		unset($_POST["ingredients"]);
-			$unites=$_POST["unites"];			unset($_POST["unites"]):
+			$unites=$_POST["unites"];			unset($_POST["unites"]);
+			$quantites=$_POST["quantites"];			unset($_POST["quantites"]);
+			
 
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			$res =$modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
-			//echo $res;
-			var_dump($res,$_POST);die();
-			$res=get_object_vars(json_decode($res)) ;
+			
+			
+			$res=get_object_vars(json_decode($res));
 			$res=$res['response'];
 			
 			if ($res > 0 ) {
@@ -69,11 +71,15 @@ class Admin extends \Library\Controller\Controller{
 				
 				
 				
-				$modelListeIngredient 	= new \Application\Models\ListeIngredient('localhost');
-				var_dump($_POST);
-				$res =$modelListeIngredient->insertListeIngredients($ingreds, $unites , $res );
+				$modelListeIngredients 	= new \Application\Models\ListeIngredients('localhost');
 				
-				var_dump($res,'dgjk');
+				$res =$modelListeIngredients->insertListeIngredients($ingreds, $unites , $res, $quantites );
+				
+				
+
+
+
+
 
 
 			}else{
@@ -115,6 +121,23 @@ class Admin extends \Library\Controller\Controller{
 
 
 		$this->setDataView(array("ingredients" =>  $ing));
+
+
+
+		//recherche des Unites
+		$modelUnite 	= new \Application\Models\Unite('localhost');
+		$unit=$modelUnite->getUnites();
+
+		$unit=$unit->response;
+		$unit=$modelUnite->convEnTab($unit);
+
+		$this->setDataView(array("unites" =>  $unit));
+
+
+
+
+
+
 
 
 

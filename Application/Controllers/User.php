@@ -130,7 +130,7 @@ class User extends \Library\Controller\Controller{
 			
 			$modelUser = new \Application\Models\User('localhost');
 			
-			$user = $modelUser->login($_POST);
+			$user = $modelUser->convEnTab($modelUser->login($_POST) );
 			
 			/*object(stdClass)[9]
 			  public 'response' => 
@@ -152,14 +152,14 @@ class User extends \Library\Controller\Controller{
 			//var_dump($user);die();
 			if(empty($user)){	//s'il y a une erreur
 				$this->message->addError("Erreur au niveau du webservice !");
-			}elseif ($user->apiError ) {
+			}elseif ($user['apiError'] ) {
 				$this->message->addError($user->apiErrorMessage);
-			}elseif ( $user->serverError ) {
+			}elseif ( $user['serverError'] ) {
 				$this->message->addError($user->serverErrorMessage);
-			}elseif ( count($user->response)!=1 ) {
+			}elseif ( count($user['response'])!=1 ) {
 				$this->message->addError("Mail/Password non valide !"); // ou couple d'id/pwd en double
 			}else{			//tout roule
-				$user=get_object_vars($user->response[0]);
+				$user=$user['response'][0];
 					/*array (size=x)
 				          'id' => int 13
 				           'nom' => string 'nom1' (length=4)

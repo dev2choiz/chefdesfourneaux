@@ -1,12 +1,23 @@
 <?=$tinyMCE?>
 <?=$message?>
 <script type="text/javascript">
+
+    tabUnit= new Array();
+    tabQuant=new Array();
+
     function ajouterIngredient(){
         var val=$( "#allingredients option:selected" ).val();
         var lab=$( "#allingredients option:selected" ).text();
         if($('#allingredients option').length!==0 ){
             $('#ingredients').append('<option value="'+val+'" selected="selected">'+lab+'</option>');
+            $('#unites').append('<option value="'+val+'" selected="selected">...</option>');
+
             $('#allingredients option:selected').remove();
+
+            tabUnit.push(1);
+            tabQuant.push(1);
+            console.log(tabUnit+ "  ## "+tabQuant);
+
         }
     }
 
@@ -14,14 +25,96 @@
         var val=$( "#ingredients option:selected" ).val();
         var lab=$( "#ingredients option:selected" ).text();
         if($('#ingredients option').length!==0 ){
+
+            //$('#unites option:eq(3)').prop('selected', true);
+            var ing =document.getElementById("ingredients");
+            var unit =document.getElementById("unites");
+
+            //supprime fna le select
+            unit.options[ing.selectedIndex].remove();
+            
+            //supprime dans quantité
+            tabUnit.splice(ing.selectedIndex,1);
+            tabQuant.splice(ing.selectedIndex,1);
+
+            console.log(tabUnit +" # "+ tabQuant);
+
             $('#allingredients').append('<option value="'+val+'" selected="selected">'+lab+'</option>');
             $('#ingredients option:selected').remove();
         }
     }
 
+
+    function definirUnite(){
+        var allUnit = document.getElementById("allunites");
+        var unit = document.getElementById("unites");
+        if(unit.selectedIndex>=0 ){
+            unit.options[unit.selectedIndex].value= allUnit.options[allUnit.selectedIndex].value ;
+            unit.options[unit.selectedIndex].text= "1 " + allUnit.options[allUnit.selectedIndex].text ;
+
+            tabUnit[unit.selectedIndex]=allUnit.options[allUnit.selectedIndex].text;
+            tabQuant[unit.selectedIndex]=1;
+
+            console.log(tabUnit+"##"+ tabQuant);
+            //alert(allUnit.options[allUnit.selectedIndex].text); 
+        }
+    }
+
+    function definirQuantite(){
+
+        var quant = document.getElementById("quantite");
+        var unit = document.getElementById("unites");
+        if(parseFloat(quant.value)>0 ){
+            
+            unit.options[unit.selectedIndex].text= parseFloat(quant.value) + " " + tabUnit[unit.selectedIndex];
+
+            tabQuant[unit.selectedIndex]=quant.value;
+            console.log(tabUnit+"##"+ tabQuant);
+
+            //alert(allUnit.options[allUnit.selectedIndex].text); 
+        }
+
+
+
+    }
+
     function preparatif(){
         //selectionne tout
         $('#ingredients option').prop('selected', true);
+        $('#unites option').prop('selected', true);
+
+
+
+
+
+        var formulaire = document.getElementById("formRecette");
+                    
+        
+         var inputQuant;
+
+        for(i=0; i<tabQuant.length; i++){
+            inputQuant = document.createElement("input");
+
+            inputQuant.setAttribute("type","hidden");
+            inputQuant.setAttribute("name","quantites["+i+"]");
+            inputQuant.setAttribute("value",tabQuant[i]);
+            formulaire.appendChild(inputQuant);
+        }
+
+
+
+
+
+         
+        formulaire.submit();
+
+    }
+
+
+
+    function actualiserQuantite(){
+     var quant = document.getElementById("quantite");
+     quant.value=tabQuant[document.getElementById("unites").selectedIndex];
     }
 
 </script>
@@ -29,7 +122,7 @@
 
 
 
-<form class="" method="post" border="1" onsubmit="preparatif();">
+<form class="" method="post" border="1" onsubmit="preparatif();" id="formRecette">
     <h2 class="form-signin-heading">
         <?=$pageTitle?>
     </h2>
@@ -104,15 +197,35 @@
     <input type="checkbox" name="gluten" id="gluten" value="">
 
 
-    <table>
-        <tr><td collspan="2">Ingredients</td></tr>
+    <table  border="1">
+<tr><td collspan="4">Ingredients</td></tr>
             <tr><td>
-                
+            </td>
+            <td>
+            </td>
+            <td>
+                <select id="allunites"     style="min-width:150px;">
+                  <?php foreach ($unites as $unite) {?>
+                      <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option> 
+                  <?php } ?>
+                </select>
+            </td>
+            <td>
+                <input type="button" onclick="definirUnite();" value="definir">
+            </td>
+
+        </tr>      
+
+
+        <tr>
+            <td>
+                    
                 <select  id="allingredients" multiple size="8"   onclick="ajouterIngredient();"  style="min-width:150px;">
                   <?php foreach ($ingredients as $ingredient) {?>
                       <option value="<?=$ingredient['id_ingredient']?>" ><?=$ingredient['value']?></option> 
                   <?php } ?>
                 </select>
+                    
             </td>
             <td>
                 <select id="ingredients"  name="ingredients[]" multiple size="8"   onclick="retirerIngredient();"  style="min-width:150px;">
@@ -120,7 +233,16 @@
                 </select>
             </td>
 
-        </tr>      
+            <td>
+                <select id="unites"  name="unites[]" multiple size="8" onclick="actualiserQuantite();"     style="min-width:150px;">
+                </select>    
+            </td>
+            <td>
+                <input type="text" id="quantite">
+                <input type="button" id="okquantite" onclick="definirQuantite();" value="ok">
+            </td>
+        </tr>
+
     </table>
 
 

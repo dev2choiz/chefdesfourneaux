@@ -4,9 +4,7 @@ namespace Application\Models;
 
 
 
-class Categorie extends \Library\Model\Model{
-
-	
+class Unite extends \Library\Model\Model{
 
 	
 
@@ -18,10 +16,10 @@ class Categorie extends \Library\Model\Model{
 	/**
 	 * @return [array]              [description]
 	 */
-	public function getCategories(){
+	public function getUnites(){
 		$data =array(
-			        'service' 				=> 'categorie',				//on peut aussi mettre un tableau(tous ce qu'on vt) pour la valeur de service
-			        'method' 				=> 'getcategories'
+			        'service' 				=> 'unite',				//on peut aussi mettre un tableau(tous ce qu'on vt) pour la valeur de service
+			        'method' 				=> 'getunites'
 	  	);
 
 		$opts = array('http' =>
