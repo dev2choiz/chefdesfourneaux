@@ -27,10 +27,35 @@ class User extends \Library\Model\Model{
 		    				)
 		        )
 		);
+//
+		$context  = stream_context_create($opts);
+		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
+	}
+
+public function updateUser($id, $password, $params){
+	//var_dump($params);
+		$opts = array('http' =>
+		    array(
+		        'method'  => 'POST',
+		        'header'  => 'Content-type: application/x-www-form-urlencoded',
+		        'content' => http_build_query(
+								array(
+							        'service' => 'user',
+							        'method' => 'updateuser',
+							        'id_user'	=> $id,
+							        'password'	=> $password,
+							        'params'=> json_encode($params)
+
+							    )
+		    				)
+		        )
+		);
 
 		$context  = stream_context_create($opts);
 		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
 	}
+
+
 
 
 }
