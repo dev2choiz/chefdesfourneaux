@@ -6,8 +6,7 @@ namespace Application\Models;
 
 class Recette extends \Library\Model\Model{
 
-	protected $table 	= 'recette';
-	protected $primary 	= 'id';
+	
 
 	
 

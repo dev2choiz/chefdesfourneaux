@@ -7,8 +7,6 @@ abstract class Model{
 
 	/**
 	 * Initialise le model
-	 * 
-	 * @param String $connexionName : nom de la connexion a utiliser
 	 * @return  void
 	 */
 	public function __construct(){
@@ -18,9 +16,9 @@ abstract class Model{
 
 
 	/**
-	 * [convEnTab description]
-	 * @param  [stdclass ou array] $tab [description]
-	 * @return [array]      [description]
+	 * [convEnTab converti les objets et soous objets en tableau]
+	 * @param  [stdclass ou array] $tab
+	 * @return [array]
 	 */
 	public function convEnTab($tab){
 

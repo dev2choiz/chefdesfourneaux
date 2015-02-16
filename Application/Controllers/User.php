@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace Application\Controllers;
 
 class User extends \Library\Controller\Controller{
@@ -27,7 +27,7 @@ class User extends \Library\Controller\Controller{
 		$this->setLayout("blog");
 		$this->setDataView(array("pageTitle" => "Update profil"));
 
-
+		var_dump($_POST);
 		if(isset($_POST['btn'])){
 
 			if(empty($_POST['nom'])){
@@ -48,13 +48,17 @@ class User extends \Library\Controller\Controller{
 				$this->message->addError("Mail non valide !");
 			}
 
+			$currentPassword	=	$_POST['currentpassword'];
+
 			if(!empty($_POST['password'])){
-				if(isset($_POST['confpassword']) && $_POST['password'] !== $_POST['confpassword']){
+  				if(isset($_POST['confpassword']) && $_POST['password'] !== $_POST['confpassword']){
 					$this->message->addError("Confirmation password non valide !");
+
+				}else{	//password=confpassword
+					$password =	$_POST['password'];
 				}
-				$_POST['password'] = md5($_POST['password'].SALT_PASSWORD);
-			}else{
-				unset($_POST['password']);
+			}else{	//on ne cherche pas a modifier le mot de passe
+				$password	=	$_POST['currentpassword'];
 			}
 			
 			$listMessage = $this->message->getMessages("error");
@@ -63,11 +67,12 @@ class User extends \Library\Controller\Controller{
 				return false;
 			}
 
-			$currentpassword = md5($_POST['currentpassword'].SALT_PASSWORD);
-			unset($_POST['btn'], $_POST['confpassword'], $_POST['currentpassword'], $listMessage);
+			//$currentpassword = md5($_POST['currentpassword'].SALT_PASSWORD);
+			
 
 			
 			$modelUser = new \Application\Models\User('localhost');
+
 			$user = $modelUser->login();
 			if(!empty($user[0])){
 
@@ -76,6 +81,32 @@ class User extends \Library\Controller\Controller{
 					$user = $modelUser->findByPrimary($_SESSION['user']->id, "`id`,`nom`,`prenom`,`mail`,`update`");
 					if(!empty($user[0])){
 						$_SESSION['user'] = $user[0];
+
+			//$_POST["password"]=;
+
+			 $user=$modelUser->convEnTab($modelUser->login( array('mail'=>$_POST['mail'], 'password'=>$currentPassword )   ) );
+			 $user=$user ['response'][0];
+			 var_dump($user, '##',$_POST);
+			 unset( $_POST['btn'],$_POST['password'], $_POST['confpassword'], $_POST['currentpassword'], $listMessage);
+
+			 $_POST['password']=$password;		//<== new password
+			if( !empty($user) ){
+				$res=$modelUser->convEnTab($modelUser->updateUser($user["id_user"], $currentPassword, $_POST));
+					//echo "############".$res['page']."#############";
+					//var_dump($res);
+					$res=$res['response'];
+
+				//var_dump("fdf",$res, $_POST ,"df");
+				if($res){
+					
+
+
+					//recupere les nouvelles données de l'utlisateur
+					$user = $modelUser->convEnTab($modelUser->login(array( 'mail'=>$_POST['mail'], 'password'=>$password ) ) );
+					$user=$user ['response'][0];
+					if(!empty($user)){
+						$_SESSION['user'] = $user;
+
 						$this->message->addSuccess("Update valide");
 					}else{
 						$this->message->addError("Update Failure !");
@@ -129,7 +160,7 @@ class User extends \Library\Controller\Controller{
 			
 			$modelUser = new \Application\Models\User('localhost');
 			
-			$user = $modelUser->login($_POST);
+			$user = $modelUser->convEnTab($modelUser->login($_POST) );
 			
 			/*object(stdClass)[9]
 			  public 'response' => 
@@ -151,14 +182,14 @@ class User extends \Library\Controller\Controller{
 			//var_dump($user);die();
 			if(empty($user)){	//s'il y a une erreur
 				$this->message->addError("Erreur au niveau du webservice !");
-			}elseif ($user->apiError ) {
+			}elseif ($user['apiError'] ) {
 				$this->message->addError($user->apiErrorMessage);
-			}elseif ( $user->serverError ) {
+			}elseif ( $user['serverError'] ) {
 				$this->message->addError($user->serverErrorMessage);
-			}elseif ( count($user->response)!=1 ) {
+			}elseif ( count($user['response'])!=1 ) {
 				$this->message->addError("Mail/Password non valide !"); // ou couple d'id/pwd en double
 			}else{			//tout roule
-				$user=get_object_vars($user->response[0]);
+				$user=$user['response'][0];
 					/*array (size=x)
 				          'id' => int 13
 				           'nom' => string 'nom1' (length=4)
