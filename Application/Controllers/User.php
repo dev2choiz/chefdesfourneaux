@@ -68,11 +68,10 @@ class User extends \Library\Controller\Controller{
 
 			
 			$modelUser = new \Application\Models\User('localhost');
-
-			$user = $modelUser->fetchAll("`id`={$_SESSION['user']->id} AND `password`='$currentpassword'", "`id`");
+			$user = $modelUser->login();
 			if(!empty($user[0])){
 
-				if($modelUser->update("`id`={$_SESSION['user']->id} AND `password`='$currentpassword'", $_POST, false)){
+				if($modelUser->put()){
 					
 					$user = $modelUser->findByPrimary($_SESSION['user']->id, "`id`,`nom`,`prenom`,`mail`,`update`");
 					if(!empty($user[0])){
