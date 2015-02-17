@@ -9,8 +9,8 @@ class Admin extends \Library\Controller\Controller{
 
 	public function __construct(){
 		parent::__construct();
-		//$this->setLayout("carousel");
-		$this->setLayout("blog");
+		$this->setLayout("carousel");
+		//$this->setLayout("blog");
 		$this->message = new \Library\Message\Message();
 		$this->tinyMCE=new \Library\TinyMCE\tinyMCE();
 	}
