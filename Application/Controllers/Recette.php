@@ -6,27 +6,30 @@ class Recette extends \Library\Controller\Controller{
 
 	private $message;
 	private $tinyMCE;
+	private $modelCat;
+	private $modelViewRecettes;
 
 	public function __construct(){
 		parent::__construct();
-		$this->setLayout("blog");
-		$this->message = new \Library\Message\Message();
-		$this->tinyMCE=new \Library\TinyMCE\tinyMCE();
+		$this->setLayout("carousel");
+		$this->message 				= new \Library\Message\Message();
+		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
+		$this->modelCat 			= new \Application\Models\Categorie('localhost');
+		$this->modelViewRecettes 	= new \Application\Models\ViewRecettes('localhost');
 	}
 
 	public function indexAction(){
 		//echo "indexdjkl".LINK_ROOT."recette/creer"; die();
 		//$this->setRedirect(LINK_ROOT."recette/creer");
 		
-		$modelRecette 	= new \Application\Models\Recette('localhost');
-		$recettes 		= $modelRecette->getRecettes() ;	//interroge le webservice
-		//var_dump($recettes);
+		$viewRecettes = $this->modelViewRecettes->getViewRecettes() ;	//interroge le webservice
+		//var_dump($viewRecettes);
 
-		if(empty($recettes->response)){
+		if(empty($viewRecettes->response)){
 			$this->message->addError("aucune recette !");
-		}elseif ($recettes->apiError ) {
+		}elseif ($viewRecettes->apiError ) {
 			$this->message->addError($user->apiErrorMessage);
-		}elseif ( $recettes->serverError ) {
+		}elseif ( $viewRecettes->serverError ) {
 			$this->message->addError($user->serverErrorMessage);
 		}
 
@@ -34,7 +37,7 @@ class Recette extends \Library\Controller\Controller{
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
-			"recettes" => $recettes->response
+			"recettes" => $viewRecettes->response
 			));
 
 	}

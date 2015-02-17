@@ -2,16 +2,70 @@
 <?php 
 
 
-var_dump($recettes);
-foreach($recettes as $recette){ ?>
+// public   'id_recette' => int 1
+//           public 'value' => string '<p>recette1</p>' (length=15)
+//           public 'tps_cuisson' => int 0
+//           public 'difficulte' => int 0
+//           public 'type' => string '' (length=0)
+//           public 'diabete' => int 0
+//           public 'ble' => int 0
+//           public 'lait' => int 0
+//           public 'oeuf' => int 0
+//           public 'arachide' => int 0
+//           public 'soja' => int 0
+//           public 'gluten' => int 0
+//           public 'user_pseudo' => string '' (length=0)
+//           public 'categorie' => string 'Cuisine du monde' (length=16)
+//           public 'livre' => string 'Les petits plats de maman' (length=25)
+//           public 'livre_prix' => int 50
+//           public 'resto' => string 'Les petits plats de Samyn' (length=25)
+//           public 'resto_chef' => string 'Samyn' (length=5)
+//           public 'resto_prix' => int 4
 
-	<div style='border: 1px solid #000'>
-		recette : <?=$recette->value?>
-		iduser:<?=$recette->id_user?><BR/>
-		idcategorie:<?=$recette->id_cat?>
-	</div>
-	
-<?php } ?>
+foreach($recettes as $recette): 
+    
+if($recette->categorie == "Cuisine du monde"): ?>
+<!-- START THE FEATURETTES -->
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+        <h2 class="featurette-heading"><?=$recette->categorie?> <span class="text-muted"></span></h2>
+        <p class="lead"><?=$recette->titre?></p>
+        </div>
+        <div class="col-md-5">
+        <img class="featurette-image img-responsive" src="<?=WEB_ROOT?>/img/monde.jpg" alt="plat">
+        </div>
+    </div>
+<?php endif; endforeach;?>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+    <div class="col-md-5">
+    <img class="featurette-image img-responsive" src="<?=WEB_ROOT?>/img/entree2.jpg" alt="Generic placeholder image">
+    </div>
+    <div class="col-md-7">
+    <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+    </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+    <div class="col-md-7">
+    <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+    </div>
+    <div class="col-md-5">
+    <img class="featurette-image img-responsive" src="<?=WEB_ROOT?>/img/dessert3.jpg" alt="Generic placeholder image">
+    </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+ <!-- /END THE FEATURETTES -->
 	
 
 

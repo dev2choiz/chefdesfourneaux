@@ -9,8 +9,8 @@ class Admin extends \Library\Controller\Controller{
 
 	public function __construct(){
 		parent::__construct();
-		//$this->setLayout("carousel");
-		$this->setLayout("blog");
+		$this->setLayout("carousel");
+		//$this->setLayout("blog");
 		$this->message = new \Library\Message\Message();
 		$this->tinyMCE=new \Library\TinyMCE\tinyMCE();
 	}
@@ -177,21 +177,21 @@ class Admin extends \Library\Controller\Controller{
 		}
 	}
 
-	public function supprimerRestaurantAction(){
+	public function supprimerLivreAction(){
 		if($_SESSION['user']['role'] !== "admin"){
 			header('location: '.LINK_ROOT);
 			die();
 		}
 	}
 
-	public function creerLivreAction(){
+	public function creerRestaurantAction(){
 		if($_SESSION['user']['role'] !== "admin"){
 			header('location: '.LINK_ROOT);
 			die();
 		}
 	}
 
-	public function creerLivreAction(){
+	public function mettreajourRestaurantAction(){
 		if($_SESSION['user']['role'] !== "admin"){
 			header('location: '.LINK_ROOT);
 			die();

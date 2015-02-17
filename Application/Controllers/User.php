@@ -82,48 +82,52 @@ class User extends \Library\Controller\Controller{
 					if(!empty($user[0])){
 						$_SESSION['user'] = $user[0];
 
-			//$_POST["password"]=;
+						//$_POST["password"]=;
 
-			 $user=$modelUser->convEnTab($modelUser->login( array('mail'=>$_POST['mail'], 'password'=>$currentPassword )   ) );
-			 $user=$user ['response'][0];
-			 var_dump($user, '##',$_POST);
-			 unset( $_POST['btn'],$_POST['password'], $_POST['confpassword'], $_POST['currentpassword'], $listMessage);
+						$user=$modelUser->convEnTab($modelUser->login( array('mail'=>$_POST['mail'], 'password'=>$currentPassword )   ) );
+						$user=$user ['response'][0];
+						var_dump($user, '##',$_POST);
+						unset( $_POST['btn'],$_POST['password'], $_POST['confpassword'], $_POST['currentpassword'], $listMessage);
 
-			 $_POST['password']=$password;		//<== new password
-			if( !empty($user) ){
-				$res=$modelUser->convEnTab($modelUser->updateUser($user["id_user"], $currentPassword, $_POST));
-					//echo "############".$res['page']."#############";
-					//var_dump($res);
-					$res=$res['response'];
+						$_POST['password']=$password;		//<== new password
+						if( !empty($user) ){
+							$res=$modelUser->convEnTab($modelUser->updateUser($user["id_user"], $currentPassword, $_POST));
+								//echo "############".$res['page']."#############";
+								//var_dump($res);
+								$res=$res['response'];
 
-				//var_dump("fdf",$res, $_POST ,"df");
-				if($res){
-					
+							//var_dump("fdf",$res, $_POST ,"df");
+							if($res){
+								
 
 
-					//recupere les nouvelles données de l'utlisateur
-					$user = $modelUser->convEnTab($modelUser->login(array( 'mail'=>$_POST['mail'], 'password'=>$password ) ) );
-					$user=$user ['response'][0];
-					if(!empty($user)){
-						$_SESSION['user'] = $user;
+								//recupere les nouvelles données de l'utlisateur
+								$user = $modelUser->convEnTab($modelUser->login(array( 'mail'=>$_POST['mail'], 'password'=>$password ) ) );
+								$user=$user ['response'][0];
+								if(!empty($user)){
+									$_SESSION['user'] = $user;
 
-						$this->message->addSuccess("Update valide");
-					}else{
-						$this->message->addError("Update Failure !");
+									$this->message->addSuccess("Update valide");
+								}else{
+									$this->message->addError("Update Failure !");
+								}
+
+							}else{
+								$this->message->addError("Mail déjà existant en base !");
+							}
+
+						}else{
+							$this->message->addError("Password non valide !");
+						}
 					}
 
-				}else{
-					$this->message->addError("Mail déjà existant en base !");
-				}
 
-			}else{
-				$this->message->addError("Password non valide !");
+					$this->setDataView(array("message" => $this->message->showMessages()));
+				}
 			}
 		}
-
-
-		$this->setDataView(array("message" => $this->message->showMessages()));
 	}
+
 
 
 
