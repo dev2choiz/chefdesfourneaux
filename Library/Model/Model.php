@@ -4,11 +4,6 @@ namespace Library\Model;
 
 abstract class Model{
 
-	private $database;
-	protected $table;
-	protected $primary;
-
-
 
 	/**
 	 * Initialise le model

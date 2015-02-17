@@ -72,8 +72,16 @@ class User extends \Library\Controller\Controller{
 
 			
 			$modelUser = new \Application\Models\User('localhost');
-//#####################
-//
+
+			$user = $modelUser->login();
+			if(!empty($user[0])){
+
+				if($modelUser->put()){
+					
+					$user = $modelUser->findByPrimary($_SESSION['user']->id, "`id`,`nom`,`prenom`,`mail`,`update`");
+					if(!empty($user[0])){
+						$_SESSION['user'] = $user[0];
+
 			//$_POST["password"]=;
 
 			 $user=$modelUser->convEnTab($modelUser->login( array('mail'=>$_POST['mail'], 'password'=>$currentPassword )   ) );
@@ -98,6 +106,7 @@ class User extends \Library\Controller\Controller{
 					$user=$user ['response'][0];
 					if(!empty($user)){
 						$_SESSION['user'] = $user;
+
 						$this->message->addSuccess("Update valide");
 					}else{
 						$this->message->addError("Update Failure !");

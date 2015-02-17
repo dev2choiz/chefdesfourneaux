@@ -20,8 +20,10 @@ class Admin extends \Library\Controller\Controller{
 		
 	}
 
-	public function creerAction(){
+
+	public function creerRecetteAction(){
 		//var_dump($_POST);
+
 		//echo "creer    ".LINK_ROOT."recette/creer";
 		if($_SESSION['user']['role'] !== "admin"){
 			header('location: '.LINK_ROOT);
@@ -55,8 +57,10 @@ class Admin extends \Library\Controller\Controller{
 
 			$ingreds=$_POST["ingredients"];		unset($_POST["ingredients"]);
 			$unites=$_POST["unites"];			unset($_POST["unites"]);
+
 			$quantites=$_POST["quantites"];			unset($_POST["quantites"]);
 			
+
 
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			$res =$modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
@@ -145,20 +149,61 @@ class Admin extends \Library\Controller\Controller{
 
 	}
 
-	public function mettreajourAction(){
+	public function mettreajourRecetteAction(){
 		if($_SESSION['user']['role'] !== "admin"){
 			header('location: '.LINK_ROOT);
 			die();
 		}
 	}
 
-	public function supprimerAction(){
+	public function supprimerRecetteAction(){
 		if($_SESSION['user']['role'] !== "admin"){
 			header('location: '.LINK_ROOT);
 			die();
 		}
 	}
 
+	public function creerLivreAction(){
+		if($_SESSION['user']['role'] !== "admin"){
+			header('location: '.LINK_ROOT);
+			die();
+		}
+	}
+
+	public function mettreajourLivreAction(){
+		if($_SESSION['user']['role'] !== "admin"){
+			header('location: '.LINK_ROOT);
+			die();
+		}
+	}
+
+	public function supprimerRestaurantAction(){
+		if($_SESSION['user']['role'] !== "admin"){
+			header('location: '.LINK_ROOT);
+			die();
+		}
+	}
+
+	public function creerLivreAction(){
+		if($_SESSION['user']['role'] !== "admin"){
+			header('location: '.LINK_ROOT);
+			die();
+		}
+	}
+
+	public function creerLivreAction(){
+		if($_SESSION['user']['role'] !== "admin"){
+			header('location: '.LINK_ROOT);
+			die();
+		}
+	}
+
+	public function supprimerRestaurantAction(){
+		if($_SESSION['user']['role'] !== "admin"){
+			header('location: '.LINK_ROOT);
+			die();
+		}
+	}
 
 
 	public function logoutAction(){
