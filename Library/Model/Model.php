@@ -16,7 +16,7 @@ abstract class Model{
 
 
 	/**
-	 * [convEnTab converti les objets et soous objets en tableau]
+	 * [convEnTab converti les objets et sous objets en tableau]
 	 * @param  [stdclass ou array] $tab
 	 * @return [array]
 	 */
