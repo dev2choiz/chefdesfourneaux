@@ -24,8 +24,12 @@ class User extends \Library\Controller\Controller{
 			die();
 		}
 
+		
+
+
 		$this->setLayout("blog");
 		$this->setDataView(array("pageTitle" => "Update profil"));
+		$this->setDataView(array("message" => ""));
 
 		var_dump($_POST);
 		if(isset($_POST['btn'])){
@@ -58,14 +62,16 @@ class User extends \Library\Controller\Controller{
 					$password =	$_POST['password'];
 				}
 			}else{	//on ne cherche pas a modifier le mot de passe
-				$password	=	$_POST['currentpassword'];
+				$password	=	$_POST['currentpassword'];	//==>new pwd= old pwd
 			}
 			
 			$listMessage = $this->message->getMessages("error");
+			
 			if(!empty($listMessage)){
 				$this->setDataView(array("message" => $this->message->showMessages()));	
 				return false;
 			}
+
 
 			//$currentpassword = md5($_POST['currentpassword'].SALT_PASSWORD);
 			
@@ -73,60 +79,54 @@ class User extends \Library\Controller\Controller{
 			
 			$modelUser = new \Application\Models\User('localhost');
 
-			$user = $modelUser->login();
-			if(!empty($user[0])){
+			$user = $modelUser->login(array("mail"=>$_SESSION['user']['mail'], "password"=>$_POST['currentpassword']));
+			//$user=$modelUser->convEnTab($user['response'][0]);
+			$user=$modelUser->convEnTab($user);
+			$user=$user['response'][0];
+			//var_dump("dqdf", $user);
+			if(!empty($user)){
 
-				if($modelUser->put()){
+
+				unset( $_POST['btn'],$_POST['password'], $_POST['confpassword'], $_POST['currentpassword'], $listMessage);
+
+				$_POST['password']=$password;		//<== new password
+				$res=$modelUser->convEnTab($modelUser->updateUser($user["id_user"], $currentPassword, $_POST));
+				//echo "############".$res['page']."#############";
+				//var_dump($res);
+				$res=$res['response'];
+
+				//var_dump("fdf",$res, $_POST ,"df");
+				if($res){
 					
-					$user = $modelUser->findByPrimary($_SESSION['user']->id, "`id`,`nom`,`prenom`,`mail`,`update`");
-					if(!empty($user[0])){
-						$_SESSION['user'] = $user[0];
-
-						//$_POST["password"]=;
-
-						$user=$modelUser->convEnTab($modelUser->login( array('mail'=>$_POST['mail'], 'password'=>$currentPassword )   ) );
-						$user=$user ['response'][0];
-						var_dump($user, '##',$_POST);
-						unset( $_POST['btn'],$_POST['password'], $_POST['confpassword'], $_POST['currentpassword'], $listMessage);
-
-						$_POST['password']=$password;		//<== new password
-						if( !empty($user) ){
-							$res=$modelUser->convEnTab($modelUser->updateUser($user["id_user"], $currentPassword, $_POST));
-								//echo "############".$res['page']."#############";
-								//var_dump($res);
-								$res=$res['response'];
-
-							//var_dump("fdf",$res, $_POST ,"df");
-							if($res){
-								
 
 
-								//recupere les nouvelles données de l'utlisateur
-								$user = $modelUser->convEnTab($modelUser->login(array( 'mail'=>$_POST['mail'], 'password'=>$password ) ) );
-								$user=$user ['response'][0];
-								if(!empty($user)){
-									$_SESSION['user'] = $user;
+					//recupere les nouvelles données de l'utlisateur
+					$user = $modelUser->convEnTab($modelUser->login(array( 'mail'=>$_POST['mail'], 'password'=>$password ) ) );
+					$user=$user ['response'][0];
+					if(!empty($user)){
+						$_SESSION['user'] = $user;
 
-									$this->message->addSuccess("Update valide");
-								}else{
-									$this->message->addError("Update Failure !");
-								}
-
-							}else{
-								$this->message->addError("Mail déjà existant en base !");
-							}
-
-						}else{
-							$this->message->addError("Password non valide !");
-						}
+						$this->message->addSuccess("Update valide");
+					}else{
+						$this->message->addError("Update Failure !");
 					}
 
-
-					$this->setDataView(array("message" => $this->message->showMessages()));
+				}else{
+					$this->message->addError("La mise a jour ne s'est pas faite correctement");
 				}
+
+			}else{
+				$this->message->addError("Password non valide !");
 			}
-		}
-	}
+		}		//fin traitement formulaire
+
+
+		$this->setDataView(array("message" => $this->message->showMessages()));
+		
+			
+	
+
+	}	//fin de la fonction profil
 
 
 
