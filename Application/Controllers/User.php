@@ -83,7 +83,7 @@ class User extends \Library\Controller\Controller{
 			//$user=$modelUser->convEnTab($user['response'][0]);
 			$user=$modelUser->convEnTab($user);
 			$user=$user['response'][0];
-			var_dump("dqdf", $user);
+			//var_dump("dqdf", $user);
 			if(!empty($user)){
 
 
@@ -91,7 +91,7 @@ class User extends \Library\Controller\Controller{
 
 				$_POST['password']=$password;		//<== new password
 				$res=$modelUser->convEnTab($modelUser->updateUser($user["id_user"], $currentPassword, $_POST));
-				echo "############".$res['page']."#############";
+				//echo "############".$res['page']."#############";
 				//var_dump($res);
 				$res=$res['response'];
 
