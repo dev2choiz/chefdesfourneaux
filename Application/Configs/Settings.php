@@ -30,10 +30,10 @@ class Settings
 		}
 
 		/**
-		 * WEB_ROOT  : 	/recette/Public/
-		 * LINK_ROOT : http://localhost/phpmvc/
-		 * APP_ROOT	 : C:/wamp/www/phpmvc/Application
-		 * LIB_ROOT	 : C:/wamp/www/phpmvc/Library
+		 * WEB_ROOT  : 	/fourneaux/Public/
+		 * LINK_ROOT : http://localhost/fourneaux/
+		 * APP_ROOT	 : C:/wamp/www/fourneaux/Application
+		 * LIB_ROOT	 : C:/wamp/www/fourneaux/Library
 		 */
 		
 		define('WEB_ROOT', 	str_replace('index.php', '', $_SERVER["SCRIPT_NAME"]));

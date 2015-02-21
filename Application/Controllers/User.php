@@ -31,7 +31,7 @@ class User extends \Library\Controller\Controller{
 		$this->setDataView(array("pageTitle" => "Update profil"));
 		$this->setDataView(array("message" => ""));
 
-		var_dump($_POST);
+		//var_dump($_POST);
 		if(isset($_POST['btn'])){
 
 			if(empty($_POST['nom'])){
@@ -90,9 +90,9 @@ class User extends \Library\Controller\Controller{
 				unset( $_POST['btn'],$_POST['password'], $_POST['confpassword'], $_POST['currentpassword'], $listMessage);
 
 				$_POST['password']=$password;		//<== new password
-				$res=$modelUser->convEnTab($modelUser->updateUser($user["id_user"], $currentPassword, $_POST));
+				$res=$modelUser->convEnTab($modelUser->updateUser($_SESSION['user']["id_user"],$_SESSION['user']["mail"] , $currentPassword, $_POST));
 				//echo "############".$res['page']."#############";
-				//var_dump($res);
+				
 				$res=$res['response'];
 
 				//var_dump("fdf",$res, $_POST ,"df");
@@ -112,7 +112,7 @@ class User extends \Library\Controller\Controller{
 					}
 
 				}else{
-					$this->message->addError("La mise a jour ne s'est pas faite correctement");
+					$this->message->addError("La mise à jour ne s'est pas faite correctement");
 				}
 
 			}else{
@@ -234,6 +234,7 @@ class User extends \Library\Controller\Controller{
 
 		if(isset($_POST['btn'])){
 
+			var_dump($_POST);
 			if(empty($_POST['nom'])){
 				$this->message->addError("Nom vide !");
 			}elseif(strlen($_POST['nom'])>50){
@@ -265,16 +266,80 @@ class User extends \Library\Controller\Controller{
 			}
 
 			unset($_POST['btn'], $_POST['confpassword'], $listMessage);
-			$_POST['password'] = md5($_POST['password'].SALT_PASSWORD);
-
 			
+
+
+			$_POST['role']='membre';
+			$_POST['age']=$_POST['age']+0;
+
 			$modelUser = new \Application\Models\User('localhost');
-			if($modelUser->insert($_POST)){
+			$res=$modelUser->convEnTab($modelUser->insertUser($_POST));
+
+			echo $res['page'];
+
+
+			//var_dump("dskj",$res, $_POST);
+			if($res){
 				$this->message->addSuccess("Inscription valide");
 				header('location: '.LINK_ROOT.'user/login');
 				die();
 			}else{
-				$this->message->addError("Mail déjà existant en base !");
+				$this->message->addError("erreur pendant l'inscription !");
+
+			}
+		}
+		$this->setDataView(array("message" => $this->message->showMessages()));	
+	}
+
+
+
+
+	public function deleteAction(){
+
+		
+		if(empty($_SESSION['user'])){
+			header('location: '.LINK_ROOT);
+			die();
+		}
+
+		$this->setDataView(array("pageTitle" => "Delete"));
+
+
+		if(isset($_POST['btn'])){
+
+			
+			
+			if(empty($_POST['password'])){
+				$this->message->addError("Password vide !");
+			}
+			
+			$listMessage = $this->message->getMessages("error");
+			if(!empty($listMessage)){
+				$this->setDataView(array("message" => $this->message->showMessages()));	
+				return false;
+			}
+
+			unset($_POST['btn'], $listMessage);
+			
+
+
+			$_POST['id_user']=$_SESSION['user']['id_user'];
+
+			$modelUser = new \Application\Models\User('localhost');
+			$res=$modelUser->convEnTab($modelUser->deleteUser($_POST));
+
+			$res=$res['response'];
+			//echo $res['page'];
+
+
+			
+			if($res){
+				$this->message->addSuccess("Compte supprimé");
+				unset($_SESSION['user']);
+				header('location: '.LINK_ROOT.'user/login');
+				die();
+			}else{
+				$this->message->addError("mot de passe erroné  !");
 
 			}
 		}

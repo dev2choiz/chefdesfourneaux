@@ -8,12 +8,14 @@
     <input value="<?=(isset($_POST['pseudo']))?$_POST['pseudo']:''?>" name="pseudo" type="text" class="form-control" placeholder="Pseudo" required>
     <input value="<?=(isset($_POST['mail']))?$_POST['mail']:''?>" name="mail" type="email" class="form-control" placeholder="Adresse email" required>
 
-    <select>
-        <option value="<?=$user['']?>"></option>
-    </select>
-    <input value="<?=(isset($_POST['age']))?$_POST['age']:''?>" name="age" type="" class="form-control" placeholder="Email address" required>
-    <input value="<?=(isset($_POST['mail']))?$_POST['mail']:''?>" name="mail" type="email" class="form-control" placeholder="Email address" required>
-    <input value="<?=(isset($_POST['mail']))?$_POST['mail']:''?>" name="mail" type="email" class="form-control" placeholder="Email address" required>
+    <!--select>
+        <option value="">Monsieur</option>
+        <option value="">Madame</option>
+    </select-->
+
+    <input value="<?=(isset($_POST['age']))?$_POST['age']:''?>" name="age" type="" class="form-control" placeholder="Age" required>
+    <!--input value="<?=(isset($_POST['mail']))?$_POST['mail']:''?>" name="mail" type="email" class="form-control" placeholder="Email address" required>
+    <input value="<?=(isset($_POST['mail']))?$_POST['mail']:''?>" name="mail" type="email" class="form-control" placeholder="Email address" required-->
     <input name="password" type="password" class="form-control form-password" placeholder="Password" required>
     <input name="confpassword" type="password" class="form-control" placeholder="Confirm Password" required>
     <button name="btn" class="btn btn-lg btn-primary btn-block" type="submit"><?=$pageTitle?></button>
