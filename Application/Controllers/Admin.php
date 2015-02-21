@@ -6,18 +6,33 @@ class Admin extends \Library\Controller\Controller{
 
 	private $message;
 	private $tinyMCE;
+	private $modelRecette;
+	private $modelCategorie; // A compléter
+	private $modelIngredient; // A compléter
+
 
 	public function __construct(){
 		parent::__construct();
 		$this->setLayout("carousel");
 		//$this->setLayout("blog");
-		$this->message = new \Library\Message\Message();
-		$this->tinyMCE=new \Library\TinyMCE\tinyMCE();
+		$this->message 		= new \Library\Message\Message();
+		$this->tinyMCE 		= new \Library\TinyMCE\tinyMCE();
+		$this->modelRecette = new \Application\Models\Recette('localhost');
 	}
 
 
 	public function indexAction(){
-		
+		if($_SESSION['user']['role'] !== "admin"){
+			header('location: '.LINK_ROOT);
+			die();
+		}
+		$recettes = $this->modelRecette->getRecettes();
+
+		$this->setDataView(array(
+			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
+			"message" => $this->message->showMessages(),
+			"recettes" => $recettes->response
+		));
 	}
 
 
