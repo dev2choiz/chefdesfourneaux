@@ -22,7 +22,7 @@ class Admin extends \Library\Controller\Controller{
 
 
 	public function creerRecetteAction(){
-		//var_dump($_POST);
+		
 
 		//echo "creer    ".LINK_ROOT."recette/creer";
 		if($_SESSION['user']['role'] !== "admin"){
@@ -55,14 +55,31 @@ class Admin extends \Library\Controller\Controller{
 
 
 
+  			$_POST["diabete"]	=	(isset($_POST["diabete"])? 1:0);
+			$_POST["ble"]		=	(isset($_POST["ble"])?1:0);
+			$_POST["lait"]		=	(isset($_POST["lait"])?1:0);
+			$_POST["oeuf"]		=	(isset($_POST["oeuf"])?1:0);
+			$_POST["arachide"]	=	(isset($_POST["arachide"])?1:0);
+			$_POST["soja"]		=	(isset($_POST["soja"])?1:0);
+			$_POST["gluten"]	=	(isset($_POST["gluten"])?1:0);
+
+
+			//$_POST["cout"]	=	$_POST["cout"]+0;
+			
+			//var_dump($_POST);
+
+
+
+
 			$ingreds=$_POST["ingredients"];		unset($_POST["ingredients"]);
 			$unites=$_POST["unites"];			unset($_POST["unites"]);
 
 			$quantites=$_POST["quantites"];			unset($_POST["quantites"]);
 			
 
-
+			//var_dump("dff",$_POST);
 			$modelRecette 	= new \Application\Models\Recette('localhost');
+			
 			$res =$modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
 			
 			
@@ -81,14 +98,14 @@ class Admin extends \Library\Controller\Controller{
 				
 				
 
-
+				$this->message->addSuccess("Recette ajoutée");
 
 
 
 
 			}else{
 				$this->message->addError($user->apiErrorMessage);
-				$this->message->addError($user->serverErrorMessage.$res);
+				$this->message->addError($user->serverErrorMessage);
 			}
 		}
 

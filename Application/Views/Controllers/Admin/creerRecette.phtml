@@ -4,7 +4,8 @@
 
     tabUnit  = new Array();
     tabQuant = new Array();
-    
+    verifChamp=0;
+
 
     function ajouterIngredient(){
         var val=$( "#allingredients option:selected" ).val();
@@ -15,8 +16,9 @@
 
             $('#allingredients option:selected').remove();
 
-            tabUnit.push(1);
+            tabUnit.push("rien");
             tabQuant.push(1);
+            verifChamp++;
             console.log(tabUnit+ "  ## "+tabQuant);
 
         }
@@ -37,6 +39,8 @@
             //supprime dans quantité
             tabUnit.splice(ing.selectedIndex,1);
             tabQuant.splice(ing.selectedIndex,1);
+
+            verifChamp--;   
 
             console.log(tabUnit +" # "+ tabQuant);
 
@@ -80,34 +84,53 @@
     }
 
     function preparatif(){
-        //selectionne tout
-        $('#ingredients option').prop('selected', true);
-        $('#unites option').prop('selected', true);
 
-
-
-
-
-        var formulaire = document.getElementById("formRecette");
-                    
-        
-         var inputQuant;
-
-        for(i=0; i<tabQuant.length; i++){
-            inputQuant = document.createElement("input");
-
-            inputQuant.setAttribute("type","hidden");
-            inputQuant.setAttribute("name","quantites["+i+"]");
-            inputQuant.setAttribute("value",tabQuant[i]);
-            formulaire.appendChild(inputQuant);
+        alors=false;
+        for( i=0; i<tabUnit.length; i++ ){
+            if(tabUnit[i]==="rien"){
+                alors=true;
+            }
         }
 
+        if (alors) {    //verifie si chaque ingredient
+            alert("veuillez selectionner une unité pour chaque ingredient");
+            return false;
+            
+        }else{      //prepare l'envoi
 
 
+            //selectionne tout
+            $('#ingredients option').prop('selected', true);
+            $('#unites option').prop('selected', true);
 
 
-         
-        formulaire.submit();
+            var formulaire = document.getElementById("formRecette");
+                        
+            
+             var inputQuant;
+             console.log(tabQuant);
+
+            for(i=0; i<tabQuant.length; i++){
+                inputQuant = document.createElement("input");
+
+                inputQuant.setAttribute("type","hidden");
+                inputQuant.setAttribute("name","quantites["+i+"]");
+                inputQuant.setAttribute("value",tabQuant[i]);
+                formulaire.appendChild(inputQuant);
+            }
+     
+
+                //recrée le bouton btn
+                inputQuant2 = document.createElement("input");
+                inputQuant2.setAttribute("type","hidden");
+                inputQuant2.setAttribute("name","btn");
+                formulaire.appendChild( );
+
+
+            formulaire.submit();
+
+        }
+
 
     }
 
@@ -145,7 +168,7 @@
 
 
 
-<form class="" method="post"  onsubmit="preparatif();" id="formRecette">
+<form class="" method="post"  onsubmit="preparatif(); return false;" id="formRecette">
     <h2 class="form-signin-heading">
         <?=$pageTitle?>
     </h2>
@@ -167,11 +190,11 @@
 
         <tr>
             <td>temps de cuisson</td>
-            <td><input type="text"  name="tps_cuisson"></td>
+            <td><input type="text"  name="tps_cuisson" required></td>
         </tr>
         <tr>
             <td>cout</td>
-            <td><input type="text"  name="cout"  /></td>
+            <td><input type="text"  name="cout" required /></td>
         </tr>
         <tr>
             <td>difficulté</td>
@@ -189,9 +212,9 @@
             <td>type</td>
             <td>
                 <select name="type">
-                    <option value="Entrée">Entrée</option>
-                    <option value="Plat">Plat</option>
-                    <option value="Dessert">Dessert</option>
+                    <option value="entrée">Entrée</option>
+                    <option value="plat">Plat</option>
+                    <option value="dessert">Dessert</option>
                 </select> 
             </td>
         </tr>
@@ -199,25 +222,25 @@
 
 
     <label for="diabete">diabete</label>
-    <input type="checkbox" name="diabete" id="diabete" value="0">
+    <input type="checkbox" name="diabete" id="diabete" value="">
 
     <label for="ble">ble</label>
-    <input type="checkbox" name="ble" id="ble" value="1">
+    <input type="checkbox" name="ble" id="ble" value="">
 
     <label for="lait">lait</label>
-    <input type="checkbox" name="lait" id="lait" value="0">
+    <input type="checkbox" name="lait" id="lait" value="">
 
     <label for="oeuf">oeuf</label>
-    <input type="checkbox" name="oeuf" id="oeuf" value="0">
+    <input type="checkbox" name="oeuf" id="oeuf" value="">
 
     <label for="arachide">arachide</label>
-    <input type="checkbox" name="arachide" id="arachide" value="0">
+    <input type="checkbox" name="arachide" id="arachide" value="">
 
     <label for="soja">soja</label>
-    <input type="checkbox" name="soja" id="soja" value="0">
+    <input type="checkbox" name="soja" id="soja" value="">
 
     <label for="gluten">gluten</label>
-    <input type="checkbox" name="gluten" id="gluten" value="0">
+    <input type="checkbox" name="gluten" id="gluten" value="">
 
 
     <table  border="1">

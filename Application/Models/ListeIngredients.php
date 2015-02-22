@@ -27,7 +27,7 @@ class ListeIngredients extends \Library\Model\Model{
 			        'id_recette'			=>	$idrecette,
 			        'quantites'				=>	json_encode($quantites)
 	  	);
-		var_dump("samrojtmj",$data);
+		//var_dump("samrojtmj",$data);
 		$opts = array('http' =>
 		    array(
 		        'method'  => 'POST',
