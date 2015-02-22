@@ -18,13 +18,24 @@ class Index extends \Library\Controller\Controller
 
 
 	public function indexAction(){
+		echo "<br><br><br>";
+		echo "<br><br><br>";
 
-		$viewRecettes 		= $this->modelViewRecettes->getViewRecette(1) ;
+		 
+		$viewRecettes 		= $this->modelViewRecettes->getAllViewRecettes() ;
+		if(!$viewRecettes['error']){
+			$viewRecettes=$viewRecettes['response'];
+			//var_dump("##################################", $viewRecettes);
+		}
+		
+
+		$viewRecettes 		= $this->modelViewRecettes->getViewRecette() ;
+
 
 		$this->setDataView(array(
 			"pageTitle" => "Maitres des fourneaux, site de recettes, cuisine de chef et vente electroménager",
-			"message" => $this->message->showMessages(),
-			"recettes" => $viewRecettes->response
+			"message" => $this->message->showMessages()//,
+			//"recettes" => $viewRecettes
 		));
 	}
 

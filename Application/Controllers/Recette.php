@@ -15,21 +15,23 @@ class Recette extends \Library\Controller\Controller{
 		$this->message 				= new \Library\Message\Message();
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelCat 			= new \Application\Models\Categorie('localhost');
-		$this->modelViewRecettes 	= new \Application\Models\ViewRecettes('localhost');
+		$this->modelViewRecette 	= new \Application\Models\ViewRecettes('localhost');
 	}
 
 	public function indexAction(){
 		//echo "indexdjkl".LINK_ROOT."recette/creer"; die();
 		//$this->setRedirect(LINK_ROOT."recette/creer");
-		
-		$viewRecettes = $this->modelViewRecettes->getViewRecette(1) ;	//interroge le webservice
+
+
+		$viewRecette = $this->modelViewRecette->getViewRecette() ;	//interroge le webservice
+
 		//var_dump($viewRecettes);
 
-		if(empty($viewRecettes->response)){
+		if(empty($viewRecette->response)){
 			$this->message->addError("aucune recette !");
-		}elseif ($viewRecettes->apiError ) {
+		}elseif ($viewRecette->apiError ) {
 			$this->message->addError($user->apiErrorMessage);
-		}elseif ( $viewRecettes->serverError ) {
+		}elseif ( $viewRecette->serverError ) {
 			$this->message->addError($user->serverErrorMessage);
 		}
 
@@ -37,7 +39,7 @@ class Recette extends \Library\Controller\Controller{
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
-			"recettes" => $viewRecettes->response
+			"recettes" => $viewRecette->response
 			));
 
 	}
