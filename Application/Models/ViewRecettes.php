@@ -4,7 +4,7 @@ namespace Application\Models;
 
 
 
-class ViewRecette extends \Library\Model\Model{
+class ViewRecettes extends \Library\Model\Model{
 
 
 	public function __construct($connexionName){
@@ -21,7 +21,7 @@ class ViewRecette extends \Library\Model\Model{
 		        'content' => http_build_query(
 								array(
 							        'service' => 'viewrecette',				//on peut aussi mettre un tableau(tous ce qu'on vt) pour la valeur de service
-							        'method' => 'getviewrecette',
+							        'method' => 'getviewrecettes',
 							        'id_recette'=> $id
 							    )
 		    				)

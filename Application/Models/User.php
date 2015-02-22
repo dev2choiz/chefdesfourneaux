@@ -29,7 +29,7 @@ class User extends \Library\Model\Model{
 		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
 	}
 
-public function updateUser($id,$mail , $password, $params){		//id ou mail
+	public function updateUser($id, $mail , $password, $params){		//id ou mail
 	
 		$opts = array('http' =>
 		    array(

@@ -22,7 +22,7 @@ class Recette extends \Library\Controller\Controller{
 		//echo "indexdjkl".LINK_ROOT."recette/creer"; die();
 		//$this->setRedirect(LINK_ROOT."recette/creer");
 		
-		$viewRecettes = $this->modelViewRecettes->getViewRecettes() ;	//interroge le webservice
+		$viewRecettes = $this->modelViewRecettes->getViewRecette(1) ;	//interroge le webservice
 		//var_dump($viewRecettes);
 
 		if(empty($viewRecettes->response)){

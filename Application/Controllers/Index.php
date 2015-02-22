@@ -19,7 +19,7 @@ class Index extends \Library\Controller\Controller
 
 	public function indexAction(){
 
-		$viewRecettes 		= $this->modelViewRecettes->getViewRecettes() ;
+		$viewRecettes 		= $this->modelViewRecettes->getViewRecette(1) ;
 
 		$this->setDataView(array(
 			"pageTitle" => "Maitres des fourneaux, site de recettes, cuisine de chef et vente electroménager",
