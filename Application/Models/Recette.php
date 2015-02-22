@@ -28,21 +28,17 @@ class Recette extends \Library\Model\Model{
 	 * @return [boolean]              [description]
 	 */
 	public function insertRecette($params, $idUser){
-		$data =array(
-			        'service' 				=> 'recette',				//on peut aussi mettre un tableau(tous ce qu'on vt) pour la valeur de service
-			        'method' 				=> 'insertrecette',
-					"value"					=> $params['value'],		//recette
-	  		   		"id_user"				=> $idUser,
-	  		   		"id_cat"				=> $params['id_cat'],
-	  		   		"id_resto"				=> $params['id_resto'],
-	  		   		"id_livre"				=> $params['id_livre']
-	  	);
+
+
+		$params["id_user"]=$idUser;
+		$params["service"]="recette";
+		$params["method"]="insertrecette";
 
 		$opts = array('http' =>
 		    array(
 		        'method'  => 'POST',
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query($data)
+		        'content' => http_build_query($params)
 		        )
 		);
 

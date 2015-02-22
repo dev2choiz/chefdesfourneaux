@@ -13,18 +13,27 @@ class Index extends \Library\Controller\Controller
 		$this->setLayout("carousel");
 		$this->message 				= new \Library\Message\Message();
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
-		$this->modelViewRecettes 	= new \Application\Models\ViewRecettes('localhost');
+		$this->modelViewRecette 	= new \Application\Models\ViewRecette('localhost');
 	}
 
 
 	public function indexAction(){
+		echo "<br><br><br>";
+		echo "<br><br><br>";
 
-		$viewRecettes 		= $this->modelViewRecettes->getViewRecettes() ;
+		 
+		$viewRecettes 		= $this->modelViewRecette->getAllViewRecettes() ;
+		if(!$viewRecettes['error']){
+			$viewRecettes=$viewRecettes['response'];
+			var_dump("##################################", $viewRecettes);
+		}
+		
+
 
 		$this->setDataView(array(
 			"pageTitle" => "Maitres des fourneaux, site de recettes, cuisine de chef et vente electroménager",
-			"message" => $this->message->showMessages(),
-			"recettes" => $viewRecettes->response
+			"message" => $this->message->showMessages()//,
+			//"recettes" => $viewRecettes
 		));
 	}
 

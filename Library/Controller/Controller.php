@@ -216,7 +216,11 @@ abstract class Controller implements iController
 
 		if(file_exists($pathView)){
 			
-			header("Content-type: ".$this->getResponseHeader()."; charset=utf-8");
+
+			//if(!headers_sent()  ){			//<---condition a enlever quand on recevera les reponses du webservice sans entete
+				header("Content-type: ".$this->getResponseHeader()."; charset=utf-8");
+			//}
+
 			extract($this->getDataView());
 
 			ob_start();
