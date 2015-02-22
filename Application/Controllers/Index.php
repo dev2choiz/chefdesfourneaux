@@ -25,7 +25,7 @@ class Index extends \Library\Controller\Controller
 		$viewRecettes 		= $this->modelViewRecette->getAllViewRecettes() ;
 		if(!$viewRecettes['error']){
 			$viewRecettes=$viewRecettes['response'];
-			var_dump("##################################", $viewRecettes);
+			//var_dump("##################################", $viewRecettes);
 		}
 		
 
