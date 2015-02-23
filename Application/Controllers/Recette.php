@@ -23,8 +23,8 @@ class Recette extends \Library\Controller\Controller{
 		//$this->setRedirect(LINK_ROOT."recette/creer");
 
 
-		$viewRecette = $this->modelViewRecette->getViewRecette() ;	//interroge le webservice
-
+		$viewAllRecette = $this->modelViewRecette->getViewRecette() ;	//interroge le webservice
+		$viewAllRecette 		= $viewAllRecette['response'];
 		//var_dump($viewRecettes);
 
 		if(empty($viewRecette->response)){
@@ -39,7 +39,7 @@ class Recette extends \Library\Controller\Controller{
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
-			"recettes" => $viewRecette->response
+			"recettes" => $viewAllRecette
 			));
 
 	}
@@ -73,10 +73,26 @@ class Recette extends \Library\Controller\Controller{
 	
 
 
-	public function santeAction(){
+	public function indexSanteAction(){
+		$viewAllRecettes  	= $this->modelViewRecette->getAllViewRecettes();
+		$viewAllRecettes 	= $viewAllRecettes['response'];
+		//var_dump($viewAllRecettes);
 		$this->setDataView(array(
 			"pageTitle" => "Recette santé, régime, cuisine légère",
-			"tinyMCE" => $this->tinyMCE->getSource()
+			"message" => $this->message->showMessages(),
+			"tinyMCE" 		=> $this->tinyMCE->getSource(),
+			"recettes"		=> $viewAllRecettes
+		));
+	}
+
+	public function santeAction($id){
+		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($id);
+		$viewRecette 		= $viewRecette['response'][0];
+		$this->setDataView(array(
+			"pageTitle" => "Recette santé, régime, cuisine légère",
+			"message" 		=> $this->message->showMessages(),
+			"tinyMCE" => $this->tinyMCE->getSource(),
+			"recette"		=> $viewRecette 
 		));
 	}
 
