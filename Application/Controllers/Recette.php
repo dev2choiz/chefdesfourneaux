@@ -44,12 +44,13 @@ class Recette extends \Library\Controller\Controller{
 
 	}
 
-	public function chefAction($id){
+	public function indexChefAction(){
+
 
 		$viewAllRecettes  	= $this->modelViewRecette->getAllViewRecettes();
-		//var_dump($viewAllRecettes);
 		$viewAllRecettes 	= $viewAllRecettes['response'];
-		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($id);
+		//var_dump($viewAllRecettes); 		
+		
 		
 		$this->setDataView(array(
 			"pageTitle" 	=> "Recettes de chef cuisiniers",
@@ -57,9 +58,20 @@ class Recette extends \Library\Controller\Controller{
 			"tinyMCE" 		=> $this->tinyMCE->getSource(),
 			"recettes"		=> $viewAllRecettes
 		));
-
-
 	}
+
+	public function chefAction($id){
+		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($id);
+		$viewRecette 		= $viewRecette['response'][0];
+		$this->setDataView(array(
+			"pageTitle" 	=> $viewRecette['titre'],
+			"message" 		=> $this->message->showMessages(),
+			"tinyMCE" 		=> $this->tinyMCE->getSource(),
+			"recette"		=> $viewRecette 
+		));
+	}
+	
+
 
 	public function santeAction(){
 		$this->setDataView(array(
