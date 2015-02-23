@@ -27,7 +27,7 @@ class ViewRecette extends \Library\Model\Model{
 								array(
 							        'service' => 'viewrecette',				//on peut aussi mettre un tableau(tous ce qu'on vt) pour la valeur de service
 							        'method' => 'getviewrecette',
-							        'id_recette'=> $id
+							        'id_recette' => $id
 							    )
 		    				)
 		        )
@@ -35,7 +35,6 @@ class ViewRecette extends \Library\Model\Model{
 
 		$context  = stream_context_create($opts);
 		return  $this->convEnTab(json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ) ;
-
 	}
 
 	/**

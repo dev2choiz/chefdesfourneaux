@@ -44,7 +44,12 @@
                                 <li><a href="<?=LINK_ROOT.'vente/restaurant'?>">Restaurants de nos chefs</a></li>
                                 
                                 <li class="dropdown">
+                                    <?php if(empty($_SESSION['user'])):?>
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">S'inscrire / Se connecter <span class="caret"></span></a>
+                                    <?php else :?>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bienvenue <?=$_SESSION['user']['pseudo']?> <span class="caret"></span></a>
+                                    <?php endif ;?>
+
 
 
                                     <ul class="dropdown-menu" role="menu">
@@ -63,12 +68,12 @@
                                         <li class="dropdown-header">Administration du site</li>
                                         
                                         <li><a href="<?=LINK_ROOT.'admin/index'?>">Index</a></li>
-                                        <li><a href="#">Créer</a></li>
-                                        <li><a href="#">Mettre à jour</a></li>
-                                        <li><a href="#">Supprimer</a></li>
+                                        <li><a href="<?=LINK_ROOT.'admin/recette'?>">Recette</a></li>
+                                        <li><a href="<?=LINK_ROOT.'admin/livre'?>">Livres de cuisine</a></li>
+                                        <li><a href="<?=LINK_ROOT.'admin/restaurant'?>">Restaurant</a></li>
                                         <?php endif; ?>
                                         
-                                    </ul>
+                                    </ul> 
                                 </li>
                             </ul>
                         </div> <!-- Fin navbar-header -->
@@ -152,6 +157,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="<?=WEB_ROOT?>/js/bootstrap.min.js"></script>
         <script src="<?=WEB_ROOT?>/js/docs.min.js"></script>
+        <script src="<?=WEB_ROOT?>/js/script.js"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="<?=WEB_ROOT?>/js/ie10-viewport-bug-workaround.js"></script>
     </body>

@@ -6,7 +6,7 @@ class Index extends \Library\Controller\Controller
 {
 	private $message;
 	private $tinyMCE;
-	private $modelViewRecettes;
+	private $modelViewRecette;
 	
 	public function __construct(){
 		parent::__construct();
@@ -22,12 +22,15 @@ class Index extends \Library\Controller\Controller
 		echo "<br><br><br>";
 
 		 
-		$viewRecettes 		= $this->modelViewRecette->getAllViewRecettes() ;
-		if(!$viewRecettes['error']){
-			$viewRecettes=$viewRecettes['response'];
+		$viewAllRecettes 		= $this->modelViewRecette->getAllViewRecettes() ;
+		if(!empty($viewAllRecettes['response'])){
+			$viewAllRecettes=$viewAllRecettes['response'];
 			//var_dump("##################################", $viewRecettes);
+		}else{
+			$this->message->addError("pas de Recettes");
 		}
-		
+
+		//$viewRecettes = $this->modelViewRecette->getViewRecette($id);
 
 
 		$this->setDataView(array(

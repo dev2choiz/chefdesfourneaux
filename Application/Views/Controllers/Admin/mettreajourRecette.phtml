@@ -158,11 +158,11 @@
             <td>
                 <select name="id_cat">
                   <?php foreach ($categories as $categorie) {
-                            if($categorie['value']== $viewrecette['categorie'] ){
-                                $txt=" selected ";
-                            }else{
-                                $txt="";
-                            }
+                        if($categorie['value'] == $viewrecette['categorie'] ){
+                            $txt=" selected ";
+                        }else{
+                            $txt="";
+                        }
                    ?>
                       <option value="<?=$categorie['id_cat']?>"  <?=$txt?> ><?=$categorie['value']?></option> 
 

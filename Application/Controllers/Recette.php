@@ -7,7 +7,7 @@ class Recette extends \Library\Controller\Controller{
 	private $message;
 	private $tinyMCE;
 	private $modelCat;
-	private $modelViewRecettes;
+	private $modelViewRecette;
 
 	public function __construct(){
 		parent::__construct();
@@ -21,8 +21,10 @@ class Recette extends \Library\Controller\Controller{
 	public function indexAction(){
 		//echo "indexdjkl".LINK_ROOT."recette/creer"; die();
 		//$this->setRedirect(LINK_ROOT."recette/creer");
-		
+
+
 		$viewRecette = $this->modelViewRecette->getViewRecette() ;	//interroge le webservice
+
 		//var_dump($viewRecettes);
 
 		if(empty($viewRecette->response)){
@@ -42,11 +44,21 @@ class Recette extends \Library\Controller\Controller{
 
 	}
 
-	public function chefAction(){
+	public function chefAction($id){
+
+		$viewAllRecettes  	= $this->modelViewRecette->getAllViewRecettes();
+		//var_dump($viewAllRecettes);
+		$viewAllRecettes 	= $viewAllRecettes['response'];
+		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($id);
+		
 		$this->setDataView(array(
-			"pageTitle" => "Recettes de chef",
-			"tinyMCE" => $this->tinyMCE->getSource()
+			"pageTitle" 	=> "Recettes de chef cuisiniers",
+			"message" 		=> $this->message->showMessages(),
+			"tinyMCE" 		=> $this->tinyMCE->getSource(),
+			"recettes"		=> $viewAllRecettes
 		));
+
+
 	}
 
 	public function santeAction(){

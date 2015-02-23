@@ -5,6 +5,7 @@
 body {
   padding-bottom: 40px;
   color: #5a5a5a;
+  font-family: "Origin-Regular", Helvetica, Arial, sans-serif;
 }
 
 
@@ -18,6 +19,8 @@ body {
   right: 0;
   left: 0;
   z-index: 20;
+  font-family: "Calibri Light", Helvetica, Arial, sans-serif;
+
 }
 
 /* Flip around the padding for proper display in narrow viewports */
@@ -28,6 +31,7 @@ body {
 .navbar-wrapper .navbar {
   padding-right: 15px;
   padding-left: 15px;
+  /*background-color: #D7D3D3;*/
 }
 .navbar-wrapper .navbar .container {
   width: auto;
