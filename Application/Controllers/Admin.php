@@ -16,7 +16,8 @@ class Admin extends \Library\Controller\Controller{
 		$this->setLayout("carousel");
 		$this->message 		= new \Library\Message\Message();
 		$this->tinyMCE 		= new \Library\TinyMCE\tinyMCE();
-		$this->modelRecette = new \Application\Models\Recette('localhost');
+		//$this->modelRecette = new \Application\Models\Recette('localhost');
+		$this->modelVR = new \Application\Models\ViewRecette('localhost');
 	}
 
 
@@ -25,12 +26,14 @@ class Admin extends \Library\Controller\Controller{
 		if($_SESSION['user']['role'] !== "admin"){
 			$this->setRedirect(LINK_ROOT);
 		}
-		$recettes = $this->modelRecette->getRecettes();
+		//$viewR = $this->modelVR->getRecettes();
+		$viewR = $this->modelVR->getAllViewRecettes();
+
 
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
-			"recettes" => $recettes['response']
+			"recettes" => $viewR['response']
 		));
 	}
 
