@@ -16,9 +16,8 @@ class Recette extends \Library\Model\Model{
 
 
 	public function getRecettes(){
-		//http://localhost/Webservice/Public/index.php?service=recette&method=getrecettes
-		//echo file_get_contents(WEBSERVICE_ROOT.'/index.php?service=recette&method=getrecettes');
-		return json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php?service=recette&method=getrecettes'));
+		
+		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php?service=recette&method=getrecettes')) );
 	}
 
 	/**

@@ -21,6 +21,7 @@ class Admin extends \Library\Controller\Controller{
 
 
 	public function indexAction(){
+				echo "<BR><BR><BR>";
 		if($_SESSION['user']['role'] !== "admin"){
 			$this->setRedirect(LINK_ROOT);
 		}
@@ -29,7 +30,7 @@ class Admin extends \Library\Controller\Controller{
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
-			"recettes" => $recettes->response
+			"recettes" => $recettes['response']
 		));
 	}
 
