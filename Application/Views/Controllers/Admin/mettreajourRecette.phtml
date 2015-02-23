@@ -1,6 +1,8 @@
 <?=$tinyMCE?>
 <?php
 //$message
+
+var_dump($viewrecette);
 ?>
 <script type="text/javascript">
 
@@ -281,9 +283,10 @@
                     
                 <select  id="allingredients" multiple size="8"   onclick="ajouterIngredient();"  style="min-width:150px;">
                   <?php
-                  
+                  //var_dump($ingredients);
                   foreach ($ingredients as $ingredient) {
-                    echo '<option value="'.$ingredient['id_ingredient']." >".$ingredient['value']."</option>";
+                    //echo "assssssssssss";
+                    echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
                   }
 
 

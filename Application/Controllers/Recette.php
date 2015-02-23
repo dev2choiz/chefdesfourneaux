@@ -18,20 +18,26 @@ class Recette extends \Library\Controller\Controller{
 		$this->modelViewRecette 	= new \Application\Models\ViewRecette('localhost');
 	}
 
-	public function indexAction(){
-		//echo "indexdjkl".LINK_ROOT."recette/creer"; die();
-		//$this->setRedirect(LINK_ROOT."recette/creer");
 
 
 		$viewAllRecette = $this->modelViewRecette->getViewRecette() ;	//interroge le webservice
 		$viewAllRecette 		= $viewAllRecette['response'];
+
+
+	//elle sert à quoi cette page? a afficher une recette
+	//ou toute les recettes cuisine du monde ?
+	public function indexAction(){
+		
+		$viewRecettes = $this->modelViewRecette->getAllViewRecettes() ;			//toute les recette
+
 		//var_dump($viewRecettes);
 
-		if(empty($viewRecette->response)){
+
+		if(empty($viewRecette['response'])){					//<== avec ou sans 's'?
 			$this->message->addError("aucune recette !");
-		}elseif ($viewRecette->apiError ) {
+		}elseif ($viewRecette['apiError'] ) {
 			$this->message->addError($user->apiErrorMessage);
-		}elseif ( $viewRecette->serverError ) {
+		}elseif ( $viewRecette['serverError'] ) {
 			$this->message->addError($user->serverErrorMessage);
 		}
 
@@ -40,6 +46,7 @@ class Recette extends \Library\Controller\Controller{
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
 			"recettes" => $viewAllRecette
+			"recettes" => $viewRecettes['response']
 			));
 
 	}
@@ -98,7 +105,7 @@ class Recette extends \Library\Controller\Controller{
 
 
 
-	public function logoutAction(){
+	public function logoutAction(){		//a effacer?
 		session_unset();
 	}
 
