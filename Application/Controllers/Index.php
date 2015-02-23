@@ -6,14 +6,14 @@ class Index extends \Library\Controller\Controller
 {
 	private $message;
 	private $tinyMCE;
-	private $modelViewRecettes;
+	private $modelViewRecette;
 	
 	public function __construct(){
 		parent::__construct();
 		$this->setLayout("carousel");
 		$this->message 				= new \Library\Message\Message();
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
-		$this->modelViewRecettes 	= new \Application\Models\ViewRecettes('localhost');
+		$this->modelViewRecette 	= new \Application\Models\ViewRecette('localhost');
 	}
 
 
@@ -22,14 +22,15 @@ class Index extends \Library\Controller\Controller
 		echo "<br><br><br>";
 
 		 
-		$viewRecettes 		= $this->modelViewRecettes->getAllViewRecettes() ;
-		if(!$viewRecettes['error']){
-			$viewRecettes=$viewRecettes['response'];
+		$viewAllRecettes 		= $this->modelViewRecette->getAllViewRecettes() ;
+		if(!empty($viewAllRecettes['response'])){
+			$viewAllRecettes=$viewAllRecettes['response'];
 			//var_dump("##################################", $viewRecettes);
+		}else{
+			$this->message->addError("pas de Recettes");
 		}
-		
 
-		$viewRecettes 		= $this->modelViewRecettes->getViewRecette() ;
+		//$viewRecettes = $this->modelViewRecette->getViewRecette($id);
 
 
 		$this->setDataView(array(

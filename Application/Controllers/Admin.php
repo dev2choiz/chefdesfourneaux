@@ -14,7 +14,6 @@ class Admin extends \Library\Controller\Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->setLayout("carousel");
-		//$this->setLayout("blog");
 		$this->message 		= new \Library\Message\Message();
 		$this->tinyMCE 		= new \Library\TinyMCE\tinyMCE();
 		$this->modelRecette = new \Application\Models\Recette('localhost');
@@ -23,8 +22,7 @@ class Admin extends \Library\Controller\Controller{
 
 	public function indexAction(){
 		if($_SESSION['user']['role'] !== "admin"){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 		$recettes = $this->modelRecette->getRecettes();
 
@@ -181,25 +179,17 @@ class Admin extends \Library\Controller\Controller{
 
 	}
 
-	public function mettreajourRecetteAction(){
-		var_dump($_POST, $_GET);
+	public function mettreajourRecetteAction($id){
 
 		
 		if($_SESSION['user']['role'] !== "admin"){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 		
 		$this->setDataView(array(
 			"pageTitle" => "Modifier une recette",
 			"tinyMCE" => $this->tinyMCE->getSource()
 		));
-
-
-
-
-
-
 /*		
 		if(isset($_POST['btn'])){
 			
@@ -269,125 +259,89 @@ class Admin extends \Library\Controller\Controller{
 
 		//données pour la view
 
-		$this->setDataView(array("message" => $this->message->showMessages()));
 
 		//recherche des categories
 		$modelCategorie 	= new \Application\Models\Categorie('localhost');
 		$cat=$modelCategorie->getCategories();
 		$cat=$cat->response;
 		$cat=$modelCategorie->convEnTab($cat);
-		$this->setDataView(array("categories" =>  $cat));
+
 
 		//recherche des ingredients
 		$modelIngredient 	= new \Application\Models\Ingredient('localhost');
 		$ing=$modelIngredient->getIngredients();
 		$ing=$ing->response;
 		$ing=$modelIngredient->convEnTab($ing);
-		$this->setDataView(array("ingredients" =>  $ing));
+
 
 		//recherche des Unites
 		$modelUnite 	= new \Application\Models\Unite('localhost');
 		$unit=$modelUnite->getUnites();
 		$unit=$unit->response;
 		$unit=$modelUnite->convEnTab($unit);
-		$this->setDataView(array("unites" =>  $unit));
 
 
-
-
-
-
-
-		if(isset($_GET['id_recette'])){		
+		//if(isset($_GET['page'])){		
 			//## prepare les données pour afficher la recette
 
 		
 			$modelVR 	= new \Application\Models\ViewRecette('localhost');
-			$viewR=$modelVR->convEnTab($modelVR->getViewRecette($_GET['id_recette'])) ;
-			//echo "#####################@@@@@@@@@@@@@@@@@".$viewR['page']."##########";
-			
-			$viewR=$viewR['response'];
-			var_dump($viewR,"ffdsd");
+			$viewR 		= $modelVR->getViewRecette($id);
+			$viewR 		= $viewR['response'][0];
+			var_dump($viewR);
 
+			$this->setDataView(array(
+				"message" => $this->message->showMessages(),
+				"viewrecette" =>  $viewR,
+				"categories" =>  $cat,
+				"ingredients" =>  $ing,
+				"unites" =>  $unit
+			));
 
-			$this->setDataView(array("viewrecette" =>  $viewR));
-
-
-
-
-		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		
 
 
 	}
 
 	public function supprimerRecetteAction(){
 		if($_SESSION['user']['role'] !== "admin"){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 	}
 
 	public function creerLivreAction(){
 		if($_SESSION['user']['role'] !== "admin"){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 	}
 
 	public function mettreajourLivreAction(){
 		if($_SESSION['user']['role'] !== "admin"){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 	}
 
 	public function supprimerLivreAction(){
 		if($_SESSION['user']['role'] !== "admin"){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 	}
 
 	public function creerRestaurantAction(){
 		if($_SESSION['user']['role'] !== "admin"){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 	}
 
 	public function mettreajourRestaurantAction(){
 		if($_SESSION['user']['role'] !== "admin"){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 	}
 
 	public function supprimerRestaurantAction(){
 		if($_SESSION['user']['role'] !== "admin"){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 	}
 

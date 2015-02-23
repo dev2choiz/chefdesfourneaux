@@ -4,7 +4,7 @@ namespace Application\Models;
 
 
 
-class ViewRecettes extends \Library\Model\Model{
+class ViewRecette extends \Library\Model\Model{
 
 
 	public function __construct($connexionName){
@@ -26,8 +26,8 @@ class ViewRecettes extends \Library\Model\Model{
 		        'content' => http_build_query(
 								array(
 							        'service' => 'viewrecette',				//on peut aussi mettre un tableau(tous ce qu'on vt) pour la valeur de service
-							        'method' => 'getviewrecettes',
-							        'id_recette'=> $id
+							        'method' => 'getviewrecette',
+							        'id_recette' => $id
 							    )
 		    				)
 		        )
@@ -35,7 +35,6 @@ class ViewRecettes extends \Library\Model\Model{
 
 		$context  = stream_context_create($opts);
 		return  $this->convEnTab(json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ) ;
-
 	}
 
 	/**

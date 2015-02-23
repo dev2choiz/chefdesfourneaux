@@ -1,183 +1,26 @@
 <?=$tinyMCE?>
 <?=$message?>
-<script type="text/javascript">
-
-    tabUnit  = new Array();
-    tabQuant = new Array();
-    verifChamp=0;
-
-
-    function ajouterIngredient(){
-        var val=$( "#allingredients option:selected" ).val();
-        var lab=$( "#allingredients option:selected" ).text();
-        if($('#allingredients option').length!==0 ){
-            $('#ingredients').append('<option value="'+val+'" selected="selected">'+lab+'</option>');
-            $('#unites').append('<option value="'+val+'" selected="selected">...</option>');
-
-            $('#allingredients option:selected').remove();
-
-            tabUnit.push("rien");
-            tabQuant.push(1);
-            verifChamp++;
-            console.log(tabUnit+ "  ## "+tabQuant);
-
-        }
-    }
-
-    function retirerIngredient(){
-        var val=$( "#ingredients option:selected" ).val();
-        var lab=$( "#ingredients option:selected" ).text();
-        if($('#ingredients option').length!==0 ){
-
-            //$('#unites option:eq(3)').prop('selected', true);
-            var ing =document.getElementById("ingredients");
-            var unit =document.getElementById("unites");
-
-            //supprime fna le select
-            unit.options[ing.selectedIndex].remove();
-            
-            //supprime dans quantité
-            tabUnit.splice(ing.selectedIndex,1);
-            tabQuant.splice(ing.selectedIndex,1);
-
-            verifChamp--;   
-
-            console.log(tabUnit +" # "+ tabQuant);
-
-            $('#allingredients').append('<option value="'+val+'" selected="selected">'+lab+'</option>');
-            $('#ingredients option:selected').remove();
-        }
-    }
-
-
-    function definirUnite(){
-        var allUnit = document.getElementById("allunites");
-        var unit = document.getElementById("unites");
-        if(unit.selectedIndex>=0 ){
-            unit.options[unit.selectedIndex].value= allUnit.options[allUnit.selectedIndex].value ;
-            unit.options[unit.selectedIndex].text= "1 " + allUnit.options[allUnit.selectedIndex].text ;
-
-            tabUnit[unit.selectedIndex]=allUnit.options[allUnit.selectedIndex].text;
-            tabQuant[unit.selectedIndex]=1;
-
-            console.log(tabUnit+"##"+ tabQuant);
-            //alert(allUnit.options[allUnit.selectedIndex].text); 
-        }
-    }
-
-    function definirQuantite(){
-
-        var quant = document.getElementById("quantite");
-        var unit = document.getElementById("unites");
-        if(parseFloat(quant.value)>0 ){
-            
-            unit.options[unit.selectedIndex].text= parseFloat(quant.value) + " " + tabUnit[unit.selectedIndex];
-
-            tabQuant[unit.selectedIndex]=quant.value;
-            console.log(tabUnit+"##"+ tabQuant);
-
-            //alert(allUnit.options[allUnit.selectedIndex].text); 
-        }
-
-
-
-    }
-
-    function preparatif(){
-
-        alors=false;
-        for( i=0; i<tabUnit.length; i++ ){
-            if(tabUnit[i]==="rien"){
-                alors=true;
-            }
-        }
-
-        if (alors) {    //verifie si chaque ingredient
-            alert("veuillez selectionner une unité pour chaque ingredient");
-            return false;
-            
-        }else{      //prepare l'envoi
-
-
-            //selectionne tout
-            $('#ingredients option').prop('selected', true);
-            $('#unites option').prop('selected', true);
-
-
-            var formulaire = document.getElementById("formRecette");
-                        
-            
-             var inputQuant;
-             console.log(tabQuant);
-
-            for(i=0; i<tabQuant.length; i++){
-                inputQuant = document.createElement("input");
-
-                inputQuant.setAttribute("type","hidden");
-                inputQuant.setAttribute("name","quantites["+i+"]");
-                inputQuant.setAttribute("value",tabQuant[i]);
-                formulaire.appendChild(inputQuant);
-            }
-     
-
-                //recrée le bouton btn
-                inputQuant2 = document.createElement("input");
-                inputQuant2.setAttribute("type","hidden");
-                inputQuant2.setAttribute("name","btn");
-                formulaire.appendChild( );
-
-
-            formulaire.submit();
-
-        }
-
-
-    }
-
-
-
-    function actualiserQuantite(){
-     var quant = document.getElementById("quantite");
-     quant.value=tabQuant[document.getElementById("unites").selectedIndex];
-    }
-
-
-
-    function masquer(){
-
-        document.getElementById("boutonunite").style.visibility='hidden';
-        document.getElementById("allunites").style.visibility='hidden';
-        document.getElementById("quantite").style.visibility='hidden';
-        document.getElementById("okquantite").style.visibility='hidden';
-    }
-
-
-    function afficher(){
-        document.getElementById("boutonunite").style.visibility='visible';
-        document.getElementById("allunites").style.visibility='visible';
-        document.getElementById("quantite").style.visibility='visible';
-        document.getElementById("okquantite").style.visibility='visible';
-    }
-
-
-
-
-
-</script>
-
-
 
 
 <form class="" method="post"  onsubmit="preparatif(); return false;" id="formRecette">
     <h2 class="form-signin-heading">
         <?=$pageTitle?>
     </h2>
-    <textarea name="value" autofocus style="width: 100%;"></textarea>
-
+    
     <table>
-        <tr><td>categorie</td>
+        <tr>
+            <label for="titre">Titre de la recette que vous souhaitez ajouter : </label>
+            <td><input type="text" name="titre" id="titre" required></td>
+        </tr>
+    </table>
+    <br/>
+    <textarea name="value" autofocus style="width: 50%;"></textarea>
+    <br/>
+    <table>
+        <tr>
+            <td><label for="id_cat">Catégorie : </label></td>
             <td>
-                <select name="id_cat">
+                <select name="id_cat" id="id_cat">
                   <?php foreach ($categories as $categorie) {?>
                       <option value="<?=$categorie['id_cat']?>"><?=$categorie['value']?></option> 
 
@@ -189,17 +32,17 @@
 
 
         <tr>
-            <td>temps de cuisson</td>
-            <td><input type="text"  name="tps_cuisson" required></td>
+            <td><label for="tps_cuisson">Temps de cuisson : </label></td>
+            <td><input type="text"  name="tps_cuisson" id="tps_cuisson" required></td>
         </tr>
         <tr>
-            <td>cout</td>
+            <td><label for="cout"></label></td>
             <td><input type="text"  name="cout" required /></td>
         </tr>
         <tr>
-            <td>difficulté</td>
+            <td><label for="difficulte">Difficulté : </label></td>
             <td>
-                <select name="difficulte">
+                <select name="difficulte" id="difficulte">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -209,9 +52,9 @@
             </td>
         </tr>
         <tr>
-            <td>type</td>
+            <td><label for="type">Type : </label></td>
             <td>
-                <select name="type">
+                <select name="type" id="type">
                     <option value="entrée">Entrée</option>
                     <option value="plat">Plat</option>
                     <option value="dessert">Dessert</option>
@@ -244,11 +87,10 @@
 
 
     <table  border="1">
-<tr><td collspan="4">Ingredients</td></tr>
-            <tr><td>
-            </td>
-            <td>
-            </td>
+        <tr><td collspan="4">Ingredients : </td></tr>
+        <tr>
+            <td></td>
+            <td></td>
             <td>
                 <select id="allunites"     style="min-width:150px;">
                   <?php foreach ($unites as $unite) {?>
@@ -259,7 +101,6 @@
             <td>
                 <input type="button" onclick="definirUnite();" value="definir" id="boutonunite">
             </td>
-
         </tr>      
 
 
@@ -294,7 +135,7 @@
 
 
 
-    <input type="hidden"  name="id_livre"  value="1"m  style="min-width:150px;">
+    <input type="hidden"  name="id_livre"  value="1" style="min-width:150px;">
     <input type="hidden"  name="id_resto"  value="1">
 
     <BR>

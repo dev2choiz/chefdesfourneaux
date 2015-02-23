@@ -20,8 +20,7 @@ class User extends \Library\Controller\Controller{
 	public function profilAction(){
 
 		if(empty($_SESSION['user'])){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 
 		
@@ -135,8 +134,7 @@ class User extends \Library\Controller\Controller{
 	public function loginAction(){
 
 		if(!empty($_SESSION['user'])){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 		
 		$this->setDataView(array("pageTitle" => "Connexion"));
@@ -225,8 +223,7 @@ class User extends \Library\Controller\Controller{
 	public function inscriptionAction(){
 
 		if(!empty($_SESSION['user'])){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 
 		$this->setDataView(array("pageTitle" => "Inscription"));
@@ -298,8 +295,7 @@ class User extends \Library\Controller\Controller{
 
 		
 		if(empty($_SESSION['user'])){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 
 		$this->setDataView(array("pageTitle" => "Delete"));
@@ -336,8 +332,7 @@ class User extends \Library\Controller\Controller{
 			if($res){
 				$this->message->addSuccess("Compte supprimé");
 				unset($_SESSION['user']);
-				header('location: '.LINK_ROOT.'user/login');
-				die();
+				$this->setRedirect(LINK_ROOT.'user/login'); 	
 			}else{
 				$this->message->addError("mot de passe erroné  !");
 

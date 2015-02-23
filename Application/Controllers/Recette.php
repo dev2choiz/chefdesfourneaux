@@ -7,7 +7,7 @@ class Recette extends \Library\Controller\Controller{
 	private $message;
 	private $tinyMCE;
 	private $modelCat;
-	private $modelViewRecettes;
+	private $modelViewRecette;
 
 	public function __construct(){
 		parent::__construct();
@@ -15,7 +15,7 @@ class Recette extends \Library\Controller\Controller{
 		$this->message 				= new \Library\Message\Message();
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelCat 			= new \Application\Models\Categorie('localhost');
-		$this->modelViewRecette 	= new \Application\Models\ViewRecettes('localhost');
+		$this->modelViewRecette 	= new \Application\Models\ViewRecette('localhost');
 	}
 
 	public function indexAction(){
@@ -44,11 +44,21 @@ class Recette extends \Library\Controller\Controller{
 
 	}
 
-	public function chefAction(){
+	public function chefAction($id){
+
+		$viewAllRecettes  	= $this->modelViewRecette->getAllViewRecettes();
+		//var_dump($viewAllRecettes);
+		$viewAllRecettes 	= $viewAllRecettes['response'];
+		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($id);
+		
 		$this->setDataView(array(
-			"pageTitle" => "Recettes de chef",
-			"tinyMCE" => $this->tinyMCE->getSource()
+			"pageTitle" 	=> "Recettes de chef cuisiniers",
+			"message" 		=> $this->message->showMessages(),
+			"tinyMCE" 		=> $this->tinyMCE->getSource(),
+			"recettes"		=> $viewAllRecettes
 		));
+
+
 	}
 
 	public function santeAction(){

@@ -30,9 +30,9 @@ class Recette extends \Library\Model\Model{
 	public function insertRecette($params, $idUser){
 
 
-		$params["id_user"]=$idUser;
-		$params["service"]="recette";
-		$params["method"]="insertrecette";
+		$params["id_user"] = $idUser;
+		$params["service"] = "recette";
+		$params["method"]  = "insertrecette";
 
 		$opts = array('http' =>
 		    array(
