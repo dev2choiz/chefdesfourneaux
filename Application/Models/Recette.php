@@ -43,7 +43,7 @@ class Recette extends \Library\Model\Model{
 
 		$context  = stream_context_create($opts);
 		
-		return file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ;
+		return $this->convEnTab(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) );
 		
 	}
 

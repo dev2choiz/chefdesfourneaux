@@ -100,20 +100,25 @@ class Admin extends \Library\Controller\Controller{
 			$res=get_object_vars(json_decode($res));
 			$res=$res['response'];
 			
-			if ($res > 0 ) {
+			if ($res > 0 ) {		//res= id de la recette créée si tout s est bien passé
 				//header('location: '.LINK_ROOT.'recette');
 				//die();
 				
 				
 				
-				$modelListeIngredients 	= new \Application\Models\ListeIngredients('localhost');
+				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
+				//echo "<br><br><br><br>";
+				//var_dump($ingreds, $unites , $res, $quantites );
+				$res =$modelListIngredients->insertListIngredients($ingreds, $unites , $res, $quantites );
+				//echo $res->page;
+				//var_dump("ress",$res);
 				
-				$res =$modelListeIngredients->insertListeIngredients($ingreds, $unites , $res, $quantites );
-				
-				
-
-				$this->message->addSuccess("Recette ajoutée");
-
+					//aucune verif la flemme
+				if($res->response){
+					$this->message->addSuccess("Recette ajoutée");
+				}else{
+					$this->message->addSuccess("Recette ajoutée sans les ingredients");
+				}
 
 
 
@@ -180,13 +185,26 @@ class Admin extends \Library\Controller\Controller{
 
 	}
 
-	public function mettreajourRecetteAction($id){
+	
+	/**
+	 * [mettreAJourRecetteAction : l'addresse fini avec un parametre get : ]
+	 * 							http://localhost/fourneaux/admin/mettreajourrecette/12
+	 * @return [type] [description]
+	 */
+	public function mettreAJourRecetteAction($idRecette){
 
+
+		echo "<br><br><br><br>".$idRecette;
 		
-		if($_SESSION['user']['role'] !== "admin"){
+		if( $_SESSION['user']['role'] !== "admin" ){
 			$this->setRedirect(LINK_ROOT);
+		}elseif( !isset($idRecette) || empty($idRecette)  || $idRecette===0 ){	//si pas d'idrecette
+			$this->setRedirect(LINK_ROOT."admin/");
 		}
-		
+
+
+
+
 		$this->setDataView(array(
 			"pageTitle" => "Modifier une recette",
 			"tinyMCE" => $this->tinyMCE->getSource()
@@ -231,7 +249,7 @@ class Admin extends \Library\Controller\Controller{
 				
 				
 				
-				$modelListeIngredients 	= new \Application\Models\ListeIngredients('localhost');
+				$modelListIngredients 	= new \Application\Models\ListeIngredients('localhost');
 				
 				$res =$modelListeIngredients->insertListeIngredients($ingreds, $unites , $res, $quantites );
 				
@@ -254,6 +272,16 @@ class Admin extends \Library\Controller\Controller{
 
 */
 
+
+
+
+
+
+
+
+
+
+
 		//################## données pour la view ############################
 
 
@@ -273,6 +301,8 @@ class Admin extends \Library\Controller\Controller{
 		$ing=$modelIngredient->getIngredients();
 		$ing=$ing->response;
 		$ing=$modelIngredient->convEnTab($ing);
+		//var_dump($ing);
+
 
 
 		//recherche des Unites
@@ -282,25 +312,32 @@ class Admin extends \Library\Controller\Controller{
 		$unit=$modelUnite->convEnTab($unit);
 
 
-		//if(isset($_GET['page'])){		
+
+
+		if( $idRecette>0 ){		//condition qui  sert a rien
+			
 			//## prepare les données pour afficher la recette
 
 		
+			
 			$modelVR 	= new \Application\Models\ViewRecette('localhost');
-			$viewR 		= $modelVR->getViewRecette($id);
-			$viewR 		= $viewR['response'][0];
+			$viewR 		= $modelVR->getViewRecette($idRecette);
+			$viewR 		= $viewR['response'];
 			var_dump($viewR);
 
+
+
+			
+
+		}
+		
 			$this->setDataView(array(
 				"message" => $this->message->showMessages(),
-				"viewrecette" =>  $viewR,
 				"categories" =>  $cat,
 				"ingredients" =>  $ing,
-				"unites" =>  $unit
+				"unites" =>  $unit,
+				"viewrecette" =>  $viewR
 			));
-
-		
-
 
 	}
 

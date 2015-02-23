@@ -22,16 +22,18 @@
 //           public 'resto_chef' => string 'Samyn' (length=5)
 //           public 'resto_prix' => int 4
 
+
+
 foreach($recettes as $recette): 
     
-if($recette->categorie == "Cuisine du monde"): ?>
+if($recette['categorie'] == "Cuisine du monde"): ?>
 <!-- START THE FEATURETTES -->
     <hr class="featurette-divider">
 
     <div class="row featurette">
         <div class="col-md-7">
-        <h2 class="featurette-heading"><?=$recette->categorie?> <span class="text-muted"></span></h2>
-        <p class="lead"><?=$recette->titre?></p>
+        <h2 class="featurette-heading"><?=$recette['categorie']?> <span class="text-muted"></span></h2>
+        <p class="lead"><?=$recette['titre']?></p>
         </div>
         <div class="col-md-5">
         <img class="featurette-image img-responsive" src="<?=WEB_ROOT?>/img/monde.jpg" alt="plat">
