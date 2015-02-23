@@ -4,7 +4,7 @@ namespace Application\Models;
 
 
 
-class ListeIngredients extends \Library\Model\Model{
+class ListIngredients extends \Library\Model\Model{
 
 	protected $table 	= 'ingredients';
 	protected $primary 	= 'id_ingredient';
@@ -18,10 +18,10 @@ class ListeIngredients extends \Library\Model\Model{
 
 
 
-	public function insertListeIngredients($tabIngreds, $unites, $idrecette, $quantites){
+	public function insertListIngredients($tabIngreds, $unites, $idrecette, $quantites){
 		$data =array(
-			        'service' 				=> 'listeingredients',
-			        'method' 				=> 'insertlisteingredients',
+			        'service' 				=> 'listingredients',
+			        'method' 				=> 'insertlistingredients',
 			        'ingredients'			=>	json_encode($tabIngreds),
 			        'unites'				=>	json_encode($unites),
 			        'id_recette'			=>	$idrecette,
