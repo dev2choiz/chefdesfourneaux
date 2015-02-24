@@ -326,7 +326,7 @@ class Admin extends \Library\Controller\Controller{
 			$modelVR 	= new \Application\Models\ViewRecette('localhost');
 			$viewR 		= $modelVR->getViewRecette($idRecette);
 			$viewR 		= $viewR['response'];
-			var_dump($viewR);
+			//var_dump($viewR);
 
 
 
