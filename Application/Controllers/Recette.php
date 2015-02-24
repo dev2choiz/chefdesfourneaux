@@ -20,15 +20,15 @@ class Recette extends \Library\Controller\Controller{
 
 
 
-		$viewAllRecette = $this->modelViewRecette->getViewRecette() ;	//interroge le webservice
-		$viewAllRecette 		= $viewAllRecette['response'];
+		
 
 
 	//elle sert à quoi cette page? a afficher une recette
 	//ou toute les recettes cuisine du monde ?
 	public function indexAction(){
+		$viewAllRecette = $this->modelViewRecette->getAllViewRecettes() ;	//interroge le webservice
+		$viewAllRecette 		= $viewAllRecette['response'];
 		
-		$viewRecettes = $this->modelViewRecette->getAllViewRecettes() ;			//toute les recette
 
 		//var_dump($viewRecettes);
 
@@ -46,7 +46,6 @@ class Recette extends \Library\Controller\Controller{
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
 			"recettes" => $viewAllRecette
-			"recettes" => $viewRecettes['response']
 			));
 
 	}
@@ -55,8 +54,8 @@ class Recette extends \Library\Controller\Controller{
 
 
 		$viewAllRecettes  	= $this->modelViewRecette->getAllViewRecettes();
-		$viewAllRecettes 	= $viewAllRecettes['response'];
-		//var_dump($viewAllRecettes); 		
+		$viewAllRecettes 	= $viewAllRecettes;
+		var_dump($viewAllRecettes); 		
 		
 		
 		$this->setDataView(array(
