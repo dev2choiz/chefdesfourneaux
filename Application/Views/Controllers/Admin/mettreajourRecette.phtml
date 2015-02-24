@@ -1,13 +1,21 @@
 <?=$tinyMCE?>
+<?=$message?>
 <?php
-//$message
 
-var_dump($viewrecette);
+
+var_dump("sfhdh",$viewrecette);
+
+
+
+
 ?>
 <script type="text/javascript">
 
-    tabUnit  = new Array();
-    tabQuant = new Array();
+
+tabUnit  = new Array();
+tabQuant  = new Array();
+
+
     
 
     function ajouterIngredient(){
@@ -327,5 +335,49 @@ var_dump($viewrecette);
 
 
 <script type="text/javascript">
-    masquer();
+    //masquer();
+
+<?php
+//ici pour que les elements soient deja crées
+
+    $strTabUnit="tabUnit  = new Array(";
+    $strTabQuant="tabQuant  = new Array(";
+    $alors=false;
+    $js="";
+    foreach ($viewrecette['ingredients'] as $ingredient) {
+        $strTabUnit.=$ingredient['id_unite'].", ";
+        $strTabQuant.=$ingredient['value'].", ";
+
+        //ajoute les options
+        //
+        //
+        
+
+        /*$js.=" op = document.createElement('option');";
+        $js.="op.setAttribute(\"value\",\"".$ingredient['id_unite']."\");";
+        $js.="op.text='".$ingredient['unite']."';";
+        //'<option value=\"".$ingredient['id_unite']."\" selected >".$ingredient['value'].' '.$ingredient['unite']."</option>'
+        $js.="document.getElementById('unites').appendChild(op);";*/
+        //"$('#unites').append('<option value=\"".$ingredient['id_unite']."\" selected >".$ingredient['value'].' '.$ingredient['unite']."</option>');   ";
+        
+        $js.="$('#unites').append('<option value=\"".$ingredient['id_unite']."\" selected >".$ingredient['value'].' '.$ingredient['unite']."</option>');   ";
+
+        $alors=true;
+    }
+    if($alors){
+        $strTabUnit=substr($strTabUnit, 0, -2);
+        $strTabQuant=substr($strTabQuant, 0, -2);
+    }
+    $strTabUnit.=");";
+    $strTabQuant.=");";
+
+
+    echo $strTabUnit;   //tabUnit  = new Array();
+    echo $strTabQuant;  //tabQuant = new Array();
+    echo $js;
+    
+
+?>
+
+
 </script>
