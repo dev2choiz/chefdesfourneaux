@@ -27,13 +27,13 @@ class Admin extends \Library\Controller\Controller{
 			$this->setRedirect(LINK_ROOT);
 		}
 		//$viewR = $this->modelVR->getRecettes();
-		$viewR = $this->modelVR->getAllViewRecettes();
-
+		$viewRs = $this->modelVR->getAllViewRecettes();
+		var_dump("dfjk", $viewRs);
 
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
-			"recettes" => $viewR['response']
+			"recettes" => $viewRs['response']
 		));
 	}
 
