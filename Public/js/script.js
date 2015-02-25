@@ -1,8 +1,8 @@
 
 // Création d'une recette
-tabUnit  = new Array();
-tabQuant = new Array();
-verifChamp=0;
+tabUnit     = new Array();
+tabQuant    = new Array();
+verifChamp  = 0;
 
 
 function ajouterIngredient(){

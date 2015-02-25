@@ -18,26 +18,18 @@ class Recette extends \Library\Controller\Controller{
 		$this->modelViewRecette 	= new \Application\Models\ViewRecette('localhost');
 	}
 
-
-
-		$viewAllRecette = $this->modelViewRecette->getViewRecette() ;	//interroge le webservice
-		$viewAllRecette 		= $viewAllRecette['response'];
-
-
-	//elle sert à quoi cette page? a afficher une recette
-	//ou toute les recettes cuisine du monde ?
 	public function indexAction(){
 		
-		$viewRecettes = $this->modelViewRecette->getAllViewRecettes() ;			//toute les recette
+		$viewAllRecettes = $this->modelViewRecette->getAllViewRecettes() ;			
 
 		//var_dump($viewRecettes);
 
 
-		if(empty($viewRecette['response'])){					//<== avec ou sans 's'?
+		if(empty($viewAllRecettes['response'])){					//<== avec ou sans 's'?
 			$this->message->addError("aucune recette !");
-		}elseif ($viewRecette['apiError'] ) {
+		}elseif ($viewAllRecettes['apiError'] ) {
 			$this->message->addError($user->apiErrorMessage);
-		}elseif ( $viewRecette['serverError'] ) {
+		}elseif ( $viewAllRecettes['serverError'] ) {
 			$this->message->addError($user->serverErrorMessage);
 		}
 
@@ -45,8 +37,7 @@ class Recette extends \Library\Controller\Controller{
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
-			"recettes" => $viewAllRecette
-			"recettes" => $viewRecettes['response']
+			"recettes" => $viewAllRecettes
 			));
 
 	}
@@ -55,8 +46,9 @@ class Recette extends \Library\Controller\Controller{
 
 
 		$viewAllRecettes  	= $this->modelViewRecette->getAllViewRecettes();
+		var_dump($viewAllRecettes);
 		$viewAllRecettes 	= $viewAllRecettes['response'];
-		//var_dump($viewAllRecettes); 		
+		var_dump($viewAllRecettes); 		
 		
 		
 		$this->setDataView(array(
