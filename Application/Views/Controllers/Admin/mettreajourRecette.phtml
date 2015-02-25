@@ -3,151 +3,13 @@
 <?php
 
 
-var_dump("sfhdh",$viewrecette);
+var_dump("skhlkmhfhdh",$viewrecette);
 
 
 
 
 ?>
 <script type="text/javascript">
-
-
-tabUnit  = new Array();
-tabQuant  = new Array();
-
-
-    
-
-    function ajouterIngredient(){
-        var val=$( "#allingredients option:selected" ).val();
-        var lab=$( "#allingredients option:selected" ).text();
-        if($('#allingredients option').length!==0 ){
-            $('#ingredients').append('<option value="'+val+'" selected="selected">'+lab+'</option>');
-            $('#unites').append('<option value="'+val+'" selected="selected">...</option>');
-
-            $('#allingredients option:selected').remove();
-
-            tabUnit.push(1);
-            tabQuant.push(1);
-            console.log(tabUnit+ "  ## "+tabQuant);
-
-        }
-    }
-
-    function retirerIngredient(){
-        var val=$( "#ingredients option:selected" ).val();
-        var lab=$( "#ingredients option:selected" ).text();
-        if($('#ingredients option').length!==0 ){
-
-            //$('#unites option:eq(3)').prop('selected', true);
-            var ing =document.getElementById("ingredients");
-            var unit =document.getElementById("unites");
-
-            //supprime fna le select
-            unit.options[ing.selectedIndex].remove();
-            
-            //supprime dans quantité
-            tabUnit.splice(ing.selectedIndex,1);
-            tabQuant.splice(ing.selectedIndex,1);
-
-            console.log(tabUnit +" # "+ tabQuant);
-
-            $('#allingredients').append('<option value="'+val+'" selected="selected">'+lab+'</option>');
-            $('#ingredients option:selected').remove();
-        }
-    }
-
-
-    function definirUnite(){
-        var allUnit = document.getElementById("allunites");
-        var unit = document.getElementById("unites");
-        if(unit.selectedIndex>=0 ){
-            unit.options[unit.selectedIndex].value= allUnit.options[allUnit.selectedIndex].value ;
-            unit.options[unit.selectedIndex].text= "1 " + allUnit.options[allUnit.selectedIndex].text ;
-
-            tabUnit[unit.selectedIndex]=allUnit.options[allUnit.selectedIndex].text;
-            tabQuant[unit.selectedIndex]=1;
-
-            console.log(tabUnit+"##"+ tabQuant);
-            //alert(allUnit.options[allUnit.selectedIndex].text); 
-        }
-    }
-
-    function definirQuantite(){
-
-        var quant = document.getElementById("quantite");
-        var unit = document.getElementById("unites");
-        if(parseFloat(quant.value)>0 ){
-            
-            unit.options[unit.selectedIndex].text= parseFloat(quant.value) + " " + tabUnit[unit.selectedIndex];
-
-            tabQuant[unit.selectedIndex]=quant.value;
-            console.log(tabUnit+"##"+ tabQuant);
-
-            //alert(allUnit.options[allUnit.selectedIndex].text); 
-        }
-
-
-
-    }
-
-    function preparatif(){
-        //selectionne tout
-        $('#ingredients option').prop('selected', true);
-        $('#unites option').prop('selected', true);
-
-
-
-
-
-        var formulaire = document.getElementById("formRecette");
-                    
-        
-         var inputQuant;
-
-        for(i=0; i<tabQuant.length; i++){
-            inputQuant = document.createElement("input");
-
-            inputQuant.setAttribute("type","hidden");
-            inputQuant.setAttribute("name","quantites["+i+"]");
-            inputQuant.setAttribute("value",tabQuant[i]);
-            formulaire.appendChild(inputQuant);
-        }
-
-
-
-
-
-         
-        formulaire.submit();
-
-    }
-
-
-
-    function actualiserQuantite(){
-     var quant = document.getElementById("quantite");
-     quant.value=tabQuant[document.getElementById("unites").selectedIndex];
-    }
-
-
-
-    function masquer(){
-
-        document.getElementById("boutonunite").style.visibility='hidden';
-        document.getElementById("allunites").style.visibility='hidden';
-        document.getElementById("quantite").style.visibility='hidden';
-        document.getElementById("okquantite").style.visibility='hidden';
-    }
-
-
-    function afficher(){
-        document.getElementById("boutonunite").style.visibility='visible';
-        document.getElementById("allunites").style.visibility='visible';
-        document.getElementById("quantite").style.visibility='visible';
-        document.getElementById("okquantite").style.visibility='visible';
-    }
-
 
 
 
@@ -291,10 +153,24 @@ tabQuant  = new Array();
                     
                 <select  id="allingredients" multiple size="8"   onclick="ajouterIngredient();"  style="min-width:150px;">
                   <?php
-                  //var_dump($ingredients);
+                  
+                  function ingredientIsUsed( $id, $tabIng ){
+
+                    foreach ($tabIng as  $ing) {
+
+                        if ($ing['id_ingredient']===$id) {
+                            return true;
+                        }
+                    }
+                    return false;
+                  }
+
+
                   foreach ($ingredients as $ingredient) {
-                    //echo "assssssssssss";
-                    echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
+
+                    if( !ingredientIsUsed( $ingredient['id_ingredient'], $viewrecette['ingredients'] ) ){
+                        echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['ingredients']."</option>";
+                    }
                   }
 
 
@@ -305,12 +181,19 @@ tabQuant  = new Array();
             </td>
             <td>
                 <select id="ingredients"  name="ingredients[]" multiple size="8"   onclick="retirerIngredient();"  style="min-width:150px;">
-                    
+                <?php
+
+                  foreach ($viewrecette['ingredients'] as $ingredient) {
+                    echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
+                  }
+
+
+                ?>
                 </select>
             </td>
 
             <td>
-                <select id="unites"  name="unites[]" multiple size="8" onclick="actualiserQuantite();"     style="min-width:150px;" onBlur="//masquer();" onFocus="afficher();">
+                <select id="unites"  name="unites[]" multiple size="8" onclick="actualiserQuantite();"     style="min-width:150px;" onBlur="" onFocus="afficher();">
                 </select>    
             </td>
             <td>
@@ -324,15 +207,16 @@ tabQuant  = new Array();
 
 
 
-    <input type="hidden"  name="id_livre"  value="1"m  style="min-width:150px;">
+    <input type="hidden"  name="id_livre"  value="1">
     <input type="hidden"  name="id_resto"  value="1">
 
     <BR>
     <button name="btn" class="btn btn-lg btn-primary" type="submit"><?=$pageTitle?></button><BR>
     <a href="<?=LINK_ROOT?>">Retour à l'accueil</a> - 
 
-</form  style="min-width:150px;">
+</form style="min-width: 150px;">
 
+    <script src="<?=WEB_ROOT?>/js/script.js"></script>
 
 <script type="text/javascript">
     //masquer();
@@ -345,22 +229,12 @@ tabQuant  = new Array();
     $alors=false;
     $js="";
     foreach ($viewrecette['ingredients'] as $ingredient) {
-        $strTabUnit.=$ingredient['id_unite'].", ";
+        $strTabUnit.="'".$ingredient['unite']."', ";
         $strTabQuant.=$ingredient['value'].", ";
-
-        //ajoute les options
-        //
-        //
         
-
-        /*$js.=" op = document.createElement('option');";
-        $js.="op.setAttribute(\"value\",\"".$ingredient['id_unite']."\");";
-        $js.="op.text='".$ingredient['unite']."';";
-        //'<option value=\"".$ingredient['id_unite']."\" selected >".$ingredient['value'].' '.$ingredient['unite']."</option>'
-        $js.="document.getElementById('unites').appendChild(op);";*/
-        //"$('#unites').append('<option value=\"".$ingredient['id_unite']."\" selected >".$ingredient['value'].' '.$ingredient['unite']."</option>');   ";
+        //$ingredients
         
-        $js.="$('#unites').append('<option value=\"".$ingredient['id_unite']."\" selected >".$ingredient['value'].' '.$ingredient['unite']."</option>');   ";
+        $js.="$('#unites').append('<option value=\"".$ingredient['id_unite']."\" selected >".$ingredient['value'].' '.$ingredient['unite']."</option>');\n   ";
 
         $alors=true;
     }
@@ -368,16 +242,16 @@ tabQuant  = new Array();
         $strTabUnit=substr($strTabUnit, 0, -2);
         $strTabQuant=substr($strTabQuant, 0, -2);
     }
-    $strTabUnit.=");";
-    $strTabQuant.=");";
+    $strTabUnit.=");\n";
+    $strTabQuant.=");\n";
 
 
-    echo $strTabUnit;   //tabUnit  = new Array();
-    echo $strTabQuant;  //tabQuant = new Array();
+    echo $strTabUnit; 
+    echo $strTabQuant; 
     echo $js;
     
 
 ?>
-
+console.log(tabUnit +" # "+ tabQuant);
 
 </script>
