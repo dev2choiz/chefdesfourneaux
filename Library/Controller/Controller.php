@@ -213,6 +213,7 @@ abstract class Controller implements iController
 
 		
 		$pathView = APP_ROOT."Views/Controllers/".str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";
+		//$pathView = APP_ROOT.str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";		//view dans Application/controllers
 
 		if(file_exists($pathView)){
 			

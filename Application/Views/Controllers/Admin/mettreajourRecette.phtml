@@ -167,9 +167,9 @@ var_dump("skhlkmhfhdh",$viewrecette);
 
 
                   foreach ($ingredients as $ingredient) {
-
+                     var_dump($ingredient);
                     if( !ingredientIsUsed( $ingredient['id_ingredient'], $viewrecette['ingredients'] ) ){
-                        echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['ingredients']."</option>";
+                        echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
                     }
                   }
 
@@ -180,11 +180,12 @@ var_dump("skhlkmhfhdh",$viewrecette);
                     
             </td>
             <td>
+                
                 <select id="ingredients"  name="ingredients[]" multiple size="8"   onclick="retirerIngredient();"  style="min-width:150px;">
                 <?php
 
                   foreach ($viewrecette['ingredients'] as $ingredient) {
-                    echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
+                    echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['ingredients']."</option>";
                   }
 
 

@@ -28,7 +28,8 @@ class Admin extends \Library\Controller\Controller{
 		}
 		//$viewR = $this->modelVR->getRecettes();
 		$viewRs = $this->modelVR->getAllViewRecettes();
-		var_dump("dfjk", $viewRs);
+		//var_dump("dfjk", $viewRs);
+		//var_dump($viewRs['page']."fdgfd");
 
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
@@ -212,8 +213,13 @@ class Admin extends \Library\Controller\Controller{
 			"pageTitle" => "Modifier une recette",
 			"tinyMCE" => $this->tinyMCE->getSource()
 		));
-/*		
-		if(isset($_POST['btn'])){
+		
+
+
+		
+		if(isset($_POST['btn'])){		//ici on passe au choses serieuses.
+			//var_dump($_POST);
+
 			
 			
 			if(empty($_POST['value'])){
@@ -232,48 +238,68 @@ class Admin extends \Library\Controller\Controller{
 
 
 
-			$ingreds=$_POST["ingredients"];		unset($_POST["ingredients"]);
-			$unites=$_POST["unites"];			unset($_POST["unites"]);
+  			$_POST["diabete"]	=	(isset($_POST["diabete"])? 1:0);
+			$_POST["ble"]		=	(isset($_POST["ble"])?1:0);
+			$_POST["lait"]		=	(isset($_POST["lait"])?1:0);
+			$_POST["oeuf"]		=	(isset($_POST["oeuf"])?1:0);
+			$_POST["arachide"]	=	(isset($_POST["arachide"])?1:0);
+			$_POST["soja"]		=	(isset($_POST["soja"])?1:0);
+			$_POST["gluten"]	=	(isset($_POST["gluten"])?1:0);
 
+
+			//$_POST["cout"]	=	$_POST["cout"]+0;
+			
+			
+
+
+			
+
+			$ingreds=$_POST["ingredients"];			unset($_POST["ingredients"]);
+			$unites=$_POST["unites"];				unset($_POST["unites"]);
 			$quantites=$_POST["quantites"];			unset($_POST["quantites"]);
 			
 
+			//var_dump("sfhkm",$_POST);
 
+			//var_dump("dff",$_POST);
 			$modelRecette 	= new \Application\Models\Recette('localhost');
-			$res =$modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
 			
-			
-			$res=get_object_vars(json_decode($res));
+			$res =$modelRecette->updateRecette($_POST, $idRecette );
+			//var_dump("res :",$res);
+			//echo $res['page'];
+
 			$res=$res['response'];
 			
-			if ($res > 0 ) {
+			if ($res  ) {		//res est un bool
 				//header('location: '.LINK_ROOT.'recette');
 				//die();
 				
 				
 				
-				$modelListIngredients 	= new \Application\Models\ListeIngredients('localhost');
+				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
+				//echo "<br><br><br><br>";
+				var_dump("ing",$ingreds, $unites , $res, $quantites );
+				$res =$modelListIngredients->updateListIngredients($ingreds, $unites , $idRecette, $quantites );
+				var_dump("ress",$res);
+				echo $res->page;
 				
-				$res =$modelListeIngredients->insertListeIngredients($ingreds, $unites , $res, $quantites );
 				
-				
-
-
-
+					//aucune verif la flemme
+				if($res->response){
+					$this->message->addSuccess("Recette ajoutée");
+				}else{
+					$this->message->addSuccess("Recette ajoutée sans les ingredients");
+				}
 
 
 
 			}else{
 				$this->message->addError($user->apiErrorMessage);
-				$this->message->addError($user->serverErrorMessage.$res);
+				$this->message->addError($user->serverErrorMessage);
 			}
 		}
 
 
-
-
-
-*/
 
 
 
