@@ -198,6 +198,16 @@ class Admin extends \Library\Controller\Controller{
 	public function mettreAJourRecetteAction($idRecette){
 
 
+
+
+
+
+
+
+
+
+
+		
 		echo "<br><br><br><br>".$idRecette;
 		
 		if( $_SESSION['user']['role'] !== "admin" ){
@@ -265,7 +275,7 @@ class Admin extends \Library\Controller\Controller{
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			
 			$res =$modelRecette->updateRecette($_POST, $idRecette );
-			//var_dump("res :",$res);
+			var_dump("res :",$res);
 			//echo $res['page'];
 
 			$res=$res['response'];
@@ -277,15 +287,15 @@ class Admin extends \Library\Controller\Controller{
 				
 				
 				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
-				//echo "<br><br><br><br>";
+				echo "<br><br><br><br>";
 				var_dump("ing",$ingreds, $unites , $res, $quantites );
-				$res =$modelListIngredients->updateListIngredients($ingreds, $unites , $idRecette, $quantites );
+				$res =$modelListIngredients->convEnTab( $modelListIngredients->updateListIngredients($ingreds, $unites , $idRecette, $quantites ) );
 				var_dump("ress",$res);
-				echo $res->page;
+				echo $res['page'];
 				
 				
 					//aucune verif la flemme
-				if($res->response){
+				if($res['response']){
 					$this->message->addSuccess("Recette ajoutée");
 				}else{
 					$this->message->addSuccess("Recette ajoutée sans les ingredients");
