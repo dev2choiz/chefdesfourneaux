@@ -227,7 +227,7 @@ class Admin extends \Library\Controller\Controller{
 
 
 		
-		if(isset($_POST['btn'])){		//ici on passe au choses serieuses.
+		if(isset($_POST['btn'])){
 			//var_dump($_POST);
 
 			
@@ -274,7 +274,7 @@ class Admin extends \Library\Controller\Controller{
 			//var_dump("dff",$_POST);
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			
-			$res =$modelRecette->updateRecette($_POST, $idRecette );
+			$res =$modelRecette->convEnTab($modelRecette->updateRecette($_POST, $idRecette ) );
 			var_dump("res :",$res);
 			//echo $res['page'];
 
@@ -288,7 +288,7 @@ class Admin extends \Library\Controller\Controller{
 				
 				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
 				echo "<br><br><br><br>";
-				var_dump("ing",$ingreds, $unites , $res, $quantites );
+				var_dump("ing",$ingreds, $unites , $idRecette, $quantites );
 				$res =$modelListIngredients->convEnTab( $modelListIngredients->updateListIngredients($ingreds, $unites , $idRecette, $quantites ) );
 				var_dump("ress",$res);
 				echo $res['page'];
