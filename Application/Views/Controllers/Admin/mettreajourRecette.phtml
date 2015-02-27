@@ -51,7 +51,7 @@ var_dump("skhlkmhfhdh",$viewrecette);
         </tr>
         <tr>
             <td>cout</td>
-            <td><input type="text"  name="cout"   value=""  /></td>
+            <td><input type="text"  name="cout"   value="<?=$viewrecette['cout']?>"  /></td>
         </tr>
         <tr>
             <td>difficulté</td>
@@ -231,7 +231,7 @@ var_dump("skhlkmhfhdh",$viewrecette);
     $js="";
     foreach ($viewrecette['ingredients'] as $ingredient) {
         $strTabUnit.="'".$ingredient['unite']."', ";
-        $strTabQuant.=$ingredient['value'].", ";
+        $strTabQuant.="'".$ingredient['value']."', ";
         
         //$ingredients
         
@@ -253,6 +253,6 @@ var_dump("skhlkmhfhdh",$viewrecette);
     
 
 ?>
-console.log(tabUnit +" # "+ tabQuant);
+console.log(tabUnit +" ## "+ tabQuant);
 
 </script>

@@ -16,7 +16,7 @@ class Admin extends \Library\Controller\Controller{
 		$this->setLayout("carousel");
 		$this->message 		= new \Library\Message\Message();
 		$this->tinyMCE 		= new \Library\TinyMCE\tinyMCE();
-		//$this->modelRecette = new \Application\Models\Recette('localhost');
+		$this->modelRecette = new \Application\Models\Recette('localhost');
 		$this->modelVR = new \Application\Models\ViewRecette('localhost');
 	}
 
@@ -257,11 +257,7 @@ class Admin extends \Library\Controller\Controller{
 			$_POST["gluten"]	=	(isset($_POST["gluten"])?1:0);
 
 
-			//$_POST["cout"]	=	$_POST["cout"]+0;
-			
-			
-
-
+			$_POST["cout"]		=	$_POST["cout"]+0;
 			
 
 			$ingreds=$_POST["ingredients"];			unset($_POST["ingredients"]);
@@ -269,14 +265,12 @@ class Admin extends \Library\Controller\Controller{
 			$quantites=$_POST["quantites"];			unset($_POST["quantites"]);
 			
 
-			//var_dump("sfhkm",$_POST);
-
-			//var_dump("dff",$_POST);
+			
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			
 			$res =$modelRecette->convEnTab($modelRecette->updateRecette($_POST, $idRecette ) );
 			var_dump("res :",$res);
-			//echo $res['page'];
+
 
 			$res=$res['response'];
 			
@@ -287,11 +281,11 @@ class Admin extends \Library\Controller\Controller{
 				
 				
 				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
-				echo "<br><br><br><br>";
-				var_dump("ing",$ingreds, $unites , $idRecette, $quantites );
+				//echo "<br><br><br><br>";
+				//var_dump("ing",$ingreds, $unites , $idRecette, $quantites );
 				$res =$modelListIngredients->convEnTab( $modelListIngredients->updateListIngredients($ingreds, $unites , $idRecette, $quantites ) );
 				var_dump("ress",$res);
-				echo $res['page'];
+				//echo $res['page'];
 				
 				
 					//aucune verif la flemme
@@ -325,8 +319,6 @@ class Admin extends \Library\Controller\Controller{
 
 
 
-		//données pour la view
-
 
 		//recherche des categories
 		$modelCategorie 	= new \Application\Models\Categorie('localhost');
@@ -356,17 +348,11 @@ class Admin extends \Library\Controller\Controller{
 		if( $idRecette>0 ){		//condition qui  sert a rien
 			
 			//## prepare les données pour afficher la recette
-
-		
 			
 			$modelVR 	= new \Application\Models\ViewRecette('localhost');
 			$viewR 		= $modelVR->getViewRecette($idRecette);
 			$viewR 		= $viewR['response'];
 			//var_dump($viewR);
-
-
-
-			
 
 		}
 		
@@ -380,10 +366,31 @@ class Admin extends \Library\Controller\Controller{
 
 	}
 
-	public function supprimerRecetteAction(){
+	public function supprimerRecetteAction($idRecette){
 		if($_SESSION['user']['role'] !== "admin"){
 			$this->setRedirect(LINK_ROOT);
 		}
+
+		if(isset($_POST['btn'])){
+
+			if($this->modelRecette->deleteRecette($idRecette) ){
+				$this->message->addSuccess("Recette supprimée");
+				$this->setRedirect(LINK_ROOT."admin/");
+			}else {
+				$this->message->addError("Erreur pendant la suppression de la recette<br> veuillez rééssayer");
+			}
+
+		}
+
+			$this->setDataView(array(
+				"pageTitle" => "Supprimer une recette",
+				"message" => $this->message->showMessages(),
+				"idRecette" =>  $idRecette
+			));
+
+
+
+
 	}
 
 	public function creerLivreAction(){
