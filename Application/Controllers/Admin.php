@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace Application\Controllers;
 
 class Admin extends \Library\Controller\Controller{
