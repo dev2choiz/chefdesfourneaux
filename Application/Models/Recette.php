@@ -79,5 +79,35 @@ class Recette extends \Library\Model\Model{
 
 
 
+	/**
+	 * @param  [String] $recette     [description]
+	 * @param  [int] $idUser      [description]
+	 * @param  [int] $idCategorie [description]
+	 * @return [boolean]              [description]
+	 */
+	public function deleteRecette($idRecette){
+		
+
+		$params["id_recette"] = $idRecette;
+		$params["service"] = "recette";
+		$params["method"]  = "deleterecette";
+
+
+		$opts = array('http' =>
+		    array(
+		        'method'  => 'POST',
+		        'header'  => 'Content-type: application/x-www-form-urlencoded',
+		        'content' => http_build_query($params)
+		        )
+		);
+
+		$context  = stream_context_create($opts);
+		
+		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) );
+		
+	}
+
+
+
 
 }
