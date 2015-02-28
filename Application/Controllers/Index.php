@@ -14,6 +14,7 @@ class Index extends \Library\Controller\Controller
 		$this->message 				= new \Library\Message\Message();
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelViewRecette 	= new \Application\Models\ViewRecette('localhost');
+		$this->modelPopUp 			= new \Application\Models\PopUp('localhost');
 	}
 
 
@@ -32,10 +33,15 @@ class Index extends \Library\Controller\Controller
 
 		//$viewRecettes = $this->modelViewRecette->getViewRecette($id);
 
+		$viewPopUpScript = $this->modelPopUp->getScriptPopUp('categorie', 'container', 'popup');
+		$textPopUpCategorie = '';
+		$viewPopUpHtml = $this->modelPopUp->getHtmlPopUp('container', 'popup', $textPopUpCategorie);
+
 
 		$this->setDataView(array(
 			"pageTitle" => "Maitres des fourneaux, site de recettes, cuisine de chef et vente electroménager",
-			"message" => $this->message->showMessages()//,
+			"message" => $this->message->showMessages(),
+			"textPopUpCategorie" => $textPopUpCategorie
 			//"recettes" => $viewRecettes
 		));
 	}
