@@ -16,7 +16,7 @@ class Categorie extends \Library\Model\Model{
 	 */
 	public function getCategories(){
 		$data =array(
-			        'service' 				=> 'categorie',				//on peut aussi mettre un tableau(tous ce qu'on vt) pour la valeur de service
+			        'service' 				=> 'categorie',				
 			        'method' 				=> 'getcategories'
 	  	);
 

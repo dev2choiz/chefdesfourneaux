@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace Application\Controllers;
 
 class Admin extends \Library\Controller\Controller{
@@ -50,7 +50,7 @@ class Admin extends \Library\Controller\Controller{
 		
 		$this->setDataView(array(
 			"pageTitle" => "Créer une recette",
-			"tinyMCE" => $this->tinyMCE->getSource()
+			"tinyMCERecette" => $this->tinyMCE->getEditeurRecette()
 		));
 
 		

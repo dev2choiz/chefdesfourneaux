@@ -25,7 +25,7 @@ class ViewRecette extends \Library\Model\Model{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'viewrecette',				//on peut aussi mettre un tableau(tous ce qu'on vt) pour la valeur de service
+							        'service' => 'viewrecette',				
 							        'method' => 'getviewrecette',
 							        'id_recette' => $id
 							    )
@@ -38,7 +38,7 @@ class ViewRecette extends \Library\Model\Model{
 	}
 
 	/**
-	 * Obtenir des views precis
+	 * Obtenir des views precises
 	 * @param  [array] $tabId [tableau d'ids de recettes]
 	 * @return [array]	Retourne un tableau (dont les key sont les id des recettes)
 	 *                  contenant les views qui sont elles meme des tableaux
@@ -78,7 +78,7 @@ class ViewRecette extends \Library\Model\Model{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'viewrecette',				//on peut aussi mettre un tableau(tous ce qu'on vt) pour la valeur de service
+							        'service' => 'viewrecette',				
 							        'method' => 'getallviewrecettes',
 							    )
 		    				)
