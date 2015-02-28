@@ -2,12 +2,12 @@
 
 namespace Application\Controllers;
 
-class Recette extends \Library\Controller\Controller{
+class Produit extends \Library\Controller\Controller{
 
 	private $message;
 	private $tinyMCE;
 	private $modelCat;
-	private $modelViewRecette;
+	private $modelViewProduit;
 
 	public function __construct(){
 		parent::__construct();
@@ -15,21 +15,20 @@ class Recette extends \Library\Controller\Controller{
 		$this->message 				= new \Library\Message\Message();
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelCat 			= new \Application\Models\Categorie('localhost');
-		$this->modelViewRecette 	= new \Application\Models\ViewRecette('localhost');
+		$this->modelViewProduit 	= new \Application\Models\ViewProduit('localhost');
 	}
 
 	public function indexAction(){
 		
-		$viewAllRecettes = $this->modelViewRecette->getAllViewRecettes() ;			
+		$viewAllProduits = $this->modelViewProduit->getAllViewProduits() ;			
 
 
 
-
-		if(empty($viewAllRecettes['response'])){
+		if(empty($viewAllProduits['response'])){
 			$this->message->addError("aucune recette !");
-		}elseif ($viewAllRecettes['apiError'] ) {
+		}elseif ($viewAllProduits['apiError'] ) {
 			$this->message->addError($user->apiErrorMessage);
-		}elseif ( $viewAllRecettes['serverError'] ) {
+		}elseif ( $viewAllProduits['serverError'] ) {
 			$this->message->addError($user->serverErrorMessage);
 		}
 
@@ -37,7 +36,7 @@ class Recette extends \Library\Controller\Controller{
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
-			"recettes" => $viewAllRecettes
+			"recettes" => $viewAllProduits
 			));
 
 	}
@@ -48,31 +47,31 @@ class Recette extends \Library\Controller\Controller{
 
 
 
-public function afficherAction( $idRecette ){
+public function afficherAction( $idProduit ){
 		
-		$viewRecette = $this->modelViewRecette->getViewRecette($idRecette);
+		$viewProduit = $this->modelViewProduit->getViewProduit($idProduit);
 
 
 
-		if(empty($viewRecette['response'])){
+		if(empty($viewProduit['response'])){
 			$this->message->addError("aucune recette !");
-		}elseif ($viewRecette['apiError'] ) {
+		}elseif ($viewProduit['apiError'] ) {
 			$this->message->addError($user->apiErrorMessage);
-		}elseif ( $viewRecette['serverError'] ) {
+		}elseif ( $viewProduit['serverError'] ) {
 			$this->message->addError($user->serverErrorMessage);
 		}else{
-			$viewRecette=$viewRecette['response'];
+			$viewProduit=$viewProduit['response'];
 		}
 
-		var_dump("repérage",$viewRecette);
+		var_dump("repérage",$viewProduit);
 
 
 		
-		echo "<br><br><br><br>".$idRecette;
+		echo "<br><br><br><br>".$idProduit;
 		
 		if( $_SESSION['user']['role'] !== "admin" ){
 			$this->setRedirect(LINK_ROOT);
-		}elseif( !isset($idRecette) || empty($idRecette)  || $idRecette===0 ){	//si pas d'idrecette
+		}elseif( !isset($idProduit) || empty($idProduit)  || $idProduit===0 ){	//si pas d'idrecette
 			$this->setRedirect(LINK_ROOT."admin/");
 		}
 
@@ -124,7 +123,7 @@ public function afficherAction( $idRecette ){
 
 		//recherche des commentaires
 		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
-		$viewComms=$modelCommentaire->getCommentaires($idRecette);
+		$viewComms=$modelCommentaire->getCommentaires($idProduit);
 
 		$viewComms=$viewComms['response'];
 		
@@ -136,7 +135,7 @@ public function afficherAction( $idRecette ){
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"tinyMCECommentaire" => $this->tinyMCE->getEditeurCommentaire(),
 			"message" => $this->message->showMessages(),
-			"viewRecette" => $viewRecette,
+			"viewProduit" => $viewProduit,
 			"viewCommentaires" => $viewComms
 			));
 
@@ -155,53 +154,53 @@ public function afficherAction( $idRecette ){
 
 
 
-		$viewAllRecettes  	= $this->modelViewRecette->getAllViewRecettes();
-		var_dump($viewAllRecettes);
-		$viewAllRecettes 	= $viewAllRecettes['response'];
-		var_dump($viewAllRecettes); 		
+		$viewAllProduits  	= $this->modelViewProduit->getAllViewProduits();
+		var_dump($viewAllProduits);
+		$viewAllProduits 	= $viewAllProduits['response'];
+		var_dump($viewAllProduits); 		
 		
 		
 		$this->setDataView(array(
-			"pageTitle" 	=> "Recettes de chef cuisiniers",
+			"pageTitle" 	=> "Produits de chef cuisiniers",
 			"message" 		=> $this->message->showMessages(),
 			"tinyMCE" 		=> $this->tinyMCE->getSource(),
-			"recettes"		=> $viewAllRecettes
+			"recettes"		=> $viewAllProduits
 		));
 	}
 
 	public function chefAction($id){
-		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($id);
-		$viewRecette 		= $viewRecette['response'][0];
+		$viewProduit 	 	= $this->modelViewProduit->getViewProduit($id);
+		$viewProduit 		= $viewProduit['response'][0];
 		$this->setDataView(array(
-			"pageTitle" 	=> $viewRecette['titre'],
+			"pageTitle" 	=> $viewProduit['titre'],
 			"message" 		=> $this->message->showMessages(),
 			"tinyMCE" 		=> $this->tinyMCE->getSource(),
-			"recette"		=> $viewRecette 
+			"recette"		=> $viewProduit 
 		));
 	}
 	
 
 
 	public function indexSanteAction(){
-		$viewAllRecettes  	= $this->modelViewRecette->getAllViewRecettes();
-		$viewAllRecettes 	= $viewAllRecettes['response'];
-		//var_dump($viewAllRecettes);
+		$viewAllProduits  	= $this->modelViewProduit->getAllViewProduits();
+		$viewAllProduits 	= $viewAllProduits['response'];
+		//var_dump($viewAllProduits);
 		$this->setDataView(array(
-			"pageTitle" => "Recette santé, régime, cuisine légère",
+			"pageTitle" => "Produit santé, régime, cuisine légère",
 			"message" => $this->message->showMessages(),
 			"tinyMCE" 		=> $this->tinyMCE->getSource(),
-			"recettes"		=> $viewAllRecettes
+			"recettes"		=> $viewAllProduits
 		));
 	}
 
 	public function santeAction($id){
-		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($id);
-		$viewRecette 		= $viewRecette['response'][0];
+		$viewProduit 	 	= $this->modelViewProduit->getViewProduit($id);
+		$viewProduit 		= $viewProduit['response'][0];
 		$this->setDataView(array(
-			"pageTitle" => "Recette santé, régime, cuisine légère",
+			"pageTitle" => "Produit santé, régime, cuisine légère",
 			"message" 		=> $this->message->showMessages(),
 			"tinyMCE" => $this->tinyMCE->getSource(),
-			"recette"		=> $viewRecette 
+			"recette"		=> $viewProduit 
 		));
 	}
 
