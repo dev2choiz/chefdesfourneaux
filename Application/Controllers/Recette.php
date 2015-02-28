@@ -22,10 +22,10 @@ class Recette extends \Library\Controller\Controller{
 		
 		$viewAllRecettes = $this->modelViewRecette->getAllViewRecettes() ;			
 
-		//var_dump($viewRecettes);
 
 
-		if(empty($viewAllRecettes['response'])){					//<== avec ou sans 's'?
+
+		if(empty($viewAllRecettes['response'])){
 			$this->message->addError("aucune recette !");
 		}elseif ($viewAllRecettes['apiError'] ) {
 			$this->message->addError($user->apiErrorMessage);
@@ -42,7 +42,117 @@ class Recette extends \Library\Controller\Controller{
 
 	}
 
+
+
+
+
+
+
+public function afficherAction( $idRecette ){
+		
+		$viewRecette = $this->modelViewRecette->getViewRecette($idRecette);
+
+
+
+		if(empty($viewRecette['response'])){
+			$this->message->addError("aucune recette !");
+		}elseif ($viewRecette['apiError'] ) {
+			$this->message->addError($user->apiErrorMessage);
+		}elseif ( $viewRecette['serverError'] ) {
+			$this->message->addError($user->serverErrorMessage);
+		}else{
+			$viewRecette=$viewRecette['response'];
+		}
+
+		var_dump($viewRecette);
+
+
+		
+		echo "<br><br><br><br>".$idRecette;
+		
+		if( $_SESSION['user']['role'] !== "admin" ){
+			$this->setRedirect(LINK_ROOT);
+		}elseif( !isset($idRecette) || empty($idRecette)  || $idRecette===0 ){	//si pas d'idrecette
+			$this->setRedirect(LINK_ROOT."admin/");
+		}
+
+
+		
+		if(isset($_POST['btn'])){
+			var_dump($_POST);
+
+			
+			
+			if(empty($_POST['value'])){
+				$this->message->addError("Commentaire vide !");
+			}
+
+			
+			$listMessage = $this->message->getMessages("error");
+			if(!empty($listMessage)){
+				$this->setDataView(array("message" => $this->message->showMessages()));
+				return false;
+			}
+
+			unset($_POST['btn'], $listMessage);
+
+			
+			$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
+			
+			$res =$modelCommentaire->insertCommentaire($_POST);
+			var_dump("res : ", $res);
+
+			if ($res['error']) {
+				$this->message->addError("erreur pendant la recuperation des commentaires !");
+			}
+
+			$res=$res['response'];
+			
+			if ($res>0  ) {		//res est vaut l'id du comm
+				
+				$this->message->addSuccess("Commentaire ajouté");
+
+			}else{
+				$this->message->addError("Commentaire non ajouté");
+			}
+		}
+
+
+
+
+		//################## données pour la view ############################
+
+		//recherche des commentaires
+		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
+		$viewComms=$modelCommentaire->getCommentaires($idRecette);
+
+		$viewComms=$viewComms['response'];
+		
+
+
+
+
+		$this->setDataView(array(
+			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
+			"tinyMCECommentaire" => $this->tinyMCE->getEditeurCommentaire(),
+			"message" => $this->message->showMessages(),
+			"viewRecette" => $viewRecette,
+			"viewCommentaires" => $viewComms
+			));
+
+
+	}
+
+
+
+
+
+
+
+
+
 	public function indexChefAction(){
+
 
 
 		$viewAllRecettes  	= $this->modelViewRecette->getAllViewRecettes();
@@ -105,3 +215,4 @@ class Recette extends \Library\Controller\Controller{
 
 	
 }
+

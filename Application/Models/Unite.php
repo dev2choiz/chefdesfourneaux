@@ -18,7 +18,7 @@ class Unite extends \Library\Model\Model{
 	 */
 	public function getUnites(){
 		$data =array(
-			        'service' 				=> 'unite',				//on peut aussi mettre un tableau(tous ce qu'on vt) pour la valeur de service
+			        'service' 				=> 'unite',				
 			        'method' 				=> 'getunites'
 	  	);
 

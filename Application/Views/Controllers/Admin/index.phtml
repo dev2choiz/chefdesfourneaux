@@ -18,7 +18,7 @@ var_dump($recettes);
                 <tr>
                     <td style="text-align: center"><p><?=$recette['titre']?></p></td>
                     <td style="text-align: center">
-                           <a type="button" class="btn btn-warning" href="<?=LINK_ROOT.'recette/index/'.$recette['id_recette']?>">Afficher</a>
+                           <a type="button" class="btn btn-warning" href="<?=LINK_ROOT.'recette/afficher/'.$recette['id_recette']?>">Afficher</a>
                           <a type="button" class="btn btn-success" href="<?=LINK_ROOT.'admin/mettreajourrecette/'.$recette['id_recette']?>">Mettre à jour</a>
                           <a type="button" class="btn btn-danger" href="<?=LINK_ROOT.'admin/supprimerrecette/'.$recette['id_recette']?>">Supprimer</a>
                     </td>
