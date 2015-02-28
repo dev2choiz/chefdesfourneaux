@@ -1,7 +1,7 @@
 <?php
 
 namespace Library\PopUp;
-//d
+
 abstract class PopUp{
 
 	public function __construct(){
