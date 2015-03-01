@@ -6,41 +6,60 @@ namespace Library\Ajax;
 
 class Ajax{
 
+
+  private $tabFonctionName;
+
+
 	public function __construct(){
-		
+    $this->tabFonctionName= array();
 	}
 
 
-  public function getAjax($methode,$data, $url, $fonction ){
+  public function getAjax( $type, $service, $methode, $data, $fonctionName, $successFonc ){
 
-    $str="";$i=0;
-    $separateur=",";
-    foreach ($data as $key => $value) {
-      if($i == (count($data)-1)   ){
-        $separateur="";
+    //ajoute a la liste des noms de fonctions utilisées si $fonctionName n'y est pas encore
+    //dans le cas contraire, return false
+    foreach ($this->tabFonctionName as $key => $value) {
+      if($value==$fonctionName){
+        return false;
+      }else{
+        $this->tabFonctionName[]=$fonctionName;
       }
-      $str.="'$key':".$value.$separateur;
+    }
+
+
+    $url=WEBSERVICE_ROOT.'/index.php';
+    $i=0;
+    $separateur=",";
+    $strData="service:'$service', method:'$methode'";
+    foreach ($data as $key => $value) {
+      $strData.=$separateur." '$key':'".$value."'";
       $i++;
     }
-    echo $str;
+    echo $strData;
     return "
-    <script type=text/javascript>
+    <script type='text/javascript'>
+    function $fonctionName(){
       $.ajax({
-        type: '$methode',
+        type: '$type',
         data: {
-          $str
+          $strData
         },
         url: '$url',
         dataType: 'json',
         //async: false,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
         success: function(data) {
-          $fonction
+          $successFonc
         }
         });
-    </script>";
+    }
+
+    </script>
+    ";
   }
 
 
 
 
 }
+
