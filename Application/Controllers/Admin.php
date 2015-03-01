@@ -9,15 +9,19 @@ class Admin extends \Library\Controller\Controller{
 	private $modelRecette;
 	private $modelCategorie; // A compléter
 	private $modelIngredient; // A compléter
+	private $modelPopUp;
+	private $modelAjax;
 
 
 	public function __construct(){
 		parent::__construct();
 		$this->setLayout("carousel");
-		$this->message 		= new \Library\Message\Message();
-		$this->tinyMCE 		= new \Library\TinyMCE\tinyMCE();
-		$this->modelRecette = new \Application\Models\Recette('localhost');
-		$this->modelVR = new \Application\Models\ViewRecette('localhost');
+		$this->message 				= new \Library\Message\Message();
+		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
+		$this->modelRecette 		= new \Application\Models\Recette('localhost');
+		$this->modelVR 				= new \Application\Models\ViewRecette('localhost');
+		$this->modelPopUp 			= new \Application\Models\PopUp();
+		// $this->modelAjax 			= new \Application\Models\Ajax();
 	}
 
 
@@ -198,15 +202,6 @@ class Admin extends \Library\Controller\Controller{
 	public function mettreAJourRecetteAction($idRecette){
 
 
-
-
-
-
-
-
-
-
-
 		
 		echo "<br><br><br><br>".$idRecette;
 		
@@ -225,18 +220,14 @@ class Admin extends \Library\Controller\Controller{
 		));
 		
 
-
-		
+		// Appuyer sur btn Modifier Recette
 		if(isset($_POST['btn'])){
 			//var_dump($_POST);
 
-			
-			
 			if(empty($_POST['value'])){
 				$this->message->addError("Recette vide !");
 			}
 
-			
 			$listMessage = $this->message->getMessages("error");
 			if(!empty($listMessage)){
 				$this->setDataView(array("message" => $this->message->showMessages()));
@@ -245,8 +236,6 @@ class Admin extends \Library\Controller\Controller{
 			}
 
 			unset($_POST['btn'], $listMessage);
-
-
 
   			$_POST["diabete"]	=	(isset($_POST["diabete"])? 1:0);
 			$_POST["ble"]		=	(isset($_POST["ble"])?1:0);
@@ -304,19 +293,23 @@ class Admin extends \Library\Controller\Controller{
 		}
 
 
-
-
-
-
-
-
-
-
-
+		if(isset($_POST['btnRechercherIng'])){
+			var_dump($_POST);
+			if(empty($_POST['rechercher'])){
+				$this->message->addError("Pas d'ingredients recherché");
+			}
+			foreach ($ings as $ing) {
+				if(strtolower($_POST['rechercher']) == strtolower($ing['value'])){
+					$ingRecherche = $ing['value'];
+				}else{
+					$this->message->addError("Cet ingredient n'existe pas encore");
+				}
+			}
+			
+		}
 
 
 		//################## données pour la view ############################
-
 
 
 
@@ -329,10 +322,10 @@ class Admin extends \Library\Controller\Controller{
 
 		//recherche des ingredients
 		$modelIngredient 	= new \Application\Models\Ingredient('localhost');
-		$ing=$modelIngredient->getIngredients();
-		$ing=$ing->response;
+		$ings=$modelIngredient->getIngredients();
+		$ing=$ings->response;
 		$ing=$modelIngredient->convEnTab($ing);
-		//var_dump($ing);
+		var_dump($ing);
 
 
 
@@ -355,14 +348,30 @@ class Admin extends \Library\Controller\Controller{
 			//var_dump($viewR);
 
 		}
+
+
+		$viewPopUpScript = $this->modelPopUp->getScriptPopUp(	"ingredient", 
+																"ingredient", 
+																"getingredients", 
+																array(), 
+																"obtenirIngredient");
+
+		$viewPopUpHtml = $this->modelPopUp->getHtmlPopUp("d'un ingrédient", "Ingrédient", "cet ingrédient");
+
+		// $codeAjax=$viewPopUpScript."".$viewPopUpHtml.$this->modelAjax->getAjaxPost("ingredient", 
+		// 										"getingredients", 
+		// 										array(), 
+		// 										"obtenirIngredient");
+
 		
-			$this->setDataView(array(
-				"message" => $this->message->showMessages(),
-				"categories" =>  $cat,
-				"ingredients" =>  $ing,
-				"unites" =>  $unit,
-				"viewrecette" =>  $viewR
-			));
+		$this->setDataView(array(
+			"message" => $this->message->showMessages(),
+			"categories" =>  $cat,
+			"ingredients" =>  $ing,
+			"unites" =>  $unit,
+			"viewrecette" =>  $viewR,
+			"ajax" => $viewPopUpScript
+		));
 
 	}
 

@@ -2,41 +2,61 @@
 
 namespace Library\PopUp;
 
-abstract class PopUp{
+abstract class PopUp extends \Library\Ajax\Ajax{
+
+	
 
 	public function __construct(){
 
 	}
 
-	public function getScriptPopUp($class, $popUpContainer, $popUp){
+	public function getAjaxPost( $service, $methode, $data, $functionName){
+
+		return $this->getAjax( "POST", $service, $methode, $data, $functionName);
+
+	}
+
+	public function getScriptPopUp($idDiv, $service, $methode, $data, $functionName){
+
 		return"
 
 		<script type='text/javascript'>
 				$(document).ready(function(){
-					$('#$class')
+					$('#$idDiv')
 						.click(function(){
-							$('#$popUpContainer').css('display', 'block');
-							$('#$popUp').css('display', 'block');	
+							$('#popupContainer').css('display', 'block');
+							$('#popup').css('display', 'block');	
+							$functionName();
 						});
 
-					$('.popUpContainer').click(function(){
-						$('#$popUpContainer').css('display', 'none');
-						$('#$popUp').css('display', 'none');
+					$('#popupContainer').click(function(){
+						$('#popupContainer').css('display', 'none');
+						$('#popup').css('display', 'none');
 					});
 				});
+				{$this->getAjax( "POST", $service, $methode, $data, $functionName)};
 		</script>
 		";
 	}
 
-	public function getHtmlPopUp($popUpContainer, $popup, $textPopUp){
+	public function getHtmlPopUp($titre, $value, $type){
 		return
 		"
 		
-		<div id='$popUpContainer' style='display:none;'>
+		<div id='popupContainer' style='display:none;'>
 
-			<div id='$popup' style='display:none;'>
+			<div id='popup' style='display:none;'>
+				<select id='popupSelect'></select>
+				<div id='row'>
+					<span>Ajout $titre</span>
+				
+					<div id='inputPopUp'>
+						<label name='value'>$value : </label>
+						<input type='text' name='value' id='value' required>
+					</div>
 
-				<p>$textPopUp</p>
+					<button name='btn' class='btn btn-lg btn-primary' type='submit'>Valider l'ajout de $type</button>
+				</div>
 			</div>
 		</div>";
 	}

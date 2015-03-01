@@ -34,23 +34,11 @@ class Index extends \Library\Controller\Controller
 
 		//$viewRecettes = $this->modelViewRecette->getViewRecette($id);
 
-		$viewPopUpScript = $this->modelPopUp->getScriptPopUp('categorie', 'container', 'popup');
-
-
-		$textPopUpCategorie = "
-		<input type='button' onclick='obtenirViewRecettes();' value='getview' >
-		";
-
-		$viewPopUpHtml = $this->modelPopUp->getHtmlPopUp('container', 'popup', $textPopUpCategorie);
-
-		$codeAjax=$this->modelAjax->getAjaxPost("ViewRecette", "getAllViewRecettes", array(), "obtenirViewRecettes" , "console.log(data);"  ).$viewPopUpScript."".$viewPopUpHtml;
 
 		$this->setDataView(array(
 			"pageTitle" => "Maitres des fourneaux, site de recettes, cuisine de chef et vente electroménager",
 			"message" => $this->message->showMessages(),
-			//"textPopUpCategorie" => $textPopUpCategorie,
-			"ajax"=> $codeAjax
-			//"recettes" => $viewRecettes
+			"recettes" => $viewRecettes
 		));
 	}
 

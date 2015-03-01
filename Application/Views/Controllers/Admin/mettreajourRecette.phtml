@@ -10,7 +10,7 @@ var_dump("skhlkmhfhdh",$viewrecette);
 
 ?>
 
-<?=$ajax?><div id="categorie">fmkjkj</div>
+
 
 
 
@@ -124,7 +124,79 @@ var_dump("skhlkmhfhdh",$viewrecette);
     <input type="checkbox" name="gluten" id="gluten" value="0" <?=$gluten?> >
 
 
-    <table  border="0">
+
+    <!-- Ne marche plus car j'ai essayé d'utiliser l'ajax directement dans la popup -->
+    <div id="ingredient">
+        Votre ingrédient n'est pas dans la liste?
+        <input type='button' value='Ajouter un ingrédient' >
+    </div>
+    <?=$ajax?>
+
+
+   
+    <div class="dv_ingredients">
+        Ingrédients : 
+        <input type="text" id="rechercher" value="" />
+        <input name="btnRechercherIng" type="button" value="Rechercher" type="submit" />
+        <select  id="allingredients" multiple size="form-control"   onclick="ajouterIngredient();"  style="min-width:150px;">
+            <?php
+
+            function ingredientIsUsed( $id, $tabIng ){
+
+                foreach ($tabIng as  $ing) {
+
+                    if ($ing['id_ingredient']===$id) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+
+            foreach ($ingredients as $ingredient) {
+                var_dump($ingredient);
+                if( !ingredientIsUsed( $ingredient['id_ingredient'], $viewrecette['ingredients'] ) ){
+                    echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
+                }
+            }
+
+            ?>
+        </select>
+    </div>
+
+    <div class="dv_ingredients">
+        Ingrédients de <?=$viewrecette['titre']?> : 
+        <select id="ingredients"  name="ingredients[]"  multiple size="form-control" onclick="retirerIngredient();"  style="min-width:150px;">
+
+            <?php
+              foreach ($viewrecette['ingredients'] as $ingredient) {
+                echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['ingredients']."</option>";
+              }
+            ?>
+        </select>
+    </div>
+
+    
+
+    <select id="allunites"     style="min-width:150px;">
+        <?php foreach ($unites as $unite) {?>
+            <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option> 
+        <?php } ?>
+    </select>
+    <input type="button" onclick="definirUnite();" value="definir cette unité" id="boutonunite">
+
+
+
+    
+
+    <select id="unites"  name="unites[]" multiple size="form-control" onclick="actualiserQuantite();"     style="min-width:150px;" onBlur="" onFocus="afficher();">
+    </select>
+
+    <input type="text" id="quantite">
+    <input type="button" id="okquantite" onclick="definirQuantite();" value="ok">
+
+
+    <!-- <table  border="0">
         <tr><td collspan="4">Ingredients</td></tr>
             <tr><td>
             </td>
@@ -150,7 +222,7 @@ var_dump("skhlkmhfhdh",$viewrecette);
                 <select  id="allingredients" multiple size="8"   onclick="ajouterIngredient();"  style="min-width:150px;">
                   <?php
                   
-                  function ingredientIsUsed( $id, $tabIng ){
+                 /* function ingredientIsUsed( $id, $tabIng ){
 
                     foreach ($tabIng as  $ing) {
 
@@ -159,15 +231,15 @@ var_dump("skhlkmhfhdh",$viewrecette);
                         }
                     }
                     return false;
-                  }
+                  }*/
 
 
-                  foreach ($ingredients as $ingredient) {
+                  /*foreach ($ingredients as $ingredient) {
                      var_dump($ingredient);
                     if( !ingredientIsUsed( $ingredient['id_ingredient'], $viewrecette['ingredients'] ) ){
                         echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
                     }
-                  }
+                  }*/
 
 
 
@@ -180,9 +252,9 @@ var_dump("skhlkmhfhdh",$viewrecette);
                 <select id="ingredients"  name="ingredients[]" multiple size="8"   onclick="retirerIngredient();"  style="min-width:150px;">
                 <?php
 
-                  foreach ($viewrecette['ingredients'] as $ingredient) {
+                  /*foreach ($viewrecette['ingredients'] as $ingredient) {
                     echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['ingredients']."</option>";
-                  }
+                  }*/
 
 
                 ?>
@@ -199,7 +271,7 @@ var_dump("skhlkmhfhdh",$viewrecette);
             </td>
         </tr>
 
-    </table>
+    </table> -->
 
 
 
