@@ -15,8 +15,20 @@ class Vente extends \Library\Controller\Controller{
 	}
 
 
-	public function indexAction(){
+	public function indexLivreAction(){
 		
+
+
+		$modelAjax 	= new \Application\Models\AjaxTest('localhost');
+		
+		$ajax= $modelAjax->getAjax("post", array("service"=>"'viewrecette'", "method"=>"'getAllViewRecettes'"), WEBSERVICE_ROOT.'/index.php', "console.log(data);"  );
+
+		$this->setDataView(array(
+			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
+			"ajax" => $ajax
+			));
+
+
 	}
 
 

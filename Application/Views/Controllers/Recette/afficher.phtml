@@ -38,11 +38,10 @@ foreach ($viewRecette['ingredients'] as $ingredient){
         echo $key." : ".$champs.'<br>';
     }
 }
-
 echo '<hr><hr><hr>';
 
 //commentaires
-var_dump("viewCOm",$viewCommentaires);
+var_dump("viewCom", $viewCommentaires);
 if(isset($viewCommentaires) && !is_null($viewCommentaires) ){
     foreach ($viewCommentaires as $commentaire){
         foreach ($commentaire as $key => $champs){

@@ -2,10 +2,15 @@
 
 namespace Application\Models;
 
-class PopUp extends \Library\PopUp\PopUp{
+
+
+class AjaxTest extends \Library\Ajax\Ajax{
 
 	public function __construct($connexionName){
 		parent::__construct($connexionName);
 	}
+
+	
+	
 
 }
