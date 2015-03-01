@@ -15,7 +15,7 @@ class Index extends \Library\Controller\Controller
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelViewRecette 	= new \Application\Models\ViewRecette('localhost');
 		$this->modelPopUp 			= new \Application\Models\PopUp('localhost');
-		$this->modelAjax 			= new \Application\Models\AjaxTest('localhost');
+		$this->modelAjax 			= new \Application\Models\Ajax('localhost');
 	}
 
 
@@ -36,17 +36,20 @@ class Index extends \Library\Controller\Controller
 
 		$viewPopUpScript = $this->modelPopUp->getScriptPopUp('categorie', 'container', 'popup');
 
-		$textPopUpCategorie = "Bienvenue chez nous!";
+
+		$textPopUpCategorie = "
+		<input type='button' onclick='obtenirViewRecettes();' value='getview' >
+		";
 
 		$viewPopUpHtml = $this->modelPopUp->getHtmlPopUp('container', 'popup', $textPopUpCategorie);
 
-		$ajax=$this->modelAjax->getAjax("post", array("service"=>"'viewrecette'", "method"=>"'getAllViewRecettes'"), WEBSERVICE_ROOT.'/index.php', "console.log(data);"  ).$viewPopUpScript."".$viewPopUpHtml;
+		$codeAjax=$this->modelAjax->getAjaxPost("ViewRecette", "getAllViewRecettes", array(), "obtenirViewRecettes" , "console.log(data);"  ).$viewPopUpScript."".$viewPopUpHtml;
 
 		$this->setDataView(array(
 			"pageTitle" => "Maitres des fourneaux, site de recettes, cuisine de chef et vente electroménager",
 			"message" => $this->message->showMessages(),
 			//"textPopUpCategorie" => $textPopUpCategorie,
-			"ajax"=> $ajax
+			"ajax"=> $codeAjax
 			//"recettes" => $viewRecettes
 		));
 	}
