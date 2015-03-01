@@ -144,68 +144,6 @@ public function afficherAction( $idProduit ){
 
 
 
-
-
-
-
-
-
-	public function indexChefAction(){
-
-
-
-		$viewAllProduits  	= $this->modelViewProduit->getAllViewProduits();
-		var_dump($viewAllProduits);
-		$viewAllProduits 	= $viewAllProduits['response'];
-		var_dump($viewAllProduits); 		
-		
-		
-		$this->setDataView(array(
-			"pageTitle" 	=> "Produits de chef cuisiniers",
-			"message" 		=> $this->message->showMessages(),
-			"tinyMCE" 		=> $this->tinyMCE->getSource(),
-			"recettes"		=> $viewAllProduits
-		));
-	}
-
-	public function chefAction($id){
-		$viewProduit 	 	= $this->modelViewProduit->getViewProduit($id);
-		$viewProduit 		= $viewProduit['response'][0];
-		$this->setDataView(array(
-			"pageTitle" 	=> $viewProduit['titre'],
-			"message" 		=> $this->message->showMessages(),
-			"tinyMCE" 		=> $this->tinyMCE->getSource(),
-			"recette"		=> $viewProduit 
-		));
-	}
-	
-
-
-	public function indexSanteAction(){
-		$viewAllProduits  	= $this->modelViewProduit->getAllViewProduits();
-		$viewAllProduits 	= $viewAllProduits['response'];
-		//var_dump($viewAllProduits);
-		$this->setDataView(array(
-			"pageTitle" => "Produit santé, régime, cuisine légère",
-			"message" => $this->message->showMessages(),
-			"tinyMCE" 		=> $this->tinyMCE->getSource(),
-			"recettes"		=> $viewAllProduits
-		));
-	}
-
-	public function santeAction($id){
-		$viewProduit 	 	= $this->modelViewProduit->getViewProduit($id);
-		$viewProduit 		= $viewProduit['response'][0];
-		$this->setDataView(array(
-			"pageTitle" => "Produit santé, régime, cuisine légère",
-			"message" 		=> $this->message->showMessages(),
-			"tinyMCE" => $this->tinyMCE->getSource(),
-			"recette"		=> $viewProduit 
-		));
-	}
-
-
-
 	public function logoutAction(){		//a effacer?
 		session_unset();
 	}

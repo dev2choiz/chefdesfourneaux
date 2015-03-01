@@ -36,6 +36,7 @@ class Index extends \Library\Controller\Controller
 
 		$viewPopUpScript = $this->modelPopUp->getScriptPopUp('categorie', 'container', 'popup');
 
+
 		$textPopUpCategorie = "
 		<input type='button' onclick='obtenirViewRecettes();' value='getview' >
 		";
