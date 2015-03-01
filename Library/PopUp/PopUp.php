@@ -11,21 +11,21 @@ abstract class PopUp{
 	public function getScriptPopUp($class, $popUpContainer, $popUp){
 		return"
 
-<script type='text/javascript'>
-		$(document).ready(function(){
-			$('#$class')
-				.click(function(){
-					$('#$popUpContainer').css('display', 'block');
-					$('#$popUp').css('display', 'block');	
-				});
+		<script type='text/javascript'>
+				$(document).ready(function(){
+					$('#$class')
+						.click(function(){
+							$('#$popUpContainer').css('display', 'block');
+							$('#$popUp').css('display', 'block');	
+						});
 
-			$('.popUpContainer').click(function(){
-				$('#$popUpContainer').css('display', 'none');
-				$('#$popUp').css('display', 'none');
-			});
-		});
-</script>
-";
+					$('.popUpContainer').click(function(){
+						$('#$popUpContainer').css('display', 'none');
+						$('#$popUp').css('display', 'none');
+					});
+				});
+		</script>
+		";
 	}
 
 	public function getHtmlPopUp($popUpContainer, $popup, $textPopUp){

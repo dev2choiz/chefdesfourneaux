@@ -36,7 +36,7 @@ class Index extends \Library\Controller\Controller
 
 		$viewPopUpScript = $this->modelPopUp->getScriptPopUp('categorie', 'container', 'popup');
 
-		$textPopUpCategorie = "dfg";
+		$textPopUpCategorie = "Bienvenue chez nous!";
 
 		$viewPopUpHtml = $this->modelPopUp->getHtmlPopUp('container', 'popup', $textPopUpCategorie);
 
