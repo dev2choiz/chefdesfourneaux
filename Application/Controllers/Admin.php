@@ -9,7 +9,8 @@ class Admin extends \Library\Controller\Controller{
 	private $modelRecette;
 	private $modelCategorie; // A compléter
 	private $modelIngredient; // A compléter
-	private $modelPopUp;
+	private $modelPopUp;	//<==effacer
+	private $modelShowDiv;
 	private $modelAjax;
 
 
@@ -20,7 +21,8 @@ class Admin extends \Library\Controller\Controller{
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelRecette 		= new \Application\Models\Recette('localhost');
 		$this->modelVR 				= new \Application\Models\ViewRecette('localhost');
-		$this->modelPopUp 			= new \Application\Models\PopUp();
+		//$this->modelPopUp 			= new \Application\Models\PopUp();
+		$this->modelShowDiv 		= new \Application\Models\ShowDiv();
 		$this->modelAjax 			= new \Application\Models\Ajax();
 	}
 
@@ -361,14 +363,14 @@ class Admin extends \Library\Controller\Controller{
 			alert(data);
 		";
 
-			//( $service, $methode, $data, $fonctionName, $successfonc)
+		//( $service, $methode, $data, $fonctionName, $successfonc)
 		$scriptAjax= $this->modelAjax->getAjaxPost("ingredient", "getingredients", array(), "ajouterIngredientBdd", $successfonc);
 
-		$viewPopUpScript = $this->modelPopUp->getScriptPopUp(	"ajouterIngredientBdd",$scriptAjax);
+		$viewShowDivScript = $this->modelShowDiv->getScriptShowDiv(	"ajouterIngredientBdd", $scriptAjax);
 
-		$viewPopUpHtml = $this->modelPopUp->getHtmlPopUp("d'un ingrédient", "Ingrédient", "cet ingrédient");
+		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("d'un ingrédient", "Ingrédient", "cet ingrédient");
 
-	$codeAjax=$viewPopUpScript."".$viewPopUpHtml;
+		$codeAjax=$viewShowDivScript."".$viewShowDivHtml;
 
 		
 		$this->setDataView(array(
@@ -377,10 +379,10 @@ class Admin extends \Library\Controller\Controller{
 			"ingredients" =>  $ing,
 			"unites" =>  $unit,
 			"viewrecette" =>  $viewR,
-			"ajax" =>	$codeAjax, //$viewPopUpScript,
+			"ajax" =>	$codeAjax,
 			"ingRecherche" => $ingRecherche
 		));
-
+		
 	}
 
 	public function supprimerRecetteAction($idRecette){
