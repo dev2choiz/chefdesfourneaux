@@ -358,19 +358,25 @@ class Admin extends \Library\Controller\Controller{
 
 
 
+
+
+		
 		$successfonc="
 			console.log(data);
 			alert(data);
 		";
 
 		//( $service, $methode, $data, $fonctionName, $successfonc)
-		$scriptAjax= $this->modelAjax->getAjaxPost("ingredient", "getingredients", array(), "ajouterIngredientBdd", $successfonc);
+		//array() doit se faire conté javascript
+		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerIngredientValue"),"ingredient", "insertingredients", array("value"=>"ajoute un ing par defaut pr le moment"), "ajouterIngredientBdd", $successfonc);
 
-		$viewShowDivScript = $this->modelShowDiv->getScriptShowDiv(	"ajouterIngredientBdd", $scriptAjax);
+		$viewButtonShowDiv = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterIngredientBdd", "Ajouter un ingrédient");
 
-		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("d'un ingrédient", "Ingrédient", "cet ingrédient");
+		$viewShowDivScript = $this->modelShowDiv->getScriptShowDiv("DivContainerIngredient",	"ajouterIngredientBdd", $scriptAjax, "ajouterIngredientBdd");
 
-		$codeAjax=$viewShowDivScript."".$viewShowDivHtml;
+		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("DivContainerIngredient", "d'un ingrédient", "Ingrédient", "cet ingrédient");
+
+		$codeAjax=$viewShowDivHtml."".$viewShowDivScript;
 
 		
 		$this->setDataView(array(
@@ -379,10 +385,11 @@ class Admin extends \Library\Controller\Controller{
 			"ingredients" =>  $ing,
 			"unites" =>  $unit,
 			"viewrecette" =>  $viewR,
-			"ajax" =>	$codeAjax,
+			"ajaxIngredientButton" => $viewButtonShowDiv,
+			"ajaxIngredientScript" =>	$codeAjax,
 			"ingRecherche" => $ingRecherche
 		));
-		
+
 	}
 
 	public function supprimerRecetteAction($idRecette){
