@@ -293,23 +293,7 @@ class Admin extends \Library\Controller\Controller{
 		}
 
 
-		if(isset($_POST['btnRechercherIng'])){
-			var_dump($_POST);
-			if(empty($_POST['rechercher'])){
-				$this->message->addError("Pas d'ingredients recherché");
-			}
-			foreach ($ings as $ing) {
-				if(strtolower($_POST['rechercher']) == strtolower($ing['value'])){
-					$ingRecherche = $ing['value'];
-				}else{
-					$this->message->addError("Cet ingredient n'existe pas encore");
-				}
-			}
-			
-		}
-
-
-		//################## données pour la view ############################
+		
 
 
 
@@ -323,10 +307,25 @@ class Admin extends \Library\Controller\Controller{
 		//recherche des ingredients
 		$modelIngredient 	= new \Application\Models\Ingredient('localhost');
 		$ings=$modelIngredient->getIngredients();
-		$ing=$ings->response;
-		$ing=$modelIngredient->convEnTab($ing);
-		var_dump($ing);
+		$ings=$ings->response;
+		$ing=$modelIngredient->convEnTab($ings);
 
+		$ingRecherche = '';
+
+		if(isset($_POST['btnRechercherIng'])){
+			
+			if(empty($_POST['rechercher'])){
+				$this->message->addError("Pas d'ingredients recherché");
+			}
+			foreach ($ing as $ingr) {
+				if(strtolower($_POST['rechercher']) == strtolower($ingr['value'])){
+					$ingRecherche = $ingr['value'];
+				}else{
+					$this->message->addError("Cet ingredient n'existe pas encore");
+				}
+			}
+			
+		}
 
 
 		//recherche des Unites
@@ -370,7 +369,8 @@ class Admin extends \Library\Controller\Controller{
 			"ingredients" =>  $ing,
 			"unites" =>  $unit,
 			"viewrecette" =>  $viewR,
-			"ajax" => $viewPopUpScript
+			"ajax" => $viewPopUpScript,
+			"ingRecherche" => $ingRecherche
 		));
 
 	}

@@ -3,7 +3,7 @@
 <?php
 
 
-var_dump("skhlkmhfhdh",$viewrecette);
+//var_dump("skhlkmhfhdh",$viewrecette);
 
 
 
@@ -136,8 +136,8 @@ var_dump("skhlkmhfhdh",$viewrecette);
    
     <div class="dv_ingredients">
         Ingrédients : 
-        <input type="text" id="rechercher" value="" />
-        <input name="btnRechercherIng" type="button" value="Rechercher" type="submit" />
+        <input type="text" id="rechercher" name="rechercher" />
+        <button name="btnRechercherIng" type="submit">Rechercher</button>  
         <select  id="allingredients" multiple size="form-control"   onclick="ajouterIngredient();"  style="min-width:150px;">
             <?php
 
@@ -177,23 +177,25 @@ var_dump("skhlkmhfhdh",$viewrecette);
     </div>
 
     
-
-    <select id="allunites"     style="min-width:150px;">
-        <?php foreach ($unites as $unite) {?>
-            <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option> 
-        <?php } ?>
-    </select>
-    <input type="button" onclick="definirUnite();" value="definir cette unité" id="boutonunite">
+    <div class="dv_ingredients">
+        <select id="allunites"     style="min-width:150px;">
+            <?php foreach ($unites as $unite) {?>
+                <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option> 
+            <?php } ?>
+        </select>
+        <input type="button" onclick="definirUnite();" value="definir cette unité" id="boutonunite">
+    </div>
 
 
 
     
+    <div class="dv_ingredients">
+        <select id="unites"  name="unites[]" multiple size="form-control" onclick="actualiserQuantite();"     style="min-width:150px;" onBlur="" onFocus="afficher();">
+        </select>
 
-    <select id="unites"  name="unites[]" multiple size="form-control" onclick="actualiserQuantite();"     style="min-width:150px;" onBlur="" onFocus="afficher();">
-    </select>
-
-    <input type="text" id="quantite">
-    <input type="button" id="okquantite" onclick="definirQuantite();" value="ok">
+        <input type="text" id="quantite">
+        <input type="button" id="okquantite" onclick="definirQuantite();" value="ok">
+    </div>
 
 
     <!-- <table  border="0">
