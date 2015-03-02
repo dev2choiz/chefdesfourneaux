@@ -128,7 +128,7 @@
     <!-- Ne marche plus car j'ai essayé d'utiliser l'ajax directement dans la popup -->
     <div id="ingredient">
         Votre ingrédient n'est pas dans la liste?
-        <input type='button' value='Ajouter un ingrédient' onclick='' id="ajouterIngredientBdd" >
+        <input type='button' value='Ajouter un ingrédient' id="ajouterIngredientBdd" >
     </div>
     #####<?=$ajax?>#####
 
@@ -158,7 +158,7 @@
 
 
             foreach ($ingredients as $ingredient) {
-                var_dump($ingredient);
+                //var_dump($ingredient);
                 if( !ingredientIsUsed( $ingredient['id_ingredient'], $viewrecette['ingredients'] ) ){
                     echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
                 }
