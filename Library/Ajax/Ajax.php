@@ -15,7 +15,7 @@ class Ajax{
 	}
 
 
-    public function getAjax( $type, $service, $methode, $data, $functionName){
+    public function getAjax( $type, $service, $methode, $data, $functionName, $successfonc){
 
         //ajoute a la liste des noms de fonctions utilisées si $fonctionName n'y est pas encore
         //dans le cas contraire, return false
@@ -39,7 +39,8 @@ class Ajax{
         echo $strData;
 
         return "
-        function $functionName(){
+
+                function $functionName(){
             $.ajax({
                 type: '$type',
                 data: {
@@ -47,18 +48,19 @@ class Ajax{
                 },
                 url: '$url',
                 dataType: 'json',
-                //async: false,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                async: false,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
                 success: function(data) {
                     var val = '';
                     var option = '';
                     for(var i=0; i<data.response.length; i++){
-                        val = data.response[i]['value'];
-                        option = '<option>' + val + '</option>';
-                        $('#popupSelect').append(option);
+                        $successfonc
+
                     }
                 }
             });
-        }";
+        }
+    
+        ";
     }
 
 }

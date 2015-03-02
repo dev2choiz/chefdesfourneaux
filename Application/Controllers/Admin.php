@@ -21,7 +21,7 @@ class Admin extends \Library\Controller\Controller{
 		$this->modelRecette 		= new \Application\Models\Recette('localhost');
 		$this->modelVR 				= new \Application\Models\ViewRecette('localhost');
 		$this->modelPopUp 			= new \Application\Models\PopUp();
-		// $this->modelAjax 			= new \Application\Models\Ajax();
+		$this->modelAjax 			= new \Application\Models\Ajax();
 	}
 
 
@@ -349,18 +349,26 @@ class Admin extends \Library\Controller\Controller{
 		}
 
 
-		$viewPopUpScript = $this->modelPopUp->getScriptPopUp(	"ingredient", 
-																"ingredient", 
-																"getingredients", 
-																array(), 
-																"obtenirIngredient");
+
+
+
+
+
+
+
+		$successfonc="
+			console.log(data);
+			alert(data);
+		";
+
+			//( $service, $methode, $data, $fonctionName, $successfonc)
+		$scriptAjax= $this->modelAjax->getAjaxPost("ingredient", "getingredients", array(), "ajouterIngredientBdd", $successfonc);
+
+		$viewPopUpScript = $this->modelPopUp->getScriptPopUp(	"ajouterIngredientBdd",$scriptAjax);
 
 		$viewPopUpHtml = $this->modelPopUp->getHtmlPopUp("d'un ingrédient", "Ingrédient", "cet ingrédient");
 
-		// $codeAjax=$viewPopUpScript."".$viewPopUpHtml.$this->modelAjax->getAjaxPost("ingredient", 
-		// 										"getingredients", 
-		// 										array(), 
-		// 										"obtenirIngredient");
+	$codeAjax=$viewPopUpScript."".$viewPopUpHtml;
 
 		
 		$this->setDataView(array(
@@ -369,7 +377,7 @@ class Admin extends \Library\Controller\Controller{
 			"ingredients" =>  $ing,
 			"unites" =>  $unit,
 			"viewrecette" =>  $viewR,
-			"ajax" => $viewPopUpScript,
+			"ajax" =>	$codeAjax, //$viewPopUpScript,
 			"ingRecherche" => $ingRecherche
 		));
 

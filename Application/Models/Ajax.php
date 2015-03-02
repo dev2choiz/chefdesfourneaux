@@ -11,9 +11,9 @@ class Ajax extends \Library\Ajax\Ajax{
 	}
 
 	
-	public function getAjaxPost( $service, $methode, $data, $fonctionName){
+	public function getAjaxPost( $service, $methode, $data, $fonctionName, $successfonc){
 
-		return $this->getAjax( "POST", $service, $methode, $data, $fonctionName);
+		return $this->getAjax( "POST", $service, $methode, $data, $fonctionName,  $successfonc);
 
 	}
 

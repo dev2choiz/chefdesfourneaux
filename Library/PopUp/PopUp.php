@@ -2,7 +2,7 @@
 
 namespace Library\PopUp;
 
-abstract class PopUp extends \Library\Ajax\Ajax{
+abstract class PopUp extends \Application\Models\Ajax{
 
 	
 
@@ -10,23 +10,22 @@ abstract class PopUp extends \Library\Ajax\Ajax{
 
 	}
 
-	public function getAjaxPost( $service, $methode, $data, $functionName){
+	
 
-		return $this->getAjax( "POST", $service, $methode, $data, $functionName);
+	//return $this->getAjaxPost(  $service, $methode, $data, $functionName);
+	
 
-	}
 
-	public function getScriptPopUp($idDiv, $service, $methode, $data, $functionName){
+	public function getScriptPopUp($idDiv, $scriptAjax){		//$service, $methode, $data, $functionName){
 
-		return"
-
+		return "
 		<script type='text/javascript'>
 				$(document).ready(function(){
 					$('#$idDiv')
 						.click(function(){
 							$('#popupContainer').css('display', 'block');
 							$('#popup').css('display', 'block');	
-							$functionName();
+							
 						});
 
 					$('#popupContainer').click(function(){
@@ -34,10 +33,16 @@ abstract class PopUp extends \Library\Ajax\Ajax{
 						$('#popup').css('display', 'none');
 					});
 				});
-				{$this->getAjax( "POST", $service, $methode, $data, $functionName)};
+				
+				$scriptAjax
+				
 		</script>
 		";
+		//{$this->getAjaxPost( $service, $methode, $data, $functionName, 'console.log(data);'  )};
+		
 	}
+
+
 
 	public function getHtmlPopUp($titre, $value, $type){
 		return

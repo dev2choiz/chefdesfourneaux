@@ -128,16 +128,20 @@
     <!-- Ne marche plus car j'ai essayé d'utiliser l'ajax directement dans la popup -->
     <div id="ingredient">
         Votre ingrédient n'est pas dans la liste?
-        <input type='button' value='Ajouter un ingrédient' >
+        <input type='button' value='Ajouter un ingrédient' onclick='' id="ajouterIngredientBdd" >
     </div>
-    <?=$ajax?>
+    #####<?=$ajax?>#####
+
+
+
+
+       
+
+
 
 
    
-    <div class="dv_ingredients">
-        Ingrédients : 
-        <input type="text" id="rechercher" name="rechercher" />
-        <button name="btnRechercherIng" type="submit">Rechercher</button>  
+    <div class="dv_ingredients">  
         <select  id="allingredients" multiple size="form-control"   onclick="ajouterIngredient();"  style="min-width:150px;">
             <?php
 
