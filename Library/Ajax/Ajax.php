@@ -19,7 +19,7 @@ class Ajax{
         $str="str='';\n";
         foreach ($tabInputValue as $key => $value) {
             $str.= "
-                str+=','+'$key'+ ':'+ document.getElementById('$value').value;
+                str+=', \'$key\''+ ' : \''+ document.getElementById('$value').value + '\' ';
             ";
         }
             $str.="";
@@ -41,22 +41,24 @@ class Ajax{
         $url = WEBSERVICE_ROOT.'/index.php';
         $i = 0;
         $separateur = ",";
-        $strData = "service:'$service', method:'$methode'";
+        $strData = "'service' : '$service', 'method' : '$methode'";
         foreach ($data as $key => $value) {
             $strData.=$separateur." '$key':'".$value."'";
             $i++;
         }
         echo $strData;
 
+
+//alert(\"$strData\"+str       );
         return "
+        function $functionName(){
 
-
-
-                function $functionName(){
+            
             $str
+            
 
-            alert(strData+str);
-
+            
+            alert(str);
 
             $.ajax({
                 type: '$type',

@@ -219,6 +219,7 @@ abstract class Controller implements iController
 			
 
 			//if(!headers_sent()  ){			//<---condition a enlever quand on recevera les reponses du webservice sans entete
+			//									//il y a tjrs une entete dans les reponses du webservice, mais bon.......
 				header("Content-type: ".$this->getResponseHeader()."; charset=utf-8");
 			//}
 
