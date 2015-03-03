@@ -363,12 +363,12 @@ class Admin extends \Library\Controller\Controller{
 		
 		$successfonc="
 			console.log(data);
-			alert(data);
+			//alert(data);
 		";
 
 		//( $service, $methode, $data, $fonctionName, $successfonc)
 		//array() doit se faire conté javascript
-		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerIngredientValue"),"ingredient", "insertingredients", array("value"=>"ajoute un ing par defaut pr le moment"), "ajouterIngredientBdd", $successfonc);
+		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerIngredientValue"),"ingredient", "insertingredients", array(), "ajouterIngredientBdd", $successfonc);
 
 		$viewButtonShowDiv = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterIngredientBdd", "Ajouter un ingrédient");
 
