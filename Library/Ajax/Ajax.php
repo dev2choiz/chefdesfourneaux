@@ -15,18 +15,28 @@ class Ajax{
 	}
 
 
-    public function getAjax( $type, $service, $methode, $data, $functionName, $successfonc){
+    public function getAjax( $tabInputValue ,  $type, $service, $methode, $data, $functionName, $successfonc){
+        $str="str='';\n";
+        foreach ($tabInputValue as $key => $value) {
+            $str.= "
+                str+=','+'$key'+ ':'+ document.getElementById('$value').value;
+            ";
+        }
+            $str.="";
 
         //ajoute a la liste des noms de fonctions utilisées si $fonctionName n'y est pas encore
         //dans le cas contraire, return false
-        /*foreach ($this->tabFunctionName as $key => $value) {
-            if($value == $functionName){
-                return false;
-            }else{
-                $this->tabFunctionName[] = $functionName;
+        if (is_array($this->tabFunctionName) && count($this->tabFunctionName)>0 ){
+            foreach ( $this->tabFunctionName as $key => $value ){
+                if($value == $functionName){
+                    return false;
+                }else{
+                    $this->tabFunctionName[] = $functionName;
+                }
             }
+        }else{
+            $this->tabFunctionName[] = $functionName;
         }
-*/
 
         $url = WEBSERVICE_ROOT.'/index.php';
         $i = 0;
@@ -40,22 +50,25 @@ class Ajax{
 
         return "
 
+
+
                 function $functionName(){
+            $str
+
+            alert(strData+str);
+
+
             $.ajax({
                 type: '$type',
                 data: {
-                    $strData
+                    $strData+str
                 },
                 url: '$url',
                 dataType: 'json',
-                async: false,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                //async: false,
                 success: function(data) {
-                    var val = '';
-                    var option = '';
-                    for(var i=0; i<data.response.length; i++){
-                        $successfonc
+                    $successfonc
 
-                    }
                 }
             });
         }
