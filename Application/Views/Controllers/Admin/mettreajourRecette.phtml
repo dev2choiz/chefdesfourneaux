@@ -3,7 +3,7 @@
 <?php
 
 
-//var_dump("skhlkmhfhdh",$viewrecette);
+//var_dump("haut de la view >>viewrecette",$viewrecette);
 
 
 
@@ -19,6 +19,12 @@
     <h2 class="form-signin-heading">
         <?=$pageTitle?>
     </h2>
+    <table>
+        <tr>
+            <label for="titre">Titre de la recette que vous souhaitez ajouter : </label>
+            <td><input type="text" name="titre" id="titre" value="<?=$viewrecette['titre']?>" required></td>
+        </tr>
+    </table>
     <textarea name="value" autofocus style="width: 100%;"><?=$viewrecette['value']?></textarea>
 
     <table>

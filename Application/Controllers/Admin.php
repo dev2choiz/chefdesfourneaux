@@ -203,9 +203,9 @@ class Admin extends \Library\Controller\Controller{
 	 */
 	public function mettreAJourRecetteAction($idRecette){
 
-
-		
 		echo "<br><br><br><br>".$idRecette;
+		
+		
 		
 		if( $_SESSION['user']['role'] !== "admin" ){
 			$this->setRedirect(LINK_ROOT);
@@ -260,7 +260,7 @@ class Admin extends \Library\Controller\Controller{
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			
 			$res =$modelRecette->convEnTab($modelRecette->updateRecette($_POST, $idRecette ) );
-			var_dump("res :",$res);
+			
 
 
 			$res=$res['response'];
@@ -275,7 +275,7 @@ class Admin extends \Library\Controller\Controller{
 				//echo "<br><br><br><br>";
 				//var_dump("ing",$ingreds, $unites , $idRecette, $quantites );
 				$res =$modelListIngredients->convEnTab( $modelListIngredients->updateListIngredients($ingreds, $unites , $idRecette, $quantites ) );
-				var_dump("ress",$res);
+
 				//echo $res['page'];
 				
 				
@@ -360,19 +360,23 @@ class Admin extends \Library\Controller\Controller{
 
 
 
-		
+
 		$successfonc="
 			console.log(data);
 			val=data['response'];		//tester à faire : si >0 ==> insertion faite
 			label=document.getElementById('DivContainerIngredientValue').value;
-	       $('#ingredients').append('<option value=\"'+val+'\" selected=\"selected\">'+label+'</option>');
+			$('#ingredients').append('<option value=\"'+val+'\" selected>'+label+'</option>');
+			$('#unites').append('<option value=\"'+val+'\" selected>...</option>');
 
+			//tab
+        	tabUnit.push('rien');
+        	tabQuant.push(1);
 
-			//alert(data);
+			alert('ingredient ajouté');
 		";
 
 		//( $service, $methode, $data, $fonctionName, $successfonc)
-		//array() doit se faire conté javascript
+		//array() doit se faire coté javascript
 		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerIngredientValue"),"ingredient", "insertingredients", array(), "ajouterIngredientBdd", $successfonc);
 
 		$viewButtonShowDiv = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterIngredientBdd", "Ajouter un ingrédient");
@@ -383,6 +387,7 @@ class Admin extends \Library\Controller\Controller{
 
 		$codeAjax=$viewShowDivHtml."".$viewShowDivScript;
 
+		
 		
 		$this->setDataView(array(
 			"message" => $this->message->showMessages(),

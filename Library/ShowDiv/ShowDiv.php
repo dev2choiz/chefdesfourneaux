@@ -79,7 +79,7 @@ abstract class ShowDiv{
 		
 			<div id='inputShowDiv'>
 				<label name='labelValue' id='labelValue'>$value : </label>
-				<input type='text' name='value' id='{$divContainerName}Value' class='inputTextShowDiv'>
+				<input type='text' id='{$divContainerName}Value' class='inputTextShowDiv'>
 
 
 
