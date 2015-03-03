@@ -265,7 +265,7 @@ class Admin extends \Library\Controller\Controller{
 
 			$res=$res['response'];
 			
-			if ($res  ) {		//res est un bool
+			if ($res){			//res est un bool
 				//header('location: '.LINK_ROOT.'recette');
 				//die();
 				
@@ -276,14 +276,13 @@ class Admin extends \Library\Controller\Controller{
 				//var_dump("ing",$ingreds, $unites , $idRecette, $quantites );
 				$res =$modelListIngredients->convEnTab( $modelListIngredients->updateListIngredients($ingreds, $unites , $idRecette, $quantites ) );
 
-				//echo $res['page'];
 				
-				
-					//aucune verif la flemme
+
+
 				if($res['response']){
-					$this->message->addSuccess("Recette ajoutée");
+					$this->message->addSuccess("Recette midifiée");
 				}else{
-					$this->message->addSuccess("Recette ajoutée sans les ingredients");
+					$this->message->addSuccess("Recette midifiée sans les ingredients");
 				}
 
 
@@ -393,21 +392,17 @@ class Admin extends \Library\Controller\Controller{
 			val=data['response'];		//test à faire : si >0 ==> insertion faite
 			label=document.getElementById('DivContainerCategorieValue').value;
 			$('#id_cat').append('<option value=\"'+val+'\" selected>'+label+'</option>');
-			$('#unites').append('<option value=\"'+val+'\" selected>...</option>');
+			
 
-			//tab
-        	tabUnit.push('rien');
-        	tabQuant.push(1);
-
-			alert('categorie ajouté');
+			alert('categorie ajoutée');
 		";
-		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerCategorieValue"),"ingredient", "insertingredients", array(), "ajouterCategorieBdd", $successfonc);
+		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerCategorieValue"),"categorie", "insertcategorie", array(), "ajouterCategorieBdd", $successfonc);
 
-		$viewButtonShowDivCategorie = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterCategorieBdd", "Ajouter un ingrédient");
+		$viewButtonShowDivCategorie = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterCategorieBdd", "Ajouter une catégorie");
 
 		$viewShowDivScript = $this->modelShowDiv->getScriptShowDiv("DivContainerCategorie",	"ajouterCategorieBdd", $scriptAjax, "ajouterCategorieBdd");
 
-		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("DivContainerCategorie", "d'un ingrédient", "Ingrédient", "cet ingrédient");
+		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("DivContainerCategorie", "d'une catégorie", "Catégorie", "cette catégorie");
 
 		$codeAjaxCategorie=$viewShowDivHtml."".$viewShowDivScript;
 		
