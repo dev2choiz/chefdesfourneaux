@@ -16,13 +16,6 @@ class Ajax{
 
 
     public function getAjax( $tabInputValue ,  $type, $service, $methode, $data, $functionName, $successfonc){
-        $str="str='';\n";
-        foreach ($tabInputValue as $key => $value) {
-            $str.= "
-                str+=','+'$key'+ ':'+ document.getElementById('$value').value;
-            ";
-        }
-            $str.="";
 
         //ajoute a la liste des noms de fonctions utilisées si $fonctionName n'y est pas encore
         //dans le cas contraire, return false
@@ -41,28 +34,41 @@ class Ajax{
         $url = WEBSERVICE_ROOT.'/index.php';
         $i = 0;
         $separateur = ",";
-        $strData = "service:'$service', method:'$methode'";
+        $strData = "jsonData={};
+                    jsonData['service']= '$service';
+                    jsonData['method']= '$methode';
+                    ";
+
+
+        
+        foreach ($tabInputValue as $key => $value) {
+            $strData .= "jsonData['$key']= document.getElementById('$value').value;";
+        }
+            
+
+
+
+
         foreach ($data as $key => $value) {
             $strData.=$separateur." '$key':'".$value."'";
             $i++;
         }
-        echo $strData;
+        //echo $strData;
 
+        //'service' : 'ingredient', 'method' : 'insertingredients', 'value' : 'ljlmk'
+        //alert(\"$strData\"+str       );
         return "
+        function $functionName(){
+
+            $strData
 
 
-
-                function $functionName(){
-            $str
-
-            alert(strData+str);
-
+            console.log('jlghiici');
+            console.log(jsonData);
 
             $.ajax({
                 type: '$type',
-                data: {
-                    $strData+str
-                },
+                data: jsonData,
                 url: '$url',
                 dataType: 'json',
                 //async: false,
