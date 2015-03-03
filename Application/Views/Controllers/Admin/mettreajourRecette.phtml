@@ -43,8 +43,18 @@
                   <?php } ?>
                 </select>
             </td>
-        </tr>      
+        </tr>
 
+
+        <tr>
+            <td colspan="2">
+                <div id="">
+                    Votre catégorie n'est pas dans la liste?
+                    <?=$ajaxCategorieButton?>
+                </div>
+                <?=$ajaxCategorieScript?>
+            </td>
+        </tr>
 
 
         <tr>
@@ -137,7 +147,7 @@
         <!--input type='button' value='Ajouter un ingrédient' id="ajouterIngredientBdd" -->
         <?=$ajaxIngredientButton?>
     </div>
-    #####<?=$ajaxIngredientScript?>#####
+    <?=$ajaxIngredientScript?>
 
 
 

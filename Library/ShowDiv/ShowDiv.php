@@ -73,8 +73,8 @@ abstract class ShowDiv{
 		return
 		"
 		<div id='$divContainerName' style=''>
-			<select id='showDivSelect'></select>
-			<span>Ajout $titre</span>
+			<!--select id='showDivSelect'></select>
+			<span>Ajout $titre</span-->
 		
 			<div id='inputShowDiv'>
 				<label name='labelValue' id='labelValue'>$value : </label>

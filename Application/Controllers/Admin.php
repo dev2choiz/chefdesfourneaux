@@ -360,10 +360,10 @@ class Admin extends \Library\Controller\Controller{
 
 
 
-
+		//script ajax permettant d'ajouter un ingredient a la bdd puis de le prendre en compte
 		$successfonc="
 			console.log(data);
-			val=data['response'];		//tester à faire : si >0 ==> insertion faite
+			val=data['response'];		//test à faire : si >0 ==> insertion faite
 			label=document.getElementById('DivContainerIngredientValue').value;
 			$('#ingredients').append('<option value=\"'+val+'\" selected>'+label+'</option>');
 			$('#unites').append('<option value=\"'+val+'\" selected>...</option>');
@@ -374,19 +374,42 @@ class Admin extends \Library\Controller\Controller{
 
 			alert('ingredient ajouté');
 		";
-
-		//( $service, $methode, $data, $fonctionName, $successfonc)
-		//array() doit se faire coté javascript
 		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerIngredientValue"),"ingredient", "insertingredients", array(), "ajouterIngredientBdd", $successfonc);
 
-		$viewButtonShowDiv = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterIngredientBdd", "Ajouter un ingrédient");
+		$viewButtonShowDivIngredient = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterIngredientBdd", "Ajouter un ingrédient");
 
 		$viewShowDivScript = $this->modelShowDiv->getScriptShowDiv("DivContainerIngredient",	"ajouterIngredientBdd", $scriptAjax, "ajouterIngredientBdd");
 
 		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("DivContainerIngredient", "d'un ingrédient", "Ingrédient", "cet ingrédient");
 
-		$codeAjax=$viewShowDivHtml."".$viewShowDivScript;
+		$codeAjaxIngredient=$viewShowDivHtml."".$viewShowDivScript;
 
+
+
+
+		//script ajax permettant d'ajouter une categorie a la bdd puis de la prendre en compte
+		$successfonc="
+			console.log(data);
+			val=data['response'];		//test à faire : si >0 ==> insertion faite
+			label=document.getElementById('DivContainerCategorieValue').value;
+			$('#id_cat').append('<option value=\"'+val+'\" selected>'+label+'</option>');
+			$('#unites').append('<option value=\"'+val+'\" selected>...</option>');
+
+			//tab
+        	tabUnit.push('rien');
+        	tabQuant.push(1);
+
+			alert('categorie ajouté');
+		";
+		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerCategorieValue"),"ingredient", "insertingredients", array(), "ajouterCategorieBdd", $successfonc);
+
+		$viewButtonShowDivCategorie = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterCategorieBdd", "Ajouter un ingrédient");
+
+		$viewShowDivScript = $this->modelShowDiv->getScriptShowDiv("DivContainerCategorie",	"ajouterCategorieBdd", $scriptAjax, "ajouterCategorieBdd");
+
+		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("DivContainerCategorie", "d'un ingrédient", "Ingrédient", "cet ingrédient");
+
+		$codeAjaxCategorie=$viewShowDivHtml."".$viewShowDivScript;
 		
 		
 		$this->setDataView(array(
@@ -395,9 +418,11 @@ class Admin extends \Library\Controller\Controller{
 			"ingredients" =>  $ing,
 			"unites" =>  $unit,
 			"viewrecette" =>  $viewR,
-			"ajaxIngredientButton" => $viewButtonShowDiv,
-			"ajaxIngredientScript" =>	$codeAjax,
-			"ingRecherche" => $ingRecherche
+			"ajaxIngredientButton" => $viewButtonShowDivIngredient,
+			"ajaxIngredientScript" =>	$codeAjaxIngredient,
+			"ajaxCategorieButton" => $viewButtonShowDivCategorie,
+			"ajaxCategorieScript" =>	$codeAjaxCategorie,																																																//la virgule
+			"ingRecherche" => $ingRecherche			//<==????????????????
 		));
 
 	}
