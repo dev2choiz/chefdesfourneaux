@@ -42,13 +42,9 @@ class Ajax{
 
         
         foreach ($tabInputValue as $key => $value) {
-            $strData .= "jsonData['$key']= document.getElementById('$value').value;";
+            $strData .= "jsonData['$key']= document.getElementById('$value').value;";       //.value pour l'instant
         }
-            
-
-
-
-
+        
         foreach ($data as $key => $value) {
             $strData.=$separateur." '$key':'".$value."'";
             $i++;

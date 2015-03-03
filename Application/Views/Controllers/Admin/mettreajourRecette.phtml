@@ -183,9 +183,9 @@
 
     
     <div class="dv_ingredients">
-        <select id="allunites"     style="min-width:150px;">
+        <select id="allunites" style="min-width:150px;">
             <?php foreach ($unites as $unite) {?>
-                <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option> 
+                <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option>
             <?php } ?>
         </select>
         <input type="button" onclick="definirUnite();" value="definir cette unité" id="boutonunite">

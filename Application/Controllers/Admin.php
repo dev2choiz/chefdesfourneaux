@@ -363,6 +363,11 @@ class Admin extends \Library\Controller\Controller{
 		
 		$successfonc="
 			console.log(data);
+			val=data['response'];		//tester à faire : si >0 ==> insertion faite
+			label=document.getElementById('DivContainerIngredientValue').value;
+	       $('#ingredients').append('<option value=\"'+val+'\" selected=\"selected\">'+label+'</option>');
+
+
 			//alert(data);
 		";
 
