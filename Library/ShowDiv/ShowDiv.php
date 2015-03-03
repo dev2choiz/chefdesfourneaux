@@ -47,8 +47,6 @@ abstract class ShowDiv{
 				
 		</script>
 		";
-		//{$this->getAjaxPost( $service, $methode, $data, $functionName, 'console.log(data);'  )};
-		
 	}
 
 
@@ -66,9 +64,9 @@ abstract class ShowDiv{
 
 			
 
-			<button name='btnCancel' class='btn btn-lg btn-cancel' id='btnCancel'>Annuler</button>
+			<button name='btnCancel' class='btn btn-cancel' id='btnCancel'>Annuler</button>
 
-			<button name='btnShowDiv' class='btn btn-lg btn-primary'>Valider l'ajout de $type</button>
+			<button name='btnShowDiv' class='btn btn-primary'>Valider l'ajout de $type</button>
 			</div>
 		</div>";
 	}

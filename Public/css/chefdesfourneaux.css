@@ -1,3 +1,8 @@
+.navbar-inverse {
+ 	background-color: #888; 
+	border-color: #080808;
+}
+
 /* PopUp */
 
 #showDivContainer{ /* Fond translucide */
