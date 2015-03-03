@@ -363,7 +363,7 @@ class Admin extends \Library\Controller\Controller{
 		
 		$successfonc="
 			console.log(data);
-			alert(data);
+			//alert(data);
 		";
 
 		//( $service, $methode, $data, $fonctionName, $successfonc)
