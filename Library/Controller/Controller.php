@@ -6,12 +6,12 @@ abstract class Controller implements iController
 {
 	
 	private $redirect		= null;
-	private $layout 		= 'blog';
+	private $layout 		= 'blog';		//carousel?
 	private $responseHeader = 'text/html';
 	private $scriptView		= array();
 	private $styleView		= array();
 	private $dataMod 		= array();
-	private $dataView   	= array("siteName" 	=> "Site MVC",
+	private $dataView   	= array("siteName" 	=> "Chef des fourneaux",
 							  		"pageTitle" => "Home");
 
 
@@ -69,7 +69,7 @@ abstract class Controller implements iController
 
 	/**
 	 * Get ResponseHeader
-	 * @return String respoonse a utiliser 
+	 * @return String response a utiliser 
 	 */
 	protected function getResponseHeader(){
 		return $this->responseHeader;
@@ -182,7 +182,7 @@ abstract class Controller implements iController
 	 * @return void
 	 */
 	private function addFilesRender(&$html){
-		foreach ($this->scriptView as $s){
+		foreach ($this->scriptView as $s){		//lol trop fort
 			$html = str_replace('</body>', "<script src='WEB_ROOT/js/$s'></script></body>", $html);
 		}
 		foreach ($this->styleView as $s){
@@ -215,7 +215,10 @@ abstract class Controller implements iController
 		$pathView = APP_ROOT."Views/Controllers/".str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";
 		//$pathView = APP_ROOT.str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";		//view dans Application/controllers
 
-		if(file_exists($pathView)){
+
+		//echo $pathView;
+
+		if( file_exists($pathView) ){
 			
 
 			//if(!headers_sent()  ){			//<---condition a enlever quand on recevera les reponses du webservice sans entete

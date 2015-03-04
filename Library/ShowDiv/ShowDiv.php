@@ -73,12 +73,12 @@ abstract class ShowDiv{
 		return
 		"
 		<div id='$divContainerName' style=''>
-			<select id='showDivSelect'></select>
-			<span>Ajout $titre</span>
+			<!--select id='showDivSelect'></select>
+			<span>Ajout $titre</span-->
 		
 			<div id='inputShowDiv'>
 				<label name='labelValue' id='labelValue'>$value : </label>
-				<input type='text' name='value' id='{$divContainerName}Value' class='inputTextShowDiv'>
+				<input type='text' id='{$divContainerName}Value' class='inputTextShowDiv'>
 
 				<input  class='btn btn-cancel' id='btnCancel' value='Annuler' >
 				<input id='{$divContainerName}BtnShowDiv' class='btn btn-primary' value='Valider l ajout de $type'>

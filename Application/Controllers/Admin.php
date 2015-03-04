@@ -203,9 +203,9 @@ class Admin extends \Library\Controller\Controller{
 	 */
 	public function mettreAJourRecetteAction($idRecette){
 
-
-		
 		echo "<br><br><br><br>".$idRecette;
+		
+		
 		
 		if( $_SESSION['user']['role'] !== "admin" ){
 			$this->setRedirect(LINK_ROOT);
@@ -260,12 +260,12 @@ class Admin extends \Library\Controller\Controller{
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			
 			$res =$modelRecette->convEnTab($modelRecette->updateRecette($_POST, $idRecette ) );
-			var_dump("res :",$res);
+			
 
 
 			$res=$res['response'];
 			
-			if ($res  ) {		//res est un bool
+			if ($res){			//res est un bool
 				//header('location: '.LINK_ROOT.'recette');
 				//die();
 				
@@ -275,15 +275,14 @@ class Admin extends \Library\Controller\Controller{
 				//echo "<br><br><br><br>";
 				//var_dump("ing",$ingreds, $unites , $idRecette, $quantites );
 				$res =$modelListIngredients->convEnTab( $modelListIngredients->updateListIngredients($ingreds, $unites , $idRecette, $quantites ) );
-				var_dump("ress",$res);
-				//echo $res['page'];
+
 				
-				
-					//aucune verif la flemme
+
+
 				if($res['response']){
-					$this->message->addSuccess("Recette ajoutée");
+					$this->message->addSuccess("Recette midifiée");
 				}else{
-					$this->message->addSuccess("Recette ajoutée sans les ingredients");
+					$this->message->addSuccess("Recette midifiée sans les ingredients");
 				}
 
 
@@ -360,24 +359,53 @@ class Admin extends \Library\Controller\Controller{
 
 
 
-		
+		//script ajax permettant d'ajouter un ingredient a la bdd puis de le prendre en compte
 		$successfonc="
 			console.log(data);
-			//alert(data);
-		";
+			val=data['response'];		//test à faire : si >0 ==> insertion faite
+			label=document.getElementById('DivContainerIngredientValue').value;
+			$('#ingredients').append('<option value=\"'+val+'\" selected>'+label+'</option>');
+			$('#unites').append('<option value=\"'+val+'\" selected>...</option>');
 
-		//( $service, $methode, $data, $fonctionName, $successfonc)
-		//array() doit se faire conté javascript
+			//tab
+        	tabUnit.push('rien');
+        	tabQuant.push(1);
+
+			alert('ingredient ajouté');
+		";
 		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerIngredientValue"),"ingredient", "insertingredients", array(), "ajouterIngredientBdd", $successfonc);
 
-		$viewButtonShowDiv = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterIngredientBdd", "Ajouter un ingrédient");
+		$viewButtonShowDivIngredient = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterIngredientBdd", "Ajouter un ingrédient");
 
 		$viewShowDivScript = $this->modelShowDiv->getScriptShowDiv("DivContainerIngredient",	"ajouterIngredientBdd", $scriptAjax, "ajouterIngredientBdd");
 
 		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("DivContainerIngredient", "d'un ingrédient", "Ingrédient", "cet ingrédient");
 
-		$codeAjax=$viewShowDivHtml."".$viewShowDivScript;
+		$codeAjaxIngredient=$viewShowDivHtml."".$viewShowDivScript;
 
+
+
+
+		//script ajax permettant d'ajouter une categorie a la bdd puis de la prendre en compte
+		$successfonc="
+			console.log(data);
+			val=data['response'];		//test à faire : si >0 ==> insertion faite
+			label=document.getElementById('DivContainerCategorieValue').value;
+			$('#id_cat').append('<option value=\"'+val+'\" selected>'+label+'</option>');
+			
+
+			alert('categorie ajoutée');
+		";
+		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerCategorieValue"),"categorie", "insertcategorie", array(), "ajouterCategorieBdd", $successfonc);
+
+		$viewButtonShowDivCategorie = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterCategorieBdd", "Ajouter une catégorie");
+
+		$viewShowDivScript = $this->modelShowDiv->getScriptShowDiv("DivContainerCategorie",	"ajouterCategorieBdd", $scriptAjax, "ajouterCategorieBdd");
+
+		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("DivContainerCategorie", "d'une catégorie", "Catégorie", "cette catégorie");
+
+		$codeAjaxCategorie=$viewShowDivHtml."".$viewShowDivScript;
+		
 		
 		$this->setDataView(array(
 			"message" => $this->message->showMessages(),
@@ -385,9 +413,11 @@ class Admin extends \Library\Controller\Controller{
 			"ingredients" =>  $ing,
 			"unites" =>  $unit,
 			"viewrecette" =>  $viewR,
-			"ajaxIngredientButton" => $viewButtonShowDiv,
-			"ajaxIngredientScript" =>	$codeAjax,
-			"ingRecherche" => $ingRecherche
+			"ajaxIngredientButton" => $viewButtonShowDivIngredient,
+			"ajaxIngredientScript" =>	$codeAjaxIngredient,
+			"ajaxCategorieButton" => $viewButtonShowDivCategorie,
+			"ajaxCategorieScript" =>	$codeAjaxCategorie,																																																//la virgule
+			"ingRecherche" => $ingRecherche			//<==????????????????
 		));
 
 	}

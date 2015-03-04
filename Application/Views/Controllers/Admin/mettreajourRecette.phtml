@@ -3,7 +3,7 @@
 <?php
 
 
-//var_dump("skhlkmhfhdh",$viewrecette);
+//var_dump("haut de la view >>viewrecette",$viewrecette);
 
 
 
@@ -19,12 +19,18 @@
     <h2 class="form-signin-heading">
         <?=$pageTitle?>
     </h2>
+    <table>
+        <tr>
+            <label for="titre">Titre de la recette que vous souhaitez ajouter : </label>
+            <td><input type="text" name="titre" id="titre" value="<?=$viewrecette['titre']?>" required></td>
+        </tr>
+    </table>
     <textarea name="value" autofocus style="width: 100%;"><?=$viewrecette['value']?></textarea>
 
     <table>
         <tr><td>categorie</td>
             <td>
-                <select name="id_cat">
+                <select name="id_cat" id="id_cat">
                   <?php foreach ($categories as $categorie) {
                         if($categorie['value'] == $viewrecette['categorie'] ){
                             $txt=" selected ";
@@ -37,8 +43,18 @@
                   <?php } ?>
                 </select>
             </td>
-        </tr>      
+        </tr>
 
+
+        <tr>
+            <td colspan="2">
+                <div id="">
+                    Votre catégorie n'est pas dans la liste?
+                    <?=$ajaxCategorieButton?>
+                </div>
+                <?=$ajaxCategorieScript?>
+            </td>
+        </tr>
 
 
         <tr>
@@ -131,7 +147,7 @@
         <!--input type='button' value='Ajouter un ingrédient' id="ajouterIngredientBdd" -->
         <?=$ajaxIngredientButton?>
     </div>
-    #####<?=$ajaxIngredientScript?>#####
+    <?=$ajaxIngredientScript?>
 
 
 
@@ -183,9 +199,9 @@
 
     
     <div class="dv_ingredients">
-        <select id="allunites"     style="min-width:150px;">
+        <select id="allunites" style="min-width:150px;">
             <?php foreach ($unites as $unite) {?>
-                <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option> 
+                <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option>
             <?php } ?>
         </select>
         <input type="button" onclick="definirUnite();" value="definir cette unité" id="boutonunite">
