@@ -66,7 +66,7 @@ class Vente extends \Library\Controller\Controller{
 
 		//script ajax permettant d'ajouter un ingredient a la bdd puis de le prendre en compte
 		$successfonc = "
-			console.log(data);
+			
 			
 		";
 		$scriptAjax = $this->modelAjax->getAjaxPost( 	array( "value"=>"popupContainer"),
@@ -78,10 +78,9 @@ class Vente extends \Library\Controller\Controller{
 
 		//$viewButtonPopupProduit = $this->modelPopup->getHtmlButtonPopup( "ajouterProduitBdd", "Ajouter un produit");
 
-		$viewPopupScript = $this->modelPopup->getScriptPopup( "DivContainerProduit",	
-																	"ajouterProduitBdd", 
-																	$scriptAjax, 
-																	"ajouterProduitBdd");
+		$viewPopupScript = $this->modelPopup->getScriptPopup( 	"popupProduit",	
+																$scriptAjax, 
+																"ajouterProduitBdd");
 
 		$viewPopupHtml = $this->modelPopup->getHtmlPopup( 	"d'un produit", 
 															"Produit", 
@@ -98,9 +97,9 @@ class Vente extends \Library\Controller\Controller{
 		$this->setDataView(array(
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
 			'produits' => $produits['response'],
-			'ajax' => $ajax ));
+			'ajax' => $codeAjaxProduit ));
 
-		$this->setStyleView('popup');
+		//$this->setStyleView('popup.css');
 
 	}
 
