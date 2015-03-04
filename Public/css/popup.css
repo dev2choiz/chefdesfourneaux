@@ -1,6 +1,6 @@
 /* PopUp */
 
-#showDivContainer{ /* Fond translucide */
+#popupContainer{ /* Fond translucide */
 	width: 100%;
 	height: 100%;
 	top: 0;
@@ -19,7 +19,7 @@
 }
 
 
-#inputShowDiv{
+#inputPopup{
 	background-color: rgba(255,255,255,1);
 	display: none;
 	margin: auto;
@@ -33,24 +33,11 @@
 	z-index: 2000;	
 }
 
+/*
 #popup #inputPopup{
 	position: relative;
 	z-index: 2001;
 }
-
-#row{
-	margin: auto;
-	position: relative;
-	z-index: 2001;
-	width: 100%;
-	background-color: #777;
-	text-align: center;
-}
+*/
 
 /* Fin Popup */
-
-/* Mise en forme des ingredients*/
-
-.dv_ingredients{
-	padding: 10px;
-}

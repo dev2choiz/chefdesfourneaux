@@ -2,7 +2,7 @@
 
 namespace Library\PopUp;
 
-abstract class PopUp extends \Application\Models\Ajax{
+abstract class PopUp extends \Library\Ajax\Ajax{
 
 	
 
@@ -10,12 +10,98 @@ abstract class PopUp extends \Application\Models\Ajax{
 
 	}
 
+/*
+	public function getHtmlButtonPopup($idButtonPopup, $value){
+		return "<input type='button' value='$value' id='$idButtonPopup' >";
+		
+	}
+
+*/
+
+	public function getScriptPopup($idDiv, $scriptAjax, $functionName){
+
+
+		return "
+		<script type='text/javascript'>
+				$(document).ready(function(){
+					$('#divpopupContainer').css('display', 'none');
+
+					$('#$idDiv')
+						.click(function(){
+							if( $('#popupContainer').css('display') == 'block' ){
+								$('#popupContainer').css('display', 'none');
+							}else{
+								$('#popupContainer').css('display', 'block');	
+							}
+						});
+
+					$('#btnCancel')
+						.click(function(){
+							$('#popupContainer').css('display', 'none');
+						})
+
+					
+
+					$('#BtnPopup').click(function(){
+						{$functionName}();
+					});
+
+
+
+
+
+					/*$('#BtnPopup').submit(function(e){t
+					    e.preventDefault();
+					 
+					 });
+
+					$('#popupContainer').click(function(){
+					$('#popupContainer').css('display', 'none');
+					});*/   
+				});
+				
+				$scriptAjax
+				
+		</script>
+		";
+	}
+
+
+
+	public function getHtmlPopup($titre, $value, $type, $input = NULL){
+		return
+		"
+		<div id='popupContainer' style=''>
+
+			<span>Ajout $titre</span-->
+		
+			<div id='inputPopup'>
+				<label name='labelValue' id='labelValue'>$value : </label>
+				<input type='text' name='value' id='value' class='inputTextPopup'>
+				<input type='text' name='prix' id='prix' class='inputTextPopup'>
+				<input type='text' name='ref' id='ref' class='inputTextPopup'>
+				$input
+
+				<input  class='btn btn-cancel' id='btnCancel' value='Annuler' >
+				<input id='BtnPopup' class='btn btn-primary' value='Valider l ajout de $type'>
+
+			<!--button name='btnPopup' class='btn btn-primary'>Valider l'ajout de $type</button-->
+			</div>
+		</div>";
+	}
+
+
+
+
+
+}
+
 	
 
 	//return $this->getAjaxPost(  $service, $methode, $data, $functionName);
 	
 
-
+/*
 	public function getScriptPopUp($idDiv, $scriptAjax){		//$service, $methode, $data, $functionName){
 
 		return "
@@ -71,3 +157,4 @@ abstract class PopUp extends \Application\Models\Ajax{
 
 
 }
+*/
