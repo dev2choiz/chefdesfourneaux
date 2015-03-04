@@ -1,0 +1,65 @@
+<?=$message?>
+
+
+
+
+<form class="" method="post"  onsubmit="" id="formRecette">
+    <h2 class="form-signin-heading">
+        <?=$pageTitle?>
+    </h2>
+
+
+    <div>
+        <label for="categories">Catégories : </label>
+        <select name="categories[]" id="categories" multiple>
+          <?php foreach ($categories as $categorie) {?>
+              <option value="<?=$categorie['id_cat']?>"><?=$categorie['value']?></option> 
+          <?php } ?>
+        </select>
+
+        <div id="divCat" >
+            <input type="text" id="inputCat">
+            <input type="button" id="btnCat">
+        </div>
+
+    </div>
+
+
+    <div>
+        <label for="ingredients">Ingrédients : </label>
+        <select name="ingredients[]"  id="ingredients"     style="min-width:150px;" multiple>
+          <?php foreach ($ingredients as $ingredient) {?>
+              <option value="<?=$ingredient['id_ingredient']?>" ><?=$ingredient['value']?></option> 
+          <?php } ?>
+        </select>
+
+        <div id="divIng" >
+            <input type="text" id="inputIng">
+            <input type="button" id="btnIng">
+        </div>
+    </div>
+
+
+    <div>
+        <label for="unites">Unités : </label>
+        <select name="unites[]" id="unites"     style="min-width:150px;" multiple>
+          <?php foreach ($unites as $unite) {?>
+              <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option> 
+          <?php } ?>
+        </select>
+
+        <div  id="divUnit" >
+            <input type="text" id="inputUnit">
+            <input type="button" id="btnUnit">
+        </div>
+
+    </div>
+
+
+
+</form  style="min-width:150px;">
+
+<script src="<?=WEB_ROOT?>/js/script.js"></script>
+<script type="text/javascript">
+    masquer();
+</script>
