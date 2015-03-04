@@ -1,13 +1,22 @@
+<link rel="stylesheet" type="text/css" href="<?=WEB_ROOT?>css/popup.css">
+
+
 <h1>Liste des Produits disponibles</h1>
 
 <?php foreach ($produits as $produit): ?>
 <div class="row">
 	<div class="col-md-8">
 		<?= $produit['value']?>
+		
 	</div>
 	<div class="col-md-4">
 		Prix : <?= $produit['prix']?> €
 		Référence : <?= $produit['ref']?>
+	</div>
+
+	<div id='popupProduit'>
+	BLALALAAL
+		<?=$ajax?>
 	</div>
 	
 </div>

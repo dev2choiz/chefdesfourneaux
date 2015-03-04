@@ -10,13 +10,13 @@ abstract class PopUp extends \Library\Ajax\Ajax{
 
 	}
 
-/*
+
 	public function getHtmlButtonPopup($idButtonPopup, $value){
 		return "<input type='button' value='$value' id='$idButtonPopup' >";
 		
 	}
 
-*/
+
 
 	public function getScriptPopup($idDiv, $scriptAjax, $functionName){
 
@@ -24,20 +24,29 @@ abstract class PopUp extends \Library\Ajax\Ajax{
 		return "
 		<script type='text/javascript'>
 				$(document).ready(function(){
-					$('#divpopupContainer').css('display', 'none');
 
 					$('#$idDiv')
 						.click(function(){
-							if( $('#popupContainer').css('display') == 'block' ){
+							/*if( $('#popupContainer').css('display') == 'block' ){
 								$('#popupContainer').css('display', 'none');
+								$('#inputPopup').css('display', 'none');
 							}else{
 								$('#popupContainer').css('display', 'block');	
-							}
+								$('#inputPopup').css('display', 'block');
+							}*/
+							$('#popupContainer').css('display', 'block');	
+							$('#inputPopup').css('display', 'block');
 						});
+
+					$('#inputPopup')
+						.click(function(){
+							$('#inputPopup').css('display', 'block');
+						})
 
 					$('#btnCancel')
 						.click(function(){
 							$('#popupContainer').css('display', 'none');
+							$('#inputPopup').css('display', 'none');
 						})
 
 					
@@ -71,7 +80,7 @@ abstract class PopUp extends \Library\Ajax\Ajax{
 	public function getHtmlPopup($titre, $value, $type, $input = NULL){
 		return
 		"
-		<div id='popupContainer' style=''>
+		<div id='popupContainer'>
 
 			<span>Ajout $titre</span-->
 		

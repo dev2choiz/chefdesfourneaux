@@ -183,10 +183,10 @@ abstract class Controller implements iController
 	 */
 	private function addFilesRender(&$html){
 		foreach ($this->scriptView as $s){		//lol trop fort
-			$html = str_replace('</body>', "<script src='WEB_ROOT/js/$s'></script></body>", $html);
+			$html = str_replace('</body>', "<script src='<?=WEB_ROOT?>/js/$s'></script></body>", $html);
 		}
 		foreach ($this->styleView as $s){
-			$html = str_replace('</head>', "<link href='WEB_ROOT/css/$s' rel='stylesheet' type='text/css' /></head>", $html);
+			$html = str_replace('</head>', "<link href='<?=WEB_ROOT?>/css/$s' rel='stylesheet' type='text/css' /></head>", $html);
 		}
 	}
 
