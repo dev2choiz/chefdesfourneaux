@@ -140,18 +140,12 @@ class Admin extends \Library\Controller\Controller{
 
 
 		//données pour la view
-		//
 		$this->setDataView(array("message" => $this->message->showMessages()));
 
 		//recherche des categories
 		$modelCategorie 	= new \Application\Models\Categorie('localhost');
 		$cat=$modelCategorie->getCategories();
-
-		
 		$cat=$cat->response;
-		
-		
-
 		$cat=$modelCategorie->convEnTab($cat);
 
 		$this->setDataView(array("categories" =>  $cat));
@@ -280,9 +274,9 @@ class Admin extends \Library\Controller\Controller{
 
 
 				if($res['response']){
-					$this->message->addSuccess("Recette midifiée");
+					$this->message->addSuccess("Recette modifiée");
 				}else{
-					$this->message->addSuccess("Recette midifiée sans les ingredients");
+					$this->message->addSuccess("Recette modifiée sans les ingredients");
 				}
 
 
@@ -489,4 +483,91 @@ class Admin extends \Library\Controller\Controller{
 	public function logoutAction(){
 		session_unset();
 	}
+
+
+
+
+
+
+	public function gestionAction(){
+		
+
+		echo "<BR><BR><BR><BR>";
+		if($_SESSION['user']['role'] !== "admin"){
+			header('location: '.LINK_ROOT);
+			die();
+		}
+
+
+
+		if(isset($_POST['btn'])){
+			
+			
+			if(empty($_POST['value'])){
+				$this->message->addError("Recette vide !");
+			}
+
+			
+			$listMessage = $this->message->getMessages("error");
+			if(!empty($listMessage)){
+				$this->setDataView(array("message" => $this->message->showMessages()));
+
+				return false;
+			}
+
+			unset($_POST['btn'], $listMessage);
+
+
+
+
+
+
+
+
+
+
+
+		}	//fin if(btn)
+
+
+		//recherche des categories
+		$modelCategorie 	= new \Application\Models\Categorie('localhost');
+		$cat=$modelCategorie->getCategories();
+		$cat=$cat->response;
+		$cat=$modelCategorie->convEnTab($cat);
+
+
+		//recherche des ingredients
+		$modelIngredient 	= new \Application\Models\Ingredient('localhost');
+		$ings=$modelIngredient->getIngredients();
+		$ings=$ings->response;
+		$ings=$modelIngredient->convEnTab($ings);
+
+		//recherche des Unites
+		$modelUnite 	= new \Application\Models\Unite('localhost');
+		$unit=$modelUnite->getUnites();
+		$unit=$unit->response;
+		$unit=$modelUnite->convEnTab($unit);
+
+
+
+		$this->setDataView(array(
+			"pageTitle" => "Gestion des categories, des ingrédients et des unités",
+			"message" => $this->message->showMessages(),
+			"categories" =>  $cat,
+			"ingredients" =>  $ings,
+			"unites" =>  $unit
+		));
+
+		$this->setScriptView('js/scriptGestion.js');
+
+
+	}
+
+
+
+
+
+
+
 }
