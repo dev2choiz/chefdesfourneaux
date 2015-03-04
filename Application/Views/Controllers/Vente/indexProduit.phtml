@@ -1,0 +1,31 @@
+<?php foreach ($produits as $produit): ?>
+<div class="row">
+	<div class="col-md-8">
+		<?= $produit['value']?> />
+	</div>
+	<div class="col-md-4">
+		Prix : <?= $produit['prix']?> /> €
+		Référence : <?= $produit['ref']?>
+	</div>
+	
+</div>
+<?=$ajax?>
+<?php endforeach; ?>
+
+<br/><br/><br/><br/>
+<div class="row">
+	<div class="col-md-8">
+Test Insert : OK
+<br/>
+<form method="post">
+	Nom : <input name="value" type="text" required>
+	<br/>
+	Prix : <input name="prix" type="text" required>
+	<br/>
+	Ref : <input name="ref" type="text"  required>
+	<br/>
+	<button class="btn btn-warning" name="btnProduit" type="submit">Valider</button>
+	</div>
+		
+	</div>
+</form>
