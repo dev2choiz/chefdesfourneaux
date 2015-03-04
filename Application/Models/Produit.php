@@ -15,9 +15,22 @@ class Produit extends \Library\Model\Model{
 	}
 
 
-	public function getProduits(){
+	public function getAllProduits(){
+
+		$params = array('service' => 'produit',
+						'method' => 'getallproduits' );
+
+		$opts = array('http' =>
+		    array(
+		        'method'  => 'POST',
+		        'header'  => 'Content-type: application/x-www-form-urlencoded',
+		        'content' => http_build_query($params)
+		        )
+		);
+
+		$context  = stream_context_create($opts);
 		
-		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php?service=produit&method=getproduits')) );
+		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
 	}
 
 	/**
@@ -26,10 +39,10 @@ class Produit extends \Library\Model\Model{
 	 * @param  [int] $idCategorie [description]
 	 * @return [boolean]              [description]
 	 */
-	public function insertProduit($params, $idUser){
+	public function insertProduit($params){
 
 
-		$params["id_user"] = $idUser;
+		//$params["id_user"] = $idUser;
 		$params["service"] = "produit";
 		$params["method"]  = "insertproduit";
 
