@@ -4,16 +4,26 @@ namespace Application\Controllers;
 
 class Vente extends \Library\Controller\Controller{
 
+	private $message;
+	private $tinyMCE;
 	private $modelProduits;
-	private $codAjax;
+	private $modelViewProduit; 
+	private $modelPopup;	//<==effacer
+	private $modelShowDiv;
+	private $modelAjax;
 
 
 	public function __construct(){
 
 		$this->setLayout("carousel");
+		$this->message 				= new \Library\Message\Message();
+		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
+		$this->modelProduits 		= new \Application\Models\Produit('localhost');
+		$this->modelViewProduit 	= new \Application\Models\ViewProduit('localhost');
+		$this->modelPopup 			= new \Application\Models\PopUp();
+		$this->modelShowDiv 		= new \Application\Models\ShowDiv();
+		$this->modelAjax 			= new \Application\Models\Ajax();
 		
-		$this->modelProduits = new \Application\Models\Produit('localhost');
-		$this->codeAjax = $viewShowDivHtml."".$viewShowDivScript;
 		
 	}
 
@@ -66,7 +76,7 @@ class Vente extends \Library\Controller\Controller{
 														"ajouterProduitBdd", 
 														$successfonc );
 
-		$viewButtonPopupProduit = $this->modelPopup->getHtmlButtonPopup( "ajouterProduitBdd", "Ajouter un produit");
+		//$viewButtonPopupProduit = $this->modelPopup->getHtmlButtonPopup( "ajouterProduitBdd", "Ajouter un produit");
 
 		$viewPopupScript = $this->modelPopup->getScriptPopup( "DivContainerProduit",	
 																	"ajouterProduitBdd", 
@@ -77,7 +87,7 @@ class Vente extends \Library\Controller\Controller{
 															"Produit", 
 															"cet produit");
 
-		$codeAjaxProduit = $this->codeAjax;
+		$codeAjaxProduit = $viewPopupHtml."".$viewPopupScript;
 
 
 		if(isset($_POST["btnProduit"])){
