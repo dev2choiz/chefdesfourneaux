@@ -1,15 +1,16 @@
+<h1>Liste des Produits disponibles</h1>
+
 <?php foreach ($produits as $produit): ?>
 <div class="row">
 	<div class="col-md-8">
-		<?= $produit['value']?> />
+		<?= $produit['value']?>
 	</div>
 	<div class="col-md-4">
-		Prix : <?= $produit['prix']?> /> €
+		Prix : <?= $produit['prix']?> €
 		Référence : <?= $produit['ref']?>
 	</div>
 	
 </div>
-<?=$ajax?>
 <?php endforeach; ?>
 
 <br/><br/><br/><br/>
@@ -18,7 +19,7 @@
 Test Insert : OK
 <br/>
 <form method="post">
-	Nom : <input name="value" type="text" required>
+	Nom du produit : <input name="value" type="text" required>
 	<br/>
 	Prix : <input name="prix" type="text" required>
 	<br/>
