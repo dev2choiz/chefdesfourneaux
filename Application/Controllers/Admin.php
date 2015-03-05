@@ -559,7 +559,7 @@ class Admin extends \Library\Controller\Controller{
 			"unites" =>  $unit
 		));
 
-		$this->setScriptView('scriptGestion.js');
+		
 
 
 	}

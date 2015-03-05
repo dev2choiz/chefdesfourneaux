@@ -20,6 +20,31 @@ $(document).ready(function(){
 	);
 
 
+	$('#btnCatValider')
+		.click(function(){
+			if ( $('#textCatAjouter').is(':visible') ) {
+				ajouterCategorie();
+				alert( "ici on ajoute une categorie"  );
+
+
+
+			}else if($('#textCatAjouter').is(':visible')){
+				alert( "ici on modifie une categorie"  );
+
+			}else if($('#textCatAjouter').is(':visible')){
+				alert( "ici on supprime une categorie"  );
+			}
+		}
+	);
+
+
+
+
+
+
+
+
+
 
 
 	$('#ingredients')
@@ -52,7 +77,7 @@ $(document).ready(function(){
 			$('#textCatModifier').css('display', 'none');
 			$('#textCatSupprimer').css('display', 'none');
 			
-			//ici effacer le contenu des autres trucs et les rendre invisible
+			//ici "effacer" le contenu des autres trucs et les rendre invisibles
 			$('#textCatModifier').css('display', 'none');
 			$('#textCatSupprimer').css('display', 'none');
 			
@@ -85,3 +110,15 @@ $(document).ready(function(){
 
 
 });
+
+
+
+function ajouterCategorie(){
+
+}
+
+
+
+
+
+

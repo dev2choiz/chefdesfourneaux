@@ -170,7 +170,7 @@ abstract class Controller implements iController
 
 
 	public function __construct(){
-
+			
 	}
 
 
@@ -189,6 +189,8 @@ abstract class Controller implements iController
 			$html = str_replace('</head>', "<link href='".WEB_ROOT."/css/$s' rel='stylesheet' type='text/css' /></head>", $html);
 		}
 	}
+
+
 
 
 
@@ -237,6 +239,29 @@ abstract class Controller implements iController
 			$finalRender = ob_get_clean();
 
 
+
+
+			
+			//ajoute le  js de la page s'il existe
+			$page=str_replace("/", "", $_GET['page']);
+			if( file_exists(PUBLIC_ROOT."js/".$page.".js") ){
+				if(!$this->scriptExiste($page.".js")){
+					$this->setScriptView($page.".js");
+				}
+			}
+
+
+			//ajoute le style de la page s'il existe
+			$page=str_replace("/", "", $_GET['page']);
+			if( file_exists(PUBLIC_ROOT."css/".$page.".css") ){
+				if(!$this->scriptExiste($page.".css")){
+					$this->setStyleView($page.".css");
+				}
+			}
+
+
+			
+
 			$this->addFilesRender($finalRender);
 			echo $finalRender;
 		
@@ -262,4 +287,25 @@ abstract class Controller implements iController
 			throw new \Exception("Error View for Module:'$module' and Action:'$action' not found");
 		}
 	}
+
+
+	public function scriptExiste($script){
+		foreach ($this->scriptView as $value) {
+			if($value===$script){
+				 return true;
+			}
+		}
+		return false;
+	}
+
+	public function styleExiste($style){
+		foreach ($this->styleView as $value) {
+			if($value===$style){
+				 return true;
+			}
+		}
+		return false;
+	}
+
+
 }
