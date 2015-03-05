@@ -510,7 +510,7 @@ class Admin extends \Library\Controller\Controller{
 			
 			$listMessage = $this->message->getMessages("error");
 			if(!empty($listMessage)){
-				$this->setDataView(array("message" => $this->message->showMessages()));
+				$this->setDataView(array("message"=> $this->message->showMessages()) );
 
 				return false;
 			}
@@ -554,12 +554,16 @@ class Admin extends \Library\Controller\Controller{
 		$this->setDataView(array(
 			"pageTitle" => "Gestion des categories, des ingrédients et des unités",
 			"message" => $this->message->showMessages(),
-			"categories" =>  $cat,
-			"ingredients" =>  $ings,
-			"unites" =>  $unit
+			"categories"			=>  $cat,
+			"ingredients" 			=>  $ings,
+			"unites" 				=>  $unit,
+			"urlWebService"			=> "
+			<script type='text/javascript'>
+					urlWebService='".WEBSERVICE_ROOT."/index.php';\n
+			</script>"
 		));
 
-		$this->setScriptView('scriptGestion.js');
+		
 
 
 	}
