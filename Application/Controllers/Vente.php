@@ -61,6 +61,7 @@ class Vente extends \Library\Controller\Controller{
 	}
 
 	public function indexProduitAction(){
+		
 		$produits = $this->modelProduits->getAllProduits();
 		//var_dump($produits);
 
@@ -84,7 +85,7 @@ class Vente extends \Library\Controller\Controller{
 
 		$viewPopupHtml = $this->modelPopup->getHtmlPopup( 	"d'un produit", 
 															"Produit", 
-															"cet produit");
+															"ce produit");
 
 		$codeAjaxProduit = $viewPopupHtml."".$viewPopupScript;
 
@@ -99,7 +100,7 @@ class Vente extends \Library\Controller\Controller{
 			'produits' => $produits['response'],
 			'ajax' => $codeAjaxProduit ));
 
-		//$this->setStyleView('popup.css');
+		$this->setStyleView('popup.css');
 
 	}
 

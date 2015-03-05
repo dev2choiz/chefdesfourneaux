@@ -27,19 +27,6 @@ $(document).ready(function(){
 
 
 
-	$('#btnCancel')
-		.click(function(){
-			$('#$divContainerName').css('display', 'none');
-		}
-	);
-
-
-	$('#{$divContainerName}BtnShowDiv').click(function(){
-		{$functionName}();
-		}
-	);
-
-
 
 
 	/*$('#{$divContainerName}BtnShowDiv').submit(function(e){t
