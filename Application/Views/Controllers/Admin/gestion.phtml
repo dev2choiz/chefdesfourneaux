@@ -1,5 +1,7 @@
 <?=$message?>
-
+<link rel="stylesheet" type="text/css" href="css/graph.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/filtreJs.js"></script>
 
 
 
@@ -17,9 +19,20 @@
           <?php } ?>
         </select>
 
-        <div id="divCat" >
-            <input type="text" id="inputCat">
-            <input type="button" id="btnCat">
+        <div id="divChoixCat" >
+            <input type="button" id="btnCatAjouter" value="Ajouter" >
+            <input type="button" id="btnCatModifier" value="Modifier" >
+            <input type="button" id="btnCatSupprimer" value="Supprimer" >
+
+              <div id="divCat" >
+                  <input type="text" id="textCatAjouter" value="" >
+                  <input type="text" id="textCatModifier" value="" >
+                  <input type="text" id="textCatSupprimer" value="" >
+                  
+                  <input type="button" id="btnCatValider" value="OK">
+                  <input type="button" id="btnCatCancel" value="OK">
+              </div>            
+            
         </div>
 
     </div>
