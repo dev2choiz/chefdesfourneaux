@@ -115,6 +115,33 @@ $(document).ready(function(){
 
 function ajouterCategorie(){
 
+	jsonData={};
+	jsonData['service']= 'categorie';
+	jsonData['method']= 'insertcategorie';
+    jsonData['value']=$("#textCatAjouter").val();
+
+    console.log(jsonData);
+
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+            if(data['response']===false){
+            	alert("erreur pendant l'ajout");
+            }else{
+            	
+            	$("#categories").append("<option value='"+data['response']+"'>"+$("#textCatAjouter").val()+"</option>");
+            	alert("ajouté");
+            }
+
+        }
+    });
+
+    
+        
 }
 
 
