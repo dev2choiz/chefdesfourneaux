@@ -26,12 +26,12 @@ $(document).ready(function(){
 				ajouterCategorie();
 				alert( "ici on ajoute une categorie"  );
 
-
-
-			}else if($('#textCatAjouter').is(':visible')){
+			}else if($('#textCatModifier').is(':visible')){
+				modifierCategorie();
 				alert( "ici on modifie une categorie"  );
 
-			}else if($('#textCatAjouter').is(':visible')){
+			}else if($('#textCatSupprimer').is(':visible')){
+				supprimerCategorie();
 				alert( "ici on supprime une categorie"  );
 			}
 		}
@@ -77,23 +77,32 @@ $(document).ready(function(){
 			$('#textCatModifier').css('display', 'none');
 			$('#textCatSupprimer').css('display', 'none');
 			
-			//ici "effacer" le contenu des autres trucs et les rendre invisibles
-			$('#textCatModifier').css('display', 'none');
-			$('#textCatSupprimer').css('display', 'none');
-			
 		}
 	);
 
 	$('#btnCatModifier')
 		.click(function(){
-			$('#divUnit').css('display', 'block');
+
+			$('#divCat').css('display', 'block');
+			alert("djk");
+			$('#textCatAjouter').css('display', 'none');
+			$('#textCatModifier').css('display', 'block');
+			$('#textCatSupprimer').css('display', 'none');
+			
 		}
 	);
 
 	$('#btnCatSupprimer')
 		.click(function(){
-			$('#divUnit').css('display', 'block');
+			$('#divDel').css('display', 'block');
+
+			$('#textCatAjouter').css('display', 'none');
+			$('#textCatModifier').css('display', 'none');
+			$('#textCatSupprimer').css('display', 'block');
+
 		}
+
+
 	);
 
 
@@ -138,13 +147,72 @@ function ajouterCategorie(){
             }
 
         }
-    });
-
-    
-        
+    }); 
 }
 
 
+
+function modifierCategorie(){
+
+	jsonData={};
+	jsonData['service']= 'categorie';
+	jsonData['method']= 'updatecategorie';
+	jsonData['id_cat']= $("#categories option:selected").val();
+    jsonData['value']	= $("#textCatModifier").val();
+
+    console.log(jsonData);
+
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+            if(data['response']===false){
+            	alert("erreur pendant l'ajout");
+            }else{
+            	
+            	$("#categories").append("<option value='"+data['response']+"'>"+$("#textCatAjouter").val()+"</option>");
+            	alert("ajouté");
+            }
+
+        }
+    }); 
+}
+
+
+
+
+
+function supprimerCategorie(){
+
+	jsonData={};
+	jsonData['service']= 'categorie';
+	jsonData['method']= 'deletecategorie';
+	jsonData['id_cat']= $("#categories option:selected").val();
+  
+
+    console.log(jsonData);
+
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+            if(data['response']===false){
+            	alert("erreur pendant le delete");
+            }else{
+            	
+            	$("#selectBox option:selected").remove();
+            	alert("supprimé");
+            }
+
+        }
+    }); 
+}
 
 
 
