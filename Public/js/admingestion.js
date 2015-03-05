@@ -26,13 +26,10 @@ $(document).ready(function(){
 				ajouterCategorie();
 				alert( "ici on ajoute une categorie"  );
 
-
-
-			}else if($('#textCatAjouter').is(':visible')){
+			}else if($('#textCatModifier').is(':visible')){
+				modifierCategorie();
 				alert( "ici on modifie une categorie"  );
 
-			}else if($('#textCatAjouter').is(':visible')){
-				alert( "ici on supprime une categorie"  );
 			}
 		}
 	);
@@ -75,25 +72,38 @@ $(document).ready(function(){
 			
 			$('#textCatAjouter').css('display', 'block');
 			$('#textCatModifier').css('display', 'none');
-			$('#textCatSupprimer').css('display', 'none');
-			
-			//ici "effacer" le contenu des autres trucs et les rendre invisibles
-			$('#textCatModifier').css('display', 'none');
-			$('#textCatSupprimer').css('display', 'none');
+
 			
 		}
 	);
 
 	$('#btnCatModifier')
 		.click(function(){
-			$('#divUnit').css('display', 'block');
+
+			$('#divCat').css('display', 'block');
+			
+			$('#textCatAjouter').css('display', 'none');
+			$('#textCatModifier').css('display', 'block');
+
+			
 		}
 	);
 
 	$('#btnCatSupprimer')
 		.click(function(){
-			$('#divUnit').css('display', 'block');
+			$('#textCatAjouter').css('display', 'none');
+			$('#textCatModifier').css('display', 'none');
+
+			supprimerCategorie();
+
+			//$('#divCat').css('display', 'block');
+
+
+			
+
 		}
+
+
 	);
 
 
@@ -138,13 +148,73 @@ function ajouterCategorie(){
             }
 
         }
-    });
-
-    
-        
+    }); 
 }
 
 
+
+function modifierCategorie(){
+	cat=document.getElementById("categories");
+	jsonData={};
+	jsonData['service']= 'categorie';
+	jsonData['method']= 'updatecategorie';
+	jsonData['id_cat']= cat.options[cat.selectedIndex].value;
+    jsonData['value']	= $("#textCatModifier").val();
+
+    console.log(jsonData);
+
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+            if(data['response']===false){
+            	alert("erreur pendant l'ajout");
+            }else{
+            	
+            	cat.options[cat.selectedIndex].text=$("#textCatModifier").val();
+            	alert("modifié");
+            }
+
+        }
+    }); 
+}
+
+
+
+
+
+function supprimerCategorie(){
+
+	cat=document.getElementById("categories");
+	jsonData={};
+	jsonData['service']= 'categorie';
+	jsonData['method']= 'deletecategorie';
+	jsonData['id_cat']= cat.options[cat.selectedIndex].value;
+  	alert(cat.options[cat.selectedIndex].value);
+
+    console.log(jsonData);
+
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+            if(data['response']===false){
+            	alert("il se peut que cette ingredient soit utilisé dans une recette.\n Il ne peut donc pas etre supprimé.");
+            }else{
+            	
+            	$("#categories option:selected").remove();
+            	alert("supprimé");
+            }
+
+        }
+    }); 
+}
 
 
 
