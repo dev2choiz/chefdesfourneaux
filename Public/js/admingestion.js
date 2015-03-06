@@ -31,11 +31,9 @@ $(document).ready(function(){
 		.click(function(){
 			if ( $('#textCatAjouter').is(':visible') ) {
 				ajouterCategorie();
-				alert( "ici on ajoute une categorie"  );
 
 			}else if($('#textCatModifier').is(':visible')){
 				modifierCategorie();
-				alert( "ici on modifie une categorie"  );
 
 			}
 		}
@@ -99,11 +97,10 @@ $(document).ready(function(){
 		.click(function(){
 			if ( $('#textIngAjouter').is(':visible') ) {
 				ajouterIngredient();
-				alert( "ici on ajoute un ingredient"  );
 
 			}else if($('#textIngModifier').is(':visible')){
 				modifierIngredient();
-				alert( "ici on modifie un ingredient"  );
+				
 
 			}
 		}
