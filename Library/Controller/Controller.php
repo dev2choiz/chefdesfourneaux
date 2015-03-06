@@ -6,7 +6,7 @@ abstract class Controller implements iController
 {
 	
 	private $redirect		= null;
-	private $layout 		= 'blog';		//carousel?
+	private $layout 		= 'carousel';		//carousel?
 	private $responseHeader = 'text/html';
 	private $scriptView		= array();
 	private $styleView		= array();
