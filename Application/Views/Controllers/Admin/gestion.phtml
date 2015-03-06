@@ -38,33 +38,62 @@
 
     </div>
 
-
+    <!-- INgredients -->
     <div>
         <label for="ingredients">Ingrédients : </label>
-        <select name="ingredients[]"  id="ingredients"     style="min-width:150px;" multiple>
+        <select name="ingredients[]" id="ingredients" multiple>
           <?php foreach ($ingredients as $ingredient) {?>
-              <option value="<?=$ingredient['id_ingredient']?>" ><?=$ingredient['value']?></option> 
+              <option value="<?=$ingredient['id_ingredient']?>"><?=$ingredient['value']?></option> 
           <?php } ?>
         </select>
 
-        <div id="divIng" >
-            <input type="text" id="inputIng">
-            <input type="button" id="btnIng">
+        <div id="divChoixIng" >
+            <input type="button" id="btnIngAjouter" value="Ajouter" >
+            <input type="button" id="btnIngModifier" value="Modifier" >
+            <input type="button" id="btnIngSupprimer" value="Supprimer" >
+
+              <div id="divIng" >
+                  <input type="text" id="textIngAjouter" value="" >
+                  <input type="text" id="textIngModifier" value="" >
+                  
+                  
+                  <input type="button" id="btnIngValider" value="OK">
+                  <!--input type="button" id="btnCatCancel" value="Annuler"-->
+              </div>            
+            
         </div>
+
     </div>
 
 
+ 
+
+
+
+
+    <!-- Unité -->
     <div>
         <label for="unites">Unités : </label>
-        <select name="unites[]" id="unites"     style="min-width:150px;" multiple>
+        <select name="unites[]" id="unites" multiple>
           <?php foreach ($unites as $unite) {?>
-              <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option> 
+              <option value="<?=$unite['id_unite']?>"><?=$unite['value']?></option> 
           <?php } ?>
         </select>
 
-        <div  id="divUnit" >
-            <input type="text" id="inputUnit">
-            <input type="button" id="btnUnit">
+        <div id="divChoixUnit" >
+            <input type="button" id="btnUnitAjouter" value="Ajouter" >
+            <input type="button" id="btnUnitModifier" value="Modifier" >
+            <input type="button" id="btnUnitSupprimer" value="Supprimer" >
+
+              <div id="divUnit" >
+                  <input type="text" id="textUnitAjouter" value="" >
+                  <input type="text" id="textUnitModifier" value="" >
+                  
+                  
+                  <input type="button" id="btnUnitValider" value="OK">
+                  <!--input type="button" id="btnCatCancel" value="Annuler"-->
+              </div>            
+            
         </div>
 
     </div>
