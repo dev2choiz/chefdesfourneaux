@@ -70,8 +70,8 @@ class Ajax{
             $strData
 
 
-            console.log('jlghiici');
-            console.log(jsonData);
+            //console.log('jlghiici');
+            //console.log(jsonData);
 
             $.ajax({
                 type: '$type',

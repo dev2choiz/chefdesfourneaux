@@ -77,93 +77,33 @@ abstract class PopUp extends \Library\Ajax\Ajax{
 
 
 
-	public function getHtmlPopup($titre, $value, $type, $input = NULL){
+	public function getHtmlPopup($id, $prix, $ref, $value){
 		return
 		"
 		<div id='popupContainer'>
 
-			<span>Ajout $titre</span-->
-		
-			<div id='inputPopup'>
-				<label name='labelValue' id='labelValue'>$value : </label>
-				<input type='text' name='value' id='value' class='inputTextPopup'>
-				<input type='text' name='prix' id='prix' class='inputTextPopup'>
-				<input type='text' name='ref' id='ref' class='inputTextPopup'>
-				$input
+			<div id=popup>
+				<h4>Modification d'un produit</h4>
 
-				<input  class='btn btn-cancel' id='btnCancel' value='Annuler' >
-				<input id='BtnPopup' class='btn btn-primary' value='Valider l ajout de $type'>
-
-			<!--button name='btnPopup' class='btn btn-primary'>Valider l'ajout de $type</button-->
-			</div>
-		</div>";
-	}
-
-
-
-
-
-}
-
-	
-
-	//return $this->getAjaxPost(  $service, $methode, $data, $functionName);
-	
-
-/*
-	public function getScriptPopUp($idDiv, $scriptAjax){		//$service, $methode, $data, $functionName){
-
-		return "
-		<script type='text/javascript'>
-				$(document).ready(function(){
-					$('#$idDiv')
-						.click(function(){
-							$('#popupContainer').css('display', 'block');
-							$('#popup').css('display', 'block');	
-							
-						});
-
-					$('#popupContainer').click(function(){
-						$('#popupContainer').css('display', 'none');
-						$('#popup').css('display', 'none');
-					});
-				});
-				
-				$scriptAjax
-				
-		</script>
-		";
-		//{$this->getAjaxPost( $service, $methode, $data, $functionName, 'console.log(data);'  )};
-		
-	}
-
-
-
-	public function getHtmlPopUp($titre, $value, $type){
-		return
-		"
-		
-		<div id='popupContainer' style='display:none;'>
-
-			<div id='popup' style='display:none;'>
-				<select id='popupSelect'></select>
-				<div id='row'>
-					<span>Ajout $titre</span>
-				
-					<div id='inputPopUp'>
-						<label name='value'>$value : </label>
-						<input type='text' name='value' id='value' required>
-					</div>
-
-					<button name='btn' class='btn btn-lg btn-primary' type='submit'>Valider l'ajout de $type</button>
+				<input type='hidden' value='$id' id='id_produit' name='id_produit'>
+				<div class='col-md-6'>Prix :</div>
+				<div class='col-md-6'>
+					<input name='prix' type='text' id='prix' value='$prix €'>
 				</div>
+				<div class='col-md-6'>Ref :</div>
+				<div class='col-md-6'>
+					<input name='ref' type='text' id='ref' value='$ref'>
+				</div>
+				<div class='col-md-6'>Nom du produit : </div>
+				<div class='col-md-6'>
+					<input name='value' type='text' id='value' value='$value'>
+				</div>
+
+				<button class='col-md-4 btn btn-default' id='btnCancel' name='btnSupprimerProduit'>Annuler</button>
+				<button class='col-md-4 btn btn-danger' id='btnSupprimerProduit' name='btnSupprimerProduit'>Supprimer</button>
+				<button class='col-md-4 btn btn-success' id='btnMettreAjourProduit' name='btnMiseAjourProduit'>Mettre à jour</button>
+	
 			</div>
 		</div>";
 	}
-
-
-
-
-
 }
-*/

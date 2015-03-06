@@ -63,44 +63,45 @@ class Vente extends \Library\Controller\Controller{
 	public function indexProduitAction(){
 		
 		$produits = $this->modelProduits->getAllProduits();
-		//var_dump($produits);
+		$produits = $produits['response'];
+		// Ajoute le infos sur les produits au html
+		foreach ($produits as $produit) {
+			$viewPopupHtml = $this->modelPopup->getHtmlPopup( 	$produit['id_produit'], 
+																$produit['prix'], 
+																$produit['ref'],
+																$produit['value']);
+		}
+		
 
-		//script ajax permettant d'ajouter un ingredient a la bdd puis de le prendre en compte
-		$successfonc = "
-			
-			
-		";
+		//$codeAjaxProduit = $viewPopupHtml."".$viewPopupScript;
+
+		/*
 		$scriptAjax = $this->modelAjax->getAjaxPost( 	array( "value"=>"popupContainer"),
 													 	"produit", 
 													 	"insertproduit", 
 													 	array(), 
-														"ajouterProduitBdd", 
+														"ajouterProduit", 
 														$successfonc );
 
 		//$viewButtonPopupProduit = $this->modelPopup->getHtmlButtonPopup( "ajouterProduitBdd", "Ajouter un produit");
 
-		$viewPopupScript = $this->modelPopup->getScriptPopup( 	"popupProduit",	
-																$scriptAjax, 
-																"ajouterProduitBdd");
-
-		$viewPopupHtml = $this->modelPopup->getHtmlPopup( 	"d'un produit", 
-															"Produit", 
-															"ce produit");
-
-		$codeAjaxProduit = $viewPopupHtml."".$viewPopupScript;
-
-
 		if(isset($_POST["btnProduit"])){
 			unset($_POST["btnProduit"]);
 			$this->modelProduits->insertProduit($_POST);
-		}
+		}*/
 		
 		$this->setDataView(array(
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
-			'produits' => $produits['response'],
-			'ajax' => $codeAjaxProduit ));
+			'produits' => $produits,
+			'ajax' => $viewPopupHtml,
+			"urlWebService"			=> "
+			<script type='text/javascript'>
+				urlWebService='".WEBSERVICE_ROOT."/index.php';\n
+			</script>"));
 
 		$this->setStyleView('popup.css');
+
+		$this->setScriptView('produit.js');
 
 	}
 
@@ -111,7 +112,11 @@ class Vente extends \Library\Controller\Controller{
 
 		$this->setDataView(array(
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
-			'produits' => $produits['response'] ));
+			'produits' => $produits['response'],
+			"urlWebService"			=> "
+			<script type='text/javascript'>
+				urlWebService='".WEBSERVICE_ROOT."/index.php';\n
+			</script>" ));
 
 	}
 

@@ -28,8 +28,8 @@ function retirerIngredient(){
     if($('#ingredients option').length!==0 ){
 
         //$('#unites option:eq(3)').prop('selected', true);
-        var ing =document.getElementById("ingredients");
-        var unit =document.getElementById("unites");
+        var ing = document.getElementById("ingredients");
+        var unit = document.getElementById("unites");
 
         //supprime fna le select
         unit.options[ing.selectedIndex].remove();

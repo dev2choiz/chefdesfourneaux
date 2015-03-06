@@ -1,4 +1,4 @@
-
+<?=$urlWebService?>
 
 
 <h1>Liste des Produits disponibles</h1>
@@ -6,17 +6,22 @@
 <?php foreach ($produits as $produit): ?>
 <div class="row">
 	<div class="col-md-8">
-		<?= $produit['value']?>
-		
+	
+		Produit : <?= $produit['value']?>
+
 	</div>
 	<div class="col-md-4">
 		Prix : <?= $produit['prix']?> €
 		Référence : <?= $produit['ref']?>
 	</div>
+	
 
-	<div id='popupProduit'>
-	BLALALAAL
-		<?=$ajax?>
+	<div >
+		<button class='btn btn-primary btn-xs col-md-offset-3 popupProduit' >Modifier ce Produit</button>
+		<div class="row">
+			<?=$ajax?>
+		</div>
+		<button class='btn btn-success col-md-3 col-md-offset-3' >Acheter ce Produit</button>
 	</div>
 	
 </div>
@@ -25,17 +30,22 @@
 <br/><br/><br/><br/>
 <div class="row">
 	<div class="col-md-8">
+
+
+
+<!-- 
 Test Insert : OK
 <br/>
-<form method="post">
-	Nom du produit : <input name="value" type="text" required>
-	<br/>
-	Prix : <input name="prix" type="text" required>
-	<br/>
-	Ref : <input name="ref" type="text"  required>
-	<br/>
-	<button class="btn btn-warning" name="btnProduit" type="submit">Valider</button>
-	</div>
-		
-	</div>
-</form>
+
+Nom du produit : <input name="value" type="text" id="value">
+<br/>
+Prix : <input name="prix" type="text" id="prix">
+<br/>
+Ref : <input name="ref" type="text" id="ref">
+<br/>
+<button class="btn btn-warning" name="btnAjouterProduit" type="submit" id="btnAjouterProduit">Valider</button>
+</div>
+
+
+</div>
+ -->
