@@ -5,7 +5,6 @@ namespace Application\Controllers;
 class Produit extends \Library\Controller\Controller{
 
 	private $message;
-	private $tinyMCE;
 	private $modelCat;
 	private $modelViewProduit;
 
@@ -13,7 +12,6 @@ class Produit extends \Library\Controller\Controller{
 		parent::__construct();
 		$this->setLayout("carousel");
 		$this->message 				= new \Library\Message\Message();
-		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelCat 			= new \Application\Models\Categorie('localhost');
 		$this->modelViewProduit 	= new \Application\Models\Produit('localhost');
 	}

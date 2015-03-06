@@ -82,8 +82,8 @@ abstract class PopUp extends \Library\Ajax\Ajax{
 		"
 		<div id='popupContainer'>
 
-			<div id=popup>
-				<h4>Modification d'un produit</h4>
+			<div id='popup'>
+				<h3>Modification d'un produit</h3>
 
 				<input type='hidden' value='$id' id='id_produit' name='id_produit'>
 				<div class='col-md-6'>Prix :</div>
@@ -106,4 +106,5 @@ abstract class PopUp extends \Library\Ajax\Ajax{
 			</div>
 		</div>";
 	}
+
 }

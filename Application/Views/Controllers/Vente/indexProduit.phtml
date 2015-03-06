@@ -1,13 +1,27 @@
 <?=$urlWebService?>
 
 
+
+<div class="row">
+<button class='btn btn-primary col-md-3 col-md-offset-3' >Ajouter un Produit</button>
+	Nom du produit : <input name="value" type="text" id="value">
+	<br/>
+	Prix : <input name="prix" type="text" id="prix">
+	<br/>
+	Ref : <input name="ref" type="text" id="ref">
+	<br/>
+	<button class="btn btn-warning" name="btnAjouterProduit" type="submit" id="btnAjouterProduit">Valider</button>
+</div>
+
+
 <h1>Liste des Produits disponibles</h1>
+
 
 <?php foreach ($produits as $produit): ?>
 <div class="row">
 	<div class="col-md-8">
 	
-		Produit : <?= $produit['value']?>
+		<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">Produit : <?= $produit['value']?></a>
 
 	</div>
 	<div class="col-md-4">

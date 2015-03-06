@@ -99,7 +99,6 @@ function supprimerProduit(){
         url: urlWebService,
         dataType: 'json',
         success: function(data) {
-            console.log(data);
 
         }
     });

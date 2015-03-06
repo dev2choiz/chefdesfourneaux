@@ -33,6 +33,25 @@ class Produit extends \Library\Model\Model{
 		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
 	}
 
+	public function getProduit($idRecette){
+
+		$params = array('service' => 'produit',
+						'method' => 'getproduit',
+						'id_produit' => $idRecette );
+
+		$opts = array('http' =>
+		    array(
+		        'method'  => 'POST',
+		        'header'  => 'Content-type: application/x-www-form-urlencoded',
+		        'content' => http_build_query($params)
+		        )
+		);
+
+		$context  = stream_context_create($opts);
+		
+		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
+	}
+
 	/**
 	 * @param  [String] $produit     [description]
 	 * @param  [int] $idUser      [description]

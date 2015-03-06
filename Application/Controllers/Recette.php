@@ -5,7 +5,6 @@ namespace Application\Controllers;
 class Recette extends \Library\Controller\Controller{
 
 	private $message;
-	private $tinyMCE;
 	private $modelCat;
 	private $modelViewRecette;
 
@@ -13,7 +12,6 @@ class Recette extends \Library\Controller\Controller{
 		parent::__construct();
 		$this->setLayout("carousel");
 		$this->message 				= new \Library\Message\Message();
-		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelCat 			= new \Application\Models\Categorie('localhost');
 		$this->modelViewRecette 	= new \Application\Models\ViewRecette('localhost');
 	}

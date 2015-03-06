@@ -28,42 +28,13 @@ class Vente extends \Library\Controller\Controller{
 	}
 
 
-	public function indexLivreAction(){
-		
-
-
-		$modelAjax 	= new \Application\Models\Ajax('localhost');
-		
-		$ajax= $modelAjax->getAjaxPost("viewrecette", "getallviewrecettes", array(), "console.log(data);"  );
-
-		$this->setDataView(array(
-			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
-			"ajax" => $ajax
-			));
-
-
-	}
-
-	public function indexRestaurantAction(){
-		
-
-
-		$modelAjax 	= new \Application\Models\Ajax('localhost');
-		
-		$ajax= $modelAjax->getAjaxPost("viewrecette", "getallviewrecettes", array(), "console.log(data);"  );
-
-		$this->setDataView(array(
-			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
-			"ajax" => $ajax
-			));
-
-
-	}
+	
 
 	public function indexProduitAction(){
 		
 		$produits = $this->modelProduits->getAllProduits();
 		$produits = $produits['response'];
+
 		// Ajoute le infos sur les produits au html
 		foreach ($produits as $produit) {
 			$viewPopupHtml = $this->modelPopup->getHtmlPopup( 	$produit['id_produit'], 
@@ -72,23 +43,6 @@ class Vente extends \Library\Controller\Controller{
 																$produit['value']);
 		}
 		
-
-		//$codeAjaxProduit = $viewPopupHtml."".$viewPopupScript;
-
-		/*
-		$scriptAjax = $this->modelAjax->getAjaxPost( 	array( "value"=>"popupContainer"),
-													 	"produit", 
-													 	"insertproduit", 
-													 	array(), 
-														"ajouterProduit", 
-														$successfonc );
-
-		//$viewButtonPopupProduit = $this->modelPopup->getHtmlButtonPopup( "ajouterProduitBdd", "Ajouter un produit");
-
-		if(isset($_POST["btnProduit"])){
-			unset($_POST["btnProduit"]);
-			$this->modelProduits->insertProduit($_POST);
-		}*/
 		
 		$this->setDataView(array(
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
@@ -105,14 +59,14 @@ class Vente extends \Library\Controller\Controller{
 
 	}
 
-	public function produitAction(){
-		$produits = $this->modelProduits->getAllProduits();
-		//var_dump($produits);
+	public function produitAction($idProduit){
+		$produit = $this->modelProduits->getProduit($idProduit);
+		//var_dump($produit);
 
 
 		$this->setDataView(array(
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
-			'produits' => $produits['response'],
+			'produit' => $produit['response'][0],
 			"urlWebService"			=> "
 			<script type='text/javascript'>
 				urlWebService='".WEBSERVICE_ROOT."/index.php';\n
@@ -121,8 +75,41 @@ class Vente extends \Library\Controller\Controller{
 	}
 
 
+
+
+
+
+
+	public function indexLivreAction(){
+		
+
+
+		$modelAjax 	= new \Application\Models\Ajax('localhost');
+		
+
+		$this->setDataView(array(
+			"pageTitle" => "Livres de Cuisine",
+			"ajax" => $ajax
+			));
+	}
+
 	public function livreAction(){
 		
+	}
+
+	public function indexRestaurantAction(){
+		
+
+
+		$modelAjax 	= new \Application\Models\Ajax('localhost');
+		
+
+		$this->setDataView(array(
+			"pageTitle" => "Nos restaurants partenaires",
+			"ajax" => $ajax
+			));
+
+
 	}
 
 	public function restaurantAction(){
