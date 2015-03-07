@@ -182,7 +182,7 @@ class Admin extends \Library\Controller\Controller{
 
 
 
-
+		$this->setScriptView("creerunerecette.js");
 
 
 

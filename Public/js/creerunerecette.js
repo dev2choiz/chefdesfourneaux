@@ -160,3 +160,5 @@ function afficher(){
     document.getElementById("quantite").style.visibility='visible';
     document.getElementById("okquantite").style.visibility='visible';
 }
+
+masquer();
