@@ -70,7 +70,7 @@ function ajouterProduit(){
             
             //console.log(script);
 
-			$("#WrapperProduits").html("##########"+$("#WrapperProduits").html()+script);
+			$("#WrapperProduits").html($("#WrapperProduits").html()+script);
 			//$("#WrapperProduits").html("##########"+script);
 			//document.getElementById("WrapperProduits").innerHTML="##########"+script;
         }

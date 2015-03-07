@@ -1,7 +1,7 @@
 
 // Création d'une recette
-tabUnit     = new Array();
-tabQuant    = new Array();
+//tabUnit     = new Array();
+//tabQuant    = new Array();
 verifChamp  = 0;        //ne sert plus a rien
 
 
@@ -82,8 +82,10 @@ function definirQuantite(){
 
 }
 
-function preparatif(){
 
+ 
+$( "form" ).submit(function( event ) {
+    event.preventDefault();
     alors=false;
     for( i=0; i<tabUnit.length; i++ ){
         if(tabUnit[i]==="rien"){
@@ -128,10 +130,11 @@ function preparatif(){
 
         formulaire.submit();
 
-    }
+    }    
+});
 
-
-}
+/*function preparatif(){
+}*/
 
 
 
