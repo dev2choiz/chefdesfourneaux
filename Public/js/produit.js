@@ -41,7 +41,7 @@ $(document).ready(function(){
 
 	$('#btnAjouterProduit').click(function(){
 		ajouterProduit();
-	}); 
+	});
 
 });
 
@@ -50,21 +50,30 @@ function ajouterProduit(){
 	{
 		'service' 	: 'produit',
 		'method' 	: 'insertproduit',
-		'value' 	: $('#popupContainer'+idProd+' #value').val(),
-		'prix' 		: parseInt( $('#popupContainer'+idProd+' #prix').val() ),
-		'ref' 		: $('#popupContainer'+idProd+' #ref').val()
+		'value' 	: $('#WrapperAddProduit #value').val(),
+		'prix' 		: parseInt( $('#WrapperAddProduit #prix').val() ),
+		'ref' 		: $('#WrapperAddProduit #ref').val()
 	}
 
-	
+	script="";
 
     $.ajax({
         type: 'POST',
         data: jsonData,
         url: urlWebService,
         dataType: 'json',
+        async :true,
         success: function(data) {
-            console.log(data);
-            alert("ajout rep :"+data->response);
+
+            //console.log(data);
+            alert("ajout id :"+data['response']);
+            script = recupererScriptNewProduit(parseInt((data['response'])) );
+            
+            //console.log(script);
+            alert("retour du script\n\n"+script);
+			//$("#WrapperProduits").html("##########"+$("#WrapperProduits").html()+script);
+			//$("#WrapperProduits").html("##########"+script);
+			document.getElementById("WrapperProduits").innerHTML="##########"+script;
         }
     });
 }
@@ -126,4 +135,31 @@ function supprimerProduit(idProd){
 
         }
     });
+}
+
+
+
+function recupererScriptNewProduit(idProd){
+	jsonData = 
+	{
+		'service' 		: 'produit',
+		'method' 		: 'recupererScriptNewProduit',
+		'id_produit' 	: idProd
+	}
+	
+
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        async:true,
+        success: function(data) {
+        	//console.log("dans recuprscr..");
+        	alert(data['response']);
+        	return data['response'];
+
+        }
+    });
+
 }
