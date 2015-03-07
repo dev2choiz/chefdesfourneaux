@@ -1,6 +1,6 @@
 /* Gestion du css d'une Popup */
 
-#popupContainer{ /* Fond gris */
+.popupContainer{ /* Fond gris */
 	width: 100%;
 	height: 100%;
 	top: 0;
@@ -13,7 +13,7 @@
 	display: none;
 }
 
-#popup{
+.popup{
 	background-color: rgba(251,229,213,1);
 	display: none;
 	margin: auto;
@@ -29,18 +29,18 @@
 }
 
 
-#popup input{
+.popup input{
 	width: 100%;
 	padding: 5px;
 	margin: 1%;
 }
 
-#popup h3{
+.popup h3{
 	text-align: center;
 
 }
 
-#popup button{
+.popup button{
 	margin-top: 4%;
 }
 
