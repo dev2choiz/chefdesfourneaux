@@ -65,15 +65,19 @@ function ajouterProduit(){
         async :true,
         success: function(data) {
 
-            //console.log(data);
-            script = recupererScriptNewProduit(parseInt((data['response'])) );
-            
-            //console.log(script);
+            //console.log("############################################",data); //
+            ids=parseInt((data['response']));
+            script = recupererScriptNewProduit(ids) ;
 
-			$("#WrapperProduits").html($("#WrapperProduits").html()+script);
+
+            console.log(script);
+            //laisse moi t'aider un peu
+
+			$("#WrapperProduits").html($("#WrapperProduits").html()+"####"+script);
 			//$("#WrapperProduits").html("##########"+script);
 			//document.getElementById("WrapperProduits").innerHTML="##########"+script;
         }
+
     });
 }
 
@@ -148,16 +152,34 @@ function recupererScriptNewProduit(idProd){
 	}
 	
 	
-    $.ajax({
+   	$.ajax({
         type: 'POST',
         data: jsonData,
         url: urlWebService,
         dataType: 'json',
-        async:true,
+        async:false,
         success: function(data) {
+        	console.log(data['response']);
         	alors= data['response'];
+        		//alert("dans recup"+alors);
+        	// avec ca, on devrait reperer le probleme
+        	// Je pense qu'on peut aussi essayer de garder le return devant ajax et aller ch
+        	// chercher la reponse
+        	// oui
+        	// La doc avec l'air de dire que le return après $.ajax ne marchait pas 
+        	// MAis oui regardons ça quand même
+        	// la doc dit que on ne pt pas faire ca??
+        	// attends, je te montre
+        	//  : Ils dissent qu'on ne peut pas return d'une 
+        	// méthode qui est async
+        	// je me disait la meme chose
+        	// c'est quoi la dif? sync et async
+        	// Je pense que ça permet de ne pas faire les deux truc en même 
+        	// temps mais que ça bloque le avigateur tant qu'il n'a pas réussi
+        	// on essaie?yes
 
         }
     });
     return alors;
+
 }
