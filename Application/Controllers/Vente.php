@@ -38,7 +38,7 @@ class Vente extends \Library\Controller\Controller{
 		$produits = $this->modelProduits->getAllProduits();
 		$produits = $produits['response'];
 		
-		var_dump("dans le controller",$produits);
+		
 
 		// Ajoute les infos du produits au html
 		foreach ($produits as $key => $produit) {

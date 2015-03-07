@@ -66,14 +66,13 @@ function ajouterProduit(){
         success: function(data) {
 
             //console.log(data);
-            alert("ajout id :"+data['response']);
             script = recupererScriptNewProduit(parseInt((data['response'])) );
             
             //console.log(script);
-            alert("retour du script\n\n"+script);
-			//$("#WrapperProduits").html("##########"+$("#WrapperProduits").html()+script);
+
+			$("#WrapperProduits").html("##########"+$("#WrapperProduits").html()+script);
 			//$("#WrapperProduits").html("##########"+script);
-			document.getElementById("WrapperProduits").innerHTML="##########"+script;
+			//document.getElementById("WrapperProduits").innerHTML="##########"+script;
         }
     });
 }
@@ -138,8 +137,9 @@ function supprimerProduit(idProd){
 }
 
 
-
+alors="";
 function recupererScriptNewProduit(idProd){
+
 	jsonData = 
 	{
 		'service' 		: 'produit',
@@ -147,7 +147,7 @@ function recupererScriptNewProduit(idProd){
 		'id_produit' 	: idProd
 	}
 	
-
+	
     $.ajax({
         type: 'POST',
         data: jsonData,
@@ -155,11 +155,9 @@ function recupererScriptNewProduit(idProd){
         dataType: 'json',
         async:true,
         success: function(data) {
-        	//console.log("dans recuprscr..");
-        	alert(data['response']);
-        	return data['response'];
+        	alors= data['response'];
 
         }
     });
-
+    return alors;
 }
