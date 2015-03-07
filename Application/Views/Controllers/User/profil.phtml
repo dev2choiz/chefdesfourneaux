@@ -1,0 +1,21 @@
+<?=$message?>
+
+<form class="form-signin" method="post">
+    <h2 class="form-signin-heading">
+    	<?=$pageTitle?>
+    </h2>
+    <input value="<?=(isset($_SESSION['user']['nom']))?$_SESSION['user']['nom']:''?>" name="nom" type="text" class="form-control" placeholder="Nom" required autofocus>
+    <input value="<?=(isset($_SESSION['user']['prenom']))?$_SESSION['user']['prenom']:''?>" name="prenom" type="text" class="form-control" placeholder="Prénom" required>
+    <input value="<?=(isset($_SESSION['user']['pseudo']))?$_SESSION['user']['pseudo']:''?>" name="pseudo" type="text" class="form-control" placeholder="Pseudo" required>
+    <input value="<?=(isset($_SESSION['user']['mail']))?$_SESSION['user']['mail']:''?>" name="mail" type="email" class="form-control" placeholder="Adresse Mail" required>
+
+    <fieldset>
+        <legend>Update Password</legend>
+        <input name="password" type="password" class="form-control form-password" placeholder="Password">
+        <input name="confpassword" type="password" class="form-control" placeholder="Confirm Password">
+    </fieldset>
+
+    <input name="currentpassword" type="password" class="form-control" placeholder="Current Password" required>
+    <button name="btn" class="btn btn-lg btn-primary btn-block" type="submit"><?=$pageTitle?></button>
+</form>
+<a href="<?=LINK_ROOT?>user/delete">Supprimer mon compte</a>
