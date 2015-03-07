@@ -414,6 +414,10 @@ class Admin extends \Library\Controller\Controller{
 			"ingRecherche" => $ingRecherche			//<==????????????????
 		));
 
+
+		$this->setScriptView("creerunerecette.js");
+
+
 	}
 
 	public function supprimerRecetteAction($idRecette){
