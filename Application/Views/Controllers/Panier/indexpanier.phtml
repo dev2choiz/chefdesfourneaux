@@ -1,0 +1,66 @@
+<?=$urlWebService?>
+
+
+
+
+<h1>Liste des Produits dans votre panier</h1>
+
+<div id="WrapperProduits">
+<?php foreach ($paniers as $panier): ?>
+
+	<div>
+		<div class="row" >
+			<div class="col-md-8">
+
+				<!-- 'id_panier' => int 1
+	          'id_recette' => int 12
+	          'id_user' => int 13
+	          'id_produit' => int 13
+	          'titre_recette' => string 'Tarte aux citrons' (length=17)
+	          'prenom_user' => string 'prenom1' (length=7)
+	          'mail_user' => string 'mail1@hotmail.com' (length=17)
+	          'value_produit' => string 'ssss' (length=4)
+	          'prix_produit' => int 45
+	          'ref_produit' => string 'DERTD' (length=5)
+	          'nom_user' => string 'nom1' (length=4) -->
+			
+				<a href="<?=LINK_ROOT.'vente/produit/'.$panier['id_produit']?>">Produit : <span id="labelValueProduit"><?= $panier['value_produit']?></span></a>
+
+			</div>
+			<div class="col-md-4">
+				Prix : <span id="labelPrixProduit"><?= $panier['prix_produit']?></span> €
+				Référence : <span id="labelRefProduit"><?= $panier['ref_produit']?></span>
+			</div>
+			
+
+			<div >
+				<button class='btn btn-success col-md-3 col-md-offset-3 btnAcheterProduit' id="btnAcheterProduit" >Finaliser la commande</button>
+			</div>
+			
+		</div>
+	</div>
+<?php endforeach; ?>
+</div>	<!-- fin de wrapperProduits-->
+
+<br/><br/><br/><br/>
+<div class="row">
+	<div class="col-md-8">
+
+
+
+<!-- 
+Test Insert : OK
+<br/>
+
+Nom du panier : <input name="value" type="text" id="value">
+<br/>
+Prix : <input name="prix" type="text" id="prix">
+<br/>
+Ref : <input name="ref" type="text" id="ref">
+<br/>
+<button class="btn btn-warning" name="btnAjouterProduit" type="submit" id="btnAjouterProduit">Valider</button>
+</div>
+
+
+</div>
+ -->

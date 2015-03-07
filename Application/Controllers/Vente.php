@@ -57,9 +57,10 @@ class Vente extends \Library\Controller\Controller{
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
 			'produits' => $produits,
 			/*'ajax' => $viewPopupHtml,*/
-			"urlWebService"			=> "
+			"parametresJs"			=> "
 			<script type='text/javascript'>
-				urlWebService='".WEBSERVICE_ROOT."/index.php';\n
+				urlWebService='".WEBSERVICE_ROOT."/index.php';
+				id_user ='".$_SESSION['user']['id_user']."';
 			</script>"));
 
 		$this->setStyleView('popup.css');
@@ -79,7 +80,7 @@ class Vente extends \Library\Controller\Controller{
 			"urlWebService"			=> "
 			<script type='text/javascript'>
 				urlWebService='".WEBSERVICE_ROOT."/index.php';\n
-			</script>" ));
+			</script>"));
 
 	}
 
