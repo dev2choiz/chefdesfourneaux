@@ -1,14 +1,14 @@
 /*
 * Fichier javascript permettant de gérer la page vente/indexproduit
 */
-
+/*
 $(document).ready(function(){
 
 	// La popup apparaît quand on clique sur le bouton Modifier le produit
 	$('.popupProduit')
 		.click(function(){
 			$('#popupContainer').css('display', 'block');
-			$('#popup').css('display', 'block');	
+			//$('#popup').css('display', 'block');	
 
 		});
 
@@ -16,7 +16,7 @@ $(document).ready(function(){
 	$('#btnCancel')
 		.click(function(){
 			$('#popupContainer').css('display', 'none');
-			$('#popup').css('display', 'none');
+			//$('#popup').css('display', 'none');
 		})
 
 
@@ -33,42 +33,66 @@ $(document).ready(function(){
 		supprimerProduit();
 	});
 });
+*/
+
+
+
+$(document).ready(function(){
+
+	$('#btnAjouterProduit').click(function(){
+		ajouterProduit();
+	});
+
+});
 
 function ajouterProduit(){
-
 	jsonData = 
 	{
 		'service' 	: 'produit',
 		'method' 	: 'insertproduit',
-		'value' 	: $('#value').val(),
-		'prix' 		: $('#prix').val(),
-		'ref' 		: $('#ref').val()
+		'value' 	: $('#WrapperAddProduit #value').val(),
+		'prix' 		: parseInt( $('#WrapperAddProduit #prix').val() ),
+		'ref' 		: $('#WrapperAddProduit #ref').val()
 	}
 
-	console.log($('#ref').val());
+	script="";
 
     $.ajax({
         type: 'POST',
         data: jsonData,
         url: urlWebService,
         dataType: 'json',
+        async :true,
         success: function(data) {
-            console.log(data);
 
+            //console.log(data);
+            alert("ajout id :"+data['response']);
+            script = recupererScriptNewProduit(parseInt((data['response'])) );
+            
+            //console.log(script);
+            alert("retour du script\n\n"+script);
+			//$("#WrapperProduits").html("##########"+$("#WrapperProduits").html()+script);
+			//$("#WrapperProduits").html("##########"+script);
+			document.getElementById("WrapperProduits").innerHTML="##########"+script;
         }
     });
 }
 
-function mettreAjourProduit(){
+
+
+
+
+function mettreAjourProduit(idProd){
+
 
 	jsonData = 
 	{
 		'service' 		: 'produit',
 		'method' 		: 'updateproduit',
-		'id_produit' 	: $('#id_produit').val(),
-		'value' 		: $('#value').val(),
-		'prix' 			: $('#prix').val(),
-		'ref' 			: $('#ref').val()
+		'id_produit' 	: $('#popupContainer'+idProd+' #id_produit').val(),
+		'value' 		: $('#popupContainer'+idProd+' #value').val(),
+		'prix' 			: parseInt( $('#popupContainer'+idProd+' #prix').val() ),
+		'ref' 			: $('#popupContainer'+idProd+' #ref').val()
 	}
 
     $.ajax({
@@ -78,18 +102,24 @@ function mettreAjourProduit(){
         dataType: 'json',
         success: function(data) {
             console.log(data);
+			$('#popupContainer'+idProd).css('display', 'none');
+			
+			$('#WrapperProduit'+idProd+" #labelValueProduit" ).html( $('#popupContainer'+idProd+' #value').val() );
+			$('#WrapperProduit'+idProd+" #labelPrixProduit" ).html( parseInt( $('#popupContainer'+idProd+' #prix').val() ) );
+			$('#WrapperProduit'+idProd+" #labelRefProduit" ).html( $('#popupContainer'+idProd+' #ref').val() );
+
 
         }
     });
 }
 
-function supprimerProduit(){
+function supprimerProduit(idProd){
 
 	jsonData = 
 	{
 		'service' 		: 'produit',
 		'method' 		: 'deleteproduit',
-		'id_produit' 	: $('#id_produit').val()
+		'id_produit' 	: $('#popupContainer'+idProd+' #id_produit').val()
 	}
 	console.log(jsonData);
 
@@ -100,6 +130,36 @@ function supprimerProduit(){
         dataType: 'json',
         success: function(data) {
 
+        	$('#WrapperProduit'+idProd).remove();	//supprime le produit dans la liste
+        	$('#popupContainer'+idProd).remove();	//supprime le popup du produit
+
         }
     });
+}
+
+
+
+function recupererScriptNewProduit(idProd){
+	jsonData = 
+	{
+		'service' 		: 'produit',
+		'method' 		: 'recupererScriptNewProduit',
+		'id_produit' 	: idProd
+	}
+	
+
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        async:true,
+        success: function(data) {
+        	//console.log("dans recuprscr..");
+        	alert(data['response']);
+        	return data['response'];
+
+        }
+    });
+
 }

@@ -213,12 +213,12 @@ abstract class Controller implements iController
 			die();
 		}
 
-		
+
 		$pathView = APP_ROOT."Views/Controllers/".str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";
-		//$pathView = APP_ROOT.str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";		//view dans Application/controllers
+		//$pathView = APP_ROOT."Controllers/Views/Controllers/".str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";		//view dans Application/controllers/views/Controllers
+		
 
-
-		//echo $pathView;
+		echo $pathView;
 
 		if( file_exists($pathView) ){
 			
@@ -236,6 +236,8 @@ abstract class Controller implements iController
 
 			ob_start();
 				include_once(APP_ROOT."Views/Layouts/".$this->getLayout().".phtml");
+				//include_once(APP_ROOT."Controllers/Views/Layouts/".$this->getLayout().".phtml");
+
 			$finalRender = ob_get_clean();
 
 
@@ -244,6 +246,7 @@ abstract class Controller implements iController
 			
 			//ajoute le  js de la page s'il existe
 			$page=str_replace("/", "", $_GET['page']);
+			//$page=$controller.$action;
 			if( file_exists(PUBLIC_ROOT."js/".$page.".js") ){
 				if(!$this->scriptExiste($page.".js")){
 					$this->setScriptView($page.".js");

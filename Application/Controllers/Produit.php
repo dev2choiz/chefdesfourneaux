@@ -136,8 +136,6 @@ public function afficherAction( $idProduit ){
 			"viewProduit" => $viewProduit,
 			"viewCommentaires" => $viewComms
 			));
-
-
 	}
 
 

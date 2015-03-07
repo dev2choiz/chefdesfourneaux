@@ -8,7 +8,7 @@ class Vente extends \Library\Controller\Controller{
 	private $tinyMCE;
 	private $modelProduits;
 	private $modelViewProduit; 
-	private $modelPopup;	//<==effacer
+	private $modelPopUpProduit;
 	private $modelShowDiv;
 	private $modelAjax;
 
@@ -20,7 +20,7 @@ class Vente extends \Library\Controller\Controller{
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelProduits 		= new \Application\Models\Produit('localhost');
 		$this->modelViewProduit 	= new \Application\Models\ViewProduit('localhost');
-		$this->modelPopup 			= new \Application\Models\PopUp();
+		$this->modelPopUpProduit	= new \Application\Models\PopUpProduit();
 		$this->modelShowDiv 		= new \Application\Models\ShowDiv();
 		$this->modelAjax 			= new \Application\Models\Ajax();
 		
@@ -31,13 +31,22 @@ class Vente extends \Library\Controller\Controller{
 	
 
 	public function indexProduitAction(){
+		echo "<br><br><br><br><br>";
+		echo "";
 		
+
 		$produits = $this->modelProduits->getAllProduits();
 		$produits = $produits['response'];
+		
+		var_dump("dans le controller",$produits);
 
-		// Ajoute le infos sur les produits au html
-		foreach ($produits as $produit) {
-			$viewPopupHtml = $this->modelPopup->getHtmlPopup( 	$produit['id_produit'], 
+		// Ajoute les infos du produits au html
+		foreach ($produits as $key => $produit) {
+			/*$viewPopupHtml = $this->modelPopUpProduit->getPopup( 	$produit['id_produit'], 
+																$produit['prix'], 
+																$produit['ref'],
+																$produit['value']);*/
+			$produits[$key]['popup']=$this->modelPopUpProduit->getPopup( 	$produit['id_produit'], 
 																$produit['prix'], 
 																$produit['ref'],
 																$produit['value']);
@@ -47,7 +56,7 @@ class Vente extends \Library\Controller\Controller{
 		$this->setDataView(array(
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
 			'produits' => $produits,
-			'ajax' => $viewPopupHtml,
+			/*'ajax' => $viewPopupHtml,*/
 			"urlWebService"			=> "
 			<script type='text/javascript'>
 				urlWebService='".WEBSERVICE_ROOT."/index.php';\n
