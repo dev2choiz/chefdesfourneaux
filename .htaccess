@@ -1,9 +1,0 @@
-##   
-## http://localhost/recette/controller/action[/param1/param2/param3/.....]
-## http://localhost/recette/Public/css/style.css
-
-RewriteEngine On
-RewriteBase /fourneaux/Public
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ index.php?page=$1 [L] 
