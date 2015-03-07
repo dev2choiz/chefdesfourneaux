@@ -177,6 +177,8 @@ class Admin extends \Library\Controller\Controller{
 
 		$this->setDataView(array("unites" =>  $unit));
 
+		$this->setScriptView('creerunerecette.js');
+
 
 
 
