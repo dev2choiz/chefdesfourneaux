@@ -109,7 +109,7 @@ class Recette extends \Library\Controller\Controller{
 			"tinyMCECommentaire" => $this->tinyMCE->getEditeurCommentaire(),
 			"message" => $this->message->showMessages(),
 			"viewRecette" => $viewRecette,
-			"viewCommentaires" => $viewComms
+			"viewCommentaires" => $viewComms,
 			"recettes" => $viewAllRecette
 			));
 
