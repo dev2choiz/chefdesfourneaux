@@ -4,7 +4,7 @@ namespace Application\Models;
 
 
 
-class ViewRecette extends \Library\Model\Model{
+class ViewProduit extends \Library\Model\Model{
 
 
 	public function __construct($connexionName){
@@ -13,11 +13,11 @@ class ViewRecette extends \Library\Model\Model{
 
 
 	/**
-	 * [getViewRecette pour obtenir la view d'une recette]
-	 * @param  [int] $id [id de la recette]
+	 * [getViewProduit pour obtenir la view d'une produit]
+	 * @param  [int] $id [id de la produit]
 	 * @return [array] 
 	 */
-	public function getViewRecette($id){
+	public function getViewProduit($id){
 
 		$opts = array('http' =>
 		    array(
@@ -25,9 +25,9 @@ class ViewRecette extends \Library\Model\Model{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'viewrecette',				
-							        'method' => 'getviewrecette',
-							        'id_recette' => $id
+							        'service' => 'viewproduit',				
+							        'method' => 'getviewproduit',
+							        'id_produit' => $id
 							    )
 		    				)
 		        )
@@ -39,24 +39,24 @@ class ViewRecette extends \Library\Model\Model{
 
 	/**
 	 * Obtenir des views precises
-	 * @param  [array] $tabId [tableau d'ids de recettes]
-	 * @return [array]	Retourne un tableau (dont les key sont les id des recettes)
+	 * @param  [array] $tabId [tableau d'ids de produits]
+	 * @return [array]	Retourne un tableau (dont les key sont les id des produits)
 	 *                  contenant les views qui sont elles meme des tableaux
 	 */
-	public function getViewRecettes($tabId){
+	public function getViewProduits($tabId){
 		$tabVR=array();
 
 		foreach ($tabId as $id) {
-			$re7=$this->getViewRecette($id);
-			if($re7['error']){
-				$re7=false;
+			$prod8=$this->getViewProduit($id);
+			if($prod8['error']){
+				$prod8=false;
 			}else{
-				echo ($re7['page'])."<br>";
-				$re7=$re7['response'];
+				echo ($prod8['page'])."<br>";
+				$prod8=$prod8['response'];
 			}
-			//var_dump($re7);
+			//var_dump($prod8);
 
-			$tabVR[$id+'']=$re7;
+			$tabVR[$id+'']=$prod8;
 
 		}
 
@@ -70,7 +70,7 @@ class ViewRecette extends \Library\Model\Model{
 	 * Obtenir toutes les views
 	 * @return [array]	Retourne un tableau contenant toutes les views
 	 */
-	public function getAllViewRecettes(){
+	public function getAllViewProduits(){
 
 		$opts = array('http' =>
 		    array(
@@ -78,8 +78,8 @@ class ViewRecette extends \Library\Model\Model{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'viewrecette',				
-							        'method' => 'getallviewrecettes',
+							        'service' => 'viewproduit',				
+							        'method' => 'getallviewproduits',
 							    )
 		    				)
 		        )

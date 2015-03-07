@@ -17,7 +17,7 @@ class User extends \Library\Model\Model{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'user',				//on peut aussi mettre un tableau(tous ce qu'on vt) pour la valeur de service
+							        'service' => 'user',				
 							        'method' => 'authentification',
 							        'params'=> json_encode($params)
 							    )

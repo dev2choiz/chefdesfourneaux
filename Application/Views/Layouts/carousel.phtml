@@ -15,6 +15,9 @@
         <!-- Styles -->
         <link href="<?=WEB_ROOT?>/css/bootstrap.min.css" rel="stylesheet">
         <link href="<?=WEB_ROOT?>/css/layouts/carousel.css" rel="stylesheet">
+        <link href="<?=WEB_ROOT?>/css/chefdesfourneaux.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
     </head>
 
     <!-- NAVBAR
@@ -26,13 +29,13 @@
                 <nav class="navbar navbar-inverse navbar-static-top">
                     <div class="container">
                         <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="<?=LINK_ROOT?>">Les fourneaux...</a>
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="<?=LINK_ROOT?>">Chef des fourneaux...</a>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
@@ -42,7 +45,7 @@
                                 <li><a href="<?=LINK_ROOT.'recette/indexsante'?>">Forme et santé</a></li>
                                 <li><a href="<?=LINK_ROOT.'vente/indexlivre'?>">Livres de cuisine</a></li>
                                 <li><a href="<?=LINK_ROOT.'vente/indexrestaurant'?>">Restaurants de nos chefs</a></li>
-                                
+                                <li><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Produits en ventes</a></li>
                                 <li class="dropdown">
                                     <?php if(empty($_SESSION['user'])):?>
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">S'inscrire / Se connecter <span class="caret"></span></a>
@@ -59,6 +62,7 @@
                                         <?php else :?>
                                         <li><a href="<?=LINK_ROOT.'user/profil'?>">
                                                 <span class="glyphicon glyphicon-user"></span>
+                                                <span class="glyphicon glyphicon-shopping-cart"></span>
                                             </a>
                                         </li>
                                         <li><a class="blog-nav-item" href="<?=LINK_ROOT.'user/logout'?>">Deconnexion</a></li>
@@ -69,8 +73,9 @@
                                         
                                         <li><a href="<?=LINK_ROOT.'admin/index'?>">Index</a></li>
                                         <li><a href="<?=LINK_ROOT.'admin/recette'?>">Recette</a></li>
-                                        <li><a href="<?=LINK_ROOT.'admin/livre'?>">Livres de cuisine</a></li>
                                         <li><a href="<?=LINK_ROOT.'admin/restaurant'?>">Restaurant</a></li>
+                                        <li><a href="<?=LINK_ROOT.'admin/livre'?>">Livres de cuisine</a></li>
+                                        <li><a href="<?=LINK_ROOT.'admin/produit'?>">Produits</a></li>
                                         <?php endif; ?>
                                         
                                     </ul> 
@@ -154,10 +159,12 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="<?=WEB_ROOT?>/js/bootstrap.min.js"></script>
-        <script src="<?=WEB_ROOT?>/js/docs.min.js"></script>
-        <script src="<?=WEB_ROOT?>/js/script.js"></script>
+        <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script-->
+        <script src="<?=WEB_ROOT?>js/bootstrap/bootstrap.min.js"></script>
+        <script src="<?=WEB_ROOT?>js/bootstrap/docs.min.js"></script>
+        <script src="<?=WEB_ROOT?>js/chefdesfourneaux.js"></script>
+
+
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="<?=WEB_ROOT?>/js/ie10-viewport-bug-workaround.js"></script>
     </body>

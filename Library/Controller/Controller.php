@@ -6,12 +6,12 @@ abstract class Controller implements iController
 {
 	
 	private $redirect		= null;
-	private $layout 		= 'blog';
+	private $layout 		= 'carousel';		//carousel?
 	private $responseHeader = 'text/html';
 	private $scriptView		= array();
 	private $styleView		= array();
 	private $dataMod 		= array();
-	private $dataView   	= array("siteName" 	=> "Site MVC",
+	private $dataView   	= array("siteName" 	=> "Chef des fourneaux",
 							  		"pageTitle" => "Home");
 
 
@@ -69,7 +69,7 @@ abstract class Controller implements iController
 
 	/**
 	 * Get ResponseHeader
-	 * @return String respoonse a utiliser 
+	 * @return String response a utiliser 
 	 */
 	protected function getResponseHeader(){
 		return $this->responseHeader;
@@ -170,7 +170,7 @@ abstract class Controller implements iController
 
 
 	public function __construct(){
-
+			
 	}
 
 
@@ -182,13 +182,15 @@ abstract class Controller implements iController
 	 * @return void
 	 */
 	private function addFilesRender(&$html){
-		foreach ($this->scriptView as $s){
-			$html = str_replace('</body>', "<script src='WEB_ROOT/js/$s'></script></body>", $html);
+		foreach ($this->scriptView as $s){		//lol trop fort
+			$html = str_replace('</body>', "<script src='".WEB_ROOT."/js/$s'></script></body>", $html);
 		}
 		foreach ($this->styleView as $s){
-			$html = str_replace('</head>', "<link href='WEB_ROOT/css/$s' rel='stylesheet' type='text/css' /></head>", $html);
+			$html = str_replace('</head>', "<link href='".WEB_ROOT."/css/$s' rel='stylesheet' type='text/css' /></head>", $html);
 		}
 	}
+
+
 
 
 
@@ -211,13 +213,18 @@ abstract class Controller implements iController
 			die();
 		}
 
-		
-		$pathView = APP_ROOT."Views/Controllers/".str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";
 
-		if(file_exists($pathView)){
+		$pathView = APP_ROOT."Views/Controllers/".str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";
+		//$pathView = APP_ROOT."Controllers/Views/Controllers/".str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";		//view dans Application/controllers/views/Controllers
+		
+
+		echo $pathView;
+
+		if( file_exists($pathView) ){
 			
 
 			//if(!headers_sent()  ){			//<---condition a enlever quand on recevera les reponses du webservice sans entete
+			//									//il y a tjrs une entete dans les reponses du webservice, mais bon.......
 				header("Content-type: ".$this->getResponseHeader()."; charset=utf-8");
 			//}
 
@@ -229,8 +236,34 @@ abstract class Controller implements iController
 
 			ob_start();
 				include_once(APP_ROOT."Views/Layouts/".$this->getLayout().".phtml");
+				//include_once(APP_ROOT."Controllers/Views/Layouts/".$this->getLayout().".phtml");
+
 			$finalRender = ob_get_clean();
 
+
+
+
+			
+			//ajoute le  js de la page s'il existe
+			$page=str_replace("/", "", $_GET['page']);
+			//$page=$controller.$action;
+			if( file_exists(PUBLIC_ROOT."js/".$page.".js") ){
+				if(!$this->scriptExiste($page.".js")){
+					$this->setScriptView($page.".js");
+				}
+			}
+
+
+			//ajoute le style de la page s'il existe
+			$page=str_replace("/", "", $_GET['page']);
+			if( file_exists(PUBLIC_ROOT."css/".$page.".css") ){
+				if(!$this->scriptExiste($page.".css")){
+					$this->setStyleView($page.".css");
+				}
+			}
+
+
+			
 
 			$this->addFilesRender($finalRender);
 			echo $finalRender;
@@ -257,4 +290,25 @@ abstract class Controller implements iController
 			throw new \Exception("Error View for Module:'$module' and Action:'$action' not found");
 		}
 	}
+
+
+	public function scriptExiste($script){
+		foreach ($this->scriptView as $value) {
+			if($value===$script){
+				 return true;
+			}
+		}
+		return false;
+	}
+
+	public function styleExiste($style){
+		foreach ($this->styleView as $value) {
+			if($value===$style){
+				 return true;
+			}
+		}
+		return false;
+	}
+
+
 }

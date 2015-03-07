@@ -5,15 +5,15 @@ namespace Application\Controllers;
 class Index extends \Library\Controller\Controller
 {
 	private $message;
-	private $tinyMCE;
 	private $modelViewRecette;
 	
 	public function __construct(){
 		parent::__construct();
 		$this->setLayout("carousel");
 		$this->message 				= new \Library\Message\Message();
-		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelViewRecette 	= new \Application\Models\ViewRecette('localhost');
+		$this->modelPopUp 			= new \Application\Models\PopUp('localhost');
+		$this->modelAjax 			= new \Application\Models\Ajax('localhost');
 	}
 
 
@@ -35,8 +35,8 @@ class Index extends \Library\Controller\Controller
 
 		$this->setDataView(array(
 			"pageTitle" => "Maitres des fourneaux, site de recettes, cuisine de chef et vente electroménager",
-			"message" => $this->message->showMessages()//,
-			//"recettes" => $viewRecettes
+			"message" => $this->message->showMessages(),
+			"recettes" => $viewRecettes
 		));
 	}
 

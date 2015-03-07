@@ -1,8 +1,8 @@
 
 // Création d'une recette
-tabUnit  = new Array();
-tabQuant = new Array();
-verifChamp=0;
+tabUnit     = new Array();
+tabQuant    = new Array();
+verifChamp  = 0;        //ne sert plus a rien
 
 
 function ajouterIngredient(){
@@ -28,8 +28,8 @@ function retirerIngredient(){
     if($('#ingredients option').length!==0 ){
 
         //$('#unites option:eq(3)').prop('selected', true);
-        var ing =document.getElementById("ingredients");
-        var unit =document.getElementById("unites");
+        var ing = document.getElementById("ingredients");
+        var unit = document.getElementById("unites");
 
         //supprime fna le select
         unit.options[ing.selectedIndex].remove();
@@ -53,10 +53,11 @@ function definirUnite(){
     var unit = document.getElementById("unites");
     if(unit.selectedIndex>=0 ){
         unit.options[unit.selectedIndex].value= allUnit.options[allUnit.selectedIndex].value ;
-        unit.options[unit.selectedIndex].text= "1 " + allUnit.options[allUnit.selectedIndex].text ;
+        unit.options[unit.selectedIndex].text= tabQuant[unit.selectedIndex]+" " + allUnit.options[allUnit.selectedIndex].text ;
 
         tabUnit[unit.selectedIndex]=allUnit.options[allUnit.selectedIndex].text;
-        tabQuant[unit.selectedIndex]=1;
+        //console.log(tabQuant[unit.selectedIndex]);
+        //tabQuant[unit.selectedIndex]=1;
 
         console.log(tabUnit+"##"+ tabQuant);
         //alert(allUnit.options[allUnit.selectedIndex].text); 
@@ -122,7 +123,7 @@ function preparatif(){
             inputQuant2 = document.createElement("input");
             inputQuant2.setAttribute("type","hidden");
             inputQuant2.setAttribute("name","btn");
-            formulaire.appendChild( );
+            formulaire.appendChild(inputQuant2 );
 
 
         formulaire.submit();

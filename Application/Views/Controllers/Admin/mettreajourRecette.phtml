@@ -1,150 +1,16 @@
-<?=$tinyMCE?>
+<?=$tinyMCERecette?>
+<?=$message?>
 <?php
-//$message
 
-var_dump($viewrecette);
+
+//var_dump("haut de la view >>viewrecette",$viewrecette);
+
+
+
+
 ?>
-<script type="text/javascript">
-
-    tabUnit  = new Array();
-    tabQuant = new Array();
-    
-
-    function ajouterIngredient(){
-        var val=$( "#allingredients option:selected" ).val();
-        var lab=$( "#allingredients option:selected" ).text();
-        if($('#allingredients option').length!==0 ){
-            $('#ingredients').append('<option value="'+val+'" selected="selected">'+lab+'</option>');
-            $('#unites').append('<option value="'+val+'" selected="selected">...</option>');
-
-            $('#allingredients option:selected').remove();
-
-            tabUnit.push(1);
-            tabQuant.push(1);
-            console.log(tabUnit+ "  ## "+tabQuant);
-
-        }
-    }
-
-    function retirerIngredient(){
-        var val=$( "#ingredients option:selected" ).val();
-        var lab=$( "#ingredients option:selected" ).text();
-        if($('#ingredients option').length!==0 ){
-
-            //$('#unites option:eq(3)').prop('selected', true);
-            var ing =document.getElementById("ingredients");
-            var unit =document.getElementById("unites");
-
-            //supprime fna le select
-            unit.options[ing.selectedIndex].remove();
-            
-            //supprime dans quantité
-            tabUnit.splice(ing.selectedIndex,1);
-            tabQuant.splice(ing.selectedIndex,1);
-
-            console.log(tabUnit +" # "+ tabQuant);
-
-            $('#allingredients').append('<option value="'+val+'" selected="selected">'+lab+'</option>');
-            $('#ingredients option:selected').remove();
-        }
-    }
 
 
-    function definirUnite(){
-        var allUnit = document.getElementById("allunites");
-        var unit = document.getElementById("unites");
-        if(unit.selectedIndex>=0 ){
-            unit.options[unit.selectedIndex].value= allUnit.options[allUnit.selectedIndex].value ;
-            unit.options[unit.selectedIndex].text= "1 " + allUnit.options[allUnit.selectedIndex].text ;
-
-            tabUnit[unit.selectedIndex]=allUnit.options[allUnit.selectedIndex].text;
-            tabQuant[unit.selectedIndex]=1;
-
-            console.log(tabUnit+"##"+ tabQuant);
-            //alert(allUnit.options[allUnit.selectedIndex].text); 
-        }
-    }
-
-    function definirQuantite(){
-
-        var quant = document.getElementById("quantite");
-        var unit = document.getElementById("unites");
-        if(parseFloat(quant.value)>0 ){
-            
-            unit.options[unit.selectedIndex].text= parseFloat(quant.value) + " " + tabUnit[unit.selectedIndex];
-
-            tabQuant[unit.selectedIndex]=quant.value;
-            console.log(tabUnit+"##"+ tabQuant);
-
-            //alert(allUnit.options[allUnit.selectedIndex].text); 
-        }
-
-
-
-    }
-
-    function preparatif(){
-        //selectionne tout
-        $('#ingredients option').prop('selected', true);
-        $('#unites option').prop('selected', true);
-
-
-
-
-
-        var formulaire = document.getElementById("formRecette");
-                    
-        
-         var inputQuant;
-
-        for(i=0; i<tabQuant.length; i++){
-            inputQuant = document.createElement("input");
-
-            inputQuant.setAttribute("type","hidden");
-            inputQuant.setAttribute("name","quantites["+i+"]");
-            inputQuant.setAttribute("value",tabQuant[i]);
-            formulaire.appendChild(inputQuant);
-        }
-
-
-
-
-
-         
-        formulaire.submit();
-
-    }
-
-
-
-    function actualiserQuantite(){
-     var quant = document.getElementById("quantite");
-     quant.value=tabQuant[document.getElementById("unites").selectedIndex];
-    }
-
-
-
-    function masquer(){
-
-        document.getElementById("boutonunite").style.visibility='hidden';
-        document.getElementById("allunites").style.visibility='hidden';
-        document.getElementById("quantite").style.visibility='hidden';
-        document.getElementById("okquantite").style.visibility='hidden';
-    }
-
-
-    function afficher(){
-        document.getElementById("boutonunite").style.visibility='visible';
-        document.getElementById("allunites").style.visibility='visible';
-        document.getElementById("quantite").style.visibility='visible';
-        document.getElementById("okquantite").style.visibility='visible';
-    }
-
-
-
-
-
-</script>
 
 
 
@@ -153,12 +19,18 @@ var_dump($viewrecette);
     <h2 class="form-signin-heading">
         <?=$pageTitle?>
     </h2>
+    <table>
+        <tr>
+            <label for="titre">Titre de la recette que vous souhaitez ajouter : </label>
+            <td><input type="text" name="titre" id="titre" value="<?=$viewrecette['titre']?>" required></td>
+        </tr>
+    </table>
     <textarea name="value" autofocus style="width: 100%;"><?=$viewrecette['value']?></textarea>
 
     <table>
         <tr><td>categorie</td>
             <td>
-                <select name="id_cat">
+                <select name="id_cat" id="id_cat">
                   <?php foreach ($categories as $categorie) {
                         if($categorie['value'] == $viewrecette['categorie'] ){
                             $txt=" selected ";
@@ -171,8 +43,18 @@ var_dump($viewrecette);
                   <?php } ?>
                 </select>
             </td>
-        </tr>      
+        </tr>
 
+
+        <tr>
+            <td colspan="2">
+                <div id="">
+                    Votre catégorie n'est pas dans la liste?
+                    <?=$ajaxCategorieButton?>
+                </div>
+                <?=$ajaxCategorieScript?>
+            </td>
+        </tr>
 
 
         <tr>
@@ -181,7 +63,7 @@ var_dump($viewrecette);
         </tr>
         <tr>
             <td>cout</td>
-            <td><input type="text"  name="cout"   value=""  /></td>
+            <td><input type="text"  name="cout"   value="<?=$viewrecette['cout']?>"  /></td>
         </tr>
         <tr>
             <td>difficulté</td>
@@ -258,7 +140,86 @@ var_dump($viewrecette);
     <input type="checkbox" name="gluten" id="gluten" value="0" <?=$gluten?> >
 
 
-    <table  border="0">
+
+    <!-- Ne marche plus car j'ai essayé d'utiliser l'ajax directement dans la popup -->
+    <div id="ingredient">
+        Votre ingrédient n'est pas dans la liste?
+        <!--input type='button' value='Ajouter un ingrédient' id="ajouterIngredientBdd" -->
+        <?=$ajaxIngredientButton?>
+    </div>
+    <?=$ajaxIngredientScript?>
+
+
+
+
+       
+
+
+
+
+   
+    <div class="dv_ingredients">  
+        <select  id="allingredients" multiple size="form-control"   onclick="ajouterIngredient();"  style="min-width:150px;">
+            <?php
+
+            function ingredientIsUsed( $id, $tabIng ){
+
+                foreach ($tabIng as  $ing) {
+
+                    if ($ing['id_ingredient']===$id) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+
+            foreach ($ingredients as $ingredient) {
+                //var_dump($ingredient);
+                if( !ingredientIsUsed( $ingredient['id_ingredient'], $viewrecette['ingredients'] ) ){
+                    echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
+                }
+            }
+
+            ?>
+        </select>
+    </div>
+
+    <div class="dv_ingredients">
+        Ingrédients de <?=$viewrecette['titre']?> : 
+        <select id="ingredients"  name="ingredients[]"  multiple size="form-control" onclick="retirerIngredient();"  style="min-width:150px;">
+
+            <?php
+              foreach ($viewrecette['ingredients'] as $ingredient) {
+                echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['ingredients']."</option>";
+              }
+            ?>
+        </select>
+    </div>
+
+    
+    <div class="dv_ingredients">
+        <select id="allunites" style="min-width:150px;">
+            <?php foreach ($unites as $unite) {?>
+                <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option>
+            <?php } ?>
+        </select>
+        <input type="button" onclick="definirUnite();" value="definir cette unité" id="boutonunite">
+    </div>
+
+
+
+    
+    <div class="dv_ingredients">
+        <select id="unites"  name="unites[]" multiple size="form-control" onclick="actualiserQuantite();"     style="min-width:150px;" onBlur="" onFocus="afficher();">
+        </select>
+
+        <input type="text" id="quantite">
+        <input type="button" id="okquantite" onclick="definirQuantite();" value="ok">
+    </div>
+
+
+    <!-- <table  border="0">
         <tr><td collspan="4">Ingredients</td></tr>
             <tr><td>
             </td>
@@ -283,11 +244,25 @@ var_dump($viewrecette);
                     
                 <select  id="allingredients" multiple size="8"   onclick="ajouterIngredient();"  style="min-width:150px;">
                   <?php
-                  //var_dump($ingredients);
-                  foreach ($ingredients as $ingredient) {
-                    //echo "assssssssssss";
-                    echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
-                  }
+                  
+                 /* function ingredientIsUsed( $id, $tabIng ){
+
+                    foreach ($tabIng as  $ing) {
+
+                        if ($ing['id_ingredient']===$id) {
+                            return true;
+                        }
+                    }
+                    return false;
+                  }*/
+
+
+                  /*foreach ($ingredients as $ingredient) {
+                     var_dump($ingredient);
+                    if( !ingredientIsUsed( $ingredient['id_ingredient'], $viewrecette['ingredients'] ) ){
+                        echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
+                    }
+                  }*/
 
 
 
@@ -296,13 +271,21 @@ var_dump($viewrecette);
                     
             </td>
             <td>
+                
                 <select id="ingredients"  name="ingredients[]" multiple size="8"   onclick="retirerIngredient();"  style="min-width:150px;">
-                    
+                <?php
+
+                  /*foreach ($viewrecette['ingredients'] as $ingredient) {
+                    echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['ingredients']."</option>";
+                  }*/
+
+
+                ?>
                 </select>
             </td>
 
             <td>
-                <select id="unites"  name="unites[]" multiple size="8" onclick="actualiserQuantite();"     style="min-width:150px;" onBlur="//masquer();" onFocus="afficher();">
+                <select id="unites"  name="unites[]" multiple size="8" onclick="actualiserQuantite();"     style="min-width:150px;" onBlur="" onFocus="afficher();">
                 </select>    
             </td>
             <td>
@@ -311,21 +294,56 @@ var_dump($viewrecette);
             </td>
         </tr>
 
-    </table>
+    </table> -->
 
 
 
 
-    <input type="hidden"  name="id_livre"  value="1"m  style="min-width:150px;">
+    <input type="hidden"  name="id_livre"  value="1">
     <input type="hidden"  name="id_resto"  value="1">
 
     <BR>
-    <button name="btn" class="btn btn-lg btn-primary" type="submit"><?=$pageTitle?></button><BR>
-    <a href="<?=LINK_ROOT?>">Retour à l'accueil</a> - 
+    <button name="btn" style="float:right;" class="col-md-4 btn btn-lg btn-primary" type="submit"><?=$pageTitle?></button><BR>
+    <a href="<?=LINK_ROOT?>">Retour à l'accueil</a>
 
-</form  style="min-width:150px;">
+</form style="min-width: 150px;">
 
+<script src="<?=WEB_ROOT?>/js/script.js"></script>
 
 <script type="text/javascript">
-    masquer();
+    //masquer();
+
+<?php
+//ici pour que les elements soient deja crées
+
+    $strTabUnit="tabUnit  = new Array(";
+    $strTabQuant="tabQuant  = new Array(";
+    $alors=false;
+    $js="";
+    foreach ($viewrecette['ingredients'] as $ingredient) {
+        $strTabUnit.="'".$ingredient['unite']."', ";
+        $strTabQuant.="'".$ingredient['value']."', ";
+        
+        //$ingredients
+        
+        $js.="$('#unites').append('<option value=\"".$ingredient['id_unite']."\" selected >".$ingredient['value'].' '.$ingredient['unite']."</option>');\n   ";
+
+        $alors=true;
+    }
+    if($alors){
+        $strTabUnit=substr($strTabUnit, 0, -2);
+        $strTabQuant=substr($strTabQuant, 0, -2);
+    }
+    $strTabUnit.=");\n";
+    $strTabQuant.=");\n";
+
+
+    echo $strTabUnit; 
+    echo $strTabQuant; 
+    echo $js;
+    
+
+?>
+console.log(tabUnit +" ## "+ tabQuant);
+
 </script>

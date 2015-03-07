@@ -4,7 +4,7 @@ namespace Application\Models;
 
 
 
-class Recette extends \Library\Model\Model{
+class Commentaire extends \Library\Model\Model{
 
 	
 
@@ -15,23 +15,11 @@ class Recette extends \Library\Model\Model{
 	}
 
 
-	public function getRecettes(){
-		
-		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php?service=recette&method=getrecettes')) );
-	}
+	public function getCommentaires($idRecette){
 
-	/**
-	 * @param  [String] $recette     [description]
-	 * @param  [int] $idUser      [description]
-	 * @param  [int] $idCategorie [description]
-	 * @return [boolean]              [description]
-	 */
-	public function insertRecette($params, $idUser){
-
-
-		$params["id_user"] = $idUser;
-		$params["service"] = "recette";
-		$params["method"]  = "insertrecette";
+		$params["id_recette"] = $idRecette;
+		$params["service"] = "commentaire";
+		$params["method"]  = "getcommentaires";
 
 		$opts = array('http' =>
 		    array(
@@ -43,24 +31,50 @@ class Recette extends \Library\Model\Model{
 
 		$context  = stream_context_create($opts);
 		
-		return $this->convEnTab(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) );
+		return $this->convEnTab(json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) );
+
+	}
+
+	/**
+	 * @param  [String] $commentaire     [description]
+	 * @param  [int] $idUser      [description]
+	 * @param  [int] $idCategorie [description]
+	 * @return [boolean]              [description]
+	 */
+	public function insertCommentaire($params){
+
+
+		$params["service"] = "commentaire";
+		$params["method"]  = "insertcommentaire";
+
+		$opts = array('http' =>
+		    array(
+		        'method'  => 'POST',
+		        'header'  => 'Content-type: application/x-www-form-urlencoded',
+		        'content' => http_build_query($params)
+		        )
+		);
+
+		$context  = stream_context_create($opts);
+		
+		return $this->convEnTab(json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) );
 		
 	}
 
 
 
 	/**
-	 * @param  [String] $recette     [description]
+	 * @param  [String] $commentaire     [description]
 	 * @param  [int] $idUser      [description]
 	 * @param  [int] $idCategorie [description]
 	 * @return [boolean]              [description]
 	 */
-	public function updateRecette($params, $idRecette){
+	public function updateCommentaire($params, $idCommentaire){
 		
 
-		$params["id_recette"] = $idRecette;
-		$params["service"] = "recette";
-		$params["method"]  = "updaterecette";
+		$params["id_commentaire"] = $idCommentaire;
+		$params["service"] = "commentaire";
+		$params["method"]  = "updatecommentaire";
 //var_dump("dan model",$params);
 
 		$opts = array('http' =>
@@ -80,17 +94,17 @@ class Recette extends \Library\Model\Model{
 
 
 	/**
-	 * @param  [String] $recette     [description]
+	 * @param  [String] $commentaire     [description]
 	 * @param  [int] $idUser      [description]
 	 * @param  [int] $idCategorie [description]
 	 * @return [boolean]              [description]
 	 */
-	public function deleteRecette($idRecette){
+	public function deleteCommentaire($idCommentaire){
 		
 
-		$params["id_recette"] = $idRecette;
-		$params["service"] = "recette";
-		$params["method"]  = "deleterecette";
+		$params["id_commentaire"] = $idCommentaire;
+		$params["service"] = "commentaire";
+		$params["method"]  = "deletecommentaire";
 
 
 		$opts = array('http' =>
