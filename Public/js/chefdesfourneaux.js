@@ -2,40 +2,73 @@
 
 API_URL = "http://localhost/webservice/Public/index.php"
 
-$(document).ready(function(){
 
-	$('.btnAcheterProduit').click(function(){
-		ajouterAuPanier(idUser, idProd);
-	});
-
-});
 
 
 // On pourra acheter dans indexproduit et produit
 
 function ajouterAuPanier(idUser, idProd){
-
-	i = parseInt($('#panierContent').html());
-
-	$('#panierContent').html(i+1);
-
 	jsonData = 
 	{
 		'service' 		: 'panier',
-		'method' 		: 'insert',
-		'id_produit' 	: $('#id_produit').val(),
-		'id_user' 		: id_user
-
+		'method' 		: 'insertPanier',
+		'id_user' 		: idUser,
+		'id_produit' 	: idProd
 	}
-
-    $.ajax({
+	
+	
+   	$.ajax({
         type: 'POST',
         data: jsonData,
         url: urlWebService,
         dataType: 'json',
+        async:false,
         success: function(data) {
-            console.log(data);
-
-        }
+			console.log(data);
+			if (data['response']>0) {
+				$('#WrapperProduit'+idProd+" #btnAcheterProduit" ).css("visibility", "hidden");
+			}else{
+				$('#WrapperProduit'+idProd+" #btnAcheterProduit" ).css("visibility", "visible");
+			}
+			actualiserPanier(idUser);
+			
+		}
     });
+    
+
+
+
+}
+
+
+
+
+function actualiserPanier(idUser){
+	jsonData = 
+	{
+		'service' 		: 'panier',
+		'method' 		: 'getHtmlIconPanier',
+		'id_user' 		: idUser
+	}
+	
+	
+   	$.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        async:false,
+        success: function(data){
+			
+			alert(data['response']);
+			$('#panierContent').html( data['response'] );
+				
+			
+			
+		}
+    });
+    
+
+
+
 }

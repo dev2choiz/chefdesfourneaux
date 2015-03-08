@@ -18,24 +18,64 @@ class Panier extends \Library\Controller\Controller{
 	}
 
 	public function indexPanierAction($idUser){
-		
-		$viewPanier = $this->modelViewPanier->getViewPanierByUser($idUser) ;			
 
-		//var_dump($viewPanier);
 
-		if(empty($viewPaniers['response'])){
-			$this->message->addError("aucune recette !");
-		}elseif ($viewPaniers['apiError'] ) {
-			$this->message->addError($user->apiErrorMessage);
-		}elseif ( $viewPaniers['serverError'] ) {
-			$this->message->addError($user->serverErrorMessage);
+	
+
+
+		//verifie si il y a des actions a realiser, comme delete un produit
+		if(isset($_POST['action'])){
+			
+
+			if($_POST['action']==="delete"){
+				echo "delete";
+				$modelPanier 	= new \Application\Models\Panier('localhost');
+				
+				$res =$modelPanier->deletePanier($_SESSION['user']['id_user']+0, $_POST['id_produit']+0);
+				var_dump("res : ", $res);				
+				$res=$res['response'];
+				
+
+				if (!$res) {
+					$this->message->addError("erreur pendant lasuppresion du produit dans le panier !");
+				}else{
+					$this->message->addSuccess("Produit supprimé !");
+				}
+
+			}
+			
+			
+			
+
+
 		}
+
+
+
+
+
+
+
+
+
+
+
+
+		//affichage du panier
+		if ( !empty($_SESSION['user']) ) {
+			$viewPanier	=	$this->modelViewPanier->getViewPanierByUser($idUser);
+			$viewPanier	=	$viewPanier ['response'];
+			$viewPanier	= 	(!$viewPanier) ? array() : $viewPanier;
+		}else{
+			$viewPanier = array();
+		}	
+		var_dump(" post pui view",$_POST, $viewPanier );
 
 
 		$this->setDataView(array(
 			"pageTitle" => "Votre panier",
 			"message" => $this->message->showMessages(),
-			"paniers" => $viewPanier['response'],
+			"viewPanier" => $viewPanier,
 			"urlWebService"			=> "
 			<script type='text/javascript'>
 				urlWebService='".WEBSERVICE_ROOT."/index.php';\n

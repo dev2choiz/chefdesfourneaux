@@ -1,17 +1,42 @@
 /*
 * Fichier javascript permettant de gérer la page vente/indexproduit
 */
-
-
-
-
+/*
 $(document).ready(function(){
+
+	// La popup apparaît quand on clique sur le bouton Modifier le produit
+	$('.popupProduit')
+		.click(function(){
+			$('#popupContainer').css('display', 'block');
+			//$('#popup').css('display', 'block');	
+
+		});
+
+	// Le bouton annuler permet de faire disparaître la popup
+	$('#btnCancel')
+		.click(function(){
+			$('#popupContainer').css('display', 'none');
+			//$('#popup').css('display', 'none');
+		})
+
+
 
 	$('#btnAjouterProduit').click(function(){
 		ajouterProduit();
+	}); 
+
+	$('#btnMettreAjourProduit').click(function(){
+		mettreAjourProduit();
 	});
 
+	$('#btnSupprimerProduit').click(function(){
+		supprimerProduit();
+	});
 });
+*/
+
+
+
 
 function ajouterProduit(){
 	jsonData = 
@@ -33,15 +58,19 @@ function ajouterProduit(){
         async :true,
         success: function(data) {
 
+            //console.log("############################################",data); //
             ids=parseInt((data['response']));
             script = recupererScriptNewProduit(ids) ;
 
 
-            //console.log(script);
-            //laisse moi t'aider un peu
+            console.log(script);
+            // mon id : 734 977 520
+            // mdp 0635
 
-			$("#WrapperProduits").append(script);
-			
+
+			$("#WrapperProduits").html($("#WrapperProduits").html()+"####"+script);
+			//$("#WrapperProduits").html("##########"+script);
+			//document.getElementById("WrapperProduits").innerHTML="##########"+script;
         }
 
     });
@@ -133,3 +162,7 @@ function recupererScriptNewProduit(idProd){
     return alors;
 
 }
+
+
+
+

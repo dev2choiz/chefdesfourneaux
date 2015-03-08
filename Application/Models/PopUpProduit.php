@@ -10,7 +10,7 @@ class PopUpProduit extends \Library\PopUp\PopUp{
 
 
 
-	public function getPopup($id, $prix, $ref, $value){
+	public function getModifPopup($id, $prix, $ref, $value){
 		return
 		"
 		<div class='popupContainer' id='popupContainer$id'>
@@ -75,9 +75,32 @@ class PopUpProduit extends \Library\PopUp\PopUp{
 					}
 				});
 			});
-		</script> 
+		</script>
+
 		";
 	}
 
+
+
+
+public function getAcheterPopup($idProd, $prix, $ref, $value){
+		return
+		"
+		<script type='text/javascript'>
+			
+			$(document).ready(function(){
+
+				//ajoute au panier apres un click
+				$('#WrapperProduit$idProd #btnAcheterProduit')
+					.click(function(){
+						ajouterAuPanier({$_SESSION['user']['id_user']}, $idProd);
+						
+					});
+
+			});
+		</script>
+
+		";
+	}
 
 }
