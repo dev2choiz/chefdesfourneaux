@@ -24,24 +24,24 @@ class Recette extends \Library\Controller\Controller{
 	//ou toute les recettes cuisine du monde ?
 	public function indexAction(){
 		$viewAllRecette = $this->modelViewRecette->getAllViewRecettes() ;	//interroge le webservice
-		$viewAllRecette 		= $viewAllRecette['response'];
+		//$viewAllRecette 		= $viewAllRecette['response'];
 
 
 
-		if(empty($viewRecette['response'])){
+		if(empty($viewAllRecette)){
 			$this->message->addError("aucune recette !");
-		}elseif ($viewRecette['apiError'] ) {
+		}elseif ($viewAllRecette['apiError'] ) {
 			$this->message->addError($user->apiErrorMessage);
-		}elseif ( $viewRecette['serverError'] ) {
+		}elseif ( $viewAllRecette['serverError'] ) {
 			$this->message->addError($user->serverErrorMessage);
 		}else{
-			$viewRecette=$viewRecette['response'];
+			$viewAllRecette=$viewAllRecette['response'];
 		}
 
 		//var_dump("repérage",$viewAllRecette);
 
 
-		
+		/*
 		echo "<br><br><br><br>".$idRecette;
 		
 		if( $_SESSION['user']['role'] !== "admin" ){
@@ -49,6 +49,7 @@ class Recette extends \Library\Controller\Controller{
 		}elseif( !isset($idRecette) || empty($idRecette)  || $idRecette===0 ){	//si pas d'idrecette
 			$this->setRedirect(LINK_ROOT."admin/");
 		}
+		*/
 
 
 		
@@ -81,7 +82,6 @@ class Recette extends \Library\Controller\Controller{
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"tinyMCECommentaire" => $this->tinyMCE->getEditeurCommentaire(),
 			"message" => $this->message->showMessages(),
-			"viewRecette" => $viewAllRecette,
 			"recettes" => $viewAllRecette
 			));
 
@@ -156,6 +156,50 @@ class Recette extends \Library\Controller\Controller{
 			}else{
 				$this->message->addError("Commentaire non ajouté");
 			}
+		
+
+
+			//################## données pour la view ############################
+
+		//recherche des commentaires
+		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
+		$viewComms = $modelCommentaire->getCommentaires($idRecette);
+
+		$viewComms = $viewComms['response'];
+
+		$this->setDataView(array(
+			"pageTitle" => "Recette santé, régime, cuisine légère",
+			"message" 		=> $this->message->showMessages(),
+			"viewCommentaires" => $viewComms,
+			"tinyMCECommentaire" => $this->tinyMCE->getEditeurCommentaire(),
+			"recette"		=> $viewRecette 
+		));
+	}
+
+	public function authentiqueAction($idRecette){
+		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($idRecette);
+		$viewRecette 		= $viewRecette['response'];
+		//var_dump($viewRecette);
+
+		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
+		unset($_POST['btn']);
+		//var_dump($_POST);
+		$res =$modelCommentaire->insertCommentaire($_POST);
+		//var_dump("res : ", $res);
+
+		if ($res['error']) {
+			//$this->message->addError("erreur pendant la recuperation des commentaires !");
+		}
+
+		$res=$res['response'];
+		
+		if ($res>0  ) {		//res est vaut l'id du comm
+			
+			$this->message->addSuccess("Commentaire ajouté");
+
+		}else{
+			$this->message->addError("Commentaire non ajouté");
+		}
 		
 
 
