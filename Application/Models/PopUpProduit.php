@@ -61,9 +61,7 @@ class PopUpProduit extends \Library\PopUp\PopUp{
 
 
 
-				$('#btnAjouterProduit$id').click(function(){
-					ajouterProduit($id);
-				}); 
+
 
 				$('#btnMettreAjourProduit$id').click(function(){
 					mettreAjourProduit($id);

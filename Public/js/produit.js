@@ -35,7 +35,14 @@ $(document).ready(function(){
 });
 */
 
+$(document).ready(function(){
 
+				$('#btnAjouterProduit').click(function(){
+						alert("dan click");
+					ajouterProduit();
+				}); 
+	}
+);
 
 
 function ajouterProduit(){
@@ -64,11 +71,10 @@ function ajouterProduit(){
 
 
             console.log(script);
-            // mon id : 734 977 520
-            // mdp 0635
 
 
-			$("#WrapperProduits").html($("#WrapperProduits").html()+"####"+script);
+
+			$("#WrapperProduits").append(script);
 			//$("#WrapperProduits").html("##########"+script);
 			//document.getElementById("WrapperProduits").innerHTML="##########"+script;
         }

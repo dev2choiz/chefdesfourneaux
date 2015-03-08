@@ -36,7 +36,7 @@ class Index extends \Library\Controller\Controller
 		$this->setDataView(array(
 			"pageTitle" => "Maitres des fourneaux, site de recettes, cuisine de chef et vente electroménager",
 			"message" => $this->message->showMessages(),
-			"recettes" => $viewRecettes
+			"recettes" => $viewAllRecettes
 		));
 	}
 

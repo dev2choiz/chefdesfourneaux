@@ -126,7 +126,7 @@ class Panier extends \Library\Model\Model{
 		$params["id_user"] = $idUser;
 		$params["id_produit"] = $idProd;
 		$params["service"] = "panier";
-		$params["method"]  = "deletePanier";
+		$params["method"]  = "deletepanier";
 
 
 		$opts = array('http' =>
