@@ -46,6 +46,7 @@ $(document).ready(function(){
 			$('#divCat').css('display', 'block');
 			$('#textCatAjouter').css('display', 'block');
 			$('#textCatModifier').css('display', 'none');
+
 		}
 	);
 
@@ -54,6 +55,8 @@ $(document).ready(function(){
 			$('#divCat').css('display', 'block');
 			$('#textCatAjouter').css('display', 'none');
 			$('#textCatModifier').css('display', 'block');
+			$('#textCatModifier').val(document.getElementById('categories').options[document.getElementById('categories').selectedIndex].text);
+
 		}
 	);
 
@@ -121,6 +124,7 @@ $(document).ready(function(){
 			$('#divIng').css('display', 'block');
 			$('#textIngAjouter').css('display', 'none');
 			$('#textIngModifier').css('display', 'block');
+			$('#textIngModifier').val(document.getElementById('ingredients').options[document.getElementById('ingredients').selectedIndex].text);
 		}
 	);
 
@@ -191,6 +195,7 @@ $(document).ready(function(){
 			$('#divUnit').css('display', 'block');
 			$('#textUnitAjouter').css('display', 'none');
 			$('#textUnitModifier').css('display', 'block');
+			$('#textUnitModifier').val(document.getElementById('unites').options[document.getElementById('unites').selectedIndex].text);
 		}
 	);
 

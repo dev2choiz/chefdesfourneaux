@@ -61,7 +61,12 @@ class Admin extends \Library\Controller\Controller{
 
 		
 		if(isset($_POST['btn'])){
+			//var_dump($_POST, $_FILES);
+
 			
+			
+
+
 			
 			if(empty($_POST['value'])){
 				$this->message->addError("Recette vide !");
@@ -101,27 +106,36 @@ class Admin extends \Library\Controller\Controller{
 			$quantites=$_POST["quantites"];			unset($_POST["quantites"]);
 			
 
-			//var_dump("dff",$_POST);
+
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			
-			$res =$modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
-			
-			
+			$res = $modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
+
 			$res=get_object_vars(json_decode($res));
 			$res=$res['response'];
+
+
+
+	        $root = $_FILES['img']['tmp_name'];
+	        $img = PUB_ROOT.'img/'.$res.$_FILES['img']['name'];
+
+	        if(copy($root, $img )){
+	        	$_POST['img'] = WEB_ROOT."img/".$res.$_FILES['img']['name'];
+	        }else{
+	        	$this->message->addError("Pb avec l'insertion de l'image");
+	        }
+	        $modelRecette->updateRecette($_POST, $res);
+			//echo "<img src='{$_POST['img']}'>";
 			
-			if ($res > 0 ) {		//res= id de la recette créée si tout s est bien passé
-				//header('location: '.LINK_ROOT.'recette');
-				//die();
+			
+			
+			if ($res > 0 ) {
 				
 				
 				
 				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
-				//echo "<br><br><br><br>";
-				//var_dump($ingreds, $unites , $res, $quantites );
+
 				$res =$modelListIngredients->insertListIngredients($ingreds, $unites , $res, $quantites );
-				//echo $res->page;
-				//var_dump("ress",$res);
 				
 					//aucune verif la flemme
 				if($res->response){
@@ -136,6 +150,7 @@ class Admin extends \Library\Controller\Controller{
 				$this->message->addError($user->apiErrorMessage);
 				$this->message->addError($user->serverErrorMessage);
 			}
+			
 		}
 
 
@@ -560,11 +575,7 @@ class Admin extends \Library\Controller\Controller{
 			"message" => $this->message->showMessages(),
 			"categories"			=>  $cat,
 			"ingredients" 			=>  $ings,
-			"unites" 				=>  $unit,
-			"urlWebService"			=> "
-			<script type='text/javascript'>
-					urlWebService='".WEBSERVICE_ROOT."/index.php';\n
-			</script>"
+			"unites" 				=>  $unit
 		));
 
 		

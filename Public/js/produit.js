@@ -37,10 +37,9 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 
-				$('#btnAjouterProduit').click(function(){
-						alert("dan click");
-					ajouterProduit();
-				}); 
+		$('#btnAjouterProduit').click(function(){
+			ajouterProduit();
+		}); 
 	}
 );
 

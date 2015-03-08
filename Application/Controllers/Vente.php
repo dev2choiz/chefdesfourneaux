@@ -98,7 +98,13 @@ class Vente extends \Library\Controller\Controller{
 	}
 
 
+	public function payerAction(){
+		
 
+		$this->setDataView(array(
+			"pageTitle" => "Finalisation de votre commande",
+			));
+	}
 
 
 
