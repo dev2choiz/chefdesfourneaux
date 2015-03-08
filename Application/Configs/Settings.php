@@ -34,6 +34,7 @@ class Settings
 		 * LINK_ROOT : http://localhost/fourneaux/
 		 * APP_ROOT	 : C:/wamp/www/fourneaux/Application
 		 * LIB_ROOT	 : C:/wamp/www/fourneaux/Library
+		 * PUB_ROOT
 		 * PUBLIC_ROOT : http://localhost/fourneaux/Public
 		 */
 		
@@ -41,6 +42,7 @@ class Settings
 		define('LINK_ROOT', str_replace('Public/index.php', '', self::$baseUrl . $_SERVER["SCRIPT_NAME"]));
 		define('APP_ROOT', 	str_replace('Public/index.php', 'Application/', $_SERVER["SCRIPT_FILENAME"]));
 		define('LIB_ROOT', 	str_replace('Public/index.php', 'Library/', $_SERVER["SCRIPT_FILENAME"]));
+		define('PUB_ROOT', 	str_replace('Public/index.php', 'Public/', $_SERVER["SCRIPT_FILENAME"]));
 		define('PUBLIC_ROOT', str_replace("Application/","Public/", APP_ROOT) );
 		
 		define('SALT_PASSWORD', 'X_ ##8[+VN7hWcmeOhHzbhaP$_I|C{-7=8Oy$W^VH(?}bRGndcM{%2r]}d?NH]6N');

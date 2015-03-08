@@ -39,11 +39,11 @@ function ajouterAuPanier(idUser, idProd){
         async:false,
         success: function(data) {
 			console.log(data);
-			if (data['response']>0) {
+			/*if (data['response']>0) {
 				$('#WrapperProduit'+idProd+" #btnAcheterProduit" ).css("visibility", "hidden");
 			}else{
 				$('#WrapperProduit'+idProd+" #btnAcheterProduit" ).css("visibility", "visible");
-			}
+			}*/
 			actualiserPanier(idUser);
 			
 		}
