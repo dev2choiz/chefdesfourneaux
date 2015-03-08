@@ -4,6 +4,20 @@ API_URL = "http://localhost/webservice/Public/index.php"
 
 
 
+$(document).ready(function(){
+		actualiserPanier(id_user);
+	}
+);
+
+
+
+
+
+
+
+
+
+
 
 // On pourra acheter dans indexproduit et produit
 
@@ -60,7 +74,7 @@ function actualiserPanier(idUser){
         async:false,
         success: function(data){
 			
-			alert(data['response']);
+			//alert(data['response']);
 			$('#panierContent').html( data['response'] );
 				
 			
@@ -72,3 +86,8 @@ function actualiserPanier(idUser){
 
 
 }
+
+
+
+
+

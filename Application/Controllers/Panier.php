@@ -32,7 +32,8 @@ class Panier extends \Library\Controller\Controller{
 				$modelPanier 	= new \Application\Models\Panier('localhost');
 				
 				$res =$modelPanier->deletePanier($_SESSION['user']['id_user']+0, $_POST['id_produit']+0);
-				var_dump("res : ", $res);				
+				//var_dump("res : ", $res);
+				
 				$res=$res['response'];
 				
 
@@ -69,7 +70,7 @@ class Panier extends \Library\Controller\Controller{
 		}else{
 			$viewPanier = array();
 		}	
-		var_dump(" post pui view",$_POST, $viewPanier );
+		//var_dump(" post pui view",$_POST, $viewPanier );
 
 
 		$this->setDataView(array(

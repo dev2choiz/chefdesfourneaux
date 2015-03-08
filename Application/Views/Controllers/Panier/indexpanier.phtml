@@ -24,7 +24,7 @@
 			<div class="col-md-4">
 				<form method="post" >
 					<input type="hidden" name="id_user" value="<?= $_SESSION['user']['id_user'] ?>" />
-					<input type="hidden" name="id_produit" value="<?= $_SESSION['user']['id_user'] ?>" />
+					<input type="hidden" name="id_produit" value="<?= $produit['id_produit'] ?>" />
 					<input type="submit" name="action" value="delete" />
 				</form>
 			</div>
@@ -48,26 +48,3 @@
 		</form>
 	</div>
 </div>	<!-- fin de wrapperProduits-->
-
-<br/><br/><br/><br/>
-<div class="row">
-	<div class="col-md-8">
-
-
-
-<!-- 
-Test Insert : OK
-<br/>
-
-Nom du panier : <input name="value" type="text" id="value">
-<br/>
-Prix : <input name="prix" type="text" id="prix">
-<br/>
-Ref : <input name="ref" type="text" id="ref">
-<br/>
-<button class="btn btn-warning" name="btnAjouterProduit" type="submit" id="btnAjouterProduit">Valider</button>
-</div>
-
-
-</div>
- -->
