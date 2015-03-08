@@ -38,12 +38,32 @@
 			<div >
 				<button class='btn btn-primary btn-xs col-md-offset-3 popupProduit' id="popupProduit<?=$produit['id_produit']?>" >Modifier ce Produit</button>
 				<div class="row">
-					<?=$produit['popup']?>
+					<?=$produit['modifierpopup']?>
 				</div>
-				<button class='btn btn-success col-md-3 col-md-offset-3 btnAcheterProduit' id="btnAcheterProduit" >Mettre ce produit dans mon panier</button>
+				<?php 
+					if ($produit['acheterpopup']===""  ) {
+						$btnAchterVisible=" style='display:none'; ";
+					}else{
+						$btnAchterVisible="";
+					}
+
+				
+				?>
+				<button class='btn btn-success col-md-3 col-md-offset-3 btnAcheterProduit' id="btnAcheterProduit" <?=$btnAchterVisible?> >Mettre ce produit dans mon panier</button>
+				<div class="row">
+					<?=$produit['acheterpopup']?>
+				</div>
+
+
+
 			</div>
 			
 		</div>
 	</div>
 <?php endforeach; ?>
 </div>	<!-- fin de wrapperProduits-->
+
+
+<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">Produit : <span id="labelValueProduit"><?= $produit['value']?></span></a>
+
+
