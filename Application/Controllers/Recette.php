@@ -21,11 +21,8 @@ class Recette extends \Library\Controller\Controller{
 	}
 		
 
-
-	//elle sert à quoi cette page? a afficher une recette
-	//ou toute les recettes cuisine du monde ?
 	public function indexAction(){
-		//$viewAllRecette = $this->modelViewRecette->getAllViewRecettes() ;	//interroge le webservice
+		//$viewAllRecette = $this->modelViewRecette->getAllViewRecettes() ;
 		//$viewAllRecette 		= $viewAllRecette['response'];
 		$viewAllCats  	= $this->modelCat->getCategories();
 		//var_dump($viewAllCats);
@@ -54,14 +51,6 @@ class Recette extends \Library\Controller\Controller{
 			$this->setRedirect(LINK_ROOT."admin/");
 		}
 		*/
-
-
-		
-			
-		
-
-
-
 
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
@@ -163,6 +152,7 @@ class Recette extends \Library\Controller\Controller{
 			"tinyMCECommentaire" 	=> $this->tinyMCE->getEditeurCommentaire(),
 			"recette"				=> $viewRecette 
 		));
+		$this->setStyleView('categorie.css');
 	}
 
 
