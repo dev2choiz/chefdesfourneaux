@@ -1,0 +1,67 @@
+<?=$tinyMCECommentaire?>
+<?=$message?>
+
+<script type="text/javascript">
+    $("document").ready(function(){
+        $("#divCom").hide();
+        $("#btnAddCom").click(function(){
+            //console.log('ici');
+            $("#divCom").show('slow');
+            return false;
+        });
+    });
+</script>
+
+<hr class="featurette-divider">
+<h1><?=$recette['categorie']?></h1>
+<div class="row featurette">
+    
+    <div class="col-md-5">
+        <img class="featurette-image img-responsive" src="<?=$recette['img']?>" alt="<?=$recette['titre']?>">
+        <h3>Liste des Ingrédients</h3>
+        <?php foreach ($recette['ingredients'] as $ing): ?>
+            <p class="lead"><?=$ing['ingredients']?> : <?=$ing['value']?> <?=$ing['unite']?></p>
+        <?php endforeach ; ?>
+
+    </div>
+    <h2 class="featurette-heading"><?=$recette['titre']?></h2>
+    <div class="col-md-7">
+        
+        <p class="lead">Difficulté : <?=$recette['difficulte']?> / 5</p>
+        <p class="lead">Prix : <?=$recette['cout']?> €</p>
+        <p class="lead"><?=$recette['value']?></p>
+    </div>
+</div>
+
+ <!-- /END THE FEATURETTES -->
+
+ <?php
+
+echo '<hr><hr><hr>';
+
+//commentaires
+//var_dump("viewCom", $viewCommentaires);
+if($viewCommentaires){//isset($viewCommentaires) && !is_null($viewCommentaires) ){
+    foreach ($viewCommentaires as $commentaire){
+        foreach ($commentaire as $key => $champs){
+            echo $key." : ".$champs.'<br>';
+        }
+        echo '<hr>';
+    }
+}
+
+
+?>
+
+
+<input type="button" value="ajouter un commentaire"  id="btnAddCom"><br>
+
+
+<div id="divCom">
+    <form method="post">
+        <textarea name="value">Un commentaire</textarea>
+        <input type="hidden" name="id_recette" value="<?=$recette['id_recette']?>">
+        <input type="hidden" name="id_user" value="<?=$_SESSION ['user']['id_user']?>">
+        <input type="submit" value="Envoyer"  name="btn">
+    </form>
+</div>
