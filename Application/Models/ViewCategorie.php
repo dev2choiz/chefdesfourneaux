@@ -4,7 +4,7 @@ namespace Application\Models;
 
 
 
-class ViewPanier extends \Library\Model\Modelview{
+class ViewCategorie extends \Library\Model\Modelview{
 
 
 	public function __construct($connexionName){
@@ -13,11 +13,11 @@ class ViewPanier extends \Library\Model\Modelview{
 
 
 	/**
-	 * [getViewPanier pour obtenir la view d'une panier]
+	 * [getViewCategorie pour obtenir la view d'une panier]
 	 * @param  [int] $idUser [id de la panier]
 	 * @return [array] 
 	 */
-	public function getViewPanierByUser($idUser){
+	public function getViewCategorie($idCat){
 
 		$opts = array('http' =>
 		    array(
@@ -25,9 +25,9 @@ class ViewPanier extends \Library\Model\Modelview{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'viewpanier',				
-							        'method' => 'getviewpanier',
-							        'id_user' => $idUser
+							        'service' => 'viewcategorie',				
+							        'method' => 'getviewcategorie',
+							        'id_cat' => $idCat
 							    )
 		    				)
 		        )

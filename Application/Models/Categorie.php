@@ -30,7 +30,7 @@ class Categorie extends \Library\Model\Model{
 
 		$context  = stream_context_create($opts);
 		
-		return json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) );
+		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
 		
 	}
 
