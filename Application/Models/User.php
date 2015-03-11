@@ -10,7 +10,7 @@ class User extends \Library\Model\Model{
 	}
 
 
-	public function login($params){
+	public function login($mail, $password){
 		$opts = array('http' =>
 		    array(
 		        'method'  => 'POST',
@@ -19,7 +19,8 @@ class User extends \Library\Model\Model{
 								array(
 							        'service' => 'user',				
 							        'method' => 'authentification',
-							        'params'=> json_encode($params)
+							        'mail'=> $mail,
+							        'password'=>$password
 							    )
 		    				)
 		        )
