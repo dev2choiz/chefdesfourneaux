@@ -1,10 +1,12 @@
 .row{
 	margin-top: 10%;
-	background-color: rgb(255,255,221);
+	background-color: rgba(255,255,221,0.2);
 	border: solid 1px;
+	border-color: rgb(95,95,95);
 	border-radius: 10px;
 }
 
 h1{
 	text-align: center;
+	margin-left: 50%;
 }

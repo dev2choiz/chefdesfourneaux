@@ -1,6 +1,10 @@
 <?=$parametresJs?>
 
+<?php if(empty($_SESSION['user'])): ?>
+	<h1>Nous vous informaons que pour acheter un produit, il est nécessaire d'être inscrits</h1>
+	<p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'user/inscription'?>" role="button">Inscription</a></p>
 
+<?php endif: ?>
 
 
 <div class="row" id="WrapperAddProduit">
