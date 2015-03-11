@@ -78,7 +78,7 @@ class User extends \Library\Controller\Controller{
 			
 			$modelUser = new \Application\Models\User('localhost');
 
-			$user = $modelUser->login(array("mail"=>$_SESSION['user']['mail'], "password"=>$_POST['currentpassword']));
+			$user = $modelUser->login($_SESSION['user']['mail'], $_POST['currentpassword']);
 			//$user=$modelUser->convEnTab($user['response'][0]);
 			$user=$modelUser->convEnTab($user);
 			$user=$user['response'][0];
@@ -100,7 +100,7 @@ class User extends \Library\Controller\Controller{
 
 
 					//recupere les nouvelles données de l'utlisateur
-					$user = $modelUser->convEnTab($modelUser->login(array( 'mail'=>$_POST['mail'], 'password'=>$password ) ) );
+					$user = $modelUser->convEnTab($modelUser->login($_POST['mail'], $password['password'] ) );
 					$user=$user ['response'][0];
 					if(!empty($user)){
 						$_SESSION['user'] = $user;
@@ -162,7 +162,7 @@ class User extends \Library\Controller\Controller{
 			
 			$modelUser = new \Application\Models\User('localhost');
 			
-			$user = $modelUser->convEnTab($modelUser->login($_POST) );
+			$user = $modelUser->convEnTab($modelUser->login($_POST['mail'], $_POST['password']) );
 			
 			/*object(stdClass)[9]
 			  public 'response' => 
