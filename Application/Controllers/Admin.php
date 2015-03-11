@@ -552,8 +552,8 @@ class Admin extends \Library\Controller\Controller{
 		//recherche des categories
 		$modelCategorie 	= new \Application\Models\Categorie('localhost');
 		$cat=$modelCategorie->getCategories();
-		$cat=$cat->response;
-		$cat=$modelCategorie->convEnTab($cat);
+		$cat=$cat['response'];
+		//$cat=$modelCategorie->convEnTab($cat);
 
 
 		//recherche des ingredients

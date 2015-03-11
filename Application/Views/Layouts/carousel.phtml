@@ -96,14 +96,19 @@
             
         </div>
         <div class="container marketing">
-            <div class="content_view">
-
-                <div class="row col-md-3 col-md-offset-3">
-                    <div class="panier" id="panier">
-                        Panier = 
-                        <div class="panierContent" id="panierContent">0</div>
-                    </div>
+            
+            <div class="row">
+                <div class="panier col-xs-6 col-md-4"></div>
+                <div class="panier col-xs-6 col-md-4"></div>
+                <div class="panier col-xs-6 col-md-4" id="panier">
+                    <a href="<?=LINK_ROOT.'panier/indexpanier/'.$_SESSION['user']['id_user']?>"> 
+                        Votre Panier : 
+                        <div class="panierContent" id="panierContent">0 </div>
+                        articles
+                    </a>
                 </div>
+            </div>
+            <div class="content_view">
                 <?=$content_view?>
             </div>
         
