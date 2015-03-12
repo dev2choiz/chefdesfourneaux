@@ -51,4 +51,5 @@ class Autoloader
 		$pathFile = self::$basePath . str_replace('\\', DIRECTORY_SEPARATOR, $class) . ".php";
 		require_once($pathFile);
 	}
+	
 }

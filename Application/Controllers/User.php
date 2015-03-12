@@ -1,5 +1,5 @@
 <?php
- 
+
 namespace Application\Controllers;
 
 class User extends \Library\Controller\Controller{
