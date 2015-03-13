@@ -64,7 +64,6 @@ function ajouterProduit(){
         async :true,
         success: function(data) {
 
-            //console.log("############################################",data); //
             ids=parseInt((data['response']));
             script = recupererScriptNewProduit(ids) ;
 
