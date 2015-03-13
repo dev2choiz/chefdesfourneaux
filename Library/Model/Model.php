@@ -40,4 +40,10 @@ abstract class Model{
 		}
 		return $tab;
 	}
+
+
+	public function isConnect(){
+		return empty($_SESSION['user'] )?false:true;
+	}
+
 }

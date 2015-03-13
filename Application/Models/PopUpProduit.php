@@ -82,23 +82,24 @@ class PopUpProduit extends \Library\PopUp\PopUp{
 
 
 public function getAcheterPopup($idProd, $prix, $ref, $value){
-		return
-		"
-		<script type='text/javascript'>
-			
-			$(document).ready(function(){
+		if(!empty($_SESSION['user'])){
+			return "
+				<script type='text/javascript'>
+					
+					$(document).ready(function(){
 
-				//ajoute au panier apres un click
-				$('#WrapperProduit$idProd #btnAcheterProduit')
-					.click(function(){
-						ajouterAuPanier({$_SESSION['user']['id_user']}, $idProd);
-						
+						//ajoute au panier apres un click
+						$('#WrapperProduit$idProd #btnAcheterProduit')
+							.click(function(){
+								ajouterAuPanier({$_SESSION['user']['id_user']}, $idProd);
+								
+							});
+
 					});
-
-			});
-		</script>
-
-		";
+				</script>";
+		}else{
+				return "";
+		}
 	}
 
 }

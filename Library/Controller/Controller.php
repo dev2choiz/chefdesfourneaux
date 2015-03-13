@@ -318,4 +318,10 @@ abstract class Controller implements iController
 	}
 
 
+
+	public function isConnect(){
+		return empty($_SESSION['user'] )?false:true;
+	}
+
+
 }

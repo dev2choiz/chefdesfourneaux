@@ -13,13 +13,14 @@ class Produit extends \Library\Controller\Controller{
 		$this->setLayout("carousel");
 		$this->message 				= new \Library\Message\Message();
 		$this->modelCat 			= new \Application\Models\Categorie('localhost');
-		$this->modelViewProduit 	= new \Application\Models\Produit('localhost');
+		//$this->modelViewProduit 	= new \Application\Models\Produit('localhost');
+		$this->modelViewProduit 	= new \Application\Models\ViewProduit('localhost');
 	}
 
 	public function indexAction(){
 		
-		$viewAllProduits = $this->modelViewProduit->getProduits() ;			
-
+		//$viewAllProduits = $this->modelViewProduit->getAllProduits();
+		$viewAllProduits = $this->modelViewProduit->getAllViewProduits();
 
 
 		if(empty($viewAllProduits['response'])){

@@ -33,7 +33,7 @@ class Vente extends \Library\Controller\Controller{
 	
 
 	public function indexProduitAction(){
-		echo "<br><br><br><br><br>";
+		echo "<br><br><br><br><br><br><br><br><br><br>";
 		echo "";
 		
 
@@ -51,30 +51,24 @@ class Vente extends \Library\Controller\Controller{
 																$produit['prix'], 
 																$produit['ref'],
 																$produit['value']);
-
-			$tst=$this->modelPanier->existeDansPanier($_SESSION['user']['id_user'], $produit['id_produit']);
-			
-			if (!$tst['response']) {
-				$produits[$key]['acheterpopup']=$this->modelPopUpProduit->getAcheterPopup(
-																$produit['id_produit'], 
-																$produit['prix'], 
-																$produit['ref'],
-																$produit['value']);
-			}else{		//si le produit est deja dans le panier
-				$produits[$key]['acheterpopup']="";
+			if(!empty($_SESSION['user'])){
+				$tst=$this->modelPanier->existeDansPanier($_SESSION['user']['id_user'], $produit['id_produit']);
 			}
+			
+			$produits[$key]['acheterpopup']=$this->modelPopUpProduit->getAcheterPopup(
+															$produit['id_produit'], 
+															$produit['prix'], 
+															$produit['ref'],
+															$produit['value']);
+			
 		}
 		
 		
 		$this->setDataView(array(
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
-			'produits' => $produits,
-			
-			"parametresJs"			=> "
-			<script type='text/javascript'>
-				urlWebService='".WEBSERVICE_ROOT."/index.php';
-				id_user ='".$_SESSION['user']['id_user']."';
-			</script>"));
+			'produits' => $produits
+								)
+							);
 
 		$this->setStyleView('popup.css');
 
@@ -89,17 +83,15 @@ class Vente extends \Library\Controller\Controller{
 
 		$this->setDataView(array(
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
-			'produit' => $produit['response'][0],
-			"urlWebService"			=> "
-			<script type='text/javascript'>
-				urlWebService='".WEBSERVICE_ROOT."/index.php';\n
-			</script>"));
+			'produit' => $produit['response'][0]
+								)
+							);
 
 	}
 
 
 	public function payerAction(){
-		
+		echo '<br><br><br><br><br><br>';
 
 		$this->setDataView(array(
 			"pageTitle" => "Finalisation de votre commande",
