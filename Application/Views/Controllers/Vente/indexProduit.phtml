@@ -1,10 +1,10 @@
-<?=$parametresJs?>
+
 
 <?php if(empty($_SESSION['user'])): ?>
-	<h1>Nous vous informaons que pour acheter un produit, il est nécessaire d'être inscrits</h1>
+	<h1>Nous vous informons que pour acheter un de nos produit, il est nécessaire d'être inscrit pour plus de sécurité ! </h1>
 	<p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'user/inscription'?>" role="button">Inscription</a></p>
 
-<?php endif: ?>
+<?php endif; ?>
 
 
 <div class="row" id="WrapperAddProduit">
@@ -55,10 +55,8 @@
 				?>
 				<button class='btn btn-success col-md-3 col-md-offset-3 btnAcheterProduit' id="btnAcheterProduit" <?=$btnAchterVisible?> >Mettre ce produit dans mon panier</button>
 				<div class="row">
-					<?=$produit['acheterpopup']?>
+					<?=['acheterpopup']?>
 				</div>
-
-
 
 			</div>
 			

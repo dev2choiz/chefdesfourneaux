@@ -160,8 +160,7 @@ class Admin extends \Library\Controller\Controller{
 		//recherche des categories
 		$modelCategorie 	= new \Application\Models\Categorie('localhost');
 		$cat=$modelCategorie->getCategories();
-		$cat=$cat->response;
-		$cat=$modelCategorie->convEnTab($cat);
+		$cat=$cat['response'];
 
 		$this->setDataView(array("categories" =>  $cat));
 
@@ -310,8 +309,7 @@ class Admin extends \Library\Controller\Controller{
 		//recherche des categories
 		$modelCategorie 	= new \Application\Models\Categorie('localhost');
 		$cat=$modelCategorie->getCategories();
-		$cat=$cat->response;
-		$cat=$modelCategorie->convEnTab($cat);
+		$cat=$cat['response'];
 
 
 		//recherche des ingredients
@@ -354,8 +352,6 @@ class Admin extends \Library\Controller\Controller{
 			$modelVR 	= new \Application\Models\ViewRecette('localhost');
 			$viewR 		= $modelVR->getViewRecette($idRecette);
 			$viewR 		= $viewR['response'];
-			//var_dump($viewR);
-
 		}
 
 
@@ -425,8 +421,7 @@ class Admin extends \Library\Controller\Controller{
 			"ajaxIngredientButton" => $viewButtonShowDivIngredient,
 			"ajaxIngredientScript" =>	$codeAjaxIngredient,
 			"ajaxCategorieButton" => $viewButtonShowDivCategorie,
-			"ajaxCategorieScript" =>	$codeAjaxCategorie,																																																//la virgule
-			"ingRecherche" => $ingRecherche			//<==????????????????
+			"ajaxCategorieScript" =>	$codeAjaxCategorie
 		));
 
 
@@ -582,11 +577,5 @@ class Admin extends \Library\Controller\Controller{
 
 
 	}
-
-
-
-
-
-
 
 }

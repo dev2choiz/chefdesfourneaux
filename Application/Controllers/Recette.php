@@ -63,7 +63,7 @@ class Recette extends \Library\Controller\Controller{
 	}
 
 
-	public function indexCategorieAction($categorie, $idCategorie){
+	public function indexCategorieAction($idCategorie){
 
 		$viewAllCats  	= $this->modelViewCat->getViewCategorie($idCategorie);
 		$viewAllCats 	= $viewAllCats['response'];
@@ -81,14 +81,13 @@ class Recette extends \Library\Controller\Controller{
 		}*/
 		
 		$this->setDataView(array(
-			"pageTitle" 		=> "Recettes ",
+			"pageTitle" 		=> "Recettes ".$titreCat,
 			"message" 			=> $this->message->showMessages(),
 			"recettes"			=> $viewAllCats,
-			"categorie"			=> $categorie,
 			"titreCat"			=> $titreCat
 		));
 	}
-	public function categorieAction($categorie, $idRecette){
+	public function categorieAction($idRecette){
 
 
 		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($idRecette);
@@ -185,131 +184,32 @@ class Recette extends \Library\Controller\Controller{
 
 
 		$viewAllRecettes  	= $this->modelViewRecette->getAllViewRecettes();
-		var_dump($viewAllRecettes);
+		//var_dump($viewAllRecettes);
 		$viewAllRecettes 	= $viewAllRecettes['response'];
 
-		var_dump($viewAllRecettes); 		
+		//var_dump($viewAllRecettes); 		
 		
 		
 		$this->setDataView(array(
 			"pageTitle" 	=> "Recettes de chef cuisiniers",
 			"message" 		=> $this->message->showMessages(),
-			"tinyMCE" 		=> $this->tinyMCE->getSource(),
 			"recettes"		=> $viewAllRecettes
 		));
+
+		$this->setStyleView('indexchef.css');
 	}
 
-	public function chefAction($id){
-		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($id);
+	public function chefAction($idRecette){
+		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($idRecette);
 		$viewRecette 		= $viewRecette['response'][0];
 		$this->setDataView(array(
 			"pageTitle" 	=> $viewRecette['titre'],
 			"message" 		=> $this->message->showMessages(),
-			"tinyMCE" 		=> $this->tinyMCE->getSource(),
+			"tinyMCECommentaire" 	=> $this->tinyMCE->getEditeurCommentaire(),
 			"recette"		=> $viewRecette 
 		));
 	}
 	
-
-
-	public function indexSanteAction(){
-		$viewAllRecettes  	= $this->modelViewRecette->getAllViewRecettes();
-		$viewAllRecettes 	= $viewAllRecettes['response'];
-		//var_dump($viewAllRecettes);
-		$this->setDataView(array(
-			"pageTitle" => "Recette santé, régime, cuisine légère",
-			"message" => $this->message->showMessages(),
-			"recettes"		=> $viewAllRecettes
-		));
-	}
-
-	public function santeAction($idRecette){
-		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($idRecette);
-		$viewRecette 		= $viewRecette['response'];
-		//var_dump($viewRecette);
-
-		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
-			unset($_POST['btn']);
-			//var_dump($_POST);
-			$res =$modelCommentaire->insertCommentaire($_POST);
-
-			if ($res['error']) {
-				//$this->message->addError("erreur pendant la recuperation des commentaires !");
-			}
-
-			$res=$res['response'];
-			
-			if ($res>0  ) {		//res est vaut l'id du comm
-				
-				$this->message->addSuccess("Commentaire ajouté");
-
-			}else{
-				$this->message->addError("Commentaire non ajouté");
-			}
-		
-
-
-			//################## données pour la view ############################
-
-		//recherche des commentaires
-		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
-		$viewComms = $modelCommentaire->getCommentaires($idRecette);
-
-		$viewComms = $viewComms['response'];
-
-		$this->setDataView(array(
-			"pageTitle" => "Recette santé, régime, cuisine légère",
-			"message" 		=> $this->message->showMessages(),
-			"viewCommentaires" => $viewComms,
-			"tinyMCECommentaire" => $this->tinyMCE->getEditeurCommentaire(),
-			"recette"		=> $viewRecette 
-		));
-	}
-
-	public function authentiqueAction($idRecette){
-		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($idRecette);
-		$viewRecette 		= $viewRecette['response'];
-		//var_dump($viewRecette);
-
-		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
-		unset($_POST['btn']);
-		//var_dump($_POST);
-		$res =$modelCommentaire->insertCommentaire($_POST);
-		//var_dump("res : ", $res);
-
-		if ($res['error']) {
-			//$this->message->addError("erreur pendant la recuperation des commentaires !");
-		}
-
-		$res=$res['response'];
-		
-		if ($res>0  ) {		//res est vaut l'id du comm
-			
-			$this->message->addSuccess("Commentaire ajouté");
-
-		}else{
-			$this->message->addError("Commentaire non ajouté");
-		}
-		
-
-
-			//################## données pour la view ############################
-
-		//recherche des commentaires
-		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
-		$viewComms = $modelCommentaire->getCommentaires($idRecette);
-
-		$viewComms = $viewComms['response'];
-
-		$this->setDataView(array(
-			"pageTitle" => "Recette santé, régime, cuisine légère",
-			"message" 		=> $this->message->showMessages(),
-			"viewCommentaires" => $viewComms,
-			"tinyMCECommentaire" => $this->tinyMCE->getEditeurCommentaire(),
-			"recette"		=> $viewRecette 
-		));
-	}
-
 
 
 	public function logoutAction(){		//a effacer?
