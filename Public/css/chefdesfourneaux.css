@@ -2,12 +2,15 @@
  	background-color: #FFF;
 	font-weight: bold;
 }
-.nav, navbar-nav {
+.container{
+	background-color: #FFF;
 	font-weight: bold;
 }
+.navbar-brand:hover{
+}
 
-.container_view{
-	margin-top: 30%;
+.content_view{
+	margin-top: 10%;
 	
 }
 
@@ -77,10 +80,14 @@
 /* Fin de la mise en forme des ingrédients */
 
 /* Mise en forme Panier*/
-.panier{
+#panier{
 	/*background-color: rgba(222,222,222,1);*/
-	position: relative;
+	position: absolute;
 	z-index: 2000;
+	top:0;
+	left:78%;
+	display: inline;
+
 	/*display: block;
 	margin-left: 200%;
 	padding-left: 20%;
@@ -88,5 +95,13 @@
 	/*height: 50px;
 	width:100%;
 	overflow: hidden;*/
+}
+
+#panier .btn-default{
+	background-color: rgba(181,237,192,0.5);
+}
+
+#panierContent{
+	display: inline;
 }
 /* Fin Mise en forme Panier*/

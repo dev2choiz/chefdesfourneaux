@@ -4,49 +4,17 @@
 <hr class="featurette-divider">
 <?php foreach($recettes as $recette): ?>
  <div class="col-md-4">
-        <h3 class="featurette-heading"><?=$recette['value']?> <span class="text-muted"></span></h3>
+        <a href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> <h1><?=$recette['value']?> <span class="text-muted"></span></h1></a>
+        <!-- ../../../..<?=$recette['img']?> -->
         <p class="lead"><img class="img-thumbnail img-responsive" src="<?=WEB_ROOT?>/img/monde.jpg" alt="plat"></p>
         </div>  
-
-    <!-- <div class="row featurette">
-        
-        <div class="col-md-4">
-        <img class="img-thumbnail img-responsive" src="<?=WEB_ROOT?>/img/monde.jpg" alt="plat">
-        </div>
-    </div> -->
 <?php endforeach;?>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-    <div class="col-md-5">
-    <img class="featurette-image img-responsive" src="<?=WEB_ROOT?>/img/entree2.jpg" alt="Generic placeholder image">
-    </div>
-    <div class="col-md-7">
-    <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-    </div>
-    </div>
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-    <div class="col-md-7">
-    <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-    </div>
-    <div class="col-md-5">
-    <img class="featurette-image img-responsive" src="<?=WEB_ROOT?>/img/dessert3.jpg" alt="Generic placeholder image">
-    </div>
-    </div>
-
-    <hr class="featurette-divider">
 
  <!-- /END THE FEATURETTES -->
 	
 
 
-    <a href="<?=LINK_ROOT?>">Retour à l'accueil</a> - 
+    <a href="<?=LINK_ROOT?>">Retour à l'accueil</a> 
 	
 </form>
 
