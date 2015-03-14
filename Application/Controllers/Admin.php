@@ -111,16 +111,18 @@ class Admin extends \Library\Controller\Controller{
 			
 			$res = $modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
 
-			$res=get_object_vars(json_decode($res));
-			$res=$res['response'];
+			$res = get_object_vars(json_decode($res));
+			$res = $res['response'];
 
 
 
 	        $root = $_FILES['img']['tmp_name'];
-	        $img = PUB_ROOT.'img/'.$res.$_FILES['img']['name'];
+	        $img = IMG_ROOT.$res.$_FILES['img']['name'];
+	        //$img = PUB_ROOT.'img/'.$res.$_FILES['img']['name'];
 
 	        if(copy($root, $img )){
-	        	$_POST['img'] = WEB_ROOT."img/".$res.$_FILES['img']['name'];
+	        	//$_POST['img'] = WEB_ROOT."img/".$res.$_FILES['img']['name'];
+	        	$_POST['img'] = IMG_ROOT.$res.$_FILES['img']['name'];
 	        }else{
 	        	$this->message->addError("Pb avec l'insertion de l'image");
 	        }
