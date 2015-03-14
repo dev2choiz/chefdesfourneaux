@@ -31,7 +31,7 @@
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                                 <span class="sr-only">Toggle navigation</span>
-                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
@@ -62,7 +62,6 @@
                                         <?php else :?>
                                         <li><a href="<?=LINK_ROOT.'user/profil'?>">
                                                 <span class="glyphicon glyphicon-user"></span>
-                                                <span class="glyphicon glyphicon-shopping-cart"></span>
                                             </a>
                                         </li>
                                         <li><a class="blog-nav-item" href="<?=LINK_ROOT.'user/logout'?>">Deconnexion</a></li>
@@ -92,34 +91,28 @@
 
         <!-- Marketing messaging and featurettes
         ================================================== -->
-        <div>
-            
+        <div class="row">
+
+            <div class="panier col-xs-6 col-md-4" id="panier">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                <?php if(!empty($_SESSION['user'])): ?>
+                <a class="btn btn-default" href="<?=LINK_ROOT.'panier/indexpanier/'.$_SESSION['user']['id_user']?>"> 
+                    Votre Panier : 
+                    <div class="panierContent" id="panierContent">0 </div>
+                    articles
+                </a>
+                <?php else: ?>
+                    <a class="btn btn-default" href="<?=LINK_ROOT.'vente/indexproduit/'?>"> Acheter des produits</a>
+                <?php endif; ?>
+            </div>
         </div>
         <div class="container marketing">
             
-            <div class="row">
-                <div class="panier col-xs-6 col-md-4"></div>
-                <div class="panier col-xs-6 col-md-4"></div>
-                <div class="panier col-xs-6 col-md-4" id="panier">
-                    <?php if(!empty($_SESSION['user'])): ?>
-                    <a href="<?=LINK_ROOT.'panier/indexpanier/'.$_SESSION['user']['id_user']?>"> 
-                        Votre Panier : 
-                        <div class="panierContent" id="panierContent">0 </div>
-                        articles
-                    </a>
-                    <?php else: ?>
-                        <a href="<?=LINK_ROOT.'vente/indexproduit/'?>"> Acheter des produits</a>
-
-                    <?php endif; ?>
-                </div>
-            </div>
+            
             <div class="content_view">
                 <?=$content_view?>
             </div>
-        
-        
-
-
+  
             <!-- FOOTER -->
             <footer>
             <p class="pull-right"><a href="#">Back to top</a></p>
