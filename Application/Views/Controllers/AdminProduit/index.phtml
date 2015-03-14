@@ -7,10 +7,10 @@
 <?php endif; ?>
 
 
-<!-- <div class="row" id="WrapperAddProduit">
-<br/><br/><br/>
+<div class="row" id="WrapperAddProduit">
+<br/><br/><br/><br/><br/>
 	
-<h2>Ajouter un Produit</h2>
+<button class='btn btn-primary col-md-3 col-md-offset-3' >Ajouter un Produit</button>
 	Nom du produit : <input name="value" type="text" id="value">
 	<br/>
 	Prix : <input name="prix" type="text" id="prix">
@@ -19,7 +19,7 @@
 	<br/>
 	<button class="btn btn-warning" name="btnAjouterProduit" type="submit" id="btnAjouterProduit">Valider</button>
 
-</div> -->
+</div>
 
 
 <h1>Liste des Produits disponibles</h1>
@@ -40,16 +40,16 @@
 			
 
 			<div >
-				<!-- <button class='btn btn-primary btn-xs col-md-offset-3 popupProduit' id="popupProduit<?=$produit['id_produit']?>" >Modifier ce Produit</button>
+				<button class='btn btn-primary btn-xs col-md-offset-3 popupProduit' id="popupProduit<?=$produit['id_produit']?>" >Modifier ce Produit</button>
 				<div class="row">
-					?=$produit['modifierpopup']?
-				</div> -->
+					<?=$produit['modifierpopup']?>
+				</div>
 
 				
-				<button class='btn btn-success col-md-3 col-md-offset-3 btnAcheterProduit' id="btnAcheterProduit"  >Mettre ce produit dans mon panier</button>
+				<!-- <button class='btn btn-success col-md-3 col-md-offset-3 btnAcheterProduit' id="btnAcheterProduit"  >Mettre ce produit dans mon panier</button>
 				<div class="row">
-					<?=$produit['acheterpopup']?>
-				</div>
+					<?php $produit['acheterpopup'] ?>
+				</div> -->
 
 				
 

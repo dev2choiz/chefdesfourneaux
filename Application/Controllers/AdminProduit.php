@@ -2,13 +2,14 @@
  
 namespace Application\Controllers;
 
-class Admin extends \Library\Controller\Controller{
+class AdminProduit extends \Library\Controller\Controller{
 
 	private $message;
 	private $tinyMCE;
-	private $modelProduit;
+	private $modelProduits;
 	private $modelViewProduit; 
-	private $modelPopUp;	//<==effacer
+	private $modelPopUpProduit;
+	private $modelPanier;
 	private $modelShowDiv;
 	private $modelAjax;
 
@@ -17,34 +18,74 @@ class Admin extends \Library\Controller\Controller{
 		parent::__construct();
 		$this->setLayout("carousel");
 		$this->message 				= new \Library\Message\Message();
+
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
-		$this->modelProduit 		= new \Application\Models\Produit('localhost');
+		$this->modelProduits 		= new \Application\Models\Produit('localhost');
 		$this->modelViewProduit 	= new \Application\Models\ViewProduit('localhost');
-		$this->modelPopUp 			= new \Application\Models\PopUp();
+		$this->modelPanier			= new \Application\Models\Panier('localhost');
+		$this->modelPopUpProduit	= new \Application\Models\PopUpProduit();
 		$this->modelShowDiv 		= new \Application\Models\ShowDiv();
 		$this->modelAjax 			= new \Application\Models\Ajax();
 	}
 
 
 	public function indexAction(){
-				echo "<BR><BR><BR>";
-		if($_SESSION['user']['role'] !== "admin"){
+		echo "<BR><BR><BR>";
+
+
+		if( !$this->isConnected() || $_SESSION['user']['role'] !== "admin" ){
 			$this->setRedirect(LINK_ROOT);
 		}
-		//$viewR = $this->modelVR->getRecettes();
-		$viewRs = $this->modelVR->getAllViewRecettes();
-		//var_dump("dfjk", $viewRs);
-		//var_dump($viewRs['page']."fdgfd");
+	
 
+		$produits = $this->modelProduits->getAllProduits();
+		$produits = $produits['response'];
+		
+
+		
+
+		// Ajoute les infos du produits au html
+		foreach ($produits as $key => $produit) {
+
+			$produits[$key]['modifierpopup']=$this->modelPopUpProduit->getModifPopup(
+																$produit['id_produit'], 
+																$produit['prix'], 
+																$produit['ref'],
+																$produit['value']);
+
+
+			/* if(!empty($_SESSION['user'])){
+				$tst=$this->modelPanier->existeDansPanier($_SESSION['user']['id_user'], $produit['id_produit']);
+			} */
+			
+			/*$produits[$key]['acheterpopup']=$this->modelPopUpProduit->getAcheterPopup(
+															$produit['id_produit'], 
+															$produit['prix'], 
+															$produit['ref'],
+															$produit['value']);*/
+
+		}
+		
+		
 		$this->setDataView(array(
-			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
-			"message" => $this->message->showMessages(),
-			"recettes" => $viewRs['response']
-		));
+			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
+			'produits' => $produits
+			)
+		);
+
+		$this->setStyleView('popup.css');
+
+		$this->setScriptView('produit.js');
+
+
+
+
+
+	
 	}
 
 
-	public function creerRecetteAction(){
+	/*public function creerRecetteAction(){
 		
 
 		//echo "creer    ".LINK_ROOT."recette/creer";
@@ -199,7 +240,7 @@ class Admin extends \Library\Controller\Controller{
 	 * [mettreAJourRecetteAction : l'addresse fini avec un parametre get : ]
 	 * 							http://localhost/fourneaux/admin/mettreajourrecette/12
 	 * @return [type] [description]
-	 */
+	 /
 	public function mettreAJourRecetteAction($idRecette){
 
 		echo "<br><br><br><br>".$idRecette;
@@ -487,5 +528,7 @@ class Admin extends \Library\Controller\Controller{
 
 	public function logoutAction(){
 		session_unset();
-	}
+	}*/
+
+
 }

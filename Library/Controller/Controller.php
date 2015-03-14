@@ -183,9 +183,14 @@ abstract class Controller implements iController
 	 * @return void
 	 */
 	private function addFilesRender(&$html){
-		if(!empty($_SESSION['user'])){
+		if( !empty($_SESSION['user']) ){
 			$html = str_replace('</body>', "<script type='text/javascript'>
-												id_user ='".$_SESSION['user']['id_user']."';
+												idUser ='".$_SESSION['user']['id_user']."';
+												urlWebService='".WEBSERVICE_ROOT."/index.php';
+											</script></body>", $html);
+		}else{
+			$html = str_replace('</body>', "<script type='text/javascript'>
+												idUser ='rien';
 												urlWebService='".WEBSERVICE_ROOT."/index.php';
 											</script></body>", $html);
 		}
@@ -315,6 +320,12 @@ abstract class Controller implements iController
 			}
 		}
 		return false;
+	}
+
+
+
+	public function isConnected(){
+		return empty($_SESSION['user'] )?false:true;
 	}
 
 

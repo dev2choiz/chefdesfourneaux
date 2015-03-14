@@ -1,11 +1,12 @@
 // Définitions de constantes utilisables dans tout le fichier
 
-API_URL = "http://localhost/webservice/Public/index.php"
+
 
 
 
 $(document).ready(function(){
-		actualiserPanier(id_user);
+		if(idUser==='rien') return false;
+		actualiserPanier(idUser);
 	}
 );
 
@@ -58,6 +59,9 @@ function ajouterAuPanier(idUser, idProd){
 
 
 function actualiserPanier(idUser){
+
+
+
 	jsonData = 
 	{
 		'service' 		: 'panier',

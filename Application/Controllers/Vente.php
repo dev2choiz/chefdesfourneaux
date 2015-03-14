@@ -33,6 +33,9 @@ class Vente extends \Library\Controller\Controller{
 	
 
 	public function indexProduitAction(){
+		echo "<br><br><br><br><br><br><br><br><br><br>";
+		echo "";
+		// if($_SESSION['user']['role'] !== "admin") $this->setRedirect(LINK_ROOT);
 
 		$produits = $this->modelProduits->getAllProduits();
 		$produits = $produits['response'];
@@ -43,30 +46,31 @@ class Vente extends \Library\Controller\Controller{
 		// Ajoute les infos du produits au html
 		foreach ($produits as $key => $produit) {
 
-			$produits[$key]['modifierpopup'] = $this->modelPopUpProduit->getModifPopup(
+			/*$produits[$key]['modifierpopup']=$this->modelPopUpProduit->getModifPopup(
 																$produit['id_produit'], 
 																$produit['prix'], 
 																$produit['ref'],
-																$produit['value']);
+																$produit['value']);*/
 
-			$tst=$this->modelPanier->existeDansPanier($_SESSION['user']['id_user'], $produit['id_produit']);
+
+			/*if(!empty($_SESSION['user'])){
+				$tst=$this->modelPanier->existeDansPanier($_SESSION['user']['id_user'], $produit['id_produit']);
+			}*/
 			
-			if (!$tst['response']) {
-				$produits[$key]['acheterpopup'] = $this->modelPopUpProduit->getAcheterPopup(
-																$produit['id_produit'], 
-																$produit['prix'], 
-																$produit['ref'],
-																$produit['value']);
-			}else{		//si le produit est deja dans le panier
-				$produits[$key]['acheterpopup'] = "";
-			}
+			$produits[$key]['acheterpopup']=$this->modelPopUpProduit->getAcheterPopup(
+															$produit['id_produit'], 
+															$produit['prix'], 
+															$produit['ref'],
+															$produit['value']);
+
 		}
 		
 		
 		$this->setDataView(array(
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
-			'produits' => $produits,
-			));
+			'produits' => $produits
+			)
+		);
 
 		$this->setStyleView('popup.css');
 
@@ -81,21 +85,21 @@ class Vente extends \Library\Controller\Controller{
 
 		$this->setDataView(array(
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
-			'produit' => $produit['response'][0],
-			"urlWebService"			=> "
-			<script type='text/javascript'>
-				urlWebService='".WEBSERVICE_ROOT."/index.php';\n
-			</script>"));
+			'produit' => $produit['response'][0]
+			)
+		);
 
 	}
 
 
 	public function payerAction(){
-		
+		echo '<br><br><br><br><br><br>';
 
 		$this->setDataView(array(
 			"pageTitle" => "Finalisation de votre commande",
-			));
+			)
+		);
+
 	}
 
 
@@ -111,7 +115,8 @@ class Vente extends \Library\Controller\Controller{
 		$this->setDataView(array(
 			"pageTitle" => "Livres de Cuisine",
 			"ajax" => $ajax
-			));
+			)
+		);
 	}
 
 	public function livreAction(){
@@ -128,7 +133,8 @@ class Vente extends \Library\Controller\Controller{
 		$this->setDataView(array(
 			"pageTitle" => "Nos restaurants partenaires",
 			"ajax" => $ajax
-			));
+			)
+		);
 
 
 	}
