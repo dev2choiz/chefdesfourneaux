@@ -81,6 +81,7 @@ class User extends \Library\Controller\Controller{
 			$user = $modelUser->login($_SESSION['user']['mail'], $_POST['currentpassword']);
 			//$user=$modelUser->convEnTab($user['response'][0]);
 			$user=$modelUser->convEnTab($user);
+			var_dump("dqdf", $user);
 			$user=$user['response'][0];
 			//var_dump("dqdf", $user);
 			if(!empty($user)){
@@ -89,9 +90,11 @@ class User extends \Library\Controller\Controller{
 				unset( $_POST['btn'],$_POST['password'], $_POST['confpassword'], $_POST['currentpassword'], $listMessage);
 
 				$_POST['password']=$password;		//<== new password
+				var_dump($_POST);
 				$res=$modelUser->convEnTab($modelUser->updateUser($_SESSION['user']["id_user"],$_SESSION['user']["mail"] , $currentPassword, $_POST));
 				//echo "############".$res['page']."#############";
-				
+				var_dump("resulta", $res);
+				echo $res['page'];
 				$res=$res['response'];
 
 				//var_dump("fdf",$res, $_POST ,"df");
@@ -100,7 +103,8 @@ class User extends \Library\Controller\Controller{
 
 
 					//recupere les nouvelles données de l'utlisateur
-					$user = $modelUser->convEnTab($modelUser->login($_POST['mail'], $password['password'] ) );
+					$user = $modelUser->convEnTab( $modelUser->login( $_POST['mail'], $_POST['password'] ) );
+
 					$user=$user ['response'][0];
 					if(!empty($user)){
 						$_SESSION['user'] = $user;

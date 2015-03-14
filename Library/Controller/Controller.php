@@ -183,17 +183,17 @@ abstract class Controller implements iController
 	 * @return void
 	 */
 	private function addFilesRender(&$html){
+		
+		$strIdUser="rien";
 		if( !empty($_SESSION['user']) ){
-			$html = str_replace('</body>', "<script type='text/javascript'>
-												idUser ='".$_SESSION['user']['id_user']."';
-												urlWebService='".WEBSERVICE_ROOT."/index.php';
-											</script></body>", $html);
-		}else{
-			$html = str_replace('</body>', "<script type='text/javascript'>
-												idUser ='rien';
-												urlWebService='".WEBSERVICE_ROOT."/index.php';
-											</script></body>", $html);
+			$strIdUser=$_SESSION['user']['id_user'];
 		}
+		$html = str_replace('</body>', "<script type='text/javascript'>
+											idUser ='$strIdUser';
+											urlImg='".IMG_ROOT."';
+											urlWebService='".WEBSERVICE_ROOT."/index.php';
+											</script></body>", $html);
+		
 		foreach ($this->scriptView as $s){		//lol trop fort
 			$html = str_replace('</body>', "<script src='".WEB_ROOT."/js/$s'></script></body>", $html);
 		}

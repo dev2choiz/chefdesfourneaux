@@ -5,6 +5,8 @@ $(document).ready(function(){
 	$('#divChoixIng').css('display', 'none');
 	$('#divChoixUnit').css('display', 'none');
 
+	$('#apercuImageCat').css('display', 'none');
+
 
 //$('#btnCat').css('display', 'block'); par defaut
 
@@ -24,6 +26,28 @@ $(document).ready(function(){
 			//masque divIng et divUnit
 			$('#divIng').css('display', 'none');
 			$('#divUnit').css('display', 'none');
+
+
+			$('#apercuImageCat').css('display', 'block');
+
+			var cat=document.getElementById('categories');
+
+			
+			str=recupererImageCat(cat.options[cat.selectedIndex].value);
+			
+			if (str==="") {
+				$('#wrapperImgCat').html("aucune image");
+			}else{
+				$('#wrapperImgCat').html("##<img src='"+str+"' alt='categorie' style='width:100px; height:100px;' />");
+			}
+
+			 alert(str);
+
+			
+
+
+
+			
 		}
 	);
 
@@ -269,8 +293,11 @@ function modifierCategorie(){
 	jsonData['id_cat']= cat.options[cat.selectedIndex].value;
     jsonData['value']	= $("#textCatModifier").val();
 
-	jsonData['img']=
-    //ImgCatModifier
+	jsonData['img']=$("#ImgCatModifier").val();
+	alert(jsonData['img']);
+
+
+    jsonData['img']
 
     console.log(jsonData);
 
@@ -524,3 +551,33 @@ function supprimerUnite(){
 
 
 
+
+function recupererImageCat(idCat){
+	unit=document.getElementById("unites");
+	jsonData={};
+	jsonData['service']= 'categorie';
+	jsonData['method']= 'getimagecategorie';
+	jsonData['id_cat']= idCat;
+
+
+    console.log(jsonData);
+
+    var res="";
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        async:false,
+        success: function(data) {
+            console.log("ici",data['response']);
+            if(data['response']===false){
+            	res= "";
+            }else{
+            	res= data['response'];
+            }
+        }
+    });
+    console.log("res",res);
+    return res;
+}

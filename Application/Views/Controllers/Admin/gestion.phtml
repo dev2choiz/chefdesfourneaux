@@ -17,6 +17,16 @@
               <option value="<?=$categorie['id_cat']?>"><?=$categorie['value']?></option> 
           <?php } ?>
         </select>
+        
+        <div id="apercuImageCat" >
+          <form >
+            <label for="ImgCatModifier" >image de la catégorie</label>
+            <input type="file" id="ImgCatModifier" name="img">
+            <input type="submmit">
+            <div id="wrapperImgCat">img<div>
+          </form>
+        </div>
+
 
         <div id="divChoixCat" >
             <input type="button" id="btnCatAjouter" value="Ajouter" >
@@ -27,12 +37,6 @@
                   <input type="text" id="textCatAjouter" value="" >
                   <input type="text" id="textCatModifier" value="" >
 
-                  <!-- modifier l'image -->
-                  <br>
-                  <div class="form-group">
-                      <label for="ImgCatModifier" >image de la catégorie</label>
-                      <input type="file" id="ImgCatModifier"  >
-                  </div>
 
                   <input type="button" id="btnCatValider" value="OK">
 
