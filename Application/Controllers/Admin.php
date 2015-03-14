@@ -122,7 +122,7 @@ class Admin extends \Library\Controller\Controller{
 
 	        if(copy($root, $img )){
 	        	//$_POST['img'] = WEB_ROOT."img/".$res.$_FILES['img']['name'];
-	        	$_POST['img'] = IMG_ROOT.$res.$_FILES['img']['name'];
+	        	$_POST['img'] = '/img/'.$res.$_FILES['img']['name'];
 	        }else{
 	        	$this->message->addError("Pb avec l'insertion de l'image");
 	        }
