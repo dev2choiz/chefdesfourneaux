@@ -30,23 +30,20 @@ class User extends \Library\Model\Model{
 		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
 	}
 
-	public function updateUser($id, $mail , $password, $params){		//id ou mail
+	public function updateUser($id, $mail , $password, $params){
 	
+
+		$params['service'] = 'user';
+		$params['method'] = 'updateuser';
+		$params['verifid_user'] = $id;
+		$params['verifmail'] = $mail;
+		$params['verifpassword'] = $password;
+		//var_dump("modeluser",$params);
 		$opts = array('http' =>
 		    array(
 		        'method'  => 'POST',
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query(
-								array(
-							        'service' => 'user',
-							        'method' => 'updateuser',
-							        'id_user'	=> $id,
-							        'mail'	=> $mail,
-							        'password'	=> $password,
-							        'params'=> json_encode($params)
-
-							    )
-		    				)
+		        'content' => http_build_query( $params )
 		        )
 		);
 
@@ -56,18 +53,14 @@ class User extends \Library\Model\Model{
 
 	public function insertUser($params){
 	
+
+		$params['service']='user';
+		$params['method']='insertuser';
 		$opts = array('http' =>
 		    array(
 		        'method'  => 'POST',
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query(
-								array(
-							        'service' => 'user',
-							        'method' => 'insertuser',
-							        'params'=> json_encode($params)
-
-							    )
-		    				)
+		        'content' => http_build_query( $params )
 		        )
 		);
 

@@ -127,7 +127,7 @@ class Admin extends \Library\Controller\Controller{
 	        	$this->message->addError("Pb avec l'insertion de l'image");
 	        }
 	        $modelRecette->updateRecette($_POST, $res);
-			//echo "<img src='{$_POST['img']}'>";
+			//echo "<img src='{$_POST['img']}'>"; 
 			
 			
 			
