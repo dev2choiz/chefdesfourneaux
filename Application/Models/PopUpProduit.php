@@ -98,7 +98,19 @@ public function getAcheterPopup($idProd, $prix, $ref, $value){
 					});
 				</script>";
 		}else{
-				return "";
+				return "
+				<script type='text/javascript'>
+					
+					$(document).ready(function(){
+
+						//ajoute au panier apres un click
+						$('#WrapperProduit$idProd #btnAcheterProduit')
+							.click(function(){
+								document.location.href = '".LINK_ROOT."user/inscription';
+							});
+
+					});
+				</script>";
 		}
 	}
 

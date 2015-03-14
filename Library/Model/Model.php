@@ -30,19 +30,18 @@ abstract class Model{
 			return $tab;
 		}
 
-		foreach ($tab as $key => $value) {
+		foreach ( $tab as $key => $value ) {
 
 			if(is_array($value ) || is_object($value ) ){
 				$tab[$key]=$this->convEnTab($value);
 			}
-			//$tab[$key]= get_object_vars($value);
 
 		}
 		return $tab;
 	}
 
 
-	public function isConnect(){
+	public function isConnected(){
 		return empty($_SESSION['user'] )?false:true;
 	}
 
