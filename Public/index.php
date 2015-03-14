@@ -26,4 +26,4 @@ $router = \Library\Router\Router::getInstance();
 $router::dispatchPage($_GET['page']);
 
 
-//var_dump($_SESSION);
+//var_dump($_SERVER);
