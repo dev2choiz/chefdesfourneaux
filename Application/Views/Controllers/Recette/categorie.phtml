@@ -1,6 +1,8 @@
 <?=$tinyMCECommentaire?>
 <?=$message?>
 
+<?php var_dump($recette)?>
+
 <script type="text/javascript">
     $("document").ready(function(){
         $("#divCom").hide();
@@ -17,7 +19,7 @@
 <div class="row featurette">
     <h1><?=$recette['categorie']?></h1>
     <div class="col-md-5">
-        <img class="featurette-image img-responsive" src="<?=$recette['img']?>" alt="<?=$recette['titre']?>">
+        <img class="featurette-image img-responsive" src="../../../..<?=$recette['img']?>" alt="<?=$recette['titre']?>">
         <h3>Liste des Ingrédients</h3>
         <?php foreach ($recette['ingredients'] as $ing): ?>
             <p class="lead"><?=$ing['ingredients']?> : <?=$ing['value']?> <?=$ing['unite']?></p>
