@@ -47,6 +47,12 @@ $(document).ready(function(){
 			$('#textCatAjouter').css('display', 'block');
 			$('#textCatModifier').css('display', 'none');
 
+			$('#ImgCatModifier').css('display', 'block');
+			
+
+
+
+
 		}
 	);
 
@@ -55,6 +61,9 @@ $(document).ready(function(){
 			$('#divCat').css('display', 'block');
 			$('#textCatAjouter').css('display', 'none');
 			$('#textCatModifier').css('display', 'block');
+
+			$('#ImgCatModifier').css('display', 'block');
+
 			$('#textCatModifier').val(document.getElementById('categories').options[document.getElementById('categories').selectedIndex].text);
 
 		}
@@ -64,6 +73,9 @@ $(document).ready(function(){
 		.click(function(){
 			$('#textCatAjouter').css('display', 'none');
 			$('#textCatModifier').css('display', 'none');
+
+			$('#ImgCatModifier').css('display', 'none');
+
 			supprimerCategorie();
 		}
 	);
@@ -256,6 +268,9 @@ function modifierCategorie(){
 	jsonData['method']= 'updatecategorie';
 	jsonData['id_cat']= cat.options[cat.selectedIndex].value;
     jsonData['value']	= $("#textCatModifier").val();
+
+	jsonData['img']=
+    //ImgCatModifier
 
     console.log(jsonData);
 
