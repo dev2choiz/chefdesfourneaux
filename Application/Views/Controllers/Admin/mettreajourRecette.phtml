@@ -24,6 +24,15 @@
             <label for="titre">Titre de la recette que vous souhaitez ajouter : </label>
             <td><input type="text" name="titre" id="titre" value="<?=$viewrecette['titre']?>" required></td>
         </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label for="exampleInputFile"></label>
+                    <input type="file" id="exampleInputFile" name="img" >
+                    <p class="help-block">Votre nom d'image doit être identique à celui de votre recette (exemple : tarteauxcitrons.jpg)</p>
+                </div>
+            </td>
+        </tr>
     </table>
     <textarea name="value" autofocus style="width: 100%;"><?=$viewrecette['value']?></textarea>
 
