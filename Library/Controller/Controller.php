@@ -188,11 +188,13 @@ abstract class Controller implements iController
 		if( !empty($_SESSION['user']) ){
 			$strIdUser=$_SESSION['user']['id_user'];
 		}
-		$html = str_replace('</body>', "<script type='text/javascript'>
-											idUser ='$strIdUser';
-											urlImg='".IMG_ROOT."';
-											urlWebService='".WEBSERVICE_ROOT."/index.php';
-											</script></body>", $html);
+		$html = str_replace('</body>', "
+			<script type='text/javascript'>
+				idUser ='$strIdUser'; 
+				urlImg='".IMG_ROOT."';
+				urlWebService='".WEBSERVICE_ROOT."/index.php';
+			</script>
+			</body>", $html);
 		
 		foreach ($this->scriptView as $s){		//lol trop fort
 			$html = str_replace('</body>', "<script src='".WEB_ROOT."/js/$s'></script></body>", $html);

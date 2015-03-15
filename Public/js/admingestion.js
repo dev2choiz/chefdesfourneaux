@@ -1,5 +1,5 @@
 
-
+ 
 $(document).ready(function(){
 	$('#divChoixCat').css('display', 'none');
 	$('#divChoixIng').css('display', 'none');
@@ -7,8 +7,9 @@ $(document).ready(function(){
 
 	$('#apercuImageCat').css('display', 'none');
 
-
-//$('#btnCat').css('display', 'block'); par defaut
+	//cache toi ici
+	$('#frameImgCat').css('display', 'none');
+	
 
 	//CATEGORIE
 	$('#categories')
@@ -28,28 +29,57 @@ $(document).ready(function(){
 			$('#divUnit').css('display', 'none');
 
 
+		}
+	);
+
+	$('#categories').change(function(){
+
 			$('#apercuImageCat').css('display', 'block');
 
 			var cat=document.getElementById('categories');
 
-			
+			//donne l'id de la categorie selectionné au formulaire
+			document.getElementById('inputIdCat').value=cat.options[cat.selectedIndex].value;
+
 			str=recupererImageCat(cat.options[cat.selectedIndex].value);
-			
+			//alert("onchange"+str);
 			if (str==="") {
-				$('#wrapperImgCat').html("aucune image");
+				$('#wrapperImgCat #imgCat').attr('src', "");
 			}else{
-				$('#wrapperImgCat').html("##<img src='"+str+"' alt='categorie' style='width:100px; height:100px;' />");
+				//alert("onchange"+str);
+				$('#wrapperImgCat #imgCat').attr('src', str);
 			}
-
-			 alert(str);
-
-			
+		}
+	);
 
 
+
+	//afficher l'image selectionnée 		marche pas
+	$('#inputFileImgCatModifier').change(function(){
+
+		console.log("zekl",document.getElementById("inputFileImgCatModifier").files[0]);
+    	// if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e)  {
+            	alert("la la");
+            }
+            reader.readAsDataURL( this.files[0] );
+
+		// }
 
 			
 		}
 	);
+
+
+
+
+
+
+
+
+
+
 
 	$('#btnCatValider')
 		.click(function(){
@@ -71,7 +101,7 @@ $(document).ready(function(){
 			$('#textCatAjouter').css('display', 'block');
 			$('#textCatModifier').css('display', 'none');
 
-			$('#ImgCatModifier').css('display', 'block');
+			$('#inputFileImgCatModifier').css('display', 'block');
 			
 
 
@@ -86,7 +116,7 @@ $(document).ready(function(){
 			$('#textCatAjouter').css('display', 'none');
 			$('#textCatModifier').css('display', 'block');
 
-			$('#ImgCatModifier').css('display', 'block');
+			$('#inputFileImgCatModifier').css('display', 'block');
 
 			$('#textCatModifier').val(document.getElementById('categories').options[document.getElementById('categories').selectedIndex].text);
 
@@ -98,7 +128,7 @@ $(document).ready(function(){
 			$('#textCatAjouter').css('display', 'none');
 			$('#textCatModifier').css('display', 'none');
 
-			$('#ImgCatModifier').css('display', 'none');
+			$('#inputFileImgCatModifier').css('display', 'none');
 
 			supprimerCategorie();
 		}
@@ -120,6 +150,8 @@ $(document).ready(function(){
 			//masque les autres
 			$('#divChoixCat').css('display', 'none');
 			$('#divChoixUnit').css('display', 'none');
+
+			$('#apercuImageCat').css('display', 'none');
 
 			//masque les inputs et le bouton pour valider
 			$('#divIng').css('display', 'none');
@@ -188,12 +220,14 @@ $(document).ready(function(){
 
 	$('#unites')
 		.click(function(){
-			//affiche la div contenant le choix des actions possibles 
+			//affiche la div contenant le choix des actions possibles
 			$('#divChoixUnit').css('display', 'block');
 
 			//masque les autres
 			$('#divChoixIng').css('display', 'none');
 			$('#divChoixCat').css('display', 'none');
+
+			$('#apercuImageCat').css('display', 'none');
 
 			//masque les inputs et le bouton pour valider
 			$('#divUnit').css('display', 'none');
@@ -293,11 +327,8 @@ function modifierCategorie(){
 	jsonData['id_cat']= cat.options[cat.selectedIndex].value;
     jsonData['value']	= $("#textCatModifier").val();
 
-	jsonData['img']=$("#ImgCatModifier").val();
-	alert(jsonData['img']);
-
-
-    jsonData['img']
+	//jsonData['img']=$("#inputFileImgCatModifier").val();
+	//alert(jsonData['img']);
 
     console.log(jsonData);
 
@@ -581,3 +612,21 @@ function recupererImageCat(idCat){
     console.log("res",res);
     return res;
 }
+
+function finUpload(error, path) {
+    if (error === 'non') {
+    	var cat=document.getElementById('categories');
+        $('#wrapperImgCat #imgCat').attr( 'src', recupererImageCat(cat.options[cat.selectedIndex].value) );
+        alert("image envoyée" );
+    } else {
+        alert(error);
+    }
+}
+
+$( "#formImgCat" ).submit(function( event ) {
+	if ($('#inputFileImgCatModifier').val()==='') {
+		alert('veuillez selectionner une image');
+		event.preventDefault();
+    }
+});
+
