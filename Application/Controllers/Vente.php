@@ -39,30 +39,19 @@ class Vente extends \Library\Controller\Controller{
 		$produits = $this->modelProduits->getAllProduits();
 		$produits = $produits['response'];
 		
-
 		
 
 		// Ajoute les infos du produits au html
 		foreach ($produits as $key => $produit) {
-
-			/*$produits[$key]['modifierpopup']=$this->modelPopUpProduit->getModifPopup(
-																$produit['id_produit'], 
-																$produit['prix'], 
-																$produit['ref'],
-																$produit['value']);*/
-
-
-			/*if(!empty($_SESSION['user'])){
-				$tst=$this->modelPanier->existeDansPanier($_SESSION['user']['id_user'], $produit['id_produit']);
-			}*/
 			
-			$produits[$key]['acheterpopup']=$this->modelPopUpProduit->getAcheterPopup(
+			$produits[$key]['acheterpopup'] = $this->modelPopUpProduit->getAcheterPopup(
 															$produit['id_produit'], 
 															$produit['prix'], 
 															$produit['ref'],
 															$produit['value']);
 
 		}
+
 		
 		
 		$this->setDataView(array(
@@ -73,7 +62,6 @@ class Vente extends \Library\Controller\Controller{
 		);
 
 		$this->setStyleView('popup.css');
-		$this->setStyleView('produit.css');
 
 		$this->setScriptView('produit.js');
 

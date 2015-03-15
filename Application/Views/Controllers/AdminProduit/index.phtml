@@ -8,20 +8,38 @@
 		<div class="row">
 			<div class="col-md-4">
 				<label for="value">Nom du produit : </label>  
-				<input name="value" type="text" id="value">
+				<input name="value" type="text" id="value" required>
 			</div>
 			<div class="col-md-4">
 				<label for="prix">Prix : </label>
-				<input name="prix" type="text" id="prix">
+				<input name="prix" type="text" id="prix" required>
 			</div>
 			<div class="col-md-4">
 				<label for="ref">Ref : </label>
-				<input name="ref" type="text" id="ref">
+				<input name="ref" type="text" id="ref" required>
 			</div>
 		</div>
-		<div class="row">
-			<button class="btn btn-warning col-md-1" name="btnAjouterProduit" type="submit" id="btnAjouterProduit">Valider</button>
-		</div>
+		<form id="formImgProduit" enctype="multipart/form-data" action="<?= WEBSERVICE_ROOT.'/index.php' ?>" target="frameImgProduit" method="post">
+			<label for="inputFileImgProduitModifier" >image du produit</label>
+			<input type="file" id="inputFileImgProduitModifier" name="img">
+			
+			<!-- <input type="submit" value="envoyer" id="uploadSubmitImg">
+			<div id="wrapperImgProduit">
+				<img id='imgProduit'  alt='Image produit' style='width:100px; height:100px;' />
+			</div> -->
+
+			<!-- <input type="hidden" name="service" value="produit">
+			<input type="hidden" name="method" value="envoiimageproduit">
+			<input type="hidden" name="id_produit" id="inputIdProduit" value=""> -->
+			<iframe src="#" name="frameImgProduit" id="frameImgProduit">
+				frame
+			</iframe>
+
+			<div class="row">
+				<button class="btn btn-warning col-md-1" name="btnAjouterProduit" type="submit" id="btnAjouterProduit">Valider</button>
+			</div>
+		</form>
+		
 	</div>
 
 </div> <!-- fin de wrapperAddProduits-->
