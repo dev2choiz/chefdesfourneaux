@@ -45,9 +45,6 @@ class AdminProduit extends \Library\Controller\Controller{
 		$produits = $this->modelProduits->getAllProduits();
 		$produits = $produits['response'];
 		//var_dump($produits);
-		
-
-		
 
 		// Ajoute les infos du produits au html
 		foreach ($produits as $key => $produit) {
@@ -58,6 +55,10 @@ class AdminProduit extends \Library\Controller\Controller{
 																$produit['ref'],
 																$produit['value']);
 
+		}
+
+		if(isset($_POST['btnAjouterProduit'])){
+			var_dump($_POST);
 		}
 		
 		

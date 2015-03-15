@@ -1,5 +1,3 @@
-
-
 $(document).ready(function(){
 
 		$('#btnAjouterProduitShowDiv').click(function(){
@@ -10,9 +8,15 @@ $(document).ready(function(){
 			}
 		});
 
+		$('#apercuImageProduit').css('display', 'none');
+
+		//cache toi ici
+		$('#frameImgProduit').css('display', 'none');
+
 		$('#btnAjouterProduit').click(function(){
 			ajouterProduit();
 		});
+
 	}
 );
 
