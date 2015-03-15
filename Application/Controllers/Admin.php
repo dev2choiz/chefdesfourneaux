@@ -261,19 +261,29 @@ class Admin extends \Library\Controller\Controller{
 
 			
 			$modelRecette 	= new \Application\Models\Recette('localhost');
+
+
+
+			//######################## Copie et met a jour dans la base
+	        $root = $_FILES['img']['tmp_name'];
+	        $img = IMG_ROOT.$this->retirerCaractereSpeciaux($_POST["titre"].".jpg");
+
+	        if(copy($root, $img )){
+	        	
+	        	$_POST['img'] = '/img/'.$this->retirerCaractereSpeciaux($_POST["titre"]).".jpg";
+	        }else{
+	        	$this->message->addError("Pb avec la mise a jour de l'image");
+	        }
+
+
 			
 			$res =$modelRecette->convEnTab($modelRecette->updateRecette($_POST, $idRecette ) );
-			
-
 
 			$res=$res['response'];
 			
 			if ($res){			//res est un bool
-				//header('location: '.LINK_ROOT.'recette');
-				//die();
-				
-				
-				
+
+	
 				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
 				//echo "<br><br><br><br>";
 				//var_dump("ing",$ingreds, $unites , $idRecette, $quantites );
