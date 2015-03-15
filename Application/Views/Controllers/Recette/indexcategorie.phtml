@@ -1,19 +1,24 @@
 <?=$message?>
 <!-- START THE FEATURETTES -->
-    
-<h2 class="featurette-heading"><?=$titreCat?> <span class="text-muted"></span></h2>
-
-<hr class="featurette-divider">
+<div class="container-fluid">
+    <div class="row">
+        <h1 style="text-align:center;" class="featurettes-heading"><?=$titreCat?><span class="text-muted"></span></h1>
+    </div> 
+</div>
+<div class="container-fluid">
+    <br class="featurette-divider">
     <div class="row featurette">
-        <div class="col-md-7">
+        <div class="col-md-6" style="text-align:center;">
+        <h1>Liste des Recettes : </h1>
         <?php foreach($recettes as $recette): ?>
         <p class="lead"><a href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>"> <?=$recette['titre']?></a></p>
         <?php endforeach;?>
         </div>
-        <div class="col-md-5">
-        <img class="featurette-image img-responsive" src="<?=$recette['img']?>" alt="plat">
+        <div class="col-md-6">
+            <img class="featurette-image img-responsive" src="<?=$recette['img']?>" alt="plat">
         </div>
     </div>
+</div>
 
 
  <!-- /END THE FEATURETTES -->

@@ -1,7 +1,6 @@
 <?=$message?>
 
 <!-- START THE FEATURETTES -->
-<hr class="featurette-divider">
 <?php foreach($recettes as $recette): ?>
  <div class="col-md-4">
         <a href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> <h1><?=$recette['value']?> <span class="text-muted"></span></h1></a>

@@ -9,7 +9,6 @@ class Admin extends \Library\Controller\Controller{
 	private $modelRecette;
 	private $modelCategorie; // A compléter
 	private $modelIngredient; // A compléter
-	private $modelPopUp;	//<==effacer
 	private $modelShowDiv;
 	private $modelAjax;
 
@@ -21,7 +20,6 @@ class Admin extends \Library\Controller\Controller{
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelRecette 		= new \Application\Models\Recette('localhost');
 		$this->modelVR 				= new \Application\Models\ViewRecette('localhost');
-		//$this->modelPopUp 			= new \Application\Models\PopUp();
 		$this->modelShowDiv 		= new \Application\Models\ShowDiv();
 		$this->modelAjax 			= new \Application\Models\Ajax();
 	}
@@ -155,10 +153,6 @@ class Admin extends \Library\Controller\Controller{
 			
 		}
 
-
-		//données pour la view
-		$this->setDataView(array("message" => $this->message->showMessages()));
-
 		//recherche des categories
 		$modelCategorie 	= new \Application\Models\Categorie('localhost');
 		$cat=$modelCategorie->getCategories();
@@ -191,7 +185,10 @@ class Admin extends \Library\Controller\Controller{
 		$unit=$unit->response;
 		$unit=$modelUnite->convEnTab($unit);
 
-		$this->setDataView(array("unites" =>  $unit));
+		$this->setDataView(array(
+			"unites" =>  $unit, 
+			"message" => $this->message->showMessages()
+			));
 
 
 
@@ -213,10 +210,6 @@ class Admin extends \Library\Controller\Controller{
 	 */
 	public function mettreAJourRecetteAction($idRecette){
 
-		echo "<br><br><br><br>".$idRecette;
-		
-		
-		
 		if( $_SESSION['user']['role'] !== "admin" ){
 			$this->setRedirect(LINK_ROOT);
 		}elseif( !isset($idRecette) || empty($idRecette)  || $idRecette===0 ){	//si pas d'idrecette
@@ -396,7 +389,7 @@ class Admin extends \Library\Controller\Controller{
 		//script ajax permettant d'ajouter une categorie a la bdd puis de la prendre en compte
 		$successfonc="
 			console.log(data);
-			val=data['response'];		//test à faire : si >0 ==> insertion faite
+			val = data['response'];		//test à faire : si >0 ==> insertion faite
 			label=document.getElementById('DivContainerCategorieValue').value;
 			$('#id_cat').append('<option value=\"'+val+'\" selected>'+label+'</option>');
 			
@@ -506,9 +499,7 @@ class Admin extends \Library\Controller\Controller{
 
 
 	public function gestionAction(){
-		
 
-		echo "<BR><BR><BR><BR>";
 		if($_SESSION['user']['role'] !== "admin"){
 			header('location: '.LINK_ROOT);
 			die();

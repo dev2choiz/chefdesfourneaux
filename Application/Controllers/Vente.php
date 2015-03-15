@@ -33,8 +33,7 @@ class Vente extends \Library\Controller\Controller{
 	
 
 	public function indexProduitAction(){
-		echo "<br><br><br><br><br><br><br><br><br><br>";
-		echo "";
+		
 		// if($_SESSION['user']['role'] !== "admin") $this->setRedirect(LINK_ROOT);
 
 		$produits = $this->modelProduits->getAllProduits();
@@ -67,12 +66,14 @@ class Vente extends \Library\Controller\Controller{
 		
 		
 		$this->setDataView(array(
+			'message' => $this->message->showMessages(),
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
 			'produits' => $produits
 			)
 		);
 
 		$this->setStyleView('popup.css');
+		$this->setStyleView('produit.css');
 
 		$this->setScriptView('produit.js');
 

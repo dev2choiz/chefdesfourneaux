@@ -1,65 +1,39 @@
-
-
+<?=$message?>
 <?php if(empty($_SESSION['user'])): ?>
-	<h1>Nous vous informons que pour acheter un de nos produit, il est nécessaire d'être inscrit pour plus de sécurité ! </h1>
+	<h2>Nous vous informons que pour acheter un de nos produit, il est nécessaire d'être inscrit pour plus de sécurité ! </h2>
 	<p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'user/inscription'?>" role="button">Inscription</a></p>
 
-<?php endif; ?>
+<?php endif;?>
 
 
-<!-- <div class="row" id="WrapperAddProduit">
-<br/><br/><br/>
-	
-<h2>Ajouter un Produit</h2>
-	Nom du produit : <input name="value" type="text" id="value">
-	<br/>
-	Prix : <input name="prix" type="text" id="prix">
-	<br/>
-	Ref : <input name="ref" type="text" id="ref">
-	<br/>
-	<button class="btn btn-warning" name="btnAjouterProduit" type="submit" id="btnAjouterProduit">Valider</button>
-
-</div> -->
-
-
-<h1>Liste des Produits disponibles</h1>
-
+<!-- <h1>Liste des Produits disponibles</h1> -->
+<br class="featurette-divider">
 <div id="WrapperProduits">
-<?php foreach ($produits as $produit): ?>
-	<div>
+	<div class="row">
+		<div class="col-md-4" id="labelProduits">Produits</div>
+		<div class="col-md-4" id="labelPrix">Prix</div>
+	</div>
+	<hr>
+	<?php foreach ($produits as $produit): ?>
 		<div class="row" id="WrapperProduit<?= $produit['id_produit']?>">
-			<div class="col-md-8">
-			
-				<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">Produit : <span id="labelValueProduit"><?= $produit['value']?></span></a>
 
+			<div class="col-md-4">
+				<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">
+        			<img class="media-object" src="../../../..<?=$produit['img']?>" alt="<?=$produit['value']?>">
+      			</a>
+				<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>"><span id="labelValueProduit"><?= $produit['value']?></span></a>
+				<p>Référence : <span id="labelRefProduit"><?= $produit['ref']?></span></p>
 			</div>
 			<div class="col-md-4">
-				Prix : <span id="labelPrixProduit"><?= $produit['prix']?></span> €
-				Référence : <span id="labelRefProduit"><?= $produit['ref']?></span>
+				<span id="labelPrixProduit"><?= $produit['prix']?></span> €
 			</div>
-			
-
-			<div >
-				<!-- <button class='btn btn-primary btn-xs col-md-offset-3 popupProduit' id="popupProduit<?=$produit['id_produit']?>" >Modifier ce Produit</button>
-				<div class="row">
-					?=$produit['modifierpopup']?
-				</div> -->
-
-				
-				<button class='btn btn-success col-md-3 col-md-offset-3 btnAcheterProduit' id="btnAcheterProduit"  >Mettre ce produit dans mon panier</button>
-				<div class="row">
-					<?=$produit['acheterpopup']?>
-				</div>
-
-				
-
-
-
+			<div class="col-md-4">
+				<button class='btn btn-success btnAcheterProduit' id="btnAcheterProduit"  >Mettre ce produit dans mon panier <?=$produit['acheterpopup']?></button>
 			</div>
 			
 		</div>
-	</div>
-<?php endforeach; ?>
+		<hr>
+	<?php endforeach; ?>
 </div>	<!-- fin de wrapperProduits-->
 
 

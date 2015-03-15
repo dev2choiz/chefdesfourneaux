@@ -1,45 +1,18 @@
-/*
-* Fichier javascript permettant de gérer la page vente/indexproduit
-*/
-/*
+
+
 $(document).ready(function(){
 
-	// La popup apparaît quand on clique sur le bouton Modifier le produit
-	$('.popupProduit')
-		.click(function(){
-			$('#popupContainer').css('display', 'block');
-			//$('#popup').css('display', 'block');	
-
+		$('#btnAjouterProduitShowDiv').click(function(){
+			if( $('.ajouterProduitShowDiv').css('display') == 'block' ){
+				$('.ajouterProduitShowDiv').css('display', 'none');
+			}else{
+				$('.ajouterProduitShowDiv').css('display', 'block');	
+			}
 		});
-
-	// Le bouton annuler permet de faire disparaître la popup
-	$('#btnCancel')
-		.click(function(){
-			$('#popupContainer').css('display', 'none');
-			//$('#popup').css('display', 'none');
-		})
-
-
-
-	$('#btnAjouterProduit').click(function(){
-		ajouterProduit();
-	}); 
-
-	$('#btnMettreAjourProduit').click(function(){
-		mettreAjourProduit();
-	});
-
-	$('#btnSupprimerProduit').click(function(){
-		supprimerProduit();
-	});
-});
-*/
-
-$(document).ready(function(){
 
 		$('#btnAjouterProduit').click(function(){
 			ajouterProduit();
-		}); 
+		});
 	}
 );
 
