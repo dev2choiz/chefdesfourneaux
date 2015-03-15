@@ -45,4 +45,15 @@ abstract class Model{
 		return empty($_SESSION['user'] )?false:true;
 	}
 
+
+
+    public function retirerCaractereSpeciaux($chaine){
+        $chaine = mb_strtolower($chaine, 'UTF-8');
+        return str_replace(     '@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ',
+                                'aAAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy',
+                                $chaine);
+ 
+    }
+
+
 }

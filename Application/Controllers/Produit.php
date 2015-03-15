@@ -147,6 +147,16 @@ public function afficherAction( $idProduit ){
 
 
 
+
+
+
+
+
+
+
+
+
+
 	
 }
 
