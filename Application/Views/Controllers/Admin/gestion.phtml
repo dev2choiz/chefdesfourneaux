@@ -1,7 +1,32 @@
-
 <?=$message?>
 
 
+
+
+
+
+
+        <div id="apercuImageCat" border="1" style="background-color: #888;">
+          <form id="formImgCat" enctype="multipart/form-data" action="<?= WEBSERVICE_ROOT.'/index.php' ?>" target="frameImgCat" method="post">
+            <label for="inputFileImgCatModifier" >image de la catégorie</label>
+            <input type="file" id="inputFileImgCatModifier" name="img">
+            <input type="submit" value="envoyer" id="uploadSubmitImg">
+            <div id="wrapperImgCat">
+                <img id='imgCat'  alt='Image categorie' style='width:100px; height:100px;' />
+            </div>
+
+            <input type="hidden" name="service" value="categorie">
+            <input type="hidden" name="method" value="envoiimagecategorie">
+            <input type="hidden" name="id_cat" id="inputIdCat" value="">
+          </form>
+
+ 
+          <!-- frame pour upload l'image  -->
+          <iframe src="#" name="frameImgCat" id="frameImgCat">
+              frame
+          </iframe>
+  
+        </div>
 
 
 <form class="" method="post"  onsubmit="" id="formRecette">
@@ -17,15 +42,14 @@
               <option value="<?=$categorie['id_cat']?>"><?=$categorie['value']?></option> 
           <?php } ?>
         </select>
+
+
+
         
-        <div id="apercuImageCat" >
-          <form >
-            <label for="ImgCatModifier" >image de la catégorie</label>
-            <input type="file" id="ImgCatModifier" name="img">
-            <input type="submmit">
-            <div id="wrapperImgCat">img<div>
-          </form>
-        </div>
+
+
+
+
 
 
         <div id="divChoixCat" >
