@@ -195,6 +195,7 @@ abstract class Controller implements iController
 				urlWebService='".WEBSERVICE_ROOT."/index.php';
 			</script>
 			</body>", $html);
+
 		
 		foreach ($this->scriptView as $s){		//lol trop fort
 			$html = str_replace('</body>', "<script src='".WEB_ROOT."/js/$s'></script></body>", $html);
@@ -249,6 +250,7 @@ abstract class Controller implements iController
 			$content_view = ob_get_clean();
 
 			ob_start();
+
 				include_once(APP_ROOT."Views/Layouts/".$this->getLayout().".phtml");
 				//include_once(APP_ROOT."Controllers/Views/Layouts/".$this->getLayout().".phtml");
 
@@ -259,8 +261,9 @@ abstract class Controller implements iController
 
 			
 			//ajoute le  js de la page s'il existe
-			$page=str_replace("/", "", $_GET['page']);
+			$page=strtolower (str_replace("Application\Controllers\\", "", $controller).str_replace("Action", "", $action));
 			//$page=$controller.$action;
+			
 			if( file_exists(PUBLIC_ROOT."js/".$page.".js") ){
 				if(!$this->scriptExiste($page.".js")){
 					$this->setScriptView($page.".js");
@@ -329,6 +332,19 @@ abstract class Controller implements iController
 	public function isConnected(){
 		return empty($_SESSION['user'] )?false:true;
 	}
+
+
+
+    public function convEnTab($tab){
+        $modelCategorie  = new \Application\Models\Categorie('localhost');
+        return $modelCategorie->convEnTab($tab);
+    }
+
+    public function retirerCaractereSpeciaux($chaine){
+        $modelCategorie  = new \Application\Models\Categorie('localhost');
+        return $modelCategorie->retirerCaractereSpeciaux($chaine);
+    }
+
 
 
 }
