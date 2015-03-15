@@ -22,12 +22,8 @@ class Recette extends \Library\Controller\Controller{
 		
 
 	public function indexAction(){
-		//$viewAllRecette = $this->modelViewRecette->getAllViewRecettes() ;
-		//$viewAllRecette 		= $viewAllRecette['response'];
+
 		$viewAllCats  	= $this->modelCat->getCategories();
-		//var_dump($viewAllCats);
-
-
 
 		if(empty($viewAllCats)){
 			$this->message->addError("aucune recette !");
@@ -153,26 +149,6 @@ class Recette extends \Library\Controller\Controller{
 		));
 		$this->setStyleView('categorie.css');
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

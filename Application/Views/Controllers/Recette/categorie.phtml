@@ -1,7 +1,7 @@
 <?=$tinyMCECommentaire?>
 <?=$message?>
 
-<?php var_dump($recette)?>
+<?php //var_dump($recette)?>
 
 <script type="text/javascript">
     $("document").ready(function(){
@@ -14,9 +14,7 @@
     });
 </script>
 
-<hr class="featurette-divider">
-
-<div class="row featurette">
+<div class="row featurette" id="recette">
     <h1><?=$recette['categorie']?></h1>
     <div class="col-md-5">
         <img class="featurette-image img-responsive" src="../../../..<?=$recette['img']?>" alt="<?=$recette['titre']?>">
@@ -39,7 +37,6 @@
 
  <?php
 
-echo '<hr><hr><hr>';
 
 //commentaires
 //var_dump("viewCom", $viewCommentaires);

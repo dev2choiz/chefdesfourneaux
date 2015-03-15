@@ -23,14 +23,9 @@ class User extends \Library\Controller\Controller{
 			$this->setRedirect(LINK_ROOT);
 		}
 
-		
-
-
-		$this->setLayout("blog");
-		$this->setDataView(array("pageTitle" => "Update profil"));
+		$this->setDataView(array("pageTitle" => "Mise à jour de votre profil"));
 		$this->setDataView(array("message" => ""));
 
-		//var_dump($_POST);
 		if(isset($_POST['btn'])){
 
 			if(empty($_POST['nom'])){
@@ -70,9 +65,6 @@ class User extends \Library\Controller\Controller{
 				$this->setDataView(array("message" => $this->message->showMessages()));	
 				return false;
 			}
-
-
-			//$currentpassword = md5($_POST['currentpassword'].SALT_PASSWORD);
 			
 
 			

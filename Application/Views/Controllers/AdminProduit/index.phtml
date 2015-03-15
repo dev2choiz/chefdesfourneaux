@@ -1,25 +1,30 @@
-
-
-<?php if(empty($_SESSION['user'])): ?>
-	<h1>Nous vous informons que pour acheter un de nos produit, il est nécessaire d'être inscrit pour plus de sécurité ! </h1>
-	<p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'user/inscription'?>" role="button">Inscription</a></p>
-
-<?php endif; ?>
-
-
-<div class="row" id="WrapperAddProduit">
-<br/><br/><br/><br/><br/>
+<div id="WrapperAddProduit">
 	
-<button class='btn btn-primary col-md-3 col-md-offset-3' >Ajouter un Produit</button>
-	Nom du produit : <input name="value" type="text" id="value">
+	<div class="row">
+		<button class='btn btn-primary btn-xs col-xs-12 col-sm-6 col-md-8' id="btnAjouterProduitShowDiv">Ajouter un Produit</button>
+	</div>
 	<br/>
-	Prix : <input name="prix" type="text" id="prix">
-	<br/>
-	Ref : <input name="ref" type="text" id="ref">
-	<br/>
-	<button class="btn btn-warning" name="btnAjouterProduit" type="submit" id="btnAjouterProduit">Valider</button>
+	<div class="ajouterProduitShowDiv">
+		<div class="row">
+			<div class="col-md-4">
+				<label for="value">Nom du produit : </label>  
+				<input name="value" type="text" id="value">
+			</div>
+			<div class="col-md-4">
+				<label for="prix">Prix : </label>
+				<input name="prix" type="text" id="prix">
+			</div>
+			<div class="col-md-4">
+				<label for="ref">Ref : </label>
+				<input name="ref" type="text" id="ref">
+			</div>
+		</div>
+		<div class="row">
+			<button class="btn btn-warning col-md-1" name="btnAjouterProduit" type="submit" id="btnAjouterProduit">Valider</button>
+		</div>
+	</div>
 
-</div>
+</div> <!-- fin de wrapperAddProduits-->
 
 
 <h1>Liste des Produits disponibles</h1>
@@ -28,7 +33,7 @@
 <?php foreach ($produits as $produit): ?>
 	<div>
 		<div class="row" id="WrapperProduit<?= $produit['id_produit']?>">
-			<div class="col-md-8">
+			<div class="col-md-4">
 			
 				<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">Produit : <span id="labelValueProduit"><?= $produit['value']?></span></a>
 
@@ -45,24 +50,10 @@
 					<?=$produit['modifierpopup']?>
 				</div>
 
-				
-				<!-- <button class='btn btn-success col-md-3 col-md-offset-3 btnAcheterProduit' id="btnAcheterProduit"  >Mettre ce produit dans mon panier</button>
-				<div class="row">
-					<?php $produit['acheterpopup'] ?>
-				</div> -->
-
-				
-
-
-
 			</div>
 			
 		</div>
 	</div>
 <?php endforeach; ?>
 </div>	<!-- fin de wrapperProduits-->
-
-
-<!-- <a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">Produit : <span id="labelValueProduit"><?= $produit['value']?></span></a>
- -->
 

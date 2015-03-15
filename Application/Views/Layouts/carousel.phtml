@@ -70,11 +70,10 @@
                                         <li class="divider"></li>
                                         <li class="dropdown-header">Administration du site</li>
                                         
-                                        <li><a href="<?=LINK_ROOT.'admin/index'?>">Index</a></li>
-                                        <li><a href="<?=LINK_ROOT.'admin/recette'?>">Recette</a></li>
+                                        <li><a href="<?=LINK_ROOT.'admin/index'?>">Recettes</a></li>
+                                        <li><a href="<?=LINK_ROOT.'adminproduit/index'?>">Produits</a></li>
                                         <li><a href="<?=LINK_ROOT.'admin/restaurant'?>">Restaurant</a></li>
                                         <li><a href="<?=LINK_ROOT.'admin/livre'?>">Livres de cuisine</a></li>
-                                        <li><a href="<?=LINK_ROOT.'admin/produit'?>">Produits</a></li>
                                         <?php endif; ?>
                                         
                                     </ul> 
@@ -86,7 +85,7 @@
             </div> <!-- Fin container -->
         </div> <!-- Fin navbar-wrapper --> 
 
-
+        <div id="separator" class="separator"></div>
         
 
         <!-- Marketing messaging and featurettes
@@ -107,9 +106,8 @@
             </div>
         </div>
         <div class="container marketing">
-            
-            
-            <div class="content_view">
+
+            <div class="content_view" id="content_view">
                 <?=$content_view?>
             </div>
   
@@ -128,7 +126,7 @@
         <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script-->
         <script src="<?=WEB_ROOT?>js/bootstrap/bootstrap.min.js"></script>
         <script src="<?=WEB_ROOT?>js/bootstrap/docs.min.js"></script>
-        <script src="<?=WEB_ROOT?>js/jquery/.js"></script>
+        <script src="<?=WEB_ROOT?>js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
         <script src="<?=WEB_ROOT?>js/chefdesfourneaux.js"></script>
 
 

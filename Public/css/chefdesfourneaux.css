@@ -6,13 +6,13 @@
 	background-color: #FFF;
 	font-weight: bold;
 }
-.navbar-brand:hover{
+.separator{
+	height: 200px;
 }
-
-.content_view{
+/*
+#content_view{
 	margin-top: 10%;
-	
-}
+}*/
 
 
 
