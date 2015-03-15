@@ -1,4 +1,4 @@
-#recette{
+.recette{
 	/*margin-top: 10%;*/
 	background-color: rgba(255,255,221,0.2);
 	border: solid 1px;
@@ -9,4 +9,20 @@
 h1{
 	text-align: center;
 	margin-left: 50%;
+}
+
+#labelProduitRecette{
+	text-align: center;
+	font-size: 22px;
+}
+#produitRecette{
+	font-size: 18px;
+	text-align: center;
+	vertical-align: center;
+}
+#produitRecette img{
+	width: 50%;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
