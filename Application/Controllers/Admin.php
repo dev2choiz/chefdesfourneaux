@@ -262,16 +262,18 @@ class Admin extends \Library\Controller\Controller{
 			
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 
-
-
+				echo "<br><br><br><br><br><br><br><br><br><br>";
+			var_dump($_FILES, $_POST);
 			//######################## Copie et met a jour dans la base
 	        $root = $_FILES['img']['tmp_name'];
 	        $img = IMG_ROOT.$this->retirerCaractereSpeciaux($_POST["titre"].".jpg");
 
+
+	        	var_dump($root, $img);
 	        if(copy($root, $img )){
-	        	
 	        	$_POST['img'] = '/img/'.$this->retirerCaractereSpeciaux($_POST["titre"]).".jpg";
 	        }else{
+	        	$_POST['img'] ="";
 	        	$this->message->addError("Pb avec la mise a jour de l'image");
 	        }
 
