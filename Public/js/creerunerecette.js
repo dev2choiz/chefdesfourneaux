@@ -178,11 +178,13 @@ masquer();
 
 
 function actualiserImageFormRecette(idRecette){
-    alert("dfdjgkmj");
+    
     str=recupererImageRecette(idRecette);
-    alert(str);
+    console.log("str ",str);
+    alert(idRecette+str);
     if (str==="") {
         $('#imgRecette').attr('src', "");
+        alert("ici");
     }else{
         //alert("onchange"+str);
         $('#imgRecette').attr('src', str);
@@ -201,7 +203,7 @@ function recupererImageRecette(idRecette){
     jsonData['id_recette']= idRecette;
 
 
-    //console.log(jsonData);
+    console.log(jsonData);
 
     var res="";
     $.ajax({
@@ -219,10 +221,41 @@ function recupererImageRecette(idRecette){
             }
         }
     });
-    //console.log("res",res);
+    console.log("res",res);
     return res;
 }
 
 
+varGlob="";
+
+function changerImage(idInput) {
+    input=document.getElementById(idInput);
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        alert(e.target.result);
+        $('#imgRecette').attr('src',e.target.result);
+        return true;
+    };
+    reader.readAsDataURL(input.files[0]);
+
+  }
+}
 
 
+
+$(document).ready(function(){
+
+    $("#inputFile").change(function(){
+
+        if (document.getElementById('inputFile').value!=='') {
+
+            changerImage('inputFile') ;
+        }
+    });
+
+});
+
+
+//lancer le truc
+actualiserImageFormRecette( jsIdRecette );

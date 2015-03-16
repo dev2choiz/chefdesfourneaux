@@ -57,6 +57,7 @@ class Admin extends \Library\Controller\Controller{
 			"tinyMCERecette" => $this->tinyMCE->getEditeurRecette()
 		));
 
+
 		
 		if(isset($_POST['btn'])){
 			//var_dump($_POST, $_FILES);
@@ -431,6 +432,8 @@ class Admin extends \Library\Controller\Controller{
 			"ajaxCategorieScript" =>	$codeAjaxCategorie
 		));
 
+
+		$this->setJsVarible("IdRecette", $viewR['id_recette'] );
 
 		$this->setScriptView("creerunerecette.js");
 
