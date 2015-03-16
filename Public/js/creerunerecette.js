@@ -133,6 +133,9 @@ $( "form" ).submit(function( event ) {
     }    
 });
 
+
+
+
 /*function preparatif(){
 }*/
 
@@ -162,3 +165,97 @@ function afficher(){
 }
 
 masquer();
+
+
+
+
+
+
+
+
+
+
+
+
+function actualiserImageFormRecette(idRecette){
+    
+    str=recupererImageRecette(idRecette);
+    console.log("str ",str);
+    alert(idRecette+str);
+    if (str==="") {
+        $('#imgRecette').attr('src', "");
+        alert("ici");
+    }else{
+        //alert("onchange"+str);
+        $('#imgRecette').attr('src', str);
+    }
+}
+
+
+
+
+
+function recupererImageRecette(idRecette){
+    //unit=document.getElementById("unites");
+    jsonData={};
+    jsonData['service']= 'recette';
+    jsonData['method']= 'getimagerecette';
+    jsonData['id_recette']= idRecette;
+
+
+    console.log(jsonData);
+
+    var res="";
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        async:false,
+        success: function(data) {
+            console.log("ici",data['response']);
+            if(data['response']===false){
+                res= "";
+            }else{
+                res= data['response'];
+            }
+        }
+    });
+    console.log("res",res);
+    return res;
+}
+
+
+varGlob="";
+
+function changerImage(idInput) {
+    input=document.getElementById(idInput);
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        alert(e.target.result);
+        $('#imgRecette').attr('src',e.target.result);
+        return true;
+    };
+    reader.readAsDataURL(input.files[0]);
+
+  }
+}
+
+
+
+$(document).ready(function(){
+
+    $("#inputFile").change(function(){
+
+        if (document.getElementById('inputFile').value!=='') {
+
+            changerImage('inputFile') ;
+        }
+    });
+
+});
+
+
+//lancer le truc
+actualiserImageFormRecette( jsIdRecette );

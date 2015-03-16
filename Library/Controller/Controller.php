@@ -13,8 +13,8 @@ abstract class Controller implements iController
 	private $dataMod 		= array();
 	private $dataView   	= array("siteName" 	=> "Chef des fourneaux",
 							  		"pageTitle" => "Home");
-
-
+	private $jsVariable		= array();
+	
 
 
 	protected function setRedirect($url){
@@ -75,6 +75,20 @@ abstract class Controller implements iController
 	protected function getResponseHeader(){
 		return $this->responseHeader;
 	}
+
+
+
+
+
+
+
+	protected function setJsVarible($variable, $value){
+
+		array_push($this->jsVariable, array($variable , $value ) );
+		return true;
+	}
+
+
 
 
 	/**
@@ -183,6 +197,9 @@ abstract class Controller implements iController
 	 * @return void
 	 */
 	private function addFilesRender(&$html){
+
+
+
 		
 		$strIdUser="rien";
 		if( !empty($_SESSION['user']) ){
@@ -195,8 +212,18 @@ abstract class Controller implements iController
 				urlWebService='".WEBSERVICE_ROOT."/index.php';
 			</script>
 			</body>", $html);
-
 		
+		$str="<script>\n";
+		$str.=var_export($this->jsVariable);
+		foreach ($this->jsVariable as $val){
+
+			$str.="js".$val[0]."=\"".$val[1]."\";\n";
+		}
+		$str.="</script>\n";
+		
+		$html = str_replace('</body>', "$str</body>", $html);
+
+
 		foreach ($this->scriptView as $s){		//lol trop fort
 			$html = str_replace('</body>', "<script src='".WEB_ROOT."/js/$s'></script></body>", $html);
 		}
@@ -326,6 +353,16 @@ abstract class Controller implements iController
 		}
 		return false;
 	}
+
+
+
+
+
+
+
+
+
+
 
 
 

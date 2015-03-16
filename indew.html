@@ -1,0 +1,38 @@
+<html>
+<head>
+
+<script class="" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+
+
+</head>
+
+
+
+<body>
+	<input type='file' onchange="readURL(this);" />
+<img id="blah" src="#" alt="your image" />
+<!-- <img src="img1" id="img1" onclick="aff();"/> -->
+<script type="text/javascript">
+	function aff(){
+			document.getElementById("blah").src="img/43CIMG4392.JPG";
+	}
+
+
+	function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+    	alert( e.target.result);
+      $('#blah')
+        .attr('src', e.target.result)
+        .width(150)
+        .height(200);
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+</script>
+
+</body>
+</html>

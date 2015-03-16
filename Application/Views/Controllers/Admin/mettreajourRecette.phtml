@@ -12,23 +12,31 @@
 
 
 
+          <!-- <iframe src="#" name="frameImgRecette" id="frameImgRecette">
+              frame
+          </iframe>  target="frameImgRecette" -->
 
 
-
-<form class="" method="post" id="formRecette">
+<form class=""  id="formRecette"  enctype="multipart/form-data"  method="post">
     <h2 class="form-signin-heading">
         <?=$pageTitle?>
     </h2>
     <table>
         <tr>
             <label for="titre">Titre de la recette que vous souhaitez ajouter : </label>
-            <td><input type="text" name="titre" id="titre" value="<?=$viewrecette['titre']?>" required></td>
+            <td>
+                <input type="text" name="titre" id="titre" value="<?=$viewrecette['titre']?>" required>
+                <div id="wrapperImgRecette">
+                    <img id='imgRecette'  alt='Image recette' style='width:150px; height:150px;' />
+                </div>
+
+            </td>
         </tr>
         <tr>
             <td>
                 <div class="form-group">
-                    <label for="exampleInputFile"></label>
-                    <input type="file" id="exampleInputFile" name="img" >
+                    <label for="inputFile"></label>
+                    <input type="file" id="inputFile" name="img" >
                     <p class="help-block">Votre nom d'image doit être identique à celui de votre recette (exemple : tarteauxcitrons.jpg)</p>
                 </div>
             </td>
@@ -372,5 +380,5 @@
 
 ?>
 console.log(tabUnit +" ## "+ tabQuant);
-
+ 
 </script>
