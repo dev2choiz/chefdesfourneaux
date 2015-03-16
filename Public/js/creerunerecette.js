@@ -133,6 +133,9 @@ $( "form" ).submit(function( event ) {
     }    
 });
 
+
+
+
 /*function preparatif(){
 }*/
 
@@ -162,3 +165,64 @@ function afficher(){
 }
 
 masquer();
+
+
+
+
+
+
+
+
+
+
+
+
+function actualiserImageFormRecette(idRecette){
+    alert("dfdjgkmj");
+    str=recupererImageRecette(idRecette);
+    alert(str);
+    if (str==="") {
+        $('#imgRecette').attr('src', "");
+    }else{
+        //alert("onchange"+str);
+        $('#imgRecette').attr('src', str);
+    }
+}
+
+
+
+
+
+function recupererImageRecette(idRecette){
+    //unit=document.getElementById("unites");
+    jsonData={};
+    jsonData['service']= 'recette';
+    jsonData['method']= 'getimagerecette';
+    jsonData['id_recette']= idRecette;
+
+
+    //console.log(jsonData);
+
+    var res="";
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        async:false,
+        success: function(data) {
+            console.log("ici",data['response']);
+            if(data['response']===false){
+                res= "";
+            }else{
+                res= data['response'];
+            }
+        }
+    });
+    //console.log("res",res);
+    return res;
+}
+
+
+
+

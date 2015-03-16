@@ -58,6 +58,12 @@ $(document).ready(function(){
 	$('#inputFileImgCatModifier').change(function(){
 
 		console.log("zekl",document.getElementById("inputFileImgCatModifier").files[0]);
+		alert( document.getElementById("inputFileImgCatModifier").files[0].value);
+		$('#imgRecette').attr('src', document.getElementById("inputFileImgCatModifier").files[0].value);
+		var fille = document.getElementById("inputFileImgCatModifier");
+		for( i in fille ){
+			console.log(i,fille[i]);
+		}
     	// if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e)  {
