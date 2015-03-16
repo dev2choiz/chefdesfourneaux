@@ -6,6 +6,7 @@
 	<div class="col-md-4" id="labelPrix">Prix</div>
 </div> -->
 <?php 
+//var_dump($viewPanier);
 $somme = 0;
 foreach ($viewPanier as $produit):?>
 	<hr>
@@ -26,7 +27,7 @@ foreach ($viewPanier as $produit):?>
 			<div class="col-md-4">
 				<form method="post" >
 					<input type="hidden" name="id_user" value="<?= $_SESSION['user']['id_user'] ?>" />
-					<input type="hidden" name="id_produit" value="<?= $produit['id_produit'] ?>" />
+					<input type="hidden" name="id_panier" value="<?= $produit['id_panier'] ?>" />
 					<input class="btn btn-danger supprPanier" type="submit" name="action" value="Supprimer du panier" />
 				</form>
 			</div>
