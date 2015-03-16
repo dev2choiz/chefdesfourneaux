@@ -2,18 +2,17 @@
 
 <!-- START THE FEATURETTES -->
 <?php foreach($recettes as $recette): ?>
- <div class="col-md-4">
-        <a href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> <h1><?=$recette['value']?> <span class="text-muted"></span></h1></a>
-        <!-- ../../../..<?=$recette['img']?> -->
-        <p class="lead"><img class="img-thumbnail img-responsive" src="<?=WEB_ROOT?>/img/monde.jpg" alt="plat"></p>
-        </div>  
+	<!-- <div class="row"> -->
+		<div class="col-md-4">
+	        <a href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> <h1><?=$recette['value']?> <span class="text-muted"></span></h1></a> 
+	        <!--  -->
+	        <p class="lead"><img class="img-thumbnail img-responsive" src="../../../..<?=$recette['img']?>" alt="plat"></p>
+	  	</div>
+	<!-- </div> -->
+ 	  
 <?php endforeach;?>
 
  <!-- /END THE FEATURETTES -->
-	
-
 
     <a href="<?=LINK_ROOT?>">Retour à l'accueil</a> 
-	
-</form>
 
