@@ -76,11 +76,9 @@ class Panier extends \Library\Controller\Controller{
 		$this->setDataView(array(
 			"pageTitle" => "Votre panier",
 			"message" => $this->message->showMessages(),
-			"viewPanier" => $viewPanier,
-			"urlWebService"			=> "
-			<script type='text/javascript'>
-				urlWebService='".WEBSERVICE_ROOT."/index.php';\n
-			</script>" ));
+			"viewPanier" => $viewPanier));
+
+		$this->setStyleView('indexpanier.css');
 
 	}
 
