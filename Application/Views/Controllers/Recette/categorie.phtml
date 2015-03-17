@@ -47,25 +47,19 @@
         <?php endforeach ; ?>
     </div>
 </div>
+<br>
+
+<div class="row featurette recette">
+    <?php foreach ($recette['commentaires'] as $com): ?>
+        <p><?= $com['value']?></p>
+        <p><?= $com['note']?> / 5</p>
+        <p><?= $com['pseudo']?></p>
+        <p><?= $com['update']?></p>
+    <?php endforeach ; ?>
+</div>
 
 
  <!-- /END THE FEATURETTES -->
-
- <?php
-
-
-//commentaires
-if($viewCommentaires){
-    foreach ($viewCommentaires as $commentaire){
-        foreach ($commentaire as $key => $champs){
-            echo $key." : ".$champs.'<br>';
-        }
-        echo '<hr>';
-    }
-}
-
-
-?>
 
 
 <input class="btn btn-success" type="button" value="ajouter un commentaire"  id="btnAddCom"><br>
@@ -73,7 +67,14 @@ if($viewCommentaires){
 
 <div id="divCom">
     <form method="post">
-        <textarea name="value">Un commentaire</textarea>
+        <textarea name="value"></textarea>
+        <select name="note">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
         <input type="hidden" name="id_recette" value="<?=$recette['id_recette']?>">
         <input type="hidden" name="id_user" value="<?=$_SESSION ['user']['id_user']?>">
         <input type="submit" value="Envoyer"  name="btn">
