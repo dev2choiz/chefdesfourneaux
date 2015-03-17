@@ -12,9 +12,7 @@
 
 
 
-          <!-- <iframe src="#" name="frameImgRecette" id="frameImgRecette">
-              frame
-          </iframe>  target="frameImgRecette" -->
+
 
 
 <form class=""  id="formRecette"  enctype="multipart/form-data"  method="post">
@@ -23,8 +21,9 @@
     </h2>
     <table>
         <tr>
-            <label for="titre">Titre de la recette que vous souhaitez ajouter : </label>
+            
             <td>
+                <label for="titre">Titre de la recette que vous souhaitez ajouter : </label>
                 <input type="text" name="titre" id="titre" value="<?=$viewrecette['titre']?>" required>
                 <div id="wrapperImgRecette">
                     <img id='imgRecette'  alt='Image recette' style='width:150px; height:150px;' />
