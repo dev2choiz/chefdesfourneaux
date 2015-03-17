@@ -194,7 +194,7 @@ class Admin extends \Library\Controller\Controller{
 
 
 
-
+		
 
 		$this->setScriptView("creerunerecette.js");
 
@@ -433,7 +433,12 @@ class Admin extends \Library\Controller\Controller{
 		));
 
 
-		$this->setJsVarible("IdRecette", $viewR['id_recette'] );
+		//ajoute la declaration de la variable idRecette au js (exemple : jsIdRecette=1)
+		$this->setJsConfigAvant("variable", "IdRecette", $viewR['id_recette'] );
+
+		//ajoute le code qui  lance une fonction ... avec comme parametre la variable créée ci dessus
+		//$this->setJsConfig("code" , "actualiserImageFormRecette( jsIdRecette );", "" );
+		$this->setJsConfigApres("code" , "actualiserImageFormRecette( jsIdRecette );" );
 
 		$this->setScriptView("creerunerecette.js");
 

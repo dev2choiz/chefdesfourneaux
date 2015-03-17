@@ -13,7 +13,8 @@ abstract class Controller implements iController
 	private $dataMod 		= array();
 	private $dataView   	= array("siteName" 	=> "Chef des fourneaux",
 							  		"pageTitle" => "Home");
-	private $jsVariable		= array();
+	private $jsConfigAvant		= array();
+	private $jsConfigApres		= array();
 	
 
 
@@ -80,11 +81,25 @@ abstract class Controller implements iController
 
 
 
+	/**
+	 * [setJsConfig pour inserer du code js, des variables, avant tout autre code js]
+	 * @param [String] $quoi    	[ qu'est qu'on veut faire ]
+	 * @param [String] $code 		[ code a rajouter ]
+	 * @param [String] $value 		[ valuer de la variable si c'est un variable qu'on declare ] [optionnel]
+	 */
+	protected function setJsConfigAvant($quoi, $code , $value="" ){
+		array_push( $this->jsConfigAvant, array( $quoi, $code , $value ) );
+		return true;
+	}
 
-
-	protected function setJsVarible($variable, $value){
-
-		array_push($this->jsVariable, array($variable , $value ) );
+	/**
+	 * [setJsConfig pour inserer du code js, des variables; apres les inclusion js]
+	 * @param [String] $quoi    	[ qu'est qu'on veut faire ]
+	 * @param [String] $code 		[ code a rajouter ]
+	 * @param [String] $value 		[ valuer de la variable si c'est un variable qu'on declare ] [optionnel]
+	 */
+	protected function setJsConfigApres($quoi, $code , $value="" ){
+		array_push( $this->jsConfigApres, array( $quoi, $code , $value ) );
 		return true;
 	}
 
@@ -212,21 +227,44 @@ abstract class Controller implements iController
 				urlWebService='".WEBSERVICE_ROOT."/index.php';
 			</script>
 			</body>", $html);
-		
-		$str="<script>\n";
-		$str.=var_export($this->jsVariable);
-		foreach ($this->jsVariable as $val){
 
-			$str.="js".$val[0]."=\"".$val[1]."\";\n";
+
+		//place les config js avant toute inclusion js
+		$str="<script>\n";
+		foreach ($this->jsConfigAvant as $val){
+			switch ($val[0]) {
+				case 'variable':
+					$str.="js".$val[1]."=\"".$val[2]."\";\n";
+					break;
+				case 'code':
+					$str.=$val[1].";\n";
+					break;
+			}
 		}
 		$str.="</script>\n";
-		
 		$html = str_replace('</body>', "$str</body>", $html);
 
 
-		foreach ($this->scriptView as $s){		//lol trop fort
+		//ajoute les scripts
+		foreach ($this->scriptView as $s){
 			$html = str_replace('</body>', "<script src='".WEB_ROOT."/js/$s'></script></body>", $html);
 		}
+
+		//place les configs js apres toutes les inclusions js
+		$str="<script>\n";
+		foreach ($this->jsConfigApres as $val){
+			switch ($val[0]) {
+				case 'variable':
+					$str.="js".$val[1]."=\"".$val[2]."\";\n";
+					break;
+				case 'code':
+					$str.=$val[1].";\n";
+					break;
+			}
+		}
+		$str.="</script>\n";
+		$html = str_replace('</body>', "$str</body>", $html);
+
 		foreach ($this->styleView as $s){
 			$html = str_replace('</head>', "<link href='".WEB_ROOT."/css/$s' rel='stylesheet' type='text/css' /></head>", $html);
 		}
@@ -265,10 +303,9 @@ abstract class Controller implements iController
 		if( file_exists($pathView) ){
 			
 
-			//if(!headers_sent()  ){			//<---condition a enlever quand on recevera les reponses du webservice sans entete
-			//									//il y a tjrs une entete dans les reponses du webservice, mais bon.......
-				header("Content-type: ".$this->getResponseHeader()."; charset=utf-8");
-			//}
+			//s'en fout
+			header("Content-type: ".$this->getResponseHeader()."; charset=utf-8");
+			
 
 			extract($this->getDataView());
 
