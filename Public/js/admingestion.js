@@ -57,25 +57,20 @@ $(document).ready(function(){
 	//afficher l'image selectionnée 		marche pas
 	$('#inputFileImgCatModifier').change(function(){
 
-		console.log("zekl",document.getElementById("inputFileImgCatModifier").files[0]);
-		alert( document.getElementById("inputFileImgCatModifier").files[0].value);
-		$('#imgRecette').attr('src', document.getElementById("inputFileImgCatModifier").files[0].value);
-		var fille = document.getElementById("inputFileImgCatModifier");
-		for( i in fille ){
-			console.log(i,fille[i]);
-		}
-    	// if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e)  {
-            	alert("la la");
-            }
-            reader.readAsDataURL( this.files[0] );
-
-		// }
+		
+	    input=document.getElementById('inputFileImgCatModifier');
+		 if (input.files && input.files[0]) {
+		    var reader = new FileReader();
+		    reader.onload = function (e) {
+		        alert(e.target.result);
+		        $('#imgCat').attr('src',e.target.result);
+		        return true;
+			};
+	    	reader.readAsDataURL(input.files[0]);
+	    }
 
 			
-		}
-	);
+	});
 
 
 
