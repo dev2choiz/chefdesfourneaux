@@ -15,12 +15,12 @@ class Panier extends \Library\Model\Model{
 	}
 
 
-	public function existeDansPanier($idUser, $idProd){
+	public function existeDansPanier($idUser, $idPanier){
 
 		$params = array('service' => 'panier',
 						'method' => 'existeDansPanier',
 						'id_user' => $idUser,
-						'id_produit' => $idProd
+						'id_panier' => $idPanier
 						 );
 
 		$opts = array('http' =>
@@ -120,11 +120,11 @@ class Panier extends \Library\Model\Model{
 	 * @param  [int] $idCategorie [description]
 	 * @return [boolean]              [description]
 	 */
-	public function deletePanier($idUser, $idProd){
+	public function deletePanier($idUser, $idPanier){
 		
 
 		$params["id_user"] = $idUser;
-		$params["id_produit"] = $idProd;
+		$params["id_panier"] = $idPanier;
 		$params["service"] = "panier";
 		$params["method"]  = "deletepanier";
 

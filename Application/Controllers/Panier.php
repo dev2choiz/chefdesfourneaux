@@ -27,12 +27,12 @@ class Panier extends \Library\Controller\Controller{
 		if(isset($_POST['action'])){
 			
 
-			if($_POST['action']==="delete"){
-				echo "delete";
+			if($_POST['action']==="Supprimer du panier"){
+
 				$modelPanier 	= new \Application\Models\Panier('localhost');
 				
-				$res =$modelPanier->deletePanier($_SESSION['user']['id_user']+0, $_POST['id_produit']+0);
-				//var_dump("res : ", $res);
+				//var_dump($_POST);
+				$res =$modelPanier->deletePanier($_SESSION['user']['id_user']+0, $_POST['id_panier']+0);
 				
 				$res=$res['response'];
 				
