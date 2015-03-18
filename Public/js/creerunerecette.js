@@ -2,7 +2,6 @@
 // Création d'une recette
 //tabUnit     = new Array();
 //tabQuant    = new Array();
-verifChamp  = 0;        //ne sert plus a rien
 
 
 function ajouterIngredient(){
@@ -16,7 +15,7 @@ function ajouterIngredient(){
 
         tabUnit.push("rien");
         tabQuant.push(1);
-        verifChamp++;
+        
         console.log(tabUnit+ "  ## "+tabQuant);
 
     }
@@ -37,8 +36,7 @@ function retirerIngredient(){
         //supprime dans quantité
         tabUnit.splice(ing.selectedIndex,1);
         tabQuant.splice(ing.selectedIndex,1);
-
-        verifChamp--;   
+  
 
         console.log(tabUnit +" # "+ tabQuant);
 
@@ -184,7 +182,7 @@ function actualiserImageFormRecette(idRecette){
     
     if (str==="") {
         $('#imgRecette').attr('src', "");
-        alert("ici");
+        //alert("ici");
     }else{
         //alert("onchange"+str);
         $('#imgRecette').attr('src', str);
@@ -226,7 +224,7 @@ function recupererImageRecette(idRecette){
 }
 
 
-varGlob="";
+
 
 function changerImage(idInput) {
     input=document.getElementById(idInput);
@@ -257,9 +255,3 @@ $(document).ready(function(){
 });
 
 
-//lancer le truc
-/*alert("alors?");
-if (jsIdRecette!=undefined) {
-    alert("dedans quand mm");
-    actualiserImageFormRecette( jsIdRecette );
-};*/
