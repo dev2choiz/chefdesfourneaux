@@ -29,7 +29,7 @@ function ajouterProduit(){
 		'value' 	: $('#WrapperAddProduit #value').val(),
 		'prix' 		: parseInt( $('#WrapperAddProduit #prix').val() ),
 		'ref' 		: $('#WrapperAddProduit #ref').val()
-	}
+	};
 
 	script="";
 
@@ -41,7 +41,7 @@ function ajouterProduit(){
         async :true,
         success: function(data) {
 
-            ids=parseInt((data['response']));
+            ids = parseInt((data.response));
             script = recupererScriptNewProduit(ids) ;
 
 
@@ -72,7 +72,7 @@ function mettreAjourProduit(idProd){
 		'value' 		: $('#popupContainer'+idProd+' #value').val(),
 		'prix' 			: parseInt( $('#popupContainer'+idProd+' #prix').val() ),
 		'ref' 			: $('#popupContainer'+idProd+' #ref').val()
-	}
+	};
 
     $.ajax({
         type: 'POST',
@@ -99,7 +99,7 @@ function supprimerProduit(idProd){
 		'service' 		: 'produit',
 		'method' 		: 'deleteproduit',
 		'id_produit' 	: $('#popupContainer'+idProd+' #id_produit').val()
-	}
+	};
 	console.log(jsonData);
 
     $.ajax({
@@ -125,7 +125,7 @@ function recupererScriptNewProduit(idProd){
 		'service' 		: 'produit',
 		'method' 		: 'recupererScriptNewProduit',
 		'id_produit' 	: idProd
-	}
+	};
 	
 	
    	$.ajax({
@@ -135,8 +135,8 @@ function recupererScriptNewProduit(idProd){
         dataType: 'json',
         async:false,
         success: function(data) {
-        	console.log(data['response']);
-        	alors= data['response'];
+        	console.log(data.response);
+        	alors = data.response;
 
         }
     });

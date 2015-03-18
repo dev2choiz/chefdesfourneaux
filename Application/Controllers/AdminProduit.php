@@ -84,7 +84,6 @@ class AdminProduit extends \Library\Controller\Controller{
 			$this->setRedirect(LINK_ROOT);
 		}
 
-		echo "<br><br><br><br><br><br><br><br><br><br>";
 		$produits = $this->modelProduits->getAllProduits();
 		$viewRecette = $this->modelViewRecette->getViewRecette($idRecette)['response'];
 		

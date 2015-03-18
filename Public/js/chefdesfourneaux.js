@@ -13,13 +13,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-
-
-
 // On pourra acheter dans indexproduit et produit
 
 function ajouterAuPanier(idUser, idProd){
@@ -29,7 +22,7 @@ function ajouterAuPanier(idUser, idProd){
 		'method' 		: 'insertPanier',
 		'id_user' 		: idUser,
 		'id_produit' 	: idProd
-	}
+	};
 	
 	
    	$.ajax({
@@ -67,7 +60,7 @@ function actualiserPanier(idUser){
 		'service' 		: 'panier',
 		'method' 		: 'getHtmlIconPanier',
 		'id_user' 		: idUser
-	}
+	};
 	
 	
    	$.ajax({
@@ -79,7 +72,7 @@ function actualiserPanier(idUser){
         success: function(data){
 			
 			//alert(data['response']);
-			$('#panierContent').html( data['response'] );
+			$('#panierContent').html( data.response );
 				
 			
 			
