@@ -8,7 +8,7 @@ $(document).ready(function(){
 	$('#apercuImageCat').css('display', 'none');
 
 	//cache toi ici
-	$('#frameImgCat').css('display', 'none');
+	//$('#frameImgCat').css('display', 'none');
 	
 
 	//CATEGORIE

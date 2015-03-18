@@ -35,7 +35,7 @@ class AdminProduit extends \Library\Controller\Controller{
 
 	public function indexAction(){
 		
-
+		echo "<br><br><br><br><br><br><br><br>";
 
 		if( !$this->isConnected() || $_SESSION['user']['role'] !== "admin" ){
 			$this->setRedirect(LINK_ROOT);
@@ -43,8 +43,9 @@ class AdminProduit extends \Library\Controller\Controller{
 	
 
 		$produits = $this->modelProduits->getAllProduits();
-		$produits = $produits['response'];
 		//var_dump($produits);
+		$produits = $produits['response'];
+		
 
 		// Ajoute les infos du produits au html
 		foreach ($produits as $key => $produit) {
