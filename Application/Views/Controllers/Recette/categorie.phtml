@@ -51,10 +51,13 @@
 
 <div class="row featurette recette">
     <?php foreach ($recette['commentaires'] as $com): ?>
+        
+        <hr>
         <p><?= $com['value']?></p>
         <p><?= $com['note']?> / 5</p>
         <p><?= $com['pseudo']?></p>
         <p><?= $com['update']?></p>
+
     <?php endforeach ; ?>
 </div>
 

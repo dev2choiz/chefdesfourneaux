@@ -62,6 +62,7 @@ class Vente extends \Library\Controller\Controller{
 		);
 
 		$this->setStyleView('popup.css');
+		$this->setStyleView('produit.css');
 
 		$this->setScriptView('produit.js');
 

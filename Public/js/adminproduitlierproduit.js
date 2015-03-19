@@ -38,7 +38,7 @@ function produitDejaLie(idRecette, idProduit){
 		'method' 		: 'getListProduit',
 		'id_recette'	: idRecette,
 		'id_produit'	: idProduit
-	}
+	};
 
 
 	alors=false;
@@ -51,14 +51,14 @@ function produitDejaLie(idRecette, idProduit){
         success: function(data) {
         	console.log("data",data);
 
-        	for (var i = 0; i < data['response'].length; i++) {
-        		//alert("idp"+data['response'][i]['id_produit']+" --"+idProduit);
-				if( data['response'][i]['id_produit']===idProduit ){
+        	for (var i = 0; i < data.response.length; i++) {
+        		//alert("idp"+data.response[i]['id_produit']+" --"+idProduit);
+				if( data.response[i].id_produit===idProduit ){
 
 					alors=true;
 
 				}
-        	};
+        	}
 
         }
     });
@@ -75,7 +75,7 @@ function insertListProduit(idRecette, idProduit){
 		'method' 		: 'insertListProduit',
 		'id_recette'	: idRecette,
 		'id_produit'	: idProduit
-	}
+	};
 
 
 
@@ -101,7 +101,7 @@ function deleteListProduit(idRecette, idProduit){
 		'method' 		: 'deleteListProduit',
 		'id_recette'	: idRecette,
 		'id_produit'	: idProduit
-	}
+	};
 
 
 
@@ -128,7 +128,7 @@ function nombreProduitAssocie(idRecette){
 		'service' 		: 'ListProduit',
 		'method' 		: 'nombreListProduit',
 		'id_recette'	: idRecette
-	}
+	};
 
 
 	alors=false;
@@ -139,8 +139,8 @@ function nombreProduitAssocie(idRecette){
         dataType: 'json',
         async :false,
         success: function(data) {
-            console.log(data["response"]);
-            alors=data["response"];
+            console.log(data.response);
+            alors=data.response;
         }
     });
     return alors;

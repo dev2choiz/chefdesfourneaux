@@ -1,4 +1,5 @@
 <?=$message?>
+
 <!-- START THE FEATURETTES -->
 <div class="container-fluid">
     <div class="row">
@@ -9,10 +10,41 @@
     <br class="featurette-divider">
     <div class="row featurette">
         <div class="col-md-6" style="text-align:center;">
-        <h1>Liste des Recettes : </h1>
-        <?php foreach($recettes as $recette): ?>
-        <p class="lead"><a href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>"> <?=$recette['titre']?></a></p>
-        <?php endforeach;?>
+            <h1>Liste des Recettes : </h1>
+
+            <!-- Affichage des entrées de la catégorie -->
+            <p class="text-muted">
+                Entree :
+            </p>
+            <?php foreach($recettes as $recette): if($recette['type'] == 'entree'):?>
+                <p class="lead">
+                    <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>">
+                        <?=$recette['titre']?>
+                    </a>
+                </p>
+            <?php endif; endforeach;?>
+            
+
+            <!-- Affichage des plats de la catégorie -->
+            <p class="text-muted">Plat :</p>
+            <?php foreach($recettes as $recette): if($recette['type'] == 'plat'):?>
+                <p class="lead">
+                    <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>"> 
+                        <?=$recette['titre']?>
+                    </a>
+                </p>
+            <?php endif; endforeach;?>
+
+
+            <!-- Affichage des desserts de la catégorie -->
+            <p class="text-muted">Dessert :</p>
+            <?php foreach($recettes as $recette): if($recette['type'] == 'dessert'):?>
+                <p class="lead">
+                    <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>">
+                        <?=$recette['titre']?>
+                    </a>
+                </p>
+            <?php endif; endforeach;?>
         </div>
         <div class="col-md-6">
             <img class="featurette-image img-responsive" src="<?=$recette['img']?>" alt="plat">
@@ -25,6 +57,6 @@
 	
 
 
-    <a href="<?=LINK_ROOT?>">Retour à l'accueil</a> - 
+    <a href="<?=LINK_ROOT?>">Retour à l'accueil</a>
 	
 </form>

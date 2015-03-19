@@ -1,5 +1,8 @@
-/* Spécifique à adminproduit/indexproduit */
+/* Spécifique à adminproduit/index */
 .ajouterProduitShowDiv{
+	display: none;
+}
+#wrapperImgProduit{
 	display: none;
 }
 /* Fin spécifique */

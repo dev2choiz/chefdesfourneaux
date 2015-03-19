@@ -34,8 +34,6 @@ class AdminProduit extends \Library\Controller\Controller{
 
 
 	public function indexAction(){
-		
-		echo "<br><br><br><br><br><br><br><br>";
 
 		if( !$this->isConnected() || $_SESSION['user']['role'] !== "admin" ){
 			$this->setRedirect(LINK_ROOT);
@@ -56,10 +54,6 @@ class AdminProduit extends \Library\Controller\Controller{
 																$produit['ref'],
 																$produit['value']);
 
-		}
-
-		if(isset($_POST['btnAjouterProduit'])){
-			var_dump($_POST);
 		}
 		
 		
@@ -84,7 +78,6 @@ class AdminProduit extends \Library\Controller\Controller{
 			$this->setRedirect(LINK_ROOT);
 		}
 
-		echo "<br><br><br><br><br><br><br><br><br><br>";
 		$produits = $this->modelProduits->getAllProduits();
 		$viewRecette = $this->modelViewRecette->getViewRecette($idRecette)['response'];
 		
@@ -106,18 +99,21 @@ class AdminProduit extends \Library\Controller\Controller{
 		
 
 		//recherche lesproduits associés a la recette
-		foreach ( $produits as $key => $produit ) {
-			$produits[$key]['associe']=false;
+		if(!empty($listProd)){
+			foreach ( $produits as $key => $produit ) {
+				$produits[$key]['associe']=false;
 
-			foreach ($listProd as $key2 => $prod) {
-				
-				if($prod['id_produit']===$produit['id_produit']){
-					$produits[$key]['associe']=true;
+				foreach ($listProd as $key2 => $prod) {
+					
+					if($prod['id_produit']===$produit['id_produit']){
+						$produits[$key]['associe']=true;
+						
+					}
 					
 				}
-				
 			}
 		}
+		
 		
 		//var_dump($listProd,$produits);
 
