@@ -2,7 +2,8 @@
  
 namespace Application\Controllers;
 
-class Admin extends \Library\Controller\Controller{
+class Admin
+ extends \Library\Controller\Controller{
 
 	private $message;
 	private $tinyMCE;

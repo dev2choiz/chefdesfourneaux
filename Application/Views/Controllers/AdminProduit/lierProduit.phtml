@@ -25,7 +25,7 @@
 				
 				<button class='btn btn-primary btn-xs col-md-offset-3' id="lierProduit" onclick="dissocierlierProduit(<?=$viewRecette['id_recette']?>, <?=$produit['id_produit']?>);" >
 
-					<?php if($produit['associe']): ?>
+					<?php if(array_key_exists('associe', $produit) && !empty($produit['associe'])): ?>
 						Dissocier ce produit a la recette
 					<?php else: ?>
 						Lier ce Produit à la recette

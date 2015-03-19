@@ -11,7 +11,7 @@ $(document).ready(function(){
 		$('#apercuImageProduit').css('display', 'none');
 
 		//cache toi ici
-		//$('#frameImgProduit').css('display', 'none');
+		$('#frameImgProduit').css('display', 'none');
 
 		$('#btnAjouterProduit').click(function(){
 			ajouterProduit();

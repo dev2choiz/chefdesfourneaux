@@ -63,7 +63,7 @@ class Message{
 
 			$html .= "<div class='alert alert-danger'>
 						<p>
-							<span class='glyphicon glyphicon-warning-sign'></span> Error
+							<span class='glyphicon glyphicon-warning-sign'></span> Erreur !
 							<hr />
 						</p>"
 							. implode('<br />', $_SESSION["message"]["error"]) .
@@ -74,7 +74,7 @@ class Message{
 
 			$html .= "<div class='alert alert-warning'>
 						<p>
-							<span class='glyphicon glyphicon-warning-sign'></span> Warning
+							<span class='glyphicon glyphicon-warning-sign'></span> Attention !
 							<hr />
 						</p>"
 							. implode('<br />', $_SESSION["message"]["warning"]) .
@@ -85,7 +85,7 @@ class Message{
 
 			$html .= "<div class='alert alert-success'>
 						<p>
-							<span class='glyphicon glyphicon-ok'></span> Success
+							<span class='glyphicon glyphicon-ok'></span> Bravo !
 							<hr />
 						</p>"
 							. implode('<br />', $_SESSION["message"]["success"]) .

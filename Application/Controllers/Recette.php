@@ -63,19 +63,9 @@ class Recette extends \Library\Controller\Controller{
 
 		$viewAllCats  	= $this->modelViewCat->getViewCategorie($idCategorie);
 		$viewAllCats 	= $viewAllCats['response'];
-		//var_dump($viewAllCats);
 
 		$titreCat = $viewAllCats[0]['categorie'];
 
-		/*
-		$recettesCat = array();
-		foreach ($viewAllCats as $key => $viewCats) {
-			if($viewCats['id_cat'] == $idCategorie){
-				$recettesCat[$viewCats['id_recette']] = $viewCats ;
-				$titreCat = $viewCats[0]['categorie'];
-			}
-		}*/
-		
 		$this->setDataView(array(
 			"pageTitle" 		=> "Recettes ".$titreCat,
 			"message" 			=> $this->message->showMessages(),
