@@ -18,23 +18,17 @@ class Index extends \Library\Controller\Controller
 
 
 	public function indexAction(){
-		echo "<br><br><br>";
-		echo "<br><br><br>";
-
 		 
 		$viewAllRecettes 		= $this->modelViewRecette->getAllViewRecettes() ;
 		if(!empty($viewAllRecettes['response'])){
 			$viewAllRecettes=$viewAllRecettes['response'];
-			//var_dump("##################################", $viewRecettes);
 		}else{
 			$this->message->addError("pas de Recettes");
 		}
 
-		//$viewRecettes = $this->modelViewRecette->getViewRecette($id);
-
 
 		$this->setDataView(array(
-			"pageTitle" => "Maitres des fourneaux, site de recettes, cuisine de chef et vente electroménager",
+			"pageTitle" => "Chef des fourneaux, site de recettes, cuisine de chef et vente electroménager",
 			"message" => $this->message->showMessages(),
 			"recettes" => $viewAllRecettes
 		));

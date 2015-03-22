@@ -35,18 +35,18 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="<?=LINK_ROOT?>">Chef des fourneaux...</a>
+                            <a class="navbar-brand lienChefDesFourneaux activeLink" href="<?=LINK_ROOT?>">Chef des fourneaux...</a>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                             
-                                <li><a href="<?=LINK_ROOT.'recette/index'?>">Categories</a></li>
-                                <li><a href="<?=LINK_ROOT.'recette/indexchef'?>">Recettes de chef</a></li>
-                                <li><a href="<?=LINK_ROOT.'recette/indexcategorie/3'?>">Forme et santé</a></li>
-                                <li><a href="<?=LINK_ROOT.'vente/indexlivre'?>">Livres de cuisine</a></li>
-                                <li><a href="<?=LINK_ROOT.'vente/indexrestaurant'?>">Restaurants de nos chefs</a></li>
-                                <li><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Produits en ventes</a></li>
-                                <li class="dropdown">
+                                <li class="lienChefDesFourneaux"><a  href="<?=LINK_ROOT.'recette/index'?>">Categories</a></li>
+                                <li class="lienChefDesFourneaux"><a  href="<?=LINK_ROOT.'recette/indexchef'?>">Recettes de chef</a></li>
+                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'recette/indexcategorie/3'?>">Forme et santé</a></li>
+                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexlivre'?>">Livres de cuisine</a></li>
+                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexrestaurant'?>">Restaurants de nos chefs</a></li>
+                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Produits en ventes</a></li>
+                                <li class="dropdown lienChefDesFourneaux">
                                     <?php if(empty($_SESSION['user'])):?>
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">S'inscrire / Se connecter <span class="caret"></span></a>
                                     <?php else :?>
