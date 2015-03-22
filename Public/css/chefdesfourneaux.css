@@ -1,11 +1,22 @@
-.navbar-inverse {
- 	background-color: #FFF;
-	font-weight: bold;
-}
 .container{
 	background-color: #FFF;
 	font-weight: bold;
+} 
+
+/* NAVBAR */
+.navbar-inverse .navbar-brand:hover{
+	background-color: #777;
 }
+.lienChefDesFourneaux:hover{
+	background-color: #777;
+}
+.activeLink{
+	background-color: #E4E4E4;
+	border-radius: 10px;
+}
+
+/* END NAVBAR */
+
 .separator{
 	height: 200px;
 }

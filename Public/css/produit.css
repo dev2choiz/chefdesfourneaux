@@ -1,17 +1,21 @@
-/* Spécifique à adminproduit/index */
 .ajouterProduitShowDiv{
 	display: none;
 }
+#uploadSubmitProd{
+	float: right;
+}
+
 #wrapperImgProduit{
 	display: none;
 }
-/* Fin spécifique */
 
-/* Spécifique à vente/indexproduit */
 #btnAcheterProduit{
 	width: 100%;
 }
-/* Fin spécifique */
+
+.btnPopupProduit{
+	width: 100%;
+}
 
 #labelProduits{
 	font-size: 30px;

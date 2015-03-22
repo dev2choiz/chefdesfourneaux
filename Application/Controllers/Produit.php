@@ -8,6 +8,9 @@ class Produit extends \Library\Controller\Controller{
 	private $modelCat;
 	private $modelViewProduit;
 
+	/**
+	 * [__construct description]
+	 */
 	public function __construct(){
 		parent::__construct();
 		$this->setLayout("carousel");
@@ -17,6 +20,10 @@ class Produit extends \Library\Controller\Controller{
 		$this->modelViewProduit 	= new \Application\Models\ViewProduit('localhost');
 	}
 
+	/**
+	 * [indexAction description]
+	 * @return [type] [description]
+	 */
 	public function indexAction(){
 		
 		//$viewAllProduits = $this->modelViewProduit->getAllProduits();
@@ -45,8 +52,13 @@ class Produit extends \Library\Controller\Controller{
 
 
 
-
-public function afficherAction( $idProduit ){
+	
+	/**
+	 * [afficherAction description]
+	 * @param  [type] $idProduit [description]
+	 * @return [type]            [description]
+	 */
+	public function afficherAction( $idProduit ){
 		
 		$viewProduit = $this->modelViewProduit->getViewProduit($idProduit);
 
@@ -143,20 +155,6 @@ public function afficherAction( $idProduit ){
 
 	public function logoutAction(){		//a effacer?
 		session_unset();
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
+	}	
 }
 

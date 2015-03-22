@@ -33,8 +33,6 @@ class Vente extends \Library\Controller\Controller{
 	
 
 	public function indexProduitAction(){
-		
-		// if($_SESSION['user']['role'] !== "admin") $this->setRedirect(LINK_ROOT);
 
 		$produits = $this->modelProduits->getAllProduits();
 		$produits = $produits['response'];
@@ -50,6 +48,19 @@ class Vente extends \Library\Controller\Controller{
 															$produit['ref'],
 															$produit['value']);
 
+		}
+
+		// Ajoute les infos du produits au html
+		if(!empty($_SESSION['user']) && $_SESSION['user']['role'] == "admin" ){
+			foreach ($produits as $key => $produit) {
+
+				$produits[$key]['modifierpopup']=$this->modelPopUpProduit->getModifPopup(
+																	$produit['id_produit'], 
+																	$produit['prix'], 
+																	$produit['ref'],
+																	$produit['value']);
+
+			}
 		}
 
 		

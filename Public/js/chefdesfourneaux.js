@@ -2,14 +2,11 @@
 
 
 
-
-
 $(document).ready(function(){
-		if(idUser==='rien') return false;
+		if(idUser === 'rien') return false;
 		actualiserPanier(idUser);
 	}
 );
-
 
 
 
