@@ -1,0 +1,19 @@
+.gestionWrapper{
+	font-size: 16px;
+}
+
+.gestionLabel .gestionInput{
+	text-align: center;
+	margin-top: 5%;
+}
+
+iframe{
+	display: none;
+}
+.inputValider{
+	margin-top: 1%;
+}
+
+#btnIngValider, #btnCatValider, #btnUnitValider, #apercuImageCat{
+	float: right;
+}

@@ -1,15 +1,106 @@
 <?=$message?>
 
 
+<div class="gestionWrapper">
+
+    <form method="post"  onsubmit="" id="formRecette">
+        <h2 class="form-signin-heading">
+            <?=$pageTitle?>
+        </h2>
+
+        
+
+        <hr class="featurette-divider" />
+        
+        <!-- Ingredients -->
+        <div class="row">
+            <div class="col-md-6">
+                <label class="col-md-6 gestionLabel" for="ingredients">Ingrédients : </label>
+                
+                <select class="col-md-6" name="ingredients[]" id="ingredients" multiple>
+                  <?php foreach ($ingredients as $ingredient) {?>
+                      <option value="<?=$ingredient['id_ingredient']?>"><?=$ingredient['value']?></option> 
+                  <?php } ?>
+                </select>
+                
+                
+            </div>
+
+            <div class="col-md-6" id="divChoixIng" >
+                <input class="btn btn-info col-md-4" type="button" id="btnIngAjouter" value="Ajouter" >
+                <input class="btn btn-warning col-md-4" type="button" id="btnIngModifier" value="Modifier" >
+                <input class="btn btn-danger col-md-4" type="button" id="btnIngSupprimer" value="Supprimer" >
+                <br>
+                <div class="inputValider" id="divIng" >
+                    <input class="form-control" type="text" id="textIngAjouter" value="" >
+                    <input class="form-control" type="text" id="textIngModifier" value="" >
+                  
+                  
+                    <input class="btn btn-success col-md-4" type="button" id="btnIngValider" value="Valider">
+                    <!--input type="button" id="btnCatCancel" value="Annuler"-->
+                </div>             
+            </div>
+        </div>
+
+        <br class="featurette-divider" />
+        <!-- Unité -->
+        <div class="row">
+            <div class="col-md-6">
+                <label class="col-md-6 gestionLabel" for="unites">Unités : </label>
+                <select class="col-md-6" name="unites[]" id="unites" multiple>
+                  <?php foreach ($unites as $unite) {?>
+                      <option value="<?=$unite['id_unite']?>"><?=$unite['value']?></option> 
+                  <?php } ?>
+                </select>
+            </div>
+            <div class="col-md-6" id="divChoixUnit" >
+                <input class="btn btn-info col-md-4" type="button" id="btnUnitAjouter" value="Ajouter" >
+                <input class="btn btn-warning col-md-4" type="button" id="btnUnitModifier" value="Modifier" >
+                <input class="btn btn-danger col-md-4" type="button" id="btnUnitSupprimer" value="Supprimer" >
+
+                <div class="inputValider" id="divUnit" >
+                    <input class="form-control" type="text" id="textUnitAjouter" value="" >
+                    <input class="form-control" type="text" id="textUnitModifier" value="" >
+                  
+                  
+                    <input class="btn btn-success col-md-4" type="button" id="btnUnitValider" value="Valider">
+                    <!--input type="button" id="btnCatCancel" value="Annuler"-->
+                </div>              
+            </div>
+        </div>
+
+        <br class="featurette-divider" />
+        <div class="row">
+            <div class="col-md-6">
+                <label class="col-md-6 gestionLabel" for="categories">Catégories : </label>
+                <select class="col-md-6" name="categories[]" id="categories" multiple>
+                  <?php foreach ($categories as $categorie) {?>
+                      <option value="<?=$categorie['id_cat']?>"><?=$categorie['value']?></option> 
+                  <?php } ?>
+                </select>
+            </div>
+            
+            <div class="col-md-6" id="divChoixCat" >
+                <input class="btn btn-info col-md-4" type="button" id="btnCatAjouter" value="Ajouter" >
+                <input class="btn btn-warning col-md-4" type="button" id="btnCatModifier" value="Modifier" >
+                <input class="btn btn-danger col-md-4" type="button" id="btnCatSupprimer" value="Supprimer" >
+                <div class="inputValider" id="divCat" >
+                    <input class="form-control" type="text" id="textCatAjouter" value="" >
+                    <input class="form-control" type="text" id="textCatModifier" value="" >
 
 
+                    <input class="btn btn-success col-md-4" type="button" id="btnCatValider" value="Valider">
 
-
-
-        <div id="apercuImageCat" border="1" style="background-color: #888;">
-          <form id="formImgCat" enctype="multipart/form-data" action="<?= WEBSERVICE_ROOT.'/index.php' ?>" target="frameImgCat" method="post">
-            <label for="inputFileImgCatModifier" >image de la catégorie</label>
+                </div>            
+                
+            </div>
+        </div>
+    </form>
+    <div class="col-md-6" id="apercuImageCat" border="1">
+        <form id="formImgCat" enctype="multipart/form-data" action="<?= WEBSERVICE_ROOT.'/index.php' ?>" target="frameImgCat" method="post">
+            <label class="gestionLabel" for="inputFileImgCatModifier" >Image de la catégorie</label>
             <input type="file" id="inputFileImgCatModifier" name="img">
+            <p class="help-block">Votre nom d'image doit être identique à celui de votre recette (exemple : tarteauxcitrons.jpg)</p>
             <input type="submit" value="envoyer" id="uploadSubmitImg">
             <div id="wrapperImgCat">
                 <img id='imgCat'  alt='Image categorie' style='width:100px; height:100px;' />
@@ -18,121 +109,14 @@
             <input type="hidden" name="service" value="categorie">
             <input type="hidden" name="method" value="envoiimagecategorie">
             <input type="hidden" name="id_cat" id="inputIdCat" value="">
-          </form>
-
- 
-          <!-- frame pour upload l'image  -->
-          <iframe src="#" name="frameImgCat" id="frameImgCat">
-              framegkjj
-          </iframe>
-  
-        </div>
+        </form>
 
 
-<form class="" method="post"  onsubmit="" id="formRecette">
-    <h2 class="form-signin-heading">
-        <?=$pageTitle?>
-    </h2>
-
-
-    <div>
-        <label for="categories">Catégories : </label>
-        <select name="categories[]" id="categories" multiple>
-          <?php foreach ($categories as $categorie) {?>
-              <option value="<?=$categorie['id_cat']?>"><?=$categorie['value']?></option> 
-          <?php } ?>
-        </select>
-
-
-
-        
-
-
-
-
-
-
-        <div id="divChoixCat" >
-            <input type="button" id="btnCatAjouter" value="Ajouter" >
-            <input type="button" id="btnCatModifier" value="Modifier" >
-            <input type="button" id="btnCatSupprimer" value="Supprimer" >
-
-              <div id="divCat" >
-                  <input type="text" id="textCatAjouter" value="" >
-                  <input type="text" id="textCatModifier" value="" >
-
-
-                  <input type="button" id="btnCatValider" value="OK">
-
-                  <p class="help-block">Votre nom d'image doit être identique à celui de votre recette (exemple : tarteauxcitrons.jpg)</p>
-              </div>            
-            
-        </div>
-
+        <!-- frame pour upload l'image  -->
+        <iframe src="#" name="frameImgCat" id="frameImgCat">
+            framegkjj
+        </iframe>
     </div>
-
-    <!-- INgredients -->
-    <div>
-        <label for="ingredients">Ingrédients : </label>
-        <select name="ingredients[]" id="ingredients" multiple>
-          <?php foreach ($ingredients as $ingredient) {?>
-              <option value="<?=$ingredient['id_ingredient']?>"><?=$ingredient['value']?></option> 
-          <?php } ?>
-        </select>
-
-        <div id="divChoixIng" >
-            <input type="button" id="btnIngAjouter" value="Ajouter" >
-            <input type="button" id="btnIngModifier" value="Modifier" >
-            <input type="button" id="btnIngSupprimer" value="Supprimer" >
-
-              <div id="divIng" >
-                  <input type="text" id="textIngAjouter" value="" >
-                  <input type="text" id="textIngModifier" value="" >
-                  
-                  
-                  <input type="button" id="btnIngValider" value="OK">
-                  <!--input type="button" id="btnCatCancel" value="Annuler"-->
-              </div>            
-            
-        </div>
-
-    </div>
-
-
- 
-
-
-
-
-    <!-- Unité -->
-    <div>
-        <label for="unites">Unités : </label>
-        <select name="unites[]" id="unites" multiple>
-          <?php foreach ($unites as $unite) {?>
-              <option value="<?=$unite['id_unite']?>"><?=$unite['value']?></option> 
-          <?php } ?>
-        </select>
-
-        <div id="divChoixUnit" >
-            <input type="button" id="btnUnitAjouter" value="Ajouter" >
-            <input type="button" id="btnUnitModifier" value="Modifier" >
-            <input type="button" id="btnUnitSupprimer" value="Supprimer" >
-
-              <div id="divUnit" >
-                  <input type="text" id="textUnitAjouter" value="" >
-                  <input type="text" id="textUnitModifier" value="" >
-                  
-                  
-                  <input type="button" id="btnUnitValider" value="OK">
-                  <!--input type="button" id="btnCatCancel" value="Annuler"-->
-              </div>            
-            
-        </div>
-
-    </div>
-
-
-
-</form  style="min-width:150px;">
+</div>
 
 
