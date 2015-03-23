@@ -5,11 +5,10 @@ $(document).ready(function(){
 
         $('#addCommentaire').click(function(){
            //document.getElementById("commValue").text="fjskfjd";
-            //document.getElementById("commValue").__load
-            alert("avant le if" +tinyMCE.get('commValue').getContent()+"##");
-            if ($("#commValue").html()!=="") {
-                alert("dans le if");
-                ajouterCommentaire(document.getElementById("commValue").value, $("#noteValue").val());
+            
+            if (tinyMCE.get('commValue').getContent()!=="") {
+                alert("dans le if"+$("#noteValue").val());
+                ajouterCommentaire(tinyMCE.get('commValue').getContent(), $("#noteValue").val());
             }
         });
     }
@@ -23,7 +22,9 @@ function ajouterCommentaire(value, note){
         'service'   : 'commentaire',
         'method'    : 'insertCommentaire',
         'value'     : value,
-        'note'      : note
+        'note'      : note,
+        'id_recette': jsIdRecette,
+        'id_user'   : idUser
     };
 
     script="";
@@ -37,7 +38,8 @@ function ajouterCommentaire(value, note){
         success: function(data) {
 
             idComm = parseInt((data.response));
-            console.log(idComm);
+            alert("dans succces ajout"+idComm);
+            console.log(data.response,"id insert :"+idComm);
             ajouterCommDansDiv(idComm);
         }
 
@@ -66,16 +68,16 @@ function ajouterCommDansDiv(idComm){
         success: function(data) {
             console.log(data.response);
 
-            html="<hr>";/*\
+            html="<hr>\
                     <div>\
-                        <p>"+data.response.value+"</p>\
-                        <p>"+data.response.note+" / 5</p>\
-                        <p>"+data.response.pseudo+"</p>\
-                        <p>"+data.response.update+"</p>\
-                    </div>";*/
+                        <p>"+data.response[0].value+"</p>\
+                        <p>"+data.response[0].note+" / 5</p>\
+                        <p>"+data.response[0].pseudo+"</p>\
+                        <p>"+data.response[0].update+"</p>\
+                    </div>";
 
             $('#WrapperComms').append(html);
-
+            $("#divCom").hide('slow');
 
         }
     });
