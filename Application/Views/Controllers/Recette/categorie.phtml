@@ -52,15 +52,17 @@
 </div>
 <br>
 
-<div class="row featurette recette">
+<div class="row featurette recette" id="WrapperComms">
     <!-- Si des commentaires sont liés à la recette -->
     <?php if(!empty($recette['commentaires'])): foreach ($recette['commentaires'] as $com): ?>
         
         <hr>
-        <p><?= $com['value']?></p>
-        <p><?= $com['note']?> / 5</p>
-        <p><?= $com['pseudo']?></p>
-        <p><?= $com['update']?></p>
+        <div>
+            <p><?= $com['value']?></p>
+            <p><?= $com['note']?> / 5</p>
+            <p><?= $com['pseudo']?></p>
+            <p><?= $com['update']?></p>
+        </div>
 
     <?php endforeach; endif; ?>
 </div>
@@ -73,17 +75,16 @@
 
 
 <div id="divCom">
-    <form method="post">
-        <textarea name="value"></textarea>
-        <select name="note">
+        <textarea id="commValue"></textarea>
+        <select id="noteValue">
             <option>1</option>
             <option>2</option>
             <option>3</option>
             <option>4</option>
             <option>5</option>
         </select>
-        <input type="hidden" name="id_recette" value="<?=$recette['id_recette']?>">
-        <input type="hidden" name="id_user" value="<?=$_SESSION ['user']['id_user']?>">
-        <input type="submit" value="Envoyer"  name="btn">
-    </form>
+<!--         <input type="hidden" name="id_recette" value="<?=$recette['id_recette']?>">
+<input type="hidden" name="id_user" value="<?=$_SESSION ['user']['id_user']?>"> -->
+        <input type="submit" value="Envoyer"  id="addCommentaire">
 </div>
+

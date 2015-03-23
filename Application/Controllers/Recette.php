@@ -84,41 +84,15 @@ class Recette extends \Library\Controller\Controller{
 		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
 		
 
-		if(isset($_POST['btn'])){
-
-			unset($_POST['btn']);
-			$res =$modelCommentaire->insertCommentaire($_POST);
+echo "<br><br><br><br><br><br><br><br>";
 
 
-			if ($res['error']) {
-				$this->message->addError("erreur pendant la recuperation des commentaires !");
-			}
-			$res = $res['response'];
+			
+				//declare la variable jsIdRecette
+		$this->setJsConfigAvant("variable", "IdRecette", $idRecette );			
+
 			
 		
-			if ($res>0  ) {		//res est vaut l'id du comm
-				
-				$this->message->addSuccess("Commentaire ajouté");
-
-			}else{
-				$this->message->addError("Commentaire non ajouté");
-			}
-			
-			if(empty($_POST['value'])){
-				$this->message->addError("Commentaire vide !");
-			}
-
-			$listMessage = $this->message->getMessages("error");
-			if(!empty($listMessage)){
-				$this->setDataView(array("message" => $this->message->showMessages()));
-				return false;
-			}
-			unset($listMessage);
-
-			
-
-			
-		}
 		
 
 
