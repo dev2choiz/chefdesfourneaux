@@ -1,11 +1,13 @@
 <div class="row">
 	<div class="col-md-8">
 
-		Produit : <?= $produit['value']?>
+		
 		<img class="media-object" src="../../../..<?=$produit['img']?>" alt="<?=$produit['value']?>">
 	</div>
 	<div class="col-md-4">
-		Prix : <?= $produit['prix']?> €
-		Référence : <?= $produit['ref']?>
+		<p>Produit : <?= $produit['value']?></p>
+		<p>Prix : <?= $produit['prix']?> €</p>
+		<p>Référence : <?= $produit['ref']?></p>
+		<button class='btn btn-success btnAcheterProduit' id="btnAcheterProduit"  >Mettre ce produit dans mon panier <?=$produit['acheterpopup']?></button>
 	</div>
 </div>

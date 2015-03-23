@@ -54,7 +54,7 @@ class Vente extends \Library\Controller\Controller{
 		if(!empty($_SESSION['user']) && $_SESSION['user']['role'] == "admin" ){
 			foreach ($produits as $key => $produit) {
 
-				$produits[$key]['modifierpopup']=$this->modelPopUpProduit->getModifPopup(
+				$produits[$key]['modifierpopup'] = $this->modelPopUpProduit->getModifPopup(
 																	$produit['id_produit'], 
 																	$produit['prix'], 
 																	$produit['ref'],
@@ -81,12 +81,21 @@ class Vente extends \Library\Controller\Controller{
 
 	public function produitAction($idProduit){
 		$produit = $this->modelProduits->getProduit($idProduit);
-		//var_dump($produit);
+		$produit = $produit['response'][0];
+		var_dump($produit);
+		// Ajoute les infos du produits au html
+		$produit['acheterpopup'] = $this->modelPopUpProduit->getAcheterPopup(
+														$produit['id_produit'], 
+														$produit['prix'], 
+														$produit['ref'],
+														$produit['value']);
+
+		
 
 
 		$this->setDataView(array(
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
-			'produit' => $produit['response'][0]
+			'produit' => $produit
 			)
 		);
 
