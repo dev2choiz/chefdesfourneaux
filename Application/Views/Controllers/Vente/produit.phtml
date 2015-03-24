@@ -1,13 +1,11 @@
-<div class="row">
+<div class="row " id="WrapperProduit<?= $produit['id_produit']?>">
 	<div class="col-md-8">
-
-		
-		<img class="media-object" src="../../../..<?=$produit['img']?>" alt="<?=$produit['value']?>">
+		<img class="featurette-image img-responsive" src="../../../..<?=$produit['img']?>" alt="<?=$produit['value']?>">
 	</div>
-	<div class="col-md-4">
-		<p>Produit : <?= $produit['value']?></p>
-		<p>Prix : <?= $produit['prix']?> €</p>
-		<p>Référence : <?= $produit['ref']?></p>
+	<ul class="col-md-4 list-group produitList">
+		<li class="list-group-item">Produit : <?= $produit['value']?></li>
+		<li class="list-group-item">Prix : <?= $produit['prix']?> €</li>
+		<li class="list-group-item">Référence : <?= $produit['ref']?></li>
 		<button class='btn btn-success btnAcheterProduit' id="btnAcheterProduit"  >Mettre ce produit dans mon panier <?=$produit['acheterpopup']?></button>
-	</div>
+	</ul>
 </div>
