@@ -1,5 +1,4 @@
 .recette{
-	/*margin-top: 10%;*/
 	background-color: rgba(255,255,221,0.2);
 	border: solid 1px;
 	border-color: rgb(95,95,95);
@@ -26,3 +25,12 @@ h1{
     margin-left: auto;
     margin-right: auto;
 }
+
+/* Commentaires*/
+#btnAddCom, #addCommentaire {
+	float: right;
+}
+.headerCom{
+	text-align: center;
+}
+/* Fin Commentaires*/
