@@ -36,7 +36,8 @@
 }
 
 .produitList{
-	font-size: 16px;
+	text-align: center;
+	font-size: 18px;
 	padding-right: 7%;
 	padding-top: 10%;
 }
