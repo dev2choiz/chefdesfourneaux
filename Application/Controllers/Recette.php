@@ -82,13 +82,8 @@ class Recette extends \Library\Controller\Controller{
 
 
 		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
-		
-
-echo "<br><br><br><br><br><br><br><br>";
-
-
 			
-				//declare la variable jsIdRecette
+		//declare la variable jsIdRecette
 		$this->setJsConfigAvant("variable", "IdRecette", $idRecette );			
 
 			
@@ -96,7 +91,7 @@ echo "<br><br><br><br><br><br><br><br>";
 		
 
 
-			//################## données pour la view ############################
+		//################## données pour la view ############################
 
 		//recherche des commentaires
 		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
@@ -112,6 +107,7 @@ echo "<br><br><br><br><br><br><br><br>";
 			"recette"				=> $viewRecette 
 		));
 		$this->setStyleView('categorie.css');
+		$this->setScriptView('categorie.js');
 	}
 
 

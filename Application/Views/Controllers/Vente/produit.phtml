@@ -3,7 +3,7 @@
 		<img class="featurette-image img-responsive" src="../../../..<?=$produit['img']?>" alt="<?=$produit['value']?>">
 	</div>
 	<ul class="col-md-4 list-group produitList">
-		<li class="list-group-item">Produit : <?= $produit['value']?></li>
+		<li class="list-group-item"><h1><?= $produit['value']?></h1></li>
 		<li class="list-group-item">Prix : <?= $produit['prix']?> €</li>
 		<li class="list-group-item">Référence : <?= $produit['ref']?></li>
 		<button class='btn btn-success btnAcheterProduit' id="btnAcheterProduit"  >Mettre ce produit dans mon panier <?=$produit['acheterpopup']?></button>

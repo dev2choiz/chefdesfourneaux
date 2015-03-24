@@ -90,9 +90,6 @@ class Vente extends \Library\Controller\Controller{
 														$produit['ref'],
 														$produit['value']);
 
-		
-
-
 		$this->setDataView(array(
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
 			'produit' => $produit
