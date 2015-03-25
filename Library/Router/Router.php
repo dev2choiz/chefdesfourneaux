@@ -83,7 +83,8 @@ class Router
 				$controller = self::getControllerClassName('error');
 			}
 		}
-
+			//echo "<br><br><br><br><br><br><br><br><br>".$controller;
+			
 		$controller = new $controller;
 
 //echo $page[0]."{##########".self::getControllerPath($page[0])."##".self::getControllerClassName($page[0]);die();
@@ -93,6 +94,8 @@ class Router
 			}
 			array_splice($page, 0, 1);
 		}
+		
+		//var_dump($controller, $action, $page);
 		call_user_func_array(array($controller, $action), $page);
 		call_user_func_array(array($controller, 'renderView'), array("controller"	=> get_class($controller),
 																	 "action"		=> $action));
