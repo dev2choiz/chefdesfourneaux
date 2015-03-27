@@ -336,4 +336,72 @@ class User extends \Library\Controller\Controller{
 		}
 		$this->setDataView(array("message" => $this->message->showMessages()));	
 	}
+
+
+
+
+
+
+
+public function motDePasseOublieAction(){
+
+		
+
+		$modelMailer = new \Application\Models\Mailer('localhost');		
+
+		$modelQuestionSecrete = new \Application\Models\QuestionSecrete('localhost');
+		$questionSecretes = $this->convEnTab( $modelQuestionSecrete->getQuestionSecretes() );
+		$questionSecretes=$questionSecretes['response'];
+		
+
+
+		$this->setDataView(array("pageTitle" => "Mot de passe oubli&eacute;","message" => ""));
+
+		if(isset($_POST['btn'])){
+
+			if(empty($_POST['reponsesecrete'])){
+				$this->message->addError("reponse vide !");
+			}
+
+			if(empty($_POST['mail'])){
+				$this->message->addError("mail vide !");
+			}
+
+			$listMessage = $this->message->getMessages("error");
+			if(!empty($listMessage)){
+				$this->setDataView(array("message" => $this->message->showMessages()));	
+				return false;
+			}
+			
+			//envoyerMail($mailExped, $mailDest, $body, $subject, $template)
+
+			$modelUser = new \Application\Models\User('localhost');		
+			$user = $modelUser->redefinirPassword( $_POST['mail'], $_POST['reponsesecrete'] );
+			$user=$modelUser->convEnTab($user);
+			$res=$user['response'];
+			
+			if( $res ){
+				$this->message->addSuccess('vous recevrez dans quelques instants un mail contenant votre nouveau mot de passe');
+			}else{
+				$this->message->addError("le mail et la reponse ne correnspondent pas  !");
+			}
+		}		//fin traitement formulaire
+
+		
+
+		$this->setDataView(array(
+			'message'			=> $this->message->showMessages(),
+			'questionSecretes'	=> $questionSecretes
+		));
+		
+			
+	
+
+	}
+
+
+
+
+
+
 }

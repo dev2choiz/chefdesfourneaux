@@ -30,6 +30,26 @@ class User extends \Library\Model\Model{
 		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
 	}
 
+
+	public function getUser($mail){
+		$opts = array('http' =>
+		    array(
+		        'method'  => 'POST',
+		        'header'  => 'Content-type: application/x-www-form-urlencoded',
+		        'content' => http_build_query(
+								array(
+							        'service' => 'user',				
+							        'method' => 'getUser',
+							        'mail'=> $mail
+							    )
+		    				)
+		        )
+		);
+//
+		$context  = stream_context_create($opts);
+		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
+	}
+
 	public function updateUser($id, $mail , $password, $params){
 	
 
@@ -85,4 +105,28 @@ class User extends \Library\Model\Model{
 		$context  = stream_context_create($opts);
 		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
 	}
+
+
+
+
+	public function redefinirPassword($mail, $reponse){
+		$params['service']='user';
+		$params['method']='redefinirPassword';
+		$params['mail']=$mail;
+		$params['reponsesecrete']=$reponse;
+		
+
+		$opts = array('http' =>
+		    array(
+		        'method'  => 'POST',
+		        'header'  => 'Content-type: application/x-www-form-urlencoded',
+		        'content' => http_build_query(
+								$params
+		    				)
+		        )
+		);
+		$context  = stream_context_create($opts);
+		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
+	}
+
 }
