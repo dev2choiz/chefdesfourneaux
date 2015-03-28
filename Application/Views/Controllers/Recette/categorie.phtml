@@ -47,8 +47,10 @@
  <!-- /END THE FEATURETTES -->
 
 <div class="row divCom">
-    <input class="btn btn-success col-md-6" type="button" value="Ajouter un commentaire"  id="btnAddCom">
-    <br>
+    <?php if(!empty($_SESSION['user'])): ?> 
+        <input class="btn btn-success col-md-6" type="button" value="Ajouter un commentaire"  id="btnAddCom">
+        <br>
+    <?php endif; ?> 
 
     <div id="divCom">
         <div class="col-md-4">Note : </div>
@@ -60,9 +62,7 @@
             <option>5</option>
         </select>
         <textarea id="commValue"></textarea>
-     
-    <!-- <input type="hidden" name="id_recette" value="<?=$recette['id_recette']?>">
-    <input type="hidden" name="id_user" value="<?=$_SESSION ['user']['id_user']?>"> -->
+
         <input class="btn btn-success col-md-6" type="submit" value="Commenter cette recette"  id="addCommentaire">
     </div>
 </div>

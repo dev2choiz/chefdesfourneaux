@@ -35,19 +35,6 @@ class Recette extends \Library\Controller\Controller{
 			$viewAllCats=$viewAllCats['response'];
 		}
 
-		//var_dump("repérage",$viewAllRecette);
-
-
-		/*
-		echo "<br><br><br><br>".$idRecette;
-		
-		if( $_SESSION['user']['role'] !== "admin" ){
-			$this->setRedirect(LINK_ROOT);
-		}elseif( !isset($idRecette) || empty($idRecette)  || $idRecette===0 ){	//si pas d'idrecette
-			$this->setRedirect(LINK_ROOT."admin/");
-		}
-		*/
-
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"tinyMCECommentaire" => $this->tinyMCE->getEditeurCommentaire(),
