@@ -25,9 +25,10 @@
     <body>
         <div class="navbar-wrapper">
             <div class="container">
-
+                
                 <nav class="navbar navbar-inverse navbar-static-top">
                     <div class="container">
+
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                                 <span class="sr-only">Toggle navigation</span>
@@ -36,8 +37,24 @@
                                 <span class="icon-bar"></span>
                             </button>
                             <a class="navbar-brand lienChefDesFourneaux activeLink" href="<?=LINK_ROOT?>">Chef des fourneaux...</a>
+                            <div class="navbar panier col-xs-6 col-md-4" id="panier">                                
+                                <?php if(!empty($_SESSION['user'])): ?>
+                                <a class="btn btn-default lienPanier" href="<?=LINK_ROOT.'panier/indexpanier/'.$_SESSION['user']['id_user']?>">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> 
+                                    Votre Panier : 
+                                    <div class="panierContent" id="panierContent">0 </div>
+                                    articles
+                                </a>
+                                <?php else: ?>
+                                    <a class="btn btn-default lienPanier" href="<?=LINK_ROOT.'vente/indexproduit/'?>"> Acheter des produits</a>
+                                <?php endif; ?>
+                            </div>
+                            
                         </div>
+                        
+
                         <div id="navbar" class="navbar-collapse collapse">
+
                             <ul class="nav navbar-nav">
                             
                                 <li class="lienChefDesFourneaux"><a  href="<?=LINK_ROOT.'recette/index'?>">Categories</a></li>
@@ -91,23 +108,8 @@
 
         <!-- Marketing messaging and featurettes
         ================================================== -->
-        <div class="row">
-
-            <div class="panier col-xs-6 col-md-4" id="panier">
-                <span class="glyphicon glyphicon-shopping-cart"></span>
-                <?php if(!empty($_SESSION['user'])): ?>
-                <a class="btn btn-default" href="<?=LINK_ROOT.'panier/indexpanier/'.$_SESSION['user']['id_user']?>"> 
-                    Votre Panier : 
-                    <div class="panierContent" id="panierContent">0 </div>
-                    articles
-                </a>
-                <?php else: ?>
-                    <a class="btn btn-default" href="<?=LINK_ROOT.'vente/indexproduit/'?>"> Acheter des produits</a>
-                <?php endif; ?>
-            </div>
-        </div>
         <div class="container marketing">
-
+        
             <div class="content_view" id="content_view">
                 <?=$content_view?>
             </div>
@@ -127,7 +129,6 @@
         <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script-->
         <script src="<?=WEB_ROOT?>js/bootstrap/bootstrap.min.js"></script>
         <script src="<?=WEB_ROOT?>js/bootstrap/docs.min.js"></script>
-        <script src="<?=WEB_ROOT?>js/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
         <script src="<?=WEB_ROOT?>js/chefdesfourneaux.js"></script>
 
 

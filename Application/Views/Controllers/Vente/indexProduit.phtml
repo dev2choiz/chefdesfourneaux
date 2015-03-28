@@ -83,7 +83,7 @@
 				<span id="labelPrixProduit"><?= $produit['prix']?></span> €
 			</div>
 			<div class="col-md-4">
-				<button class='btn btn-success btnAcheterProduit' id="btnAcheterProduit"  >Mettre ce produit dans mon panier <?=$produit['acheterpopup']?></button>
+				<button class='btn btn-success btnAcheterProduit' id="btnAcheterProduit">Mettre ce produit dans mon panier <?=$produit['acheterpopup']?></button>
 
 				<!-- Si l'utilisateur est admin -->
 				<?php if(!empty($_SESSION['user']) && $_SESSION['user']['role'] == "admin" ): ?>
