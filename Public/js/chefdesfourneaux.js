@@ -15,7 +15,7 @@ $(document).ready(function(){
 function ajouterAuPanier(idUser, idProd){
 	jsonData = 
 	{
-		'service' 		: 'panier',
+		'service' 		: 'Panier',
 		'method' 		: 'insertPanier',
 		'id_user' 		: idUser,
 		'id_produit' 	: idProd
@@ -54,7 +54,7 @@ function actualiserPanier(idUser){
 
 	jsonData = 
 	{
-		'service' 		: 'panier',
+		'service' 		: 'Panier',
 		'method' 		: 'getHtmlIconPanier',
 		'id_user' 		: idUser
 	};

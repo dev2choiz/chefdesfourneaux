@@ -25,8 +25,8 @@ class ViewProduit extends \Library\Model\Model{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'viewproduit',				
-							        'method' => 'getviewproduit',
+							        'service' => 'ViewProduit',				
+							        'method' => 'getViewProduit',
 							        'id_produit' => $id
 							    )
 		    				)
@@ -78,8 +78,8 @@ class ViewProduit extends \Library\Model\Model{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'viewproduit',				
-							        'method' => 'getallviewproduits',
+							        'service' => 'ViewProduit',				
+							        'method' => 'getAllViewProduits',
 							    )
 		    				)
 		        )

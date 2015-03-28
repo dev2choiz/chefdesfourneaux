@@ -19,7 +19,7 @@ function ajouterCommentaire(value, note){
     alert(value+ "   "+ note);
     jsonData = 
     {
-        'service'   : 'commentaire',
+        'service'   : 'Commentaire',
         'method'    : 'insertCommentaire',
         'value'     : value,
         'note'      : note,
@@ -28,7 +28,7 @@ function ajouterCommentaire(value, note){
     };
 
     script="";
-
+    alert(urlWebService);
     $.ajax({
         type: 'POST',
         data: jsonData,
@@ -36,7 +36,7 @@ function ajouterCommentaire(value, note){
         dataType: 'json',
         async :true,
         success: function(data) {
-
+            console.log(data.response);
             idComm = parseInt((data.response));
             alert("dans succces ajout"+idComm);
             console.log(data.response,"id insert :"+idComm);

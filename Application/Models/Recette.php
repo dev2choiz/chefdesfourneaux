@@ -30,8 +30,8 @@ class Recette extends \Library\Model\Model{
 
 
 		$params["id_user"] = $idUser;
-		$params["service"] = "recette";
-		$params["method"]  = "insertrecette";
+		$params["service"] = "Recette";
+		$params["method"]  = "insertRecette";
 
 		$opts = array('http' =>
 		    array(
@@ -59,8 +59,8 @@ class Recette extends \Library\Model\Model{
 		
 
 		$params["id_recette"] = $idRecette;
-		$params["service"] = "recette";
-		$params["method"]  = "updaterecette";
+		$params["service"] = "Recette";
+		$params["method"]  = "updateRecette";
 //var_dump("dan model",$params);
 
 		$opts = array('http' =>
@@ -89,8 +89,8 @@ class Recette extends \Library\Model\Model{
 		
 
 		$params["id_recette"] = $idRecette;
-		$params["service"] = "recette";
-		$params["method"]  = "deleterecette";
+		$params["service"] = "Recette";
+		$params["method"]  = "deleteRecette";
 
 
 		$opts = array('http' =>

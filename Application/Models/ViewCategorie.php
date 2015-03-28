@@ -25,8 +25,8 @@ class ViewCategorie extends \Library\Model\Modelview{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'viewcategorie',				
-							        'method' => 'getviewcategorie',
+							        'service' => 'ViewCategorie',				
+							        'method' => 'getViewCategorie',
 							        'id_cat' => $idCat
 							    )
 		    				)

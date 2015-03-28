@@ -1,0 +1,22 @@
+<?=$message?>
+
+<!-- START THE FEATURETTES -->
+<div class="container-fluid">
+	    <br class="featurette-divider">
+	    <div class="row featurette">
+			<div class="col-md-6">
+<?php foreach($recettes as $recette): ?>
+	<?php if($recette['type'] == $type): ?>
+				<h1><?php ucfirst($type)?></h1>		
+		        <a class="linkCat" href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> 
+		        	<h4><?=$recette['titre']?></h4>
+		        </a>
+		   
+<?php endif; endforeach;?>
+</div>
+
+<img class="col-md-6 img-responsive img-thumbnail img" src="../../../../img/type/<?=$type?>.jpg" alt="<?=$type?>">
+     	
+		 	
+	 	</div>
+	 </div>
