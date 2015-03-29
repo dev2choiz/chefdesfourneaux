@@ -74,7 +74,7 @@
 
 			<div class="col-md-4">
 				<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">
-        			<img class="media-object indexImg" src="../../../..<?=$produit['img']?>" alt="<?=$produit['value']?>">
+        			<img class="media-object indexImg" src="<?= IMG_LINK_ROOT.$produit['img']?>" alt="<?=$produit['value']?>">
       			</a>
 				<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>"><span id="labelValueProduit"><?= $produit['value']?></span></a>
 				<p>Référence : <span id="labelRefProduit"><?= $produit['ref']?></span></p>

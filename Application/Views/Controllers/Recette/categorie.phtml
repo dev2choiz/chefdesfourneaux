@@ -6,7 +6,7 @@
 <div class="row featurette recette">
     <h1><?=$recette['categorie']?></h1>
     <div class="col-md-5">
-        <img class="featurette-image img-responsive" src="../../../..<?=$recette['img']?>" alt="<?=$recette['titre']?>">
+        <img class="featurette-image  img-responsive" src="<?=IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['titre']?>">
         <h3>Liste des Ingrédients</h3>
 
         <!-- Si des ingrédients sont liés à la recette -->
@@ -32,7 +32,7 @@
         <?php if(!empty($recette['produits'])): foreach ($recette['produits'] as $produit): ?>
             <div class="col-md-4" id="produitRecette">
                 <a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>"><?=$produit['value_produit']?></a>
-                <img class="media-object" src="../../../..<?=$produit['img']?>" alt="<?=$produit['value_produit']?>">
+                <img class="media-object" src="<?= IMG_LINK_ROOT.$produit['img']?>" alt="<?=$produit['value_produit']?>">
                 <p><?=$produit['prix']?> €</p>
                 <p><?=$produit['ref']?></p>
             </div>
