@@ -78,7 +78,7 @@ function mettreAjourProduit(idProd){
         type: 'POST',
         data: jsonData,
         url: urlWebService,
-        dataType: 'jsonp',
+        dataType: 'json',
         success: function(data) {
             console.log(data);
 			$('#popupContainer'+idProd).css('display', 'none');

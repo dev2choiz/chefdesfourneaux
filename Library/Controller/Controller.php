@@ -1,5 +1,5 @@
 <?php
-// Let's go to the beach
+
 namespace Library\Controller;
 
 abstract class Controller implements iController
@@ -17,6 +17,9 @@ abstract class Controller implements iController
 	private $jsConfigApres		= array();
 	
 
+	protected function __construct(){
+		//header("Access-Control-Allow-Origin: *"); 
+	}
 
 	protected function setRedirect($url){
 		$this->redirect = $url;
@@ -199,10 +202,6 @@ abstract class Controller implements iController
 
 
 
-	public function __construct(){
-			
-	}
-
 
 	/**
 	 * Ajoute les styles et scripts contenu des array $styleView et $scriptView
@@ -224,7 +223,7 @@ abstract class Controller implements iController
 			<script type='text/javascript'>
 				idUser ='$strIdUser'; 
 				urlImg='".IMG_ROOT."';
-				urlWebService='".WEBSERVICE_ROOT."/index.php';
+				urlWebService='".WEBSERVICE_ROOT."index.php';
 			</script>
 			</body>", $html);
 

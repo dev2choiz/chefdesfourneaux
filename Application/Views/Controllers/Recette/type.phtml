@@ -5,17 +5,18 @@
 	    <br class="featurette-divider">
 	    <div class="row featurette">
 			<div class="col-md-6">
+<h1><?php echo ucfirst($type);?></h1>
 <?php foreach($recettes as $recette): ?>
 	<?php if($recette['type'] == $type): ?>
-				<h1><?php ucfirst($type)?></h1>		
-		        <a class="linkCat" href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> 
+						
+		        <a class="linkCat" href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>"> 
 		        	<h4><?=$recette['titre']?></h4>
 		        </a>
 		   
 <?php endif; endforeach;?>
 </div>
 
-<img class="col-md-6 img-responsive img-thumbnail img" src="../../../../img/type/<?=$type?>.jpg" alt="<?=$type?>">
+<img class="col-md-6 img-responsive img-thumbnail img" src="<?=WEB_ROOT.'img/type/'.$type?>.jpg" alt="<?=$type?>">
      	
 		 	
 	 	</div>
