@@ -8,7 +8,7 @@
         <a class="linkCat" href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> 
         	<h1><?=$recette['value']?></h1>
         </a>
-        <img class="img-responsive img-thumbnail img" src="../../../..<?=$recette['img']?>" alt="<?=$recette['value']?>">	
+        <img class="img-responsive img-thumbnail img" src="<?= IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['value']?>">	
  	</div>
 <?php endif; endforeach;?>
 </div>
@@ -22,7 +22,7 @@
 	        <span class="text-muted"></span>
 	        </h1>
         </a>
-        <p class="lead"><img class=" img-thumbnail img-responsive" src="../../../..<?=$recette['img']?>" alt="<?=$recette['value']?>"></p>
+        <p class="lead"><img class=" img-thumbnail img-responsive" src="<?= IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['value']?>"></p>
 	</div>
 <?php endif; endforeach;?>
 </div>

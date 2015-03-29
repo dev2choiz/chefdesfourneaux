@@ -14,7 +14,7 @@ foreach ($viewPanier as $produit):?>
 		<div class="row" >
 			<div class="col-md-4">
 				<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">
-        			<img class="media-object" src="../../../..<?=$produit['img_produit']?>" alt="<?=$produit['value_produit']?>">
+        			<img class="media-object" src="<?= IMG_LINK_ROOT.$produit['img_produit']?>" alt="<?=$produit['value_produit']?>">
       			</a>
 				<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">
 					<span id="labelValueProduit"><?= $produit['value_produit']?></span>
