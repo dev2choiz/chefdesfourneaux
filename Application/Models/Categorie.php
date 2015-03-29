@@ -16,8 +16,8 @@ class Categorie extends \Library\Model\Model{
 	 */
 	public function getCategories(){
 		$data =array(
-			        'service' 				=> 'categorie',				
-			        'method' 				=> 'getcategories'
+			        'service' 				=> 'Categorie',				
+			        'method' 				=> 'getCategories'
 	  	);
 
 		$opts = array('http' =>

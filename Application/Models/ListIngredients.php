@@ -6,9 +6,6 @@ namespace Application\Models;
 
 class ListIngredients extends \Library\Model\Model{
 
-	protected $table 	= 'ingredients';
-	protected $primary 	= 'id_ingredient';
-
 	
 
 	public function __construct($connexionName){
@@ -20,8 +17,8 @@ class ListIngredients extends \Library\Model\Model{
 
 	public function insertListIngredients($tabIngreds, $unites, $idrecette, $quantites){
 		$data =array(
-			        'service' 				=> 'listingredients',
-			        'method' 				=> 'insertlistingredients',
+			        'service' 				=> 'ListIngredients',
+			        'method' 				=> 'insertListIngredients',
 			        'ingredients'			=>	json_encode($tabIngreds),
 			        'unites'				=>	json_encode($unites),
 			        'id_recette'			=>	$idrecette,
@@ -47,8 +44,8 @@ class ListIngredients extends \Library\Model\Model{
 
 	public function updateListIngredients($tabIngreds, $unites, $idrecette, $quantites){
 		$data =array(
-			        'service' 				=> 'listingredients',
-			        'method' 				=> 'updatelistingredients',
+			        'service' 				=> 'ListIngredients',
+			        'method' 				=> 'updateListIngredients',
 			        'ingredients'			=>	json_encode($tabIngreds),
 			        'unites'				=>	json_encode($unites),
 			        'id_recette'			=>	$idrecette,

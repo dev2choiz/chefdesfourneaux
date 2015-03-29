@@ -17,7 +17,7 @@ class Panier extends \Library\Model\Model{
 
 	public function existeDansPanier($idUser, $idPanier){
 
-		$params = array('service' => 'panier',
+		$params = array('service' => 'Panier',
 						'method' => 'existeDansPanier',
 						'id_user' => $idUser,
 						'id_panier' => $idPanier
@@ -38,8 +38,8 @@ class Panier extends \Library\Model\Model{
 
 	public function getPanier($idUser){
 
-		$params = array('service' => 'panier',
-						'method' => 'getpanier',
+		$params = array('service' => 'Panier',
+						'method' => 'getPanier',
 						'id_panier' => $idUser );
 
 		$opts = array('http' =>
@@ -65,8 +65,8 @@ class Panier extends \Library\Model\Model{
 
 
 		//$params["id_user"] = $idUser;
-		$params["service"] = "panier";
-		$params["method"]  = "insertpanier";
+		$params["service"] = "Panier";
+		$params["method"]  = "insertPanier";
 
 		$opts = array('http' =>
 		    array(
@@ -94,8 +94,8 @@ class Panier extends \Library\Model\Model{
 		
 
 		$params["id_panier"] = $idPanier;
-		$params["service"] = "panier";
-		$params["method"]  = "updatepanier";
+		$params["service"] = "Panier";
+		$params["method"]  = "updatePanier";
 //var_dump("dan model",$params);
 
 		$opts = array('http' =>
@@ -125,8 +125,8 @@ class Panier extends \Library\Model\Model{
 
 		$params["id_user"] = $idUser;
 		$params["id_panier"] = $idPanier;
-		$params["service"] = "panier";
-		$params["method"]  = "deletepanier";
+		$params["service"] = "Panier";
+		$params["method"]  = "deletePanier";
 
 
 		$opts = array('http' =>
@@ -148,8 +148,8 @@ public function viderPanier($iUser){
 		
 
 		$params["id_user"] = $idUser;
-		$params["service"] = "panier";
-		$params["method"]  = "viderpanier";
+		$params["service"] = "Panier";
+		$params["method"]  = "viderPanier";
 
 
 		$opts = array('http' =>

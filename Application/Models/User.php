@@ -17,7 +17,7 @@ class User extends \Library\Model\Model{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'user',				
+							        'service' => 'User',				
 							        'method' => 'authentification',
 							        'mail'=> $mail,
 							        'password'=>$password
@@ -30,31 +30,11 @@ class User extends \Library\Model\Model{
 		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
 	}
 
-
-	public function getUser($mail){
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query(
-								array(
-							        'service' => 'user',				
-							        'method' => 'getUser',
-							        'mail'=> $mail
-							    )
-		    				)
-		        )
-		);
-//
-		$context  = stream_context_create($opts);
-		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
-	}
-
 	public function updateUser($id, $mail , $password, $params){
 	
 
-		$params['service'] = 'user';
-		$params['method'] = 'updateuser';
+		$params['service'] = 'User';
+		$params['method'] = 'updateUser';
 		$params['verifid_user'] = $id;
 		$params['verifmail'] = $mail;
 		$params['verifpassword'] = $password;
@@ -74,8 +54,8 @@ class User extends \Library\Model\Model{
 	public function insertUser($params){
 	
 
-		$params['service']='user';
-		$params['method']='insertuser';
+		$params['service']='User';
+		$params['method']='insertUser';
 		$opts = array('http' =>
 		    array(
 		        'method'  => 'POST',
@@ -89,8 +69,8 @@ class User extends \Library\Model\Model{
 	}
 
 	public function deleteUser($params){
-		$params['service']='user';
-		$params['method']='deleteuser';
+		$params['service']='User';
+		$params['method']='deleteUser';
 		
 		$opts = array('http' =>
 		    array(
@@ -105,28 +85,4 @@ class User extends \Library\Model\Model{
 		$context  = stream_context_create($opts);
 		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
 	}
-
-
-
-
-	public function redefinirPassword($mail, $reponse){
-		$params['service']='user';
-		$params['method']='redefinirPassword';
-		$params['mail']=$mail;
-		$params['reponsesecrete']=$reponse;
-		
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query(
-								$params
-		    				)
-		        )
-		);
-		$context  = stream_context_create($opts);
-		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
-	}
-
 }

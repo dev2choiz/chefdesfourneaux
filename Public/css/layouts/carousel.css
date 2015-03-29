@@ -102,6 +102,7 @@ body {
 
 @media (min-width: 768px) {
   /* Navbar positioning foo */
+
   .navbar-wrapper {
     margin-top: 20px;
   }

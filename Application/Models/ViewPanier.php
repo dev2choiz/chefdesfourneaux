@@ -25,8 +25,8 @@ class ViewPanier extends \Library\Model\Modelview{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'viewpanier',				
-							        'method' => 'getviewpanier',
+							        'service' => 'ViewPanier',				
+							        'method' => 'getViewPanier',
 							        'id_user' => $idUser
 							    )
 		    				)

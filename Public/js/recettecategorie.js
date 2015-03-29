@@ -19,7 +19,7 @@ function ajouterCommentaire(value, note){
     alert(value+ "   "+ note);
     jsonData = 
     {
-        'service'   : 'commentaire',
+        'service'   : 'Commentaire',
         'method'    : 'insertCommentaire',
         'value'     : value,
         'note'      : note,
@@ -28,18 +28,20 @@ function ajouterCommentaire(value, note){
     };
 
     script="";
-
+    alert(urlWebService);
     $.ajax({
         type: 'POST',
         data: jsonData,
         url: urlWebService,
-        dataType: 'json',
+        dataType: 'jsonp',
+        jsonpCallback: 'callback',
         async :true,
         success: function(data) {
-
+            //console.log(data.response);
             idComm = parseInt((data.response));
+            //console.log("id du comm",idComm);
             alert("dans succces ajout"+idComm);
-            console.log(data.response,"id insert :"+idComm);
+            //console.log(data.response,"id insert :"+idComm);
             ajouterCommDansDiv(idComm);
         }
 
@@ -64,7 +66,8 @@ function ajouterCommDansDiv(idComm){
         type: 'POST',
         data: jsonData,
         url: urlWebService,
-        dataType: 'json',
+        dataType: 'jsonp',
+        jsonpCallback: 'callback',
         success: function(data) {
             console.log(data.response);
 

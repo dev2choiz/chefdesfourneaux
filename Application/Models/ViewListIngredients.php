@@ -21,8 +21,8 @@ class ViewListIngredients extends \Library\Model\Model{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'viewlistingredients',
-							        'method' => 'getviewlistingredients',
+							        'service' => 'ViewListIngredients',
+							        'method' => 'getViewListIngredients',
 							        'id_recette' => $idRecette
 							    )
 		    				)

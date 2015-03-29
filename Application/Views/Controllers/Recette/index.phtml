@@ -1,66 +1,32 @@
 <?=$message?>
 
 <!-- START THE FEATURETTES -->
+<div class="row">
 <?php foreach($recettes as $recette): ?>
-<!-- <div class="row"> -->
-	<div class="col-md-6">
-		<?php if($recette['id_cat'] == 6): ?>
-			
-		        <a href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> 
-			        <h1><?=$recette['value']?> 
-			        <span class="text-muted"></span>
-			        </h1>
-		        </a> 
-		        <p class="lead"><img class=" img-thumbnail featurette-image img-responsive" src="../../../..<?=$recette['img']?>" alt="plat"></p>
-		  	
-	 	<?php endif; ?>
+	<?php if($recette['id_cat'] == 6 || $recette['id_cat'] == 4): ?>
+	<div class="col-md-6 headCat">	
+        <a class="linkCat" href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> 
+        	<h1><?=$recette['value']?></h1>
+        </a>
+        <img class="img-responsive img-thumbnail img" src="../../../..<?=$recette['img']?>" alt="<?=$recette['value']?>">	
  	</div>
- 	<div class="col-md-6">
- 		<div class="row">
- 			<div class="col-md-4">
-	 			<?php if($recette['id_cat'] == 2): ?>
-					
-			        <!-- <a href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> 
-				        <h1><?=$recette['value']?> 
-				        <span class="text-muted"></span>
-				        </h1>
-			        </a>  -->
-			        <p class="lead"><img class=" img-thumbnail img-responsive" src="../../../..<?=$recette['img']?>" alt="plat"></p>
-				  	
-		 		<?php endif; ?>
-	 		</div>
-	 		<div class="col-md-4">
-		 		<?php if($recette['id_cat'] == 9): ?>
-					
-			        <!-- <a href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> 
-				        <h1><?=$recette['value']?> 
-				        <span class="text-muted"></span>
-				        </h1>
-			        </a>  -->
-			        <p class="lead"><img class=" img-thumbnail img-responsive" src="../../../..<?=$recette['img']?>" alt="plat"></p>
-				  	
-			 	<?php endif; ?>
-		 	</div>
-		 	<div class="col-md-4">
-			 	<?php if($recette['id_cat'] == 4 ): ?>
-					
-			        <!-- <a href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> 
-				        <h1><?=$recette['value']?> 
-				        <span class="text-muted"></span>
-				        </h1>
-			        </a>  -->
-			        <p class="lead"><img class=" img-thumbnail img-responsive" src="../../../..<?=$recette['img']?>" alt="plat"></p>
-				  	
-		 		<?php endif; ?>
-	 		</div>
- 		</div>
- 		
- 	</div>
-<!-- </div> -->
- 	
-<?php endforeach;?>
+<?php endif; endforeach;?>
+</div>
 
- <!-- /END THE FEATURETTES -->
-<br> 
-    <p><a href="<?=LINK_ROOT?>">Retour à l'accueil</a></p> 
+<div class="row">
+<?php foreach($recettes as $recette): ?> 
+	<?php if($recette['id_cat'] != 4 && $recette['id_cat'] != 6): ?>		
+	<div class="col-md-4">	
+        <a href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> 
+	        <h1><?=$recette['value']?> 
+	        <span class="text-muted"></span>
+	        </h1>
+        </a>
+        <p class="lead"><img class=" img-thumbnail img-responsive" src="../../../..<?=$recette['img']?>" alt="<?=$recette['value']?>"></p>
+	</div>
+<?php endif; endforeach;?>
+</div>
+
+ <!-- /END THE FEATURETTES --> 
+    
 

@@ -294,8 +294,8 @@ $(document).ready(function(){
 function ajouterCategorie(){
 
 	jsonData={};
-	jsonData['service']= 'categorie';
-	jsonData['method']= 'insertcategorie';
+	jsonData['service']= 'Categorie';
+	jsonData['method']= 'insertCategorie';
     jsonData['value']=$("#textCatAjouter").val();
 
     console.log(jsonData);
@@ -323,8 +323,8 @@ function ajouterCategorie(){
 function modifierCategorie(){
 	cat=document.getElementById("categories");
 	jsonData={};
-	jsonData['service']= 'categorie';
-	jsonData['method']= 'updatecategorie';
+	jsonData['service']= 'Categorie';
+	jsonData['method']= 'updateCategorie';
 	jsonData['id_cat']= cat.options[cat.selectedIndex].value;
     jsonData['value']	= $("#textCatModifier").val();
 
@@ -356,8 +356,8 @@ function supprimerCategorie(){
 
 	cat=document.getElementById("categories");
 	jsonData={};
-	jsonData['service']= 'categorie';
-	jsonData['method']= 'deletecategorie';
+	jsonData['service']= 'Categorie';
+	jsonData['method']= 'deleteCategorie';
 	jsonData['id_cat']= cat.options[cat.selectedIndex].value;
   	alert(cat.options[cat.selectedIndex].value);
 
@@ -389,8 +389,8 @@ function supprimerCategorie(){
 function ajouterIngredient(){
 
 	jsonData={};
-	jsonData['service']= 'ingredient';
-	jsonData['method']= 'insertingredients';
+	jsonData['service']= 'Ingredient';
+	jsonData['method']= 'insertIngredients';
     jsonData['value']=$("#textIngAjouter").val();
 
     console.log(jsonData);
@@ -418,8 +418,8 @@ function ajouterIngredient(){
 function modifierIngredient(){
 	ing=document.getElementById("ingredients");
 	jsonData={};
-	jsonData['service']= 'ingredient';
-	jsonData['method']= 'updateingredient';
+	jsonData['service']= 'Ingredient';
+	jsonData['method']= 'updateIngredient';
 	jsonData['id_ingredient']= ing.options[ing.selectedIndex].value;
     jsonData['value']	= $("#textIngModifier").val();
 
@@ -448,8 +448,8 @@ function supprimerIngredient(){
 
 	ing=document.getElementById("ingredients");
 	jsonData={};
-	jsonData['service']= 'ingredient';
-	jsonData['method']= 'deleteingredient';
+	jsonData['service']= 'Ingredient';
+	jsonData['method']= 'deleteIngredient';
 	jsonData['id_ingredient']= ing.options[ing.selectedIndex].value;
   	alert(ing.options[ing.selectedIndex].value);
 
@@ -496,8 +496,8 @@ function supprimerIngredient(){
 function ajouterUnite(){
 
 	jsonData={};
-	jsonData['service']= 'unite';
-	jsonData['method']= 'insertunites';
+	jsonData['service']= 'Unite';
+	jsonData['method']= 'insertUnites';
     jsonData['value']=$("#textUnitAjouter").val();
 
     console.log(jsonData);
@@ -525,8 +525,8 @@ function ajouterUnite(){
 function modifierUnite(){
 	unit=document.getElementById("unites");
 	jsonData={};
-	jsonData['service']= 'unite';
-	jsonData['method']= 'updateunite';
+	jsonData['service']= 'Unite';
+	jsonData['method']= 'updateUnite';
 	jsonData['id_unite']= unit.options[unit.selectedIndex].value;
     jsonData['value']	= $("#textUnitModifier").val();
 
@@ -555,8 +555,8 @@ function supprimerUnite(){
 
 	unit=document.getElementById("unites");
 	jsonData={};
-	jsonData['service']= 'unite';
-	jsonData['method']= 'deleteunite';
+	jsonData['service']= 'Unite';
+	jsonData['method']= 'deleteUnite';
 	jsonData['id_unite']= unit.options[unit.selectedIndex].value;
   	alert(unit.options[unit.selectedIndex].value);
 
@@ -587,8 +587,8 @@ function supprimerUnite(){
 function recupererImageCat(idCat){
 	unit=document.getElementById("unites");
 	jsonData={};
-	jsonData['service']= 'categorie';
-	jsonData['method']= 'getimagecategorie';
+	jsonData['service']= 'Categorie';
+	jsonData['method']= 'getImageCategorie';
 	jsonData['id_cat']= idCat;
 
 

@@ -20,7 +20,7 @@ class Vente extends \Library\Controller\Controller{
 		$this->message 				= new \Library\Message\Message();
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelProduits 		= new \Application\Models\Produit('localhost');
-		$this->modelViewProduit 	= new \Application\Models\ViewProduit('localhost');
+		$this->modelViewProduits 	= new \Application\Models\ViewListProduits('localhost');
 		$this->modelPanier			= new \Application\Models\Panier('localhost');
 		$this->modelPopUpProduit	= new \Application\Models\PopUpProduit();
 		$this->modelShowDiv 		= new \Application\Models\ShowDiv();
@@ -80,8 +80,12 @@ class Vente extends \Library\Controller\Controller{
 	}
 
 	public function produitAction($idProduit){
+		
 		$produit = $this->modelProduits->getProduit($idProduit);
 		$produit = $produit['response'][0];
+		$viewProduits = $this->modelViewProduits->getViewListProduitsByProduit($idProduit);
+
+		var_dump($viewProduits);
 		//var_dump($produit);
 		// Ajoute les infos du produits au html
 		$produit['acheterpopup'] = $this->modelPopUpProduit->getAcheterPopup(
@@ -92,7 +96,8 @@ class Vente extends \Library\Controller\Controller{
 
 		$this->setDataView(array(
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
-			'produit' => $produit
+			'produit' => $produit,
+			'viewProduits' => $viewProduits
 			)
 		);
 
@@ -102,10 +107,9 @@ class Vente extends \Library\Controller\Controller{
 
 
 	public function payerAction(){
-		echo '<br><br><br><br><br><br>';
 
 		$this->setDataView(array(
-			"pageTitle" => "Finalisation de votre commande",
+			"pageTitle" => "Paiement, Finalisation de votre commande",
 			)
 		);
 

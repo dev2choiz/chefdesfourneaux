@@ -24,8 +24,8 @@ $(document).ready(function(){
 function ajouterProduit(){
 	jsonData = 
 	{
-		'service' 	: 'produit',
-		'method' 	: 'insertproduit',
+		'service' 	: 'Produit',
+		'method' 	: 'insertProduit',
 		'value' 	: $('#WrapperAddProduit #value').val(),
 		'prix' 		: parseInt( $('#WrapperAddProduit #prix').val() ),
 		'ref' 		: $('#WrapperAddProduit #ref').val()
@@ -66,8 +66,8 @@ function mettreAjourProduit(idProd){
 
 	jsonData = 
 	{
-		'service' 		: 'produit',
-		'method' 		: 'updateproduit',
+		'service' 		: 'Produit',
+		'method' 		: 'updateProduit',
 		'id_produit' 	: $('#popupContainer'+idProd+' #id_produit').val(),
 		'value' 		: $('#popupContainer'+idProd+' #value').val(),
 		'prix' 			: parseInt( $('#popupContainer'+idProd+' #prix').val() ),
@@ -96,8 +96,8 @@ function supprimerProduit(idProd){
 
 	jsonData = 
 	{
-		'service' 		: 'produit',
-		'method' 		: 'deleteproduit',
+		'service' 		: 'Produit',
+		'method' 		: 'deleteProduit',
 		'id_produit' 	: $('#popupContainer'+idProd+' #id_produit').val()
 	};
 	console.log(jsonData);
@@ -122,7 +122,7 @@ function recupererScriptNewProduit(idProd){
 
 	jsonData = 
 	{
-		'service' 		: 'produit',
+		'service' 		: 'Produit',
 		'method' 		: 'recupererScriptNewProduit',
 		'id_produit' 	: idProd
 	};

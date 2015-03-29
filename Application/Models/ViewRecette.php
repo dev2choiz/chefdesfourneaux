@@ -25,8 +25,8 @@ class ViewRecette extends \Library\Model\Model{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'viewrecette',				
-							        'method' => 'getviewrecette',
+							        'service' => 'ViewRecette',				
+							        'method' => 'getViewRecette',
 							        'id_recette' => $id
 							    )
 		    				)
@@ -78,8 +78,8 @@ class ViewRecette extends \Library\Model\Model{
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
-							        'service' => 'viewrecette',				
-							        'method' => 'getallviewrecettes',
+							        'service' => 'ViewRecette',				
+							        'method' => 'getAllViewRecettes',
 							    )
 		    				)
 		        )

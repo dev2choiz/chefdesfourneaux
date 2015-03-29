@@ -196,8 +196,8 @@ function actualiserImageFormRecette(idRecette){
 function recupererImageRecette(idRecette){
     //unit=document.getElementById("unites");
     jsonData={};
-    jsonData['service']= 'recette';
-    jsonData['method']= 'getimagerecette';
+    jsonData['service']= 'Recette';
+    jsonData['method']= 'getImageRecette';
     jsonData['id_recette']= idRecette;
 
 

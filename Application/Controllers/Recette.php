@@ -35,19 +35,6 @@ class Recette extends \Library\Controller\Controller{
 			$viewAllCats=$viewAllCats['response'];
 		}
 
-		//var_dump("repérage",$viewAllRecette);
-
-
-		/*
-		echo "<br><br><br><br>".$idRecette;
-		
-		if( $_SESSION['user']['role'] !== "admin" ){
-			$this->setRedirect(LINK_ROOT);
-		}elseif( !isset($idRecette) || empty($idRecette)  || $idRecette===0 ){	//si pas d'idrecette
-			$this->setRedirect(LINK_ROOT."admin/");
-		}
-		*/
-
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"tinyMCECommentaire" => $this->tinyMCE->getEditeurCommentaire(),
@@ -114,16 +101,16 @@ class Recette extends \Library\Controller\Controller{
 
 
 
-
+	/**
+	 * [indexChefAction Affiche la liste des recettes de chef]
+	 * @return [void] 
+	 */
 	public function indexChefAction(){
 
 
 
 		$viewAllRecettes  	= $this->modelViewRecette->getAllViewRecettes();
-		//var_dump($viewAllRecettes);
-		$viewAllRecettes 	= $viewAllRecettes['response'];
-
-		//var_dump($viewAllRecettes); 		
+		$viewAllRecettes 	= $viewAllRecettes['response'];		
 		
 		
 		$this->setDataView(array(
@@ -135,6 +122,7 @@ class Recette extends \Library\Controller\Controller{
 		$this->setStyleView('indexchef.css');
 	}
 
+
 	public function chefAction($idRecette){
 		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($idRecette);
 		$viewRecette 		= $viewRecette['response'][0];
@@ -143,6 +131,19 @@ class Recette extends \Library\Controller\Controller{
 			"message" 		=> $this->message->showMessages(),
 			"tinyMCECommentaire" 	=> $this->tinyMCE->getEditeurCommentaire(),
 			"recette"		=> $viewRecette 
+		));
+	}
+
+	public function typeAction($type){
+		$viewRecette 	 	= $this->modelViewRecette->getAllViewRecettes();
+		$viewRecette 		= $viewRecette['response'];
+		//var_dump($viewRecette);
+
+		$this->setDataView(array(
+			"pageTitle" 	=> 'Recettes de cuisine, '.$type,
+			"message" 		=> $this->message->showMessages(),
+			"type"			=> $type,
+			"recettes"		=> $viewRecette 
 		));
 	}
 	
