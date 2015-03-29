@@ -85,4 +85,30 @@ class User extends \Library\Model\Model{
 		$context  = stream_context_create($opts);
 		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
 	}
+
+
+
+	public function redefinirPassword($mail, $reponse){
+		$params['service']='User';
+		$params['method']='redefinirPassword';
+		$params['mail']=$mail;
+		$params['reponsesecrete']=$reponse;
+		
+
+		$opts = array('http' =>
+		    array(
+		        'method'  => 'POST',
+		        'header'  => 'Content-type: application/x-www-form-urlencoded',
+		        'content' => http_build_query(
+								$params
+		    				)
+		        )
+		);
+		$context  = stream_context_create($opts);
+		return  json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ;
+	}
+
+
+
+
 }

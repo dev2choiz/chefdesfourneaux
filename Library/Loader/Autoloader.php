@@ -43,13 +43,14 @@ class Autoloader
 	 * @return void      
 	 */
 	protected static function autoload($class){
-		
+
 		if(is_null(self::$basePath)){
-			throw new \Exception("basePath in" . __CLASS__ . " is Null");			
+			throw new \Exception("basePath in" . __CLASS__ . " is Null");
 		}
 
 		$pathFile = self::$basePath . str_replace('\\', DIRECTORY_SEPARATOR, $class) . ".php";
 		require_once($pathFile);
+		
 	}
 	
 }
