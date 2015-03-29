@@ -1,0 +1,29 @@
+<?=$message?>
+
+<form class="form-signin" method="post">
+    <h2 class="form-signin-heading">
+    	<?=$pageTitle?>
+    </h2>
+    
+    <input name="mail" type="email" class="form-control" placeholder="Email address" required autofocus>
+    <p>Repondre &agrave; la question pour recevoir votre nouveau mot de passe par mail</p>
+    <select name="id_questionsecrete">
+        <?php
+
+
+        foreach ($questionSecretes as $questionSecrete) {
+            $selOuPas="";
+            if($userView['id_questionsecrete']===$questionSecrete['id_questionsecrete']){
+                $selOuPas=" selected ";
+            }
+
+            ?>
+            <option value="<?=$questionSecrete['id_questionsecrete']?>" <?=$selOuPas?> ><?=$questionSecrete['value']?></option>
+            }
+        <?php } ?>
+    </select>
+
+    <input value="" name="reponsesecrete" type="text" class="form-control" placeholder="reponse secrete" required autofocus>
+
+    <button name="btn" class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
+</form>
