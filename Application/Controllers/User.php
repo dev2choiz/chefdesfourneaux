@@ -341,7 +341,9 @@ class User extends \Library\Controller\Controller{
 
 public function motDePasseOublieAction(){
 
-		
+		if(!empty($_SESSION['user'])){
+			$this->setRedirect(LINK_ROOT."user/profil");
+		}		
 
 		$modelMailer = new \Application\Models\Mailer('localhost');		
 

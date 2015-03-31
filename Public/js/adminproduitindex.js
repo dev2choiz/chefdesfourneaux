@@ -4,7 +4,7 @@ function changerImage(idInput) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
     reader.onload = function (e) {
-        //alert("onload"+e.target.result);
+        alert("onload"+e.target.result);
         $('#imgProduit').attr('src',e.target.result);
         return true;
     };

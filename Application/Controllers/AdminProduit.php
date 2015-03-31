@@ -53,7 +53,6 @@ class AdminProduit extends \Library\Controller\Controller{
 																$produit['prix'], 
 																$produit['ref'],
 																$produit['value']);
-
 		}
 		
 		
