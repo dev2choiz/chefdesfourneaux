@@ -13,9 +13,12 @@
 
         foreach ($questionSecretes as $questionSecrete) {
             $selOuPas="";
-            if($userView['id_questionsecrete']===$questionSecrete['id_questionsecrete']){
-                $selOuPas=" selected ";
+            if ( !empty($userView) ) {
+                if($userView['id_questionsecrete']===$questionSecrete['id_questionsecrete']){
+                    $selOuPas=" selected ";
+                }
             }
+            
 
             ?>
             <option value="<?=$questionSecrete['id_questionsecrete']?>" <?=$selOuPas?> ><?=$questionSecrete['value']?></option>

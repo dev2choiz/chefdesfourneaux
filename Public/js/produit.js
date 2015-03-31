@@ -127,7 +127,7 @@ function recupererScriptNewProduit(idProd){
 		'id_produit' 	: idProd
 	};
 	
-	
+		alert("dans recuperer script");
    	$.ajax({
         type: 'POST',
         data: jsonData,
@@ -135,11 +135,14 @@ function recupererScriptNewProduit(idProd){
         dataType: 'json',
         async:false,
         success: function(data) {
+
         	console.log(data.response);
+        	alert('console looog');
         	alors = data.response;
 
         }
     });
+    alert(alors);
     return alors;
 
 }

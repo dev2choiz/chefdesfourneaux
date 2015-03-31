@@ -341,7 +341,9 @@ class User extends \Library\Controller\Controller{
 
 public function motDePasseOublieAction(){
 
-		
+		if(!empty($_SESSION['user'])){
+			$this->setRedirect(LINK_ROOT."user/profil");
+		}		
 
 		$modelMailer = new \Application\Models\Mailer('localhost');		
 
@@ -373,25 +375,37 @@ public function motDePasseOublieAction(){
 			//envoyerMail($mailExped, $mailDest, $body, $subject, $template)
 
 			$modelUser = new \Application\Models\User('localhost');		
-			$user = $modelUser->redefinirPassword( $_POST['mail'], $_POST['reponsesecrete'] );
-			var_dump($user);
+			$newPwd = $modelUser->convEnTab($modelUser->redefinirPassword( $_POST['mail'], $_POST['reponsesecrete'] )  );
+
 			
-			$user=$modelUser->convEnTab($user);
-			$res=$user['response'];
+			
+			if (!$newPwd['error']) {
+				$res=true;
+				$newPwd=$newPwd['response'];
+			} else {
+				$res=false;
+			}
+			
 			
 			if( $res ){
-				$this->message->addSuccess('vous recevrez dans quelques instants un mail contenant votre nouveau mot de passe');
+				$this->message->addSuccess("votre nouveau pot de passe est <strong>$newPwd</strong>");
 			}else{
 				$this->message->addError("le mail et la reponse ne correnspondent pas  !");
 			}
 		}		//fin traitement formulaire
 
 		
+		if (!empty($_SESSION['user']) ) {
+			$user=$_SESSION['user'];
+		} else {
+			$user= array();
+		}
+		
 		
 		$this->setDataView(array(
 			'message'			=> $this->message->showMessages(),
 			'questionSecretes'	=> $questionSecretes,
-			'userView'				=> $_SESSION['user']
+			'userView'				=> $user
 		));
 		
 			
