@@ -30,14 +30,44 @@ abstract class Model{
 			return $tab;
 		}
 
-		foreach ($tab as $key => $value) {
+		foreach ( $tab as $key => $value ) {
 
 			if(is_array($value ) || is_object($value ) ){
 				$tab[$key]=$this->convEnTab($value);
 			}
-			//$tab[$key]= get_object_vars($value);
 
 		}
 		return $tab;
 	}
+
+
+	public function isConnected(){
+		return empty($_SESSION['user'] )?false:true;
+	}
+
+
+
+    /*public function retirerCaractereSpeciaux($chaine){
+        $chaine = mb_strtolower($chaine, 'UTF-8');
+        return str_replace(     '@ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ',
+                                'aAAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy',
+                                $chaine);
+ 
+    }*/
+
+
+
+
+    public function retirerCaractereSpeciaux($str, $charset='utf-8'){
+        //echo $str."<br>";
+        $str = htmlentities($str, ENT_NOQUOTES, $charset);
+        //echo $str."<br>";
+        $str = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $str);
+        //echo $str."<br>";
+        $str = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $str);
+        //echo $str."<br>";
+        //$str = preg_replace('#&[^;]+;#', '', $str); // supprime les autres caractères
+    return $str;
+    }
+
 }

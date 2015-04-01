@@ -1,18 +1,36 @@
 <?=$tinyMCERecette?>
 <?=$message?>
+<script type="text/javascript">
+    tabUnit     = new Array();
+    tabQuant    = new Array();
+</script>
 
 
 
-
-<form class="" method="post"  onsubmit="preparatif(); return false;" id="formRecette">
+<form class="" method="post"  onsubmit="preparatif(); return false;" id="formRecette" enctype="multipart/form-data">
     <h2 class="form-signin-heading">
         <?=$pageTitle?>
     </h2>
     
     <table>
         <tr>
-            <label for="titre">Titre de la recette que vous souhaitez ajouter : </label>
-            <td><input type="text" name="titre" id="titre" required></td>
+            
+            <td>
+                <label for="titre">Titre de la recette que vous souhaitez ajouter : </label><br/>
+                <input type="text" name="titre" id="titre" required>
+                <div id="wrapperImgRecette">
+                  <img id='imgRecette'  alt='Image recette' style='width:150px; height:150px;' />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label for="inputFile"></label>
+                    <input type="file" id="inputFile" name="img" >
+                    <p class="help-block">Votre nom d'image doit être identique à celui de votre recette (exemple : tarteauxcitrons.jpg)</p>
+                </div>
+            </td>
         </tr>
     </table>
     <br/>
@@ -146,7 +164,4 @@
 
 </form  style="min-width:150px;">
 
-<script src="<?=WEB_ROOT?>/js/script.js"></script>
-<script type="text/javascript">
-    masquer();
-</script>
+

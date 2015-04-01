@@ -1,8 +1,7 @@
 
 // Création d'une recette
-tabUnit     = new Array();
-tabQuant    = new Array();
-verifChamp  = 0;
+//tabUnit     = new Array();
+//tabQuant    = new Array();
 
 
 function ajouterIngredient(){
@@ -16,7 +15,7 @@ function ajouterIngredient(){
 
         tabUnit.push("rien");
         tabQuant.push(1);
-        verifChamp++;
+        
         console.log(tabUnit+ "  ## "+tabQuant);
 
     }
@@ -28,8 +27,8 @@ function retirerIngredient(){
     if($('#ingredients option').length!==0 ){
 
         //$('#unites option:eq(3)').prop('selected', true);
-        var ing =document.getElementById("ingredients");
-        var unit =document.getElementById("unites");
+        var ing = document.getElementById("ingredients");
+        var unit = document.getElementById("unites");
 
         //supprime fna le select
         unit.options[ing.selectedIndex].remove();
@@ -37,8 +36,7 @@ function retirerIngredient(){
         //supprime dans quantité
         tabUnit.splice(ing.selectedIndex,1);
         tabQuant.splice(ing.selectedIndex,1);
-
-        verifChamp--;   
+  
 
         console.log(tabUnit +" # "+ tabQuant);
 
@@ -53,10 +51,11 @@ function definirUnite(){
     var unit = document.getElementById("unites");
     if(unit.selectedIndex>=0 ){
         unit.options[unit.selectedIndex].value= allUnit.options[allUnit.selectedIndex].value ;
-        unit.options[unit.selectedIndex].text= "1 " + allUnit.options[allUnit.selectedIndex].text ;
+        unit.options[unit.selectedIndex].text= tabQuant[unit.selectedIndex]+" " + allUnit.options[allUnit.selectedIndex].text ;
 
         tabUnit[unit.selectedIndex]=allUnit.options[allUnit.selectedIndex].text;
-        tabQuant[unit.selectedIndex]=1;
+        //console.log(tabQuant[unit.selectedIndex]);
+        //tabQuant[unit.selectedIndex]=1;
 
         console.log(tabUnit+"##"+ tabQuant);
         //alert(allUnit.options[allUnit.selectedIndex].text); 
@@ -81,8 +80,10 @@ function definirQuantite(){
 
 }
 
-function preparatif(){
 
+ 
+$( "form" ).submit(function( event ) {
+    event.preventDefault();
     alors=false;
     for( i=0; i<tabUnit.length; i++ ){
         if(tabUnit[i]==="rien"){
@@ -122,15 +123,19 @@ function preparatif(){
             inputQuant2 = document.createElement("input");
             inputQuant2.setAttribute("type","hidden");
             inputQuant2.setAttribute("name","btn");
-            formulaire.appendChild( );
+            formulaire.appendChild(inputQuant2 );
 
 
         formulaire.submit();
 
-    }
+    }    
+});
 
 
-}
+
+
+/*function preparatif(){
+}*/
 
 
 
@@ -156,3 +161,97 @@ function afficher(){
     document.getElementById("quantite").style.visibility='visible';
     document.getElementById("okquantite").style.visibility='visible';
 }
+
+masquer();
+
+
+
+
+
+
+
+
+
+
+
+
+function actualiserImageFormRecette(idRecette){
+    
+    str=recupererImageRecette(idRecette);
+    //console.log("str ",str);
+    
+    if (str==="") {
+        $('#imgRecette').attr('src', "");
+        //alert("ici");
+    }else{
+        //alert("onchange"+str);
+        $('#imgRecette').attr('src', str);
+    }
+}
+
+
+
+
+
+function recupererImageRecette(idRecette){
+    //unit=document.getElementById("unites");
+    jsonData={};
+    jsonData['service']= 'Recette';
+    jsonData['method']= 'getImageRecette';
+    jsonData['id_recette']= idRecette;
+
+
+    console.log(jsonData);
+
+    var res="";
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        async:false,
+        success: function(data) {
+            console.log("ici",data['response']);
+            if(data['response']===false){
+                res= "";
+            }else{
+                res= data['response'];
+            }
+        }
+    });
+    console.log("res",res);
+    return res;
+}
+
+
+
+
+function changerImage(idInput) {
+    input=document.getElementById(idInput);
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        //alert("onload"+e.target.result);
+        $('#imgRecette').attr('src',e.target.result);
+        return true;
+    };
+    reader.readAsDataURL(input.files[0]);
+
+  }
+}
+
+
+
+$(document).ready(function(){
+
+    $("#inputFile").change(function(){
+        //alert("on change hors cond");
+        if (document.getElementById('inputFile').value!=='') {
+            //alert("on change dans cond");
+            changerImage('inputFile') ;
+        }
+    });
+
+});
+
+

@@ -3,7 +3,7 @@
 <?php
 
 
-//var_dump("skhlkmhfhdh",$viewrecette);
+//var_dump("haut de la view >>viewrecette",$viewrecette);
 
 
 
@@ -15,16 +15,38 @@
 
 
 
-<form class="" method="post"  onsubmit="preparatif();" id="formRecette">
+<form class=""  id="formRecette"  enctype="multipart/form-data"  method="post">
     <h2 class="form-signin-heading">
         <?=$pageTitle?>
     </h2>
+    <table>
+        <tr>
+            
+            <td>
+                <label for="titre">Titre de la recette que vous souhaitez ajouter : </label>
+                <input type="text" name="titre" id="titre" value="<?=$viewrecette['titre']?>" required>
+                <div id="wrapperImgRecette">
+                    <img id='imgRecette'  alt='Image recette' style='width:150px; height:150px;' />
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label for="inputFile"></label>
+                    <input type="file" id="inputFile" name="img" >
+                    <p class="help-block">Votre nom d'image doit être identique à celui de votre recette (exemple : tarteauxcitrons.jpg)</p>
+                </div>
+            </td>
+        </tr>
+    </table>
     <textarea name="value" autofocus style="width: 100%;"><?=$viewrecette['value']?></textarea>
 
     <table>
         <tr><td>categorie</td>
             <td>
-                <select name="id_cat">
+                <select name="id_cat" id="id_cat">
                   <?php foreach ($categories as $categorie) {
                         if($categorie['value'] == $viewrecette['categorie'] ){
                             $txt=" selected ";
@@ -37,8 +59,18 @@
                   <?php } ?>
                 </select>
             </td>
-        </tr>      
+        </tr>
 
+
+        <tr>
+            <td colspan="2">
+                <div id="">
+                    Votre catégorie n'est pas dans la liste?
+                    <?=$ajaxCategorieButton?>
+                </div>
+                <?=$ajaxCategorieScript?>
+            </td>
+        </tr>
 
 
         <tr>
@@ -131,7 +163,7 @@
         <!--input type='button' value='Ajouter un ingrédient' id="ajouterIngredientBdd" -->
         <?=$ajaxIngredientButton?>
     </div>
-    #####<?=$ajaxIngredientScript?>#####
+    <?=$ajaxIngredientScript?>
 
 
 
@@ -183,9 +215,9 @@
 
     
     <div class="dv_ingredients">
-        <select id="allunites"     style="min-width:150px;">
+        <select id="allunites" style="min-width:150px;">
             <?php foreach ($unites as $unite) {?>
-                <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option> 
+                <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option>
             <?php } ?>
         </select>
         <input type="button" onclick="definirUnite();" value="definir cette unité" id="boutonunite">
@@ -201,6 +233,15 @@
         <input type="text" id="quantite">
         <input type="button" id="okquantite" onclick="definirQuantite();" value="ok">
     </div>
+
+
+
+
+
+
+
+
+
 
 
     <!-- <table  border="0">
@@ -283,16 +324,25 @@
 
 
 
+
+
+
+
     <input type="hidden"  name="id_livre"  value="1">
     <input type="hidden"  name="id_resto"  value="1">
 
     <BR>
-    <button name="btn" class="btn btn-lg btn-primary" type="submit"><?=$pageTitle?></button><BR>
-    <a href="<?=LINK_ROOT?>">Retour à l'accueil</a> - 
+
+
+
+
+    <button name="btn" style="float:right;" class="col-md-4 btn btn-lg btn-primary" type="submit"><?=$pageTitle?></button><BR>
+
+    <a href="<?=LINK_ROOT?>">Retour à l'accueil</a>
 
 </form style="min-width: 150px;">
 
-<script src="<?=WEB_ROOT?>/js/script.js"></script>
+
 
 <script type="text/javascript">
     //masquer();
@@ -329,5 +379,5 @@
 
 ?>
 console.log(tabUnit +" ## "+ tabQuant);
-
+ 
 </script>

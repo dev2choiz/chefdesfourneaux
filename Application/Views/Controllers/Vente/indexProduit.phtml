@@ -1,0 +1,105 @@
+<?=$message?>
+<!-- Si l'internaute n'est pas un utilisateur -->
+<?php if(empty($_SESSION['user'])): ?>
+	<h2>Nous vous informons que pour acheter un de nos produit, il est nécessaire d'être inscrit pour plus de sécurité ! </h2>
+	<p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'user/inscription'?>" role="button">Inscription</a></p>
+
+<?php endif;?>
+
+<!-- Si l'utilisateur est admin -->
+<?php if(!empty($_SESSION['user']) && $_SESSION['user']['role'] == "admin" ): ?>
+	<div id="WrapperAddProduit">
+		
+		<div class="row">
+			<button class='btn btn-primary btn-xs col-xs-12 col-sm-6 col-md-8' id="btnAjouterProduitShowDiv">Ajouter un Produit</button>
+		</div>
+		<br/>
+		<div class="ajouterProduitShowDiv">
+
+			<form id="formImgProduit" enctype="multipart/form-data" action="<?= WEBSERVICE_ROOT.'/index.php' ?>" target="frameImgProduit" method="post">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="value">Nom du produit : </label>  
+						<input name="value" type="text" id="value" required>
+					</div>
+					<div class="col-md-4">
+						<label for="prix">Prix : </label>
+						<input name="prix" type="text" id="prix" required>
+					</div>
+					<div class="col-md-4">
+						<label for="ref">Ref : </label>
+						<input name="ref" type="text" id="ref" required>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<label for="inputFileImgProduitModifier" >image du produit</label>
+						<input type="file" id="inputFileImgProduitModifier" name="img" />
+					</div>
+					<div class="col-md-4" id="wrapperImgProduit">
+	                	<img id='imgProduit'  alt='Image produit' style='width:150px; height:150px;' />
+	            	</div>	
+				</div>
+			
+				
+
+	            <input type="hidden" name="service" value="Produit">
+	            <input type="hidden" name="method" value="insertProduit">
+
+
+				<div class="row">
+					<input class="btn btn-warning col-md-4" type="submit" value="Ajouter ce produit" id="uploadSubmitProd">
+				</div>
+			</form>
+			<iframe  src="#" name="frameImgProduit"   id="frameImgProduit" >
+	        </iframe>	
+		</div>
+
+	</div> <!-- fin de wrapperAddProduits-->
+<hr class="featurette-divider">
+<?php else: ?>
+<br class="featurette-divider">
+<?php endif; ?>
+
+
+<div id="WrapperProduits">
+	<div class="row">
+		<div class="col-md-4" id="labelProduits">Produits</div>
+		<div class="col-md-4" id="labelPrix">Prix</div>
+	</div>
+	<hr>
+	<?php foreach ($produits as $produit): ?>
+		<div class="row" id="WrapperProduit<?= $produit['id_produit']?>">
+
+			<div class="col-md-4">
+				<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">
+        			<img class="media-object indexImg" src="<?= IMG_LINK_ROOT.$produit['img']?>" alt="<?=$produit['value']?>">
+      			</a>
+				<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>"><span id="labelValueProduit"><?= $produit['value']?></span></a>
+				<p>Référence : <span id="labelRefProduit"><?= $produit['ref']?></span></p>
+			</div>
+			<div class="col-md-4">
+				<span id="labelPrixProduit"><?= $produit['prix']?></span> €
+			</div>
+			<div class="col-md-4">
+				<button class='btn btn-success btnAcheterProduit' id="btnAcheterProduit">Mettre ce produit dans mon panier <?=$produit['acheterpopup']?></button>
+
+				<!-- Si l'utilisateur est admin -->
+				<?php if(!empty($_SESSION['user']) && $_SESSION['user']['role'] == "admin" ): ?>
+					<button class='btn btn-primary btnPopupProduit' id="popupProduit<?=$produit['id_produit']?>" >Modifier ce Produit</button>
+					<div class="row">
+						<?=$produit['modifierpopup']?>
+					</div>
+				<?php endif; ?>
+			</div>
+			
+		</div>
+		<hr>
+	<?php endforeach; ?>
+</div>	<!-- fin de wrapperProduits-->
+
+
+<!-- <a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">Produit : <span id="labelValueProduit"><?= $produit['value']?></span></a>
+ -->
+

@@ -1,29 +1,55 @@
 <?=$message?>
-<?php 
-
-//var_dump($recettes);
-foreach($recettes as $recette): 
-
-
-    if($recette['chef'] == 1):?>
-<!-- START THE FEATURETTES -->
-    <hr class="featurette-divider">
-
+<!-- START THE FEATURETTES -->  
+<div class="container-fluid">
+    <div class="row">
+        <h1 style="text-align:center;" class="featurettes-heading">Recette de chef<span class="text-muted"></span></h1>
+    </div> 
+</div>
+<div class="container-fluid">
+    <br class="featurette-divider">
     <div class="row featurette">
-        <div class="col-md-7">
-        <h2 class="featurette-heading"><?=$recette['categorie']?> <span class="text-muted"></span></h2>
-        <p class="lead"><a href="<?=LINK_ROOT.'/recette/chef/'.$recette['id_recette']?>"> <?=$recette['titre']?></a></p>
+        <div class="col-md-6" style="text-align:center;">
+                <h1>Liste des Recettes: </h1>
+                <p class="text-muted">
+                    Entrees :
+                </p>
+                <?php foreach($recettes as $recette): if($recette['type'] == 'entree' && $recette['chef'] == 1):?>
+                    <p class="lead">
+                        <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>">
+                            <?=$recette['titre']?>
+                        </a>
+                    </p>
+                <?php endif; endforeach;?>
+                
+                <p class="text-muted">Plats :</p>
+                <?php foreach($recettes as $recette): if($recette['type'] == 'plat' && $recette['chef'] == 1):?>
+                    <p class="lead">
+                        <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>"> 
+                            <?=$recette['titre']?>
+                        </a>
+                    </p>
+                <?php endif; endforeach;?>
+
+                <p class="text-muted">Desserts :</p>
+                <?php foreach($recettes as $recette): if($recette['type'] == 'dessert' && $recette['chef'] == 1):?>
+                    <p class="lead">
+                        <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>">
+                            <?=$recette['titre']?>
+                        </a>
+                    </p>
+                <?php endif; endforeach;?>
+            <?php  ?>
         </div>
-        <div class="col-md-5">
-        <img class="featurette-image img-responsive" src="<?=WEB_ROOT?>/img/monde.jpg" alt="plat">
+        <div class="col-md-6">
+        <img class="featurette-image img-responsive" src="../../../../img/categorie/chef.png" alt="Cuisine de chef, recette de chef">
         </div>
     </div>
-<?php endif; endforeach;?>
+</div>
 
  <!-- /END THE FEATURETTES -->
 	
 
 
-    <a href="<?=LINK_ROOT?>">Retour à l'accueil</a> - 
+    <a href="<?=LINK_ROOT?>">Retour à l'accueil</a>
 	
 </form>

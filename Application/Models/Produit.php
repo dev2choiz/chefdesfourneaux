@@ -15,9 +15,41 @@ class Produit extends \Library\Model\Model{
 	}
 
 
-	public function getProduits(){
+	public function getAllProduits(){
+
+		$params = array('service' => 'Produit',
+						'method' => 'getAllProduits' );
+
+		$opts = array('http' =>
+		    array(
+		        'method'  => 'POST',
+		        'header'  => 'Content-type: application/x-www-form-urlencoded',
+		        'content' => http_build_query($params)
+		        )
+		);
+
+		$context  = stream_context_create($opts);
 		
-		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php?service=produit&method=getproduits')) );
+		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
+	}
+
+	public function getProduit($idRecette){
+
+		$params = array('service' => 'Produit',
+						'method' => 'getProduit',
+						'id_produit' => $idRecette );
+
+		$opts = array('http' =>
+		    array(
+		        'method'  => 'POST',
+		        'header'  => 'Content-type: application/x-www-form-urlencoded',
+		        'content' => http_build_query($params)
+		        )
+		);
+
+		$context  = stream_context_create($opts);
+		
+		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
 	}
 
 	/**
@@ -26,12 +58,12 @@ class Produit extends \Library\Model\Model{
 	 * @param  [int] $idCategorie [description]
 	 * @return [boolean]              [description]
 	 */
-	public function insertProduit($params, $idUser){
+	public function insertProduit($params){
 
 
-		$params["id_user"] = $idUser;
-		$params["service"] = "produit";
-		$params["method"]  = "insertproduit";
+		//$params["id_user"] = $idUser;
+		$params["service"] = "Produit";
+		$params["method"]  = "insertProduit";
 
 		$opts = array('http' =>
 		    array(
@@ -59,8 +91,8 @@ class Produit extends \Library\Model\Model{
 		
 
 		$params["id_produit"] = $idProduit;
-		$params["service"] = "produit";
-		$params["method"]  = "updateproduit";
+		$params["service"] = "Produit";
+		$params["method"]  = "updateProduit";
 //var_dump("dan model",$params);
 
 		$opts = array('http' =>
@@ -89,8 +121,8 @@ class Produit extends \Library\Model\Model{
 		
 
 		$params["id_produit"] = $idProduit;
-		$params["service"] = "produit";
-		$params["method"]  = "deleteproduit";
+		$params["service"] = "Produit";
+		$params["method"]  = "deleteProduit";
 
 
 		$opts = array('http' =>

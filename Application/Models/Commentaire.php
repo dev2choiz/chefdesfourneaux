@@ -18,8 +18,8 @@ class Commentaire extends \Library\Model\Model{
 	public function getCommentaires($idRecette){
 
 		$params["id_recette"] = $idRecette;
-		$params["service"] = "commentaire";
-		$params["method"]  = "getcommentaires";
+		$params["service"] = "Commentaire";
+		$params["method"]  = "getCommentaires";
 
 		$opts = array('http' =>
 		    array(
@@ -44,8 +44,8 @@ class Commentaire extends \Library\Model\Model{
 	public function insertCommentaire($params){
 
 
-		$params["service"] = "commentaire";
-		$params["method"]  = "insertcommentaire";
+		$params["service"] = "Commentaire";
+		$params["method"]  = "insertCommentaire";
 
 		$opts = array('http' =>
 		    array(
@@ -73,8 +73,8 @@ class Commentaire extends \Library\Model\Model{
 		
 
 		$params["id_commentaire"] = $idCommentaire;
-		$params["service"] = "commentaire";
-		$params["method"]  = "updatecommentaire";
+		$params["service"] = "Commentaire";
+		$params["method"]  = "updateCommentaire";
 //var_dump("dan model",$params);
 
 		$opts = array('http' =>
@@ -103,8 +103,8 @@ class Commentaire extends \Library\Model\Model{
 		
 
 		$params["id_commentaire"] = $idCommentaire;
-		$params["service"] = "commentaire";
-		$params["method"]  = "deletecommentaire";
+		$params["service"] = "Commentaire";
+		$params["method"]  = "deleteCommentaire";
 
 
 		$opts = array('http' =>

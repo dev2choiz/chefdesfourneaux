@@ -4,8 +4,9 @@
 
 body {
   padding-bottom: 40px;
-  color: #5a5a5a;
+  /* color: #5a5a5a; */
   font-family: "Calibri Light", Helvetica, Arial, sans-serif;
+  font-weight: bold;
 }
 
 
@@ -31,7 +32,6 @@ body {
 .navbar-wrapper .navbar {
   padding-right: 15px;
   padding-left: 15px;
-  /*background-color: #D7D3D3;*/
 }
 .navbar-wrapper .navbar .container {
   width: auto;
@@ -102,6 +102,7 @@ body {
 
 @media (min-width: 768px) {
   /* Navbar positioning foo */
+
   .navbar-wrapper {
     margin-top: 20px;
   }

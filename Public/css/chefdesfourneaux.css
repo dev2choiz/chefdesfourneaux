@@ -1,3 +1,32 @@
+.container{
+	background-color: #FFF;
+	font-weight: bold;
+} 
+
+/* NAVBAR */
+.navbar-inverse .navbar-brand:hover{
+	background-color: #777;
+}
+.lienChefDesFourneaux:hover{
+	background-color: #777;
+}
+.activeLink{
+	background-color: #E4E4E4;
+	border-radius: 10px;
+}
+
+/* END NAVBAR */
+
+.separator{
+	height: 200px;
+}
+
+#content_view{
+	margin-bottom : 40%;
+}
+
+
+
 /* PopUp */
 
 #showDivContainer{ /* Fond translucide */
@@ -13,11 +42,6 @@
 	z-index: 1;*/
 	display: none;
 }
-
-#type{
-	background-color: #F00;
-}
-
 
 #inputShowDiv{
 	background-color: rgba(255,255,255,1);
@@ -58,3 +82,91 @@
 .dv_ingredients{
 	padding: 10px;
 }
+
+/* Fin de la mise en forme des ingrédients */
+
+/* Mise en forme Panier*/
+.lienPanier{
+	margin-left: 350px; 
+}
+#panier{
+	/*background-color: rgba(222,222,222,1);*/
+	position: inherit;
+	z-index: 2000;
+	right: 0;
+	height: 50px;
+	font-size: 18px;
+	line-height: 20px;
+	display: block;
+	float: right;
+}
+#panier .btn{
+	line-height: 2.5;
+}
+
+#panier .btn-default{
+	background-color: rgba(181,237,192,0.5);
+}
+
+#panierContent{
+	display: inline;
+}
+/* Fin Mise en forme Panier*/
+
+/*Responsive*/
+@media (max-width: 1200px) {
+	.lienPanier{
+		margin-left: 230px;
+	}
+}
+
+@media (max-width: 990px) {
+	.lienPanier{
+		margin-left: 160px;
+	}
+}
+
+@media (max-width: 768px) {
+	.panier{
+		margin-right: 314px;
+		padding-top: 9px;
+	}
+	
+	/* .lienPanier{
+		margin-left: 0px;
+		margin-right: 0px;
+		top: 0;
+		left: 0;
+		float: left;
+	} */
+}
+
+@media (max-width: 322px) {
+	.panier{
+		margin-right: 145px;
+		padding-top: 9px;
+	}
+	
+	.lienPanier{
+		margin-left: 0px;
+		margin-right: 0px;
+		top: 0;
+		left: 0;
+		float: left;
+	}
+}
+@media (max-width: 300px) {
+	.panier{
+		margin-left: 30px;
+		margin-right: 135px;
+		padding-top: 9px;
+	}
+	.lienPanier{
+		margin-left: 0px;
+		margin-right: 0px;
+		top: 0;
+		left: 0;
+		float: left;
+	}
+}
+/* Fin Responsive */

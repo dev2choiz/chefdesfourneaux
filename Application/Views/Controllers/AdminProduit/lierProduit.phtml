@@ -1,0 +1,48 @@
+
+
+
+
+<h1>Liste des Produits disponibles</h1>
+
+<div id="WrapperProduits">
+<?php foreach ($produits as $produit): ?>
+	<div>
+		<div class="row" id="WrapperProduit<?= $produit['id_produit']?>">
+			<div class="col-md-8">
+			
+				<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">Produit : <span id="labelValueProduit"><?= $produit['value']?></span></a>
+
+			</div>
+			<div class="col-md-4">
+				Prix : <span id="labelPrixProduit"><?= $produit['prix']?></span> €
+				Référence : <span id="labelRefProduit"><?= $produit['ref']?></span>
+			</div>
+			
+
+			<div >
+
+
+				
+				<button class='btn btn-primary btn-xs col-md-offset-3' id="lierProduit" onclick="dissocierlierProduit(<?=$viewRecette['id_recette']?>, <?=$produit['id_produit']?>);" >
+
+					<?php if(array_key_exists('associe', $produit) && !empty($produit['associe'])): ?>
+						Dissocier ce produit a la recette
+					<?php else: ?>
+						Lier ce Produit à la recette
+					<?php endif; ?>
+				</button><?=$produit['id_produit']?>
+
+
+				
+
+			</div>
+			
+		</div>
+	</div>
+<?php endforeach; ?>
+</div>	<!-- fin de wrapperProduits-->
+
+
+<!-- <a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">Produit : <span id="labelValueProduit"><?= $produit['value']?></span></a>
+ -->
+

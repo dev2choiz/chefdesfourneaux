@@ -1,0 +1,53 @@
+<h1>Liste des Produits de votre panier</h1>
+
+<div id="WrapperProduits">
+<!-- <div class="row">
+	<div class="col-md-4" id="labelProduits">Produits</div>
+	<div class="col-md-4" id="labelPrix">Prix</div>
+</div> -->
+<?php 
+//var_dump($viewPanier);
+$somme = 0;
+foreach ($viewPanier as $produit):?>
+	<hr>
+	<div id="WrapperProduit<?=$produit['id_produit']?>">
+		<div class="row" >
+			<div class="col-md-4">
+				<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">
+        			<img class="media-object" src="<?= IMG_LINK_ROOT.$produit['img_produit']?>" alt="<?=$produit['value_produit']?>">
+      			</a>
+				<a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">
+					<span id="labelValueProduit"><?= $produit['value_produit']?></span>
+				</a>
+				<p>Référence : <span id="labelRefProduit"><?= $produit['ref_produit']?></span></p>
+			</div>
+			<div class="col-md-4 prixProduitContainer">
+				<span id="labelPrixProduit"><?= $produit['prix_produit']?></span> €
+			</div>
+			<div class="col-md-4">
+				<form method="post" >
+					<input type="hidden" name="id_user" value="<?= $_SESSION['user']['id_user'] ?>" />
+					<input type="hidden" name="id_panier" value="<?= $produit['id_panier'] ?>" />
+					<input class="btn btn-danger supprPanier" type="submit" name="action" value="Supprimer du panier" />
+				</form>
+			</div>
+
+
+			
+		</div>
+	</div>
+	
+<?php 
+$somme += $produit['prix_produit'];
+endforeach; ?>
+	<div> Total = <?=$somme?> €</div>
+
+
+	<div >
+		<form method="post" action="<?=LINK_ROOT.'/vente/payer'?>">
+			<input type="hidden" name="id_user" value="<?= $_SESSION['user']['id_user'] ?>">
+			<button class='btn btn-success col-md-3 col-md-offset-3 btnAcheterProduit' id="btnPasserCommande">Finaliser la commande</button>
+		</form>
+	</div>
+</div>	<!-- fin de wrapperProduits-->
+

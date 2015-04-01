@@ -1,0 +1,92 @@
+<?=$tinyMCECommentaire?>
+<?=$message?>
+
+
+
+<div class="row featurette recette">
+    <h1><?=$recette['categorie']?></h1>
+    <div class="col-md-5">
+        <img class="featurette-image  img-responsive" src="<?=IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['titre']?>">
+        <h3>Liste des Ingrédients</h3>
+
+        <!-- Si des ingrédients sont liés à la recette -->
+        <?php if(!empty($recette['ingredients'])): foreach ($recette['ingredients'] as $ing): ?>
+            <p class="lead"><?=$ing['ingredients']?> : <?=$ing['value']?> <?=$ing['unite']?></p>
+        <?php endforeach; endif; ?>
+
+    </div>
+    <h2 class="featurette-heading"><?=$recette['titre']?></h2>
+    <div class="col-md-7">
+        
+        <p class="lead">Difficulté : <?=$recette['difficulte']?> / 5</p>
+        <p class="lead">Prix : <?=$recette['cout']?> €</p>
+        <p class="lead"><?=$recette['value']?></p>
+    </div>
+    <div class="row">
+        <div class="col-md-6" id="labelProduitRecette">
+            Pour cette Recette, nos chefs ont utilisé : 
+        </div>
+    </div>
+    <div class="row">
+        <!-- Si desproduits sont liés à la recette -->
+        <?php if(!empty($recette['produits'])): foreach ($recette['produits'] as $produit): ?>
+            <div class="col-md-4" id="produitRecette">
+                <a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>"><?=$produit['value_produit']?></a>
+                <img class="media-object" src="<?= IMG_LINK_ROOT.$produit['img']?>" alt="<?=$produit['value_produit']?>">
+                <p><?=$produit['prix']?> €</p>
+                <p><?=$produit['ref']?></p>
+            </div>
+        <?php endforeach; endif; ?>
+    </div>
+</div>
+<br>
+
+
+
+
+ <!-- /END THE FEATURETTES -->
+
+<div class="row divCom">
+    <?php if(!empty($_SESSION['user'])): ?> 
+        <input class="btn btn-success col-md-6" type="button" value="Ajouter un commentaire"  id="btnAddCom">
+        <br>
+    <?php endif; ?> 
+
+    <div id="divCom">
+        <div class="col-md-4">Note : </div>
+        <select id="noteValue">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <textarea id="commValue"></textarea>
+
+        <input class="btn btn-success col-md-6" type="submit" value="Commenter cette recette"  id="addCommentaire">
+    </div>
+</div>
+
+<div class="row featurette" id="WrapperComms">
+    <!-- Si des commentaires sont liés à la recette -->
+    <?php if(!empty($recette['commentaires'])): foreach ($recette['commentaires'] as $com): ?>
+        
+        <div class="panel panel-default headerCom">
+            <div class="panel-heading">
+                <?= $com['pseudo']?> 
+                <span class="badge">
+                    <?= $com['note']?> / 5
+                </span>
+            </div>
+            <div class="panel-body">
+                <p><?= $com['value']?></p>
+                
+                <?php   $date = new Datetime($com['update']); ?>
+                <p><?=$date->format('d-m-Y'); ?>  <?=$date->format('H:i'); ?></p>
+                <p></p>
+            </div>
+        </div>
+
+    <?php endforeach; endif; ?>
+</div>
+

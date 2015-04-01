@@ -1,20 +1,25 @@
 <?php
-// Let's go to the beach
+
 namespace Library\Controller;
 
 abstract class Controller implements iController
 {
 	
 	private $redirect		= null;
-	private $layout 		= 'blog';
+	private $layout 		= 'carousel';
 	private $responseHeader = 'text/html';
 	private $scriptView		= array();
 	private $styleView		= array();
 	private $dataMod 		= array();
-	private $dataView   	= array("siteName" 	=> "Site MVC",
+	private $dataView   	= array("siteName" 	=> "Chef des fourneaux",
 							  		"pageTitle" => "Home");
+	private $jsConfigAvant		= array();
+	private $jsConfigApres		= array();
+	
 
-
+	protected function __construct(){
+		//header("Access-Control-Allow-Origin: *"); 
+	}
 
 	protected function setRedirect($url){
 		$this->redirect = $url;
@@ -69,11 +74,39 @@ abstract class Controller implements iController
 
 	/**
 	 * Get ResponseHeader
-	 * @return String respoonse a utiliser 
+	 * @return String response a utiliser 
 	 */
 	protected function getResponseHeader(){
 		return $this->responseHeader;
 	}
+
+
+
+
+
+	/**
+	 * [setJsConfig pour inserer du code js, des variables, avant tout autre code js]
+	 * @param [String] $quoi    	[ qu'est qu'on veut faire ]
+	 * @param [String] $code 		[ code a rajouter ]
+	 * @param [String] $value 		[ valuer de la variable si c'est un variable qu'on declare ] [optionnel]
+	 */
+	protected function setJsConfigAvant($quoi, $code , $value="" ){
+		array_push( $this->jsConfigAvant, array( $quoi, $code , $value ) );
+		return true;
+	}
+
+	/**
+	 * [setJsConfig pour inserer du code js, des variables; apres les inclusion js]
+	 * @param [String] $quoi    	[ qu'est qu'on veut faire ]
+	 * @param [String] $code 		[ code a rajouter ]
+	 * @param [String] $value 		[ valuer de la variable si c'est un variable qu'on declare ] [optionnel]
+	 */
+	protected function setJsConfigApres($quoi, $code , $value="" ){
+		array_push( $this->jsConfigApres, array( $quoi, $code , $value ) );
+		return true;
+	}
+
+
 
 
 	/**
@@ -169,10 +202,6 @@ abstract class Controller implements iController
 
 
 
-	public function __construct(){
-
-	}
-
 
 	/**
 	 * Ajoute les styles et scripts contenu des array $styleView et $scriptView
@@ -182,13 +211,65 @@ abstract class Controller implements iController
 	 * @return void
 	 */
 	private function addFilesRender(&$html){
-		foreach ($this->scriptView as $s){
-			$html = str_replace('</body>', "<script src='WEB_ROOT/js/$s'></script></body>", $html);
+
+
+
+		
+		$strIdUser="rien";
+		if( !empty($_SESSION['user']) ){
+			$strIdUser=$_SESSION['user']['id_user'];
 		}
+		$html = str_replace('</body>', "
+			<script type='text/javascript'>
+				idUser ='$strIdUser'; 
+				urlImg='".IMG_ROOT."';
+				urlWebService='".WEBSERVICE_ROOT."index.php';
+			</script>
+			</body>", $html);
+
+
+		//place les config js avant toute inclusion js
+		$str="<script>\n";
+		foreach ($this->jsConfigAvant as $val){
+			switch ($val[0]) {
+				case 'variable':
+					$str.="js".$val[1]."=\"".$val[2]."\";\n";
+					break;
+				case 'code':
+					$str.=$val[1].";\n";
+					break;
+			}
+		}
+		$str.="</script>\n";
+		$html = str_replace('</body>', "$str</body>", $html);
+
+
+		//ajoute les scripts
+		foreach ($this->scriptView as $s){
+			$html = str_replace('</body>', "<script src='".WEB_ROOT."/js/$s'></script></body>", $html);
+		}
+
+		//place les configs js apres toutes les inclusions js
+		$str="<script>\n";
+		foreach ($this->jsConfigApres as $val){
+			switch ($val[0]) {
+				case 'variable':
+					$str.="js".$val[1]."=\"".$val[2]."\";\n";
+					break;
+				case 'code':
+					$str.=$val[1].";\n";
+					break;
+			}
+		}
+		$str.="</script>\n";
+		$html = str_replace('</body>', "$str</body>", $html);
+
 		foreach ($this->styleView as $s){
-			$html = str_replace('</head>', "<link href='WEB_ROOT/css/$s' rel='stylesheet' type='text/css' /></head>", $html);
+			$html = str_replace('</head>', "<link href='".WEB_ROOT."/css/$s' rel='stylesheet' type='text/css' /></head>", $html);
 		}
 	}
+
+
 
 
 
@@ -211,16 +292,19 @@ abstract class Controller implements iController
 			die();
 		}
 
-		
-		$pathView = APP_ROOT."Views/Controllers/".str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";
-		//$pathView = APP_ROOT.str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";		//view dans Application/controllers
 
-		if(file_exists($pathView)){
+		$pathView = APP_ROOT."Views/Controllers/".str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";
+		//$pathView = APP_ROOT."Controllers/Views/Controllers/".str_replace("Application\Controllers\\", "", $controller)."/".str_replace("Action", "", $action).".phtml";		//view dans Application/controllers/views/Controllers
+		
+
+		
+
+		if( file_exists($pathView) ){
 			
 
-			//if(!headers_sent()  ){			//<---condition a enlever quand on recevera les reponses du webservice sans entete
-				header("Content-type: ".$this->getResponseHeader()."; charset=utf-8");
-			//}
+			//s'en fout
+			header("Content-type: ".$this->getResponseHeader()."; charset=utf-8");
+			
 
 			extract($this->getDataView());
 
@@ -229,9 +313,37 @@ abstract class Controller implements iController
 			$content_view = ob_get_clean();
 
 			ob_start();
+
 				include_once(APP_ROOT."Views/Layouts/".$this->getLayout().".phtml");
+				//include_once(APP_ROOT."Controllers/Views/Layouts/".$this->getLayout().".phtml");
+
 			$finalRender = ob_get_clean();
 
+
+
+
+			
+			//ajoute le  js de la page s'il existe
+			$page=strtolower (str_replace("Application\Controllers\\", "", $controller).str_replace("Action", "", $action));
+			//$page=$controller.$action;
+			
+			if( file_exists(PUBLIC_ROOT."js/".$page.".js") ){
+				if(!$this->scriptExiste($page.".js")){
+					$this->setScriptView($page.".js");
+				}
+			}
+
+
+			//ajoute le style de la page s'il existe
+			$page=str_replace("/", "", $_GET['page']);
+			if( file_exists(PUBLIC_ROOT."css/".$page.".css") ){
+				if(!$this->scriptExiste($page.".css")){
+					$this->setStyleView($page.".css");
+				}
+			}
+
+
+			
 
 			$this->addFilesRender($finalRender);
 			echo $finalRender;
@@ -258,4 +370,54 @@ abstract class Controller implements iController
 			throw new \Exception("Error View for Module:'$module' and Action:'$action' not found");
 		}
 	}
+
+
+	public function scriptExiste($script){
+		foreach ($this->scriptView as $value) {
+			if($value===$script){
+				 return true;
+			}
+		}
+		return false;
+	}
+
+	public function styleExiste($style){
+		foreach ($this->styleView as $value) {
+			if($value===$style){
+				 return true;
+			}
+		}
+		return false;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public function isConnected(){
+		return empty($_SESSION['user'] )?false:true;
+	}
+
+
+
+    public function convEnTab($tab){
+        $modelCategorie  = new \Application\Models\Categorie('localhost');
+        return $modelCategorie->convEnTab($tab);
+    }
+
+    public function retirerCaractereSpeciaux($chaine){
+        $modelCategorie  = new \Application\Models\Categorie('localhost');
+        return $modelCategorie->retirerCaractereSpeciaux($chaine);
+    }
+
+
+
 }

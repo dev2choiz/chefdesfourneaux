@@ -1,7 +1,14 @@
 body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #FFF;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: rgba(255,255,255,0.5);
+  background-image:url(/fourneaux/Public/img/fondinscription.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+}
+.backgroundImage{
+  
 }
 
 .form-signin {

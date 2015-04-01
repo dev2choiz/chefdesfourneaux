@@ -1,0 +1,26 @@
+#labelProduits{
+	font-size: 30px;
+}
+
+#labelPrix{
+	font-size: 30px;
+}
+#labelPrixProduit{
+	font-size: 22px;
+	margin-top: 10%;
+}
+
+.prixProduitContainer{
+	margin-top: 5%;
+}
+
+#labelValueProduit{
+	font-size: 22px;
+}
+
+img{
+	width:50%;
+}
+.supprPanier{
+	margin-top: 16%;
+}

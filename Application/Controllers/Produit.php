@@ -5,23 +5,29 @@ namespace Application\Controllers;
 class Produit extends \Library\Controller\Controller{
 
 	private $message;
-	private $tinyMCE;
 	private $modelCat;
 	private $modelViewProduit;
 
+	/**
+	 * [__construct description]
+	 */
 	public function __construct(){
 		parent::__construct();
 		$this->setLayout("carousel");
 		$this->message 				= new \Library\Message\Message();
-		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelCat 			= new \Application\Models\Categorie('localhost');
+		//$this->modelViewProduit 	= new \Application\Models\Produit('localhost');
 		$this->modelViewProduit 	= new \Application\Models\ViewProduit('localhost');
 	}
 
+	/**
+	 * [indexAction description]
+	 * @return [type] [description]
+	 */
 	public function indexAction(){
 		
-		$viewAllProduits = $this->modelViewProduit->getAllViewProduits() ;			
-
+		//$viewAllProduits = $this->modelViewProduit->getAllProduits();
+		$viewAllProduits = $this->modelViewProduit->getAllViewProduits();
 
 
 		if(empty($viewAllProduits['response'])){
@@ -46,8 +52,13 @@ class Produit extends \Library\Controller\Controller{
 
 
 
-
-public function afficherAction( $idProduit ){
+	
+	/**
+	 * [afficherAction description]
+	 * @param  [type] $idProduit [description]
+	 * @return [type]            [description]
+	 */
+	public function afficherAction( $idProduit ){
 		
 		$viewProduit = $this->modelViewProduit->getViewProduit($idProduit);
 
@@ -138,18 +149,12 @@ public function afficherAction( $idProduit ){
 			"viewProduit" => $viewProduit,
 			"viewCommentaires" => $viewComms
 			));
-
-
 	}
 
 
 
 	public function logoutAction(){		//a effacer?
 		session_unset();
-	}
-
-
-
-	
+	}	
 }
 

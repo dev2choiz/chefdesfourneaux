@@ -2,14 +2,14 @@
  
 namespace Application\Controllers;
 
-class Admin extends \Library\Controller\Controller{
+class Admin
+ extends \Library\Controller\Controller{
 
 	private $message;
 	private $tinyMCE;
 	private $modelRecette;
 	private $modelCategorie; // A compléter
 	private $modelIngredient; // A compléter
-	private $modelPopUp;	//<==effacer
 	private $modelShowDiv;
 	private $modelAjax;
 
@@ -21,7 +21,6 @@ class Admin extends \Library\Controller\Controller{
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelRecette 		= new \Application\Models\Recette('localhost');
 		$this->modelVR 				= new \Application\Models\ViewRecette('localhost');
-		//$this->modelPopUp 			= new \Application\Models\PopUp();
 		$this->modelShowDiv 		= new \Application\Models\ShowDiv();
 		$this->modelAjax 			= new \Application\Models\Ajax();
 	}
@@ -59,9 +58,15 @@ class Admin extends \Library\Controller\Controller{
 			"tinyMCERecette" => $this->tinyMCE->getEditeurRecette()
 		));
 
+
 		
 		if(isset($_POST['btn'])){
+			//var_dump($_POST, $_FILES);
+
 			
+			
+
+
 			
 			if(empty($_POST['value'])){
 				$this->message->addError("Recette vide !");
@@ -101,27 +106,38 @@ class Admin extends \Library\Controller\Controller{
 			$quantites=$_POST["quantites"];			unset($_POST["quantites"]);
 			
 
-			//var_dump("dff",$_POST);
+
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			
-			$res =$modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
+			$res = $modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
+
+			$res = get_object_vars(json_decode($res));
+			$res = $res['response'];
+
+
+
+	        $root = $_FILES['img']['tmp_name'];
+	        $img = IMG_ROOT.$res.$_FILES['img']['name'];
+	        //$img = PUB_ROOT.'img/'.$res.$_FILES['img']['name'];
+
+	        if(copy($root, $img )){
+	        	//$_POST['img'] = WEB_ROOT."img/".$res.$_FILES['img']['name'];
+	        	$_POST['img'] = '/img/'.$res.$_FILES['img']['name'];
+	        }else{
+	        	$this->message->addError("Pb avec l'insertion de l'image");
+	        }
+	        $modelRecette->updateRecette($_POST, $res);
+			//echo "<img src='{$_POST['img']}'>"; 
 			
 			
-			$res=get_object_vars(json_decode($res));
-			$res=$res['response'];
 			
-			if ($res > 0 ) {		//res= id de la recette créée si tout s est bien passé
-				//header('location: '.LINK_ROOT.'recette');
-				//die();
+			if ($res > 0 ) {
 				
 				
 				
 				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
-				//echo "<br><br><br><br>";
-				//var_dump($ingreds, $unites , $res, $quantites );
+
 				$res =$modelListIngredients->insertListIngredients($ingreds, $unites , $res, $quantites );
-				//echo $res->page;
-				//var_dump("ress",$res);
 				
 					//aucune verif la flemme
 				if($res->response){
@@ -136,23 +152,13 @@ class Admin extends \Library\Controller\Controller{
 				$this->message->addError($user->apiErrorMessage);
 				$this->message->addError($user->serverErrorMessage);
 			}
+			
 		}
-
-
-		//données pour la view
-		//
-		$this->setDataView(array("message" => $this->message->showMessages()));
 
 		//recherche des categories
 		$modelCategorie 	= new \Application\Models\Categorie('localhost');
 		$cat=$modelCategorie->getCategories();
-
-		
-		$cat=$cat->response;
-		
-		
-
-		$cat=$modelCategorie->convEnTab($cat);
+		$cat=$cat['response'];
 
 		$this->setDataView(array("categories" =>  $cat));
 
@@ -181,14 +187,17 @@ class Admin extends \Library\Controller\Controller{
 		$unit=$unit->response;
 		$unit=$modelUnite->convEnTab($unit);
 
-		$this->setDataView(array("unites" =>  $unit));
+		$this->setDataView(array(
+			"unites" =>  $unit, 
+			"message" => $this->message->showMessages()
+			));
 
 
 
 
+		
 
-
-
+		$this->setScriptView("creerunerecette.js");
 
 
 
@@ -203,10 +212,6 @@ class Admin extends \Library\Controller\Controller{
 	 */
 	public function mettreAJourRecetteAction($idRecette){
 
-
-		
-		echo "<br><br><br><br>".$idRecette;
-		
 		if( $_SESSION['user']['role'] !== "admin" ){
 			$this->setRedirect(LINK_ROOT);
 		}elseif( !isset($idRecette) || empty($idRecette)  || $idRecette===0 ){	//si pas d'idrecette
@@ -258,32 +263,43 @@ class Admin extends \Library\Controller\Controller{
 
 			
 			$modelRecette 	= new \Application\Models\Recette('localhost');
+
+				echo "<br><br><br><br><br><br><br><br><br><br>";
+			var_dump($_FILES, $_POST);
+			//######################## Copie et met a jour dans la base
+	        $root = $_FILES['img']['tmp_name'];
+	        $img = IMG_ROOT.$this->retirerCaractereSpeciaux($_POST["titre"].".jpg");
+
+
+	        	var_dump($root, $img);
+	        if(copy($root, $img )){
+	        	$_POST['img'] = '/img/'.$this->retirerCaractereSpeciaux($_POST["titre"]).".jpg";
+	        }else{
+	        	$_POST['img'] ="";
+	        	$this->message->addError("Pb avec la mise a jour de l'image");
+	        }
+
+
 			
 			$res =$modelRecette->convEnTab($modelRecette->updateRecette($_POST, $idRecette ) );
-			var_dump("res :",$res);
-
 
 			$res=$res['response'];
 			
-			if ($res  ) {		//res est un bool
-				//header('location: '.LINK_ROOT.'recette');
-				//die();
-				
-				
-				
+			if ($res){			//res est un bool
+
+	
 				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
 				//echo "<br><br><br><br>";
 				//var_dump("ing",$ingreds, $unites , $idRecette, $quantites );
 				$res =$modelListIngredients->convEnTab( $modelListIngredients->updateListIngredients($ingreds, $unites , $idRecette, $quantites ) );
-				var_dump("ress",$res);
-				//echo $res['page'];
+
 				
-				
-					//aucune verif la flemme
+
+
 				if($res['response']){
-					$this->message->addSuccess("Recette ajoutée");
+					$this->message->addSuccess("Recette modifiée");
 				}else{
-					$this->message->addSuccess("Recette ajoutée sans les ingredients");
+					$this->message->addSuccess("Recette modifiée sans les ingredients");
 				}
 
 
@@ -302,8 +318,7 @@ class Admin extends \Library\Controller\Controller{
 		//recherche des categories
 		$modelCategorie 	= new \Application\Models\Categorie('localhost');
 		$cat=$modelCategorie->getCategories();
-		$cat=$cat->response;
-		$cat=$modelCategorie->convEnTab($cat);
+		$cat=$cat['response'];
 
 
 		//recherche des ingredients
@@ -346,8 +361,6 @@ class Admin extends \Library\Controller\Controller{
 			$modelVR 	= new \Application\Models\ViewRecette('localhost');
 			$viewR 		= $modelVR->getViewRecette($idRecette);
 			$viewR 		= $viewR['response'];
-			//var_dump($viewR);
-
 		}
 
 
@@ -360,24 +373,53 @@ class Admin extends \Library\Controller\Controller{
 
 
 
-		
+		//script ajax permettant d'ajouter un ingredient a la bdd puis de le prendre en compte
 		$successfonc="
 			console.log(data);
-			alert(data);
+			val=data['response'];		//test à faire : si >0 ==> insertion faite
+			label=document.getElementById('DivContainerIngredientValue').value;
+			$('#ingredients').append('<option value=\"'+val+'\" selected>'+label+'</option>');
+			$('#unites').append('<option value=\"'+val+'\" selected>...</option>');
+
+			//tab
+        	tabUnit.push('rien');
+        	tabQuant.push(1);
+
+			alert('ingredient ajouté');
 		";
+		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerIngredientValue"),"ingredient", "insertingredients", array(), "ajouterIngredientBdd", $successfonc);
 
-		//( $service, $methode, $data, $fonctionName, $successfonc)
-		//array() doit se faire conté javascript
-		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerIngredientValue"),"ingredient", "insertingredients", array("value"=>"ajoute un ing par defaut pr le moment"), "ajouterIngredientBdd", $successfonc);
-
-		$viewButtonShowDiv = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterIngredientBdd", "Ajouter un ingrédient");
+		$viewButtonShowDivIngredient = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterIngredientBdd", "Ajouter un ingrédient");
 
 		$viewShowDivScript = $this->modelShowDiv->getScriptShowDiv("DivContainerIngredient",	"ajouterIngredientBdd", $scriptAjax, "ajouterIngredientBdd");
 
 		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("DivContainerIngredient", "d'un ingrédient", "Ingrédient", "cet ingrédient");
 
-		$codeAjax=$viewShowDivHtml."".$viewShowDivScript;
+		$codeAjaxIngredient=$viewShowDivHtml."".$viewShowDivScript;
 
+
+
+
+		//script ajax permettant d'ajouter une categorie a la bdd puis de la prendre en compte
+		$successfonc="
+			console.log(data);
+			val = data['response'];		//test à faire : si >0 ==> insertion faite
+			label=document.getElementById('DivContainerCategorieValue').value;
+			$('#id_cat').append('<option value=\"'+val+'\" selected>'+label+'</option>');
+			
+
+			alert('categorie ajoutée');
+		";
+		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerCategorieValue"),"categorie", "insertcategorie", array(), "ajouterCategorieBdd", $successfonc);
+
+		$viewButtonShowDivCategorie = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterCategorieBdd", "Ajouter une catégorie");
+
+		$viewShowDivScript = $this->modelShowDiv->getScriptShowDiv("DivContainerCategorie",	"ajouterCategorieBdd", $scriptAjax, "ajouterCategorieBdd");
+
+		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("DivContainerCategorie", "d'une catégorie", "Catégorie", "cette catégorie");
+
+		$codeAjaxCategorie=$viewShowDivHtml."".$viewShowDivScript;
+		
 		
 		$this->setDataView(array(
 			"message" => $this->message->showMessages(),
@@ -385,10 +427,22 @@ class Admin extends \Library\Controller\Controller{
 			"ingredients" =>  $ing,
 			"unites" =>  $unit,
 			"viewrecette" =>  $viewR,
-			"ajaxIngredientButton" => $viewButtonShowDiv,
-			"ajaxIngredientScript" =>	$codeAjax,
-			"ingRecherche" => $ingRecherche
+			"ajaxIngredientButton" => $viewButtonShowDivIngredient,
+			"ajaxIngredientScript" =>	$codeAjaxIngredient,
+			"ajaxCategorieButton" => $viewButtonShowDivCategorie,
+			"ajaxCategorieScript" =>	$codeAjaxCategorie
 		));
+
+
+		//ajoute la declaration de la variable idRecette au js (exemple : jsIdRecette=1)
+		$this->setJsConfigAvant("variable", "IdRecette", $viewR['id_recette'] );
+
+		//ajoute le code qui  lance une fonction ... avec comme parametre la variable créée ci dessus
+		//$this->setJsConfig("code" , "actualiserImageFormRecette( jsIdRecette );", "" );
+		$this->setJsConfigApres("code" , "actualiserImageFormRecette( jsIdRecette );" );
+
+		$this->setScriptView("creerunerecette.js");
+
 
 	}
 
@@ -459,4 +513,83 @@ class Admin extends \Library\Controller\Controller{
 	public function logoutAction(){
 		session_unset();
 	}
+
+
+
+
+
+
+	public function gestionAction(){
+
+		if($_SESSION['user']['role'] !== "admin"){
+			header('location: '.LINK_ROOT);
+			die();
+		}
+
+
+
+		if(isset($_POST['btn'])){
+			
+			
+			if(empty($_POST['value'])){
+				$this->message->addError("Recette vide !");
+			}
+
+			
+			$listMessage = $this->message->getMessages("error");
+			if(!empty($listMessage)){
+				$this->setDataView(array("message"=> $this->message->showMessages()) );
+
+				return false;
+			}
+
+			unset($_POST['btn'], $listMessage);
+
+
+
+
+
+
+
+
+
+
+
+		}	//fin if(btn)
+
+
+		//recherche des categories
+		$modelCategorie 	= new \Application\Models\Categorie('localhost');
+		$cat=$modelCategorie->getCategories();
+		$cat=$cat['response'];
+		//$cat=$modelCategorie->convEnTab($cat);
+
+
+		//recherche des ingredients
+		$modelIngredient 	= new \Application\Models\Ingredient('localhost');
+		$ings=$modelIngredient->getIngredients();
+		$ings=$ings->response;
+		$ings=$modelIngredient->convEnTab($ings);
+
+		//recherche des Unites
+		$modelUnite 	= new \Application\Models\Unite('localhost');
+		$unit=$modelUnite->getUnites();
+		$unit=$unit->response;
+		$unit=$modelUnite->convEnTab($unit);
+
+
+
+		$this->setDataView(array(
+			"pageTitle" => "Gestion des categories, des ingrédients et des unités",
+			"message" => $this->message->showMessages(),
+			"categories"			=>  $cat,
+			"ingredients" 			=>  $ings,
+			"unites" 				=>  $unit
+		));
+
+		
+
+
+	}
+
 }

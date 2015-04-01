@@ -1,6 +1,6 @@
 <?php
 //var_dump($recettes[0]['ingredients']);
-var_dump($recettes);
+//var_dump($recettes);
 ?>
 <div class="container">
     <div class="blog-header">
@@ -10,6 +10,7 @@ var_dump($recettes);
     <div class="row">
         <div class="col-sm-8 blog-main">
             <a type="button" class="btn btn-primary" href="<?=LINK_ROOT.'admin/creerrecette'?>">Ajouter une Recette</a>
+            <a type="button" class="btn btn-primary" href="<?=LINK_ROOT.'admin/gestion'?>">Gérer les catégories, ingrédients et unités</a>
             <table class="table table-bordered">
                 <tr>
                     <th colspan=2 style="text-align: center"><h1>Recettes</h1></th>
@@ -18,50 +19,18 @@ var_dump($recettes);
                 <tr>
                     <td style="text-align: center"><p><?=$recette['titre']?></p></td>
                     <td style="text-align: center">
-                           <a type="button" class="btn btn-warning" href="<?=LINK_ROOT.'recette/afficher/'.$recette['id_recette']?>">Afficher</a>
-                          <a type="button" class="btn btn-success" href="<?=LINK_ROOT.'admin/mettreajourrecette/'.$recette['id_recette']?>">Mettre à jour</a>
-                          <a type="button" class="btn btn-danger" href="<?=LINK_ROOT.'admin/supprimerrecette/'.$recette['id_recette']?>">Supprimer</a>
+                        <a type="button" class="btn btn-warning" href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>">Afficher</a>
+                        <a type="button" class="btn btn-success" href="<?=LINK_ROOT.'admin/mettreajourrecette/'.$recette['id_recette']?>">Mettre à jour</a>
+                        <a type="button" class="btn btn-info" href="<?=LINK_ROOT.'adminproduit/lierproduit/'.$recette['id_recette']?>">Associer à des produits</a>
+                        <a type="button" class="btn btn-danger" href="<?=LINK_ROOT.'admin/supprimerrecette/'.$recette['id_recette']?>">Supprimer</a>
+                          
                     </td>
                 </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>
+
             </table>
-            <table class="table table-bordered"> 
-                <tr>
-                    <th colspan=2 style="text-align: center"><h1>Livres</h1></th>
-                </tr>
-                <?php if(!empty($listProperties)): foreach($listProperties as $prop): ?>
-                <tr>
-                    <?php if($prop->type == "genre"): ?>
-                    <td style="text-align: center"><p><?=$prop->value?></p></td>
-                    <td style="text-align: center">
-                          <a type="button" class="btn btn-success" href="<?=LINK_ROOT.'jeux/update/'.$prop->id?>">Update</a>
-                          <a type="button" class="btn btn-danger" href="<?=LINK_ROOT.'jeux/delete/'.$prop->id?>">Delete</a>
-                    </td>
-                    <?php endif; ?>
-                </tr>
-                <?php endforeach; ?>
-                <?php endif; ?>
-            </table>        
-            <table class="table table-bordered">        
-                <tr>
-                    <th colspan=2 style="text-align: center"><h1>Restaurants</h1></th>
-                </tr>
-                <?php if(!empty($listProperties)): foreach($listProperties as $prop): ?>
-                
-                <tr>
-                    <?php if($prop->type == "age"): ?>
-                    <td style="text-align: center"><p><?=$prop->value?></p></td>
-                    <td style="text-align: center">
-                          <a type="button" class="btn btn-success" href="<?=LINK_ROOT.'jeux/update/'.$prop->id?>">Update</a>
-                          <a type="button" class="btn btn-danger" href="<?=LINK_ROOT.'jeux/delete/'.$prop->id?>">Delete</a>
-                    </td>
-                    <?php endif; ?>
-                </tr>
-                <?php endforeach; else:?>
-                <div>Aucune propriété</div>
-                <?php endif; ?>
-            </table>
+            
         </div><!-- /.blog-main -->
 
     </div><!-- /.row -->

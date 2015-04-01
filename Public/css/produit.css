@@ -1,0 +1,43 @@
+.ajouterProduitShowDiv{
+	display: none;
+}
+#uploadSubmitProd{
+	float: right;
+}
+
+#wrapperImgProduit{
+	display: none;
+}
+
+#btnAcheterProduit{
+	width: 100%;
+}
+
+.btnPopupProduit{
+	width: 100%;
+}
+
+#labelProduits{
+	font-size: 30px;
+}
+
+#labelPrix{
+	font-size: 30px;
+}
+#labelPrixProduit{
+	font-size: 22px;
+}
+
+#labelValueProduit{
+	font-size: 22px;
+}
+.indexImg{
+	width:40%;
+}
+
+.produitList{
+	text-align: center;
+	font-size: 18px;
+	padding-right: 7%;
+	padding-top: 10%;
+}

@@ -6,9 +6,6 @@ namespace Application\Models;
 
 class Ingredient extends \Library\Model\Model{
 
-	protected $table 	= 'ingredients';
-	protected $primary 	= 'id_ingredient';
-
 	
 
 	public function __construct($connexionName){
@@ -21,8 +18,8 @@ class Ingredient extends \Library\Model\Model{
 	 */
 	public function getIngredients(){
 		$data =array(
-			        'service' 				=> 'ingredient',
-			        'method' 				=> 'getingredients'
+			        'service' 				=> 'Ingredient',
+			        'method' 				=> 'getIngredients'
 	  	);
 
 		$opts = array('http' =>
@@ -41,8 +38,8 @@ class Ingredient extends \Library\Model\Model{
 
 	public function insertIngredients($tabIngred, $recette){
 		$data =array(
-			        'service' 				=> 'ingredient',
-			        'method' 				=> 'insertingredients',
+			        'service' 				=> 'Ingredient',
+			        'method' 				=> 'insertIngredients',
 			        'ingredients'			=>	json_encode($tabIngred),
 			        'id_recette'			=>	$recette
 	  	);

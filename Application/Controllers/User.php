@@ -1,5 +1,5 @@
 <?php
- 
+
 namespace Application\Controllers;
 
 class User extends \Library\Controller\Controller{
@@ -23,14 +23,9 @@ class User extends \Library\Controller\Controller{
 			$this->setRedirect(LINK_ROOT);
 		}
 
-		
-
-
-		$this->setLayout("blog");
-		$this->setDataView(array("pageTitle" => "Update profil"));
+		$this->setDataView(array("pageTitle" => "Mise à jour de votre profil"));
 		$this->setDataView(array("message" => ""));
 
-		//var_dump($_POST);
 		if(isset($_POST['btn'])){
 
 			if(empty($_POST['nom'])){
@@ -70,17 +65,15 @@ class User extends \Library\Controller\Controller{
 				$this->setDataView(array("message" => $this->message->showMessages()));	
 				return false;
 			}
-
-
-			//$currentpassword = md5($_POST['currentpassword'].SALT_PASSWORD);
 			
 
 			
 			$modelUser = new \Application\Models\User('localhost');
 
-			$user = $modelUser->login(array("mail"=>$_SESSION['user']['mail'], "password"=>$_POST['currentpassword']));
+			$user = $modelUser->login($_SESSION['user']['mail'], $_POST['currentpassword']);
 			//$user=$modelUser->convEnTab($user['response'][0]);
 			$user=$modelUser->convEnTab($user);
+			var_dump("dqdf", $user);
 			$user=$user['response'][0];
 			//var_dump("dqdf", $user);
 			if(!empty($user)){
@@ -89,9 +82,11 @@ class User extends \Library\Controller\Controller{
 				unset( $_POST['btn'],$_POST['password'], $_POST['confpassword'], $_POST['currentpassword'], $listMessage);
 
 				$_POST['password']=$password;		//<== new password
+				var_dump($_POST);
 				$res=$modelUser->convEnTab($modelUser->updateUser($_SESSION['user']["id_user"],$_SESSION['user']["mail"] , $currentPassword, $_POST));
 				//echo "############".$res['page']."#############";
-				
+				var_dump("resulta", $res);
+				echo $res['page'];
 				$res=$res['response'];
 
 				//var_dump("fdf",$res, $_POST ,"df");
@@ -100,7 +95,8 @@ class User extends \Library\Controller\Controller{
 
 
 					//recupere les nouvelles données de l'utlisateur
-					$user = $modelUser->convEnTab($modelUser->login(array( 'mail'=>$_POST['mail'], 'password'=>$password ) ) );
+					$user = $modelUser->convEnTab( $modelUser->login( $_POST['mail'], $_POST['password'] ) );
+
 					$user=$user ['response'][0];
 					if(!empty($user)){
 						$_SESSION['user'] = $user;
@@ -162,7 +158,7 @@ class User extends \Library\Controller\Controller{
 			
 			$modelUser = new \Application\Models\User('localhost');
 			
-			$user = $modelUser->convEnTab($modelUser->login($_POST) );
+			$user = $modelUser->convEnTab($modelUser->login($_POST['mail'], $_POST['password']) );
 			
 			/*object(stdClass)[9]
 			  public 'response' => 
@@ -185,9 +181,9 @@ class User extends \Library\Controller\Controller{
 			if(empty($user)){	//s'il y a une erreur
 				$this->message->addError("Erreur au niveau du webservice !");
 			}elseif ($user['apiError'] ) {
-				$this->message->addError($user->apiErrorMessage);
+				$this->message->addError($user['apiErrorMessage']);
 			}elseif ( $user['serverError'] ) {
-				$this->message->addError($user->serverErrorMessage);
+				$this->message->addError($user['serverErrorMessage']);
 			}elseif ( count($user['response'])!=1 ) {
 				$this->message->addError("Mail/Password non valide !"); // ou couple d'id/pwd en double
 			}else{			//tout roule
@@ -267,7 +263,7 @@ class User extends \Library\Controller\Controller{
 
 
 			$_POST['role']='membre';
-			$_POST['age']=$_POST['age']+0;
+			$_POST['date_naissance']=$_POST['date_naissance'];
 
 			$modelUser = new \Application\Models\User('localhost');
 			$res=$modelUser->convEnTab($modelUser->insertUser($_POST));
@@ -340,4 +336,83 @@ class User extends \Library\Controller\Controller{
 		}
 		$this->setDataView(array("message" => $this->message->showMessages()));	
 	}
+
+
+
+public function motDePasseOublieAction(){
+
+		if(!empty($_SESSION['user'])){
+			$this->setRedirect(LINK_ROOT."user/profil");
+		}		
+
+		$modelMailer = new \Application\Models\Mailer('localhost');		
+
+		$modelQuestionSecrete = new \Application\Models\QuestionSecrete('localhost');
+		$questionSecretes = $this->convEnTab( $modelQuestionSecrete->getQuestionSecretes() );
+
+		$questionSecretes=$questionSecretes['response'];
+		
+
+
+		$this->setDataView(array("pageTitle" => "Mot de passe oubli&eacute;","message" => ""));
+
+		if(isset($_POST['btn'])){
+
+			if(empty($_POST['reponsesecrete'])){
+				$this->message->addError("reponse vide !");
+			}
+
+			if(empty($_POST['mail'])){
+				$this->message->addError("mail vide !");
+			}
+
+			$listMessage = $this->message->getMessages("error");
+			if(!empty($listMessage)){
+				$this->setDataView(array("message" => $this->message->showMessages()));	
+				return false;
+			}
+			
+			//envoyerMail($mailExped, $mailDest, $body, $subject, $template)
+
+			$modelUser = new \Application\Models\User('localhost');		
+			$newPwd = $modelUser->convEnTab($modelUser->redefinirPassword( $_POST['mail'], $_POST['reponsesecrete'] )  );
+
+			
+			
+			if (!$newPwd['error']) {
+				$res=true;
+				$newPwd=$newPwd['response'];
+			} else {
+				$res=false;
+			}
+			
+			
+			if( $res ){
+				$this->message->addSuccess("votre nouveau pot de passe est <strong>$newPwd</strong>");
+			}else{
+				$this->message->addError("le mail et la reponse ne correnspondent pas  !");
+			}
+		}		//fin traitement formulaire
+
+		
+		if (!empty($_SESSION['user']) ) {
+			$user=$_SESSION['user'];
+		} else {
+			$user= array();
+		}
+		
+		
+		$this->setDataView(array(
+			'message'			=> $this->message->showMessages(),
+			'questionSecretes'	=> $questionSecretes,
+			'userView'				=> $user
+		));
+		
+			
+	
+
+	}
+
+
+
 }

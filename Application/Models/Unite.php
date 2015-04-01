@@ -18,8 +18,8 @@ class Unite extends \Library\Model\Model{
 	 */
 	public function getUnites(){
 		$data =array(
-			        'service' 				=> 'unite',				
-			        'method' 				=> 'getunites'
+			        'service' 				=> 'Unite',				
+			        'method' 				=> 'getUnites'
 	  	);
 
 		$opts = array('http' =>
