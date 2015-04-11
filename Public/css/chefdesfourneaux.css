@@ -113,6 +113,31 @@
 }
 /* Fin Mise en forme Panier*/
 
+
+
+
+#easteregg {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #111;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 10000;
+}
+
+
+
+
+
+
+
+
+
+
 /*Responsive*/
 @media (max-width: 1200px) {
 	.lienPanier{

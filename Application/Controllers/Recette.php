@@ -66,8 +66,6 @@ class Recette extends \Library\Controller\Controller{
 		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($idRecette);
 		$viewRecette 		= $viewRecette['response'];
 
-
-
 		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
 			
 		//declare la variable jsIdRecette
