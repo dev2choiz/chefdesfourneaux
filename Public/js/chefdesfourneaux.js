@@ -1,28 +1,29 @@
 // Définitions de constantes utilisables dans tout le fichier
 
-var cmptARebours=10;
+var cmptARebours=30;
 var sTime=null;
 
 $(document).ready(function(){
-		if(idUser === 'rien') return false;
-		actualiserPanier(idUser);
 
-		$("#easteregg").hide();
-		$('body').click(function(){
-			cmptARebours--;
-			if (cmptARebours<=0) {
-				$("#easteregg").show('low');
-				alert("oh");
-				easterEgg();				
-				
-			}
-		}); 
+    $("#easteregg").hide();
+    $('body').click(function(){
+      cmptARebours--;
+      if (cmptARebours<=0) {
+        $("#easteregg").show('low');
+        easterEgg();        
+        
+      }
+    }); 
 
-		$("#easteregg").click(function(){
-			cmptARebours=10;
-			$("#easteregg").hide();
-			clearTimeout(sTime1);
-		}); 
+    $("#easteregg").click(function(){
+      cmptARebours=30;
+      $("#easteregg").hide();
+      clearTimeout(sTime1);
+    }); 
+
+		if(idUser !== 'rien') actualiserPanier(idUser);
+
+
 
 	}
 );
@@ -228,7 +229,3 @@ var easterEgg = function() {
 };
 
 
-
-function lancerEasterEgg(){
-
-}

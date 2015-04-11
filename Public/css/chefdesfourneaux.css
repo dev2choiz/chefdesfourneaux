@@ -123,10 +123,11 @@
   height: 100%;
   overflow: hidden;
   background: #111;
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   z-index: 10000;
+  display: none;
 }
 
 
