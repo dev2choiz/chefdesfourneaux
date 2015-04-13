@@ -97,8 +97,16 @@
                                     </ul> 
                                 </li>
                             </ul>
-                        </div> <!-- Fin navbar-header -->
+
+                        </div> <!-- Fin navbar-header --> 
+                        <div id="wrapperSearchBar">
+                            <input type="text" list="dataListSearch" id="inputTextSearch" />
+                            <datalist id="dataListSearch">
+                            </datalist>
+                            <div id="divSearchResult"></div>
+                        </div>  
                     </div> <!-- Fin container -->
+
                 </nav>
             </div> <!-- Fin container -->
         </div> <!-- Fin navbar-wrapper --> 
@@ -109,12 +117,7 @@
         <!-- Marketing messaging and featurettes
         ================================================== -->
         <div class="container marketing">
-            <div id="wrapperSearchBar">
-                <input type="text" list="dataListSearch" id="inputTextSearch" />
-                <datalist id="dataListSearch">
-                </datalist>
-                <div id="divSearchResult"></div>
-            </div>
+            
             <div class="content_view" id="content_view">
                 <?=$content_view?>
             </div>
