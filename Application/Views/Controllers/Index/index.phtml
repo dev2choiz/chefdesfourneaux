@@ -10,7 +10,7 @@
             </ol>
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="<?=WEB_ROOT?>/img/entree.jpg" alt="First slide">
+                    <img src="<?=IMG_LINK_ROOT?>saumon.jpg" alt="délicieuse entrée saumon">
                     <div class="container">
                         <div class="carousel-caption">
                             <h1>L'eau à la bouche?</h1>
@@ -19,31 +19,40 @@
                     </div> <!-- /.container -->
                 </div> <!-- /.item -->
                 <div class="item">
-                    <img src="<?=WEB_ROOT?>/img/plat.jpg" alt="Second slide">
+                <?php foreach($recettes as $recette): ?>
+                    <?php if($recette['top'] == 1): ?>
+                    <img src="<?=IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['titre']?>">
                     <div class="container">
                         <div class="carousel-caption">
                             <h1>Envie de plus de recettes?</h1>
                             <p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'recette/index'?>" role="button">Voir toutes les recettes</a></p>
                         </div> <!-- /.carousel-caption -->
                     </div> <!-- /.container -->
+                <?php endif; endforeach; ?>
                 </div> <!-- /.item -->
                 <div class="item">
-                    <img src="<?=WEB_ROOT?>/img/dessert.jpg" alt="Third slide">
+                <?php foreach($recettes as $recette): ?>
+                    <?php if($recette['top'] == 2): ?>
+                    <img src="<?=IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['titre']?>">
                     <div class="container">
                         <div class="carousel-caption">
-                            <h1>Bon appétit ! </h1>
-                            <p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'recette/indexchef'?>" role="button">Voir les recettes de nos chefs</a></p>
+                            <h1>Envie de plus de recettes?</h1>
+                            <p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'recette/index'?>" role="button">Voir toutes les recettes</a></p>
                         </div> <!-- /.carousel-caption -->
                     </div> <!-- /.container -->
+                <?php endif; endforeach; ?>
                 </div> <!-- /.item -->
                 <div class="item">
-                    <img src="<?=WEB_ROOT?>/img/dessert.jpg" alt="Third slide">
+                <?php foreach($recettes as $recette): ?>
+                    <?php if($recette['top'] == 3): ?>
+                    <img src="<?=IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['titre']?>">
                     <div class="container">
                         <div class="carousel-caption">
-                            <h1>Bon appétit ! </h1>
-                            <p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'recette/indexchef'?>" role="button">Voir les recettes de nos chefs</a></p>
+                            <h1>Envie de plus de recettes?</h1>
+                            <p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'recette/index'?>" role="button">Voir toutes les recettes</a></p>
                         </div> <!-- /.carousel-caption -->
                     </div> <!-- /.container -->
+                <?php endif; endforeach; ?>
                 </div> <!-- /.item -->
             </div> <!-- /.carousel-inner -->
             <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -56,33 +65,62 @@
             </a>
         </div><!-- /.carousel -->
 
-<!-- Doit être automatisé avec les différentes catégories et les chefs (tables catégories et table restaurant...) -->
-
-<hr/>
+<br/>
 <!-- Entrées / Plats / Desserts -->
 <div class="row">
     <div class="col-lg-4">
-        <img class="img-circle" src="<?=WEB_ROOT?>/img/type/entree.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+        <img class="img-circle" src="<?=WEB_ROOT?>/img/type/entree.jpg" alt="entrée, chef des fourneaux" style="width: 160px; height: 160px;">
         <h2>Entrée</h2>
         <p><a class="btn btn-default" href="<?=LINK_ROOT.'recette/type/entree'?>" role="button">Voir toutes les entrées &raquo;</a></p>
     </div><!-- /.col-lg-4 -->
     <div class="col-lg-4">
-        <img class="img-circle" src="<?=WEB_ROOT?>/img/type/plat.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+        <img class="img-circle" src="<?=WEB_ROOT?>/img/type/plat.jpg" alt="plat, chef des fourneaux" style="width: 50%; height: 140px;">
         <h2>Plats</h2>
         <p><a class="btn btn-default" href="<?=LINK_ROOT.'recette/type/plat'?>" role="button">Voir tous les plats &raquo;</a></p>
     </div><!-- /.col-lg-4 -->
     <div class="col-lg-4">
-        <img class="img-circle" src="<?=WEB_ROOT?>/img/type/dessert.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+        <img class="img-circle" src="<?=WEB_ROOT?>/img/type/dessert.jpg" alt="dessert, chef des fourneaux" style="width: 50%; height: 140px;">
         <h2>Desserts</h2>
         <p><a class="btn btn-default" href="<?=LINK_ROOT.'recette/type/dessert'?>" role="button">Voir tous les desserts &raquo;</a></p>
     </div><!-- /.col-lg-4 -->
 </div><!-- /.row -->
 
 <hr/>
+<!-- Produits -->
+<div class="row">
+    <?php foreach($produits as $produit): ?>
+        <?php if($produit['top'] == 1): ?>
+            <div class="col-lg-4">
+                <img class="img-circle" src="<?=IMG_LINK_ROOT.$produit['img']?>" alt="<?= $produit['value']?>" style="width: 140px; height: 140px;">
+                <h2><?= $produit['value']?></h2>
+                <p></p>
+                <p><a class="btn btn-default" href="<?=LINK_ROOT.'vente/produit'.$produit['id_produit']?>" role="button">Voir ce produit  &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+        <?php endif; ?>
+        <?php if($produit['top'] == 2): ?>
+            <div class="col-lg-4">
+                <img class="img-circle" src="<?=IMG_LINK_ROOT.$produit['img']?>" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+                <h2><?= $produit['value']?></h2>
+                <p></p>
+                <p><a class="btn btn-default" href="<?=LINK_ROOT.'vente/produit'.$produit['id_produit']?>" role="button">Voir toutes les entrées &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+        <?php endif; ?>
+        <?php if($produit['top'] == 3): ?>
+            <div class="col-lg-4">
+                <img class="img-circle" src="<?=IMG_LINK_ROOT.$produit['img']?>" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+                <h2><?= $produit['value']?></h2>
+                <p></p>
+                <p><a class="btn btn-default" href="<?=LINK_ROOT.'vente/produit'.$produit['id_produit']?>" role="button">Voir toutes les entrées &raquo;</a></p>
+            </div><!-- /.col-lg-4 -->
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div><!-- /.row -->
+
+<hr/>
 <!-- Recettes des chefs -->
 <div class="row">
     <div class="col-lg-4">
-        <img class="img-circle" src="<?=WEB_ROOT?>/img/entree2.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+        <img class="img-circle" src="<?=WEB_ROOT?>/img/entree2.jpg" alt="Generic placeholder image" style="width: 160px; height: 160px;">
         <h2>Chef 1</h2>
         <p></p>
         <p><a class="btn btn-default" href="#" role="button">Voir toutes les entrées &raquo;</a></p>

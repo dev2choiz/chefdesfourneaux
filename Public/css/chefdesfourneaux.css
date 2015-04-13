@@ -1,21 +1,18 @@
-body{
-	background-color: rgba(216,236,242,0.8);
-}
-
 .containerNav{
 	background-color: #FFF;
 	font-weight: bold;
 	height: 200px;
-} 
+}
+
+.content_view{
+	margin-top: 50px;
+}
 
 /* NAVBAR */
 .navbar-nav {
   margin-top: 15px;
   background-color: #d8ecf2;
   border-radius: 10px;
-}
-.navbar-inverse .navbar-brand:hover{
-	/* background-color: #777; */
 }
 .lienChefDesFourneaux{
 	padding-top: 0px;

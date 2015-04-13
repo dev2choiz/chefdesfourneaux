@@ -12,25 +12,34 @@ class Index extends \Library\Controller\Controller
 		$this->setLayout("carousel");
 		$this->message 				= new \Library\Message\Message();
 		$this->modelViewRecette 	= new \Application\Models\ViewRecette('localhost');
-		$this->modelPopUp 			= new \Application\Models\PopUp('localhost');
-		$this->modelAjax 			= new \Application\Models\Ajax('localhost');
+		$this->modelProduits 		= new \Application\Models\Produit('localhost');
 	}
 
 
 	public function indexAction(){
-		 
+
+		// Récupération des vues des recettes 
 		$viewAllRecettes 		= $this->modelViewRecette->getAllViewRecettes() ;
 		if(!empty($viewAllRecettes['response'])){
-			$viewAllRecettes=$viewAllRecettes['response'];
+			$viewAllRecettes = $viewAllRecettes['response'];
 		}else{
-			$this->message->addError("pas de Recettes");
+			$this->message->addError("Erreur dans la récupération des recettes");
+		}
+
+		// Récupération des produits
+		$produitsAll = $this->modelProduits->getAllProduits();
+		if(!empty($produitsAll['response'])){
+			$produitsAll = $produitsAll['response'];
+		}else{
+			$this->message->addError("Erreur dans la récupération des produits");
 		}
 
 
 		$this->setDataView(array(
 			"pageTitle" => "Chef des fourneaux, site de recettes, cuisine de chef et vente electroménager",
 			"message" => $this->message->showMessages(),
-			"recettes" => $viewAllRecettes
+			"recettes" => $viewAllRecettes,
+			"produits" => $produitsAll
 		));
 	}
 
