@@ -6,6 +6,7 @@
 
 .content_view{
 	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
 /* NAVBAR */
@@ -35,11 +36,6 @@
 .separator{
 	height: 200px;
 }
-
-#content_view{
-	margin-bottom : 40%;
-}
-
 
 
 /* PopUp */
