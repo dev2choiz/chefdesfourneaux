@@ -1,6 +1,6 @@
 // Définitions de constantes utilisables dans tout le fichier
-
-var cmptARebours=30;
+var jusqua=10;
+var cmptARebours=jusqua;
 var sTime=null;
 
 $(document).ready(function(){
@@ -9,6 +9,7 @@ $(document).ready(function(){
     $('body').click(function(){
       cmptARebours--;
       if (cmptARebours<=0) {
+        //alert("cmpt"+cmptARebours);
         $("#easteregg").show('low');
         easterEgg();        
         
@@ -16,7 +17,7 @@ $(document).ready(function(){
     }); 
 
     $("#easteregg").click(function(){
-      cmptARebours=30;
+      cmptARebours=jusqua;
       $("#easteregg").hide();
       clearTimeout(sTime1);
     }); 
