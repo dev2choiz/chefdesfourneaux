@@ -146,10 +146,44 @@ class Recette extends \Library\Controller\Controller{
 	}
 	
 
+	public function rechercheAction($search){
 
-	public function logoutAction(){		//a effacer?
-		session_unset();
+		/*$this->modelRecette 			= new \Application\Models\ViewRecette('localhost');*/
+
+		$resultRecherche  	= $this->convEnTab($this->modelViewRecette->getRecherche($search, 'titre') );
+		$resultRecherche 	= $resultRecherche['response'];
+		echo "<br><br><br><br><br><br><br><br><br>";
+
+		if (!empty($resultRecherche)) {
+				//2 cas:
+				//		1 resulat
+				if (count($resultRecherche)==1 ) {
+					var_dump($resultRecherche);
+					//on redirige ver la page qui affiche la recette
+					header('location: '.LINK_ROOT.'/recette/categorie/'.$resultRecherche[0]['id_recette']);
+
+				} else {	//	>1 
+					//on dirige vers une page qui affiche la liste des 
+					//recettes
+					//selectionnées
+					
+				}
+				
+				//		 
+		} else {
+			
+		}
+		
+
+		$this->setDataView(array(
+			"pageTitle" 		=> "Recettes ",
+			"message" 			=> $this->message->showMessages(),
+			"titreCat"			=> $titreCat
+		));
 	}
+
+
+
 
 
 

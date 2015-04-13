@@ -17,7 +17,7 @@
         <link href="<?=WEB_ROOT?>/css/layouts/carousel.css" rel="stylesheet">
         <link href="<?=WEB_ROOT?>/css/chefdesfourneaux.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     </head>
     
         <!-- NAVBAR
@@ -109,7 +109,12 @@
         <!-- Marketing messaging and featurettes
         ================================================== -->
         <div class="container marketing">
-        
+            <div id="wrapperSearchBar">
+                <input type="text" list="dataListSearch" id="inputTextSearch" />
+                <datalist id="dataListSearch">
+                </datalist>
+                <div id="divSearchResult"></div>
+            </div>
             <div class="content_view" id="content_view">
                 <?=$content_view?>
             </div>

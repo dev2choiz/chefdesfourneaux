@@ -22,6 +22,53 @@ $(document).ready(function(){
       clearTimeout(sTime1);
     }); 
 
+
+
+
+  //barre de recherche
+
+  $("#inputTextSearch").keypress(function(e) {
+
+      if(e.which == 13 && $("#inputTextSearch").val()!==""  ) {
+        alert("entré");
+        $(location).attr('href',"http://localhost/fourneaux/recette/recherche/"+$("#inputTextSearch").val());
+      }
+  });
+
+  $('#inputTextSearch').autocomplete({
+      source : function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
+        jsonData = {
+          'service'     : 'Recherche',
+          'method'      : 'getAutoCompletion',
+          'recherche'   : $('#inputTextSearch').val()
+        };
+
+        nbrRes=0;
+        $.ajax({
+                url : urlWebService,
+                dataType : 'json',
+                data : jsonData,
+                type: 'POST',
+                
+                success : function(donnee){
+                    $('#dataListSearch').empty();
+                    $.map(donnee.response, function(objet){
+                        nbrRes++;
+                        $('#dataListSearch').append("<option value='"+objet.titre+"'  onclick='redirigerVers(\"recette\","+objet.id_recette+");'   >"+objet.titre+" </option>");
+                    });
+                }
+        });
+      }
+      
+  });
+
+
+
+
+
+
+
+
 		if(idUser !== 'rien') actualiserPanier(idUser);
 
 
@@ -29,6 +76,19 @@ $(document).ready(function(){
 	}
 );
 
+
+
+
+function redirigerVers(ouCa, id){
+  if (ouCa==="recette") {
+    ouCa="recette/categorie/";
+  } else if(ouCa==="produit"){
+    ouCa="vente/produit/";
+  }
+  alert("on essaye de rediriger");
+  $(location).attr('href',"http://localhost/fourneaux/"+ouCa+id);
+
+}
 
 
 // On pourra acheter dans indexproduit et produit

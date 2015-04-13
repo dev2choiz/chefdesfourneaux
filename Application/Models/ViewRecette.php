@@ -91,5 +91,32 @@ class ViewRecette extends \Library\Model\Model{
 	}
 
 
+
+	/**
+	 * @return [array]              [description]
+	 */
+	public function getRecherche($recherche, $champs){
+		$data =array(
+			        'service' 				=> 'Recherche',				
+			        'method' 				=> 'getRecherche',
+			        'recherche'				=> $recherche,
+        			'ou'					=> $champs
+	  	);
+
+		$opts = array('http' =>
+		    array(
+		        'method'  => 'POST',
+		        'header'  => 'Content-type: application/x-www-form-urlencoded',
+		        'content' => http_build_query($data)
+		        )
+		);
+
+		$context  = stream_context_create($opts);
+		
+		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
+		
+	}
+
+
 }
 
