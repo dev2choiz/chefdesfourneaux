@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 /**
  * Chargement de l'autoloader
  */
@@ -24,5 +23,4 @@ $config::readSettings();
  */
 $router = \Library\Router\Router::getInstance();
 $router::dispatchPage($_GET['page']);
-
-//var_dump($_SERVER);	
+	

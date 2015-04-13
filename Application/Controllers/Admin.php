@@ -118,10 +118,8 @@ class Admin
 
 	        $root = $_FILES['img']['tmp_name'];
 	        $img = IMG_ROOT.$res.$_FILES['img']['name'];
-	        //$img = PUB_ROOT.'img/'.$res.$_FILES['img']['name'];
 
 	        if(copy($root, $img )){
-	        	//$_POST['img'] = WEB_ROOT."img/".$res.$_FILES['img']['name'];
 	        	$_POST['img'] = '/img/'.$res.$_FILES['img']['name'];
 	        }else{
 	        	$this->message->addError("Pb avec l'insertion de l'image");
@@ -471,42 +469,6 @@ class Admin
 
 
 
-	}
-
-	public function creerLivreAction(){
-		if($_SESSION['user']['role'] !== "admin"){
-			$this->setRedirect(LINK_ROOT);
-		}
-	}
-
-	public function mettreajourLivreAction(){
-		if($_SESSION['user']['role'] !== "admin"){
-			$this->setRedirect(LINK_ROOT);
-		}
-	}
-
-	public function supprimerLivreAction(){
-		if($_SESSION['user']['role'] !== "admin"){
-			$this->setRedirect(LINK_ROOT);
-		}
-	}
-
-	public function creerRestaurantAction(){
-		if($_SESSION['user']['role'] !== "admin"){
-			$this->setRedirect(LINK_ROOT);
-		}
-	}
-
-	public function mettreajourRestaurantAction(){
-		if($_SESSION['user']['role'] !== "admin"){
-			$this->setRedirect(LINK_ROOT);
-		}
-	}
-
-	public function supprimerRestaurantAction(){
-		if($_SESSION['user']['role'] !== "admin"){
-			$this->setRedirect(LINK_ROOT);
-		}
 	}
 
 

@@ -28,9 +28,9 @@ class Recette extends \Library\Controller\Controller{
 		if(empty($viewAllCats)){
 			$this->message->addError("aucune recette !");
 		}elseif ($viewAllCats['apiError'] ) {
-			$this->message->addError($user->apiErrorMessage);
+			$this->message->addError($user['apiErrorMessage']);
 		}elseif ( $viewAllCats['serverError'] ) {
-			$this->message->addError($user->serverErrorMessage);
+			$this->message->addError($user['serverErrorMessage']);
 		}else{
 			$viewAllCats=$viewAllCats['response'];
 		}
