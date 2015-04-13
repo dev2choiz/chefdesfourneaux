@@ -1,19 +1,34 @@
-.container{
+.containerNav{
 	background-color: #FFF;
 	font-weight: bold;
-} 
+	height: 200px;
+}
+
+.content_view{
+	margin-top: 50px;
+}
 
 /* NAVBAR */
-.navbar-inverse .navbar-brand:hover{
-	background-color: #777;
+.navbar-nav {
+  margin-top: 15px;
+  background-color: #d8ecf2;
+  border-radius: 10px;
+}
+.lienChefDesFourneaux{
+	padding-top: 0px;
+}
+.lienChefDesFourneaux img{
+	width:63%; 
+	top:0;
 }
 .lienChefDesFourneaux:hover{
 	background-color: #777;
+	padding-top: 0px;
 }
-.activeLink{
+/* .activeLink{
 	background-color: #E4E4E4;
 	border-radius: 10px;
-}
+} */
 
 /* END NAVBAR */
 
@@ -105,7 +120,8 @@
 }
 
 #panier .btn-default{
-	background-color: rgba(181,237,192,0.5);
+	background-color: rgba(65,193,235,0.5);
+	font-weight: bold;
 }
 
 #panierContent{

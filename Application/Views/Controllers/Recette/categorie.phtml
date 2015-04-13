@@ -2,7 +2,7 @@
 <?=$message?>
 
 
-
+<img src="<?=IMG_LINK_ROOT.'bandeauhaut.png'?>" style="margin-left:467px">
 <div class="row featurette recette">
     <h1><?=$recette['categorie']?></h1>
     <div class="col-md-5">
@@ -39,6 +39,7 @@
         <?php endforeach; endif; ?>
     </div>
 </div>
+<img src="<?=IMG_LINK_ROOT.'bandeaubas.png'?>" style="margin-left:467px">
 <br>
 
 
@@ -48,7 +49,7 @@
 
 <div class="row divCom">
     <?php if(!empty($_SESSION['user'])): ?> 
-        <input class="btn btn-success col-md-6" type="button" value="Ajouter un commentaire"  id="btnAddCom">
+        <input class="btn btn-default col-md-6" type="button" value="Ajouter un commentaire"  id="btnAddCom">
         <br>
     <?php endif; ?> 
 

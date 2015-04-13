@@ -1,4 +1,4 @@
-#headCat{
-	vertical-align:center;
-
+.headCat{
+	/*display: inline-block;*/
+	vertical-align:middle;
 }
