@@ -177,7 +177,7 @@ class Recette extends \Library\Controller\Controller{
 		$this->setDataView(array(
 			"pageTitle" 		=> "Recettes ",
 			"message" 			=> $this->message->showMessages(),
-			"recettes"			=> $tresultRecherche
+			"recettes"			=> $resultRecherche
 		));
 	}
 
