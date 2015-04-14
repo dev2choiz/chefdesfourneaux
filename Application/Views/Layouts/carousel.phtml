@@ -38,15 +38,15 @@
                             </button>
                             <a class="navbar-brand lienChefDesFourneaux activeLink" href="<?=LINK_ROOT?>"><img src="<?=IMG_LINK_ROOT?>chefdesfourneauxlogo.png"></a>
                             <div class="navbar panier col-xs-6 col-md-4" id="panier">                                
-                                <?php if(!empty($_SESSION['user'])): ?>
-                                <a class="btn btn-default lienPanier" href="<?=LINK_ROOT.'panier/indexpanier/'.$_SESSION['user']['id_user']?>">
+                                <?php if(!empty($_SESSION['user'])): ?> 
+                                <a class="btn btn-default lienPanier " href="<?=LINK_ROOT.'panier/indexpanier/'.$_SESSION['user']['id_user']?>">
                                     <span class="glyphicon glyphicon-shopping-cart"></span> 
                                     Votre Panier : 
                                     <div class="panierContent" id="panierContent">0 </div>
                                     articles
                                 </a>
                                 <?php else: ?>
-                                    <a class="btn btn-default lienPanier" href="<?=LINK_ROOT.'vente/indexproduit/'?>"> Acheter des produits</a>
+                                    <a class="btn btn-default lienPanier animSiteFadeInSlow" href="<?=LINK_ROOT.'vente/indexproduit/'?>"> Acheter des produits</a>
                                 <?php endif; ?>
                             </div>
                             
@@ -55,7 +55,7 @@
 
                         <div id="navbar" class="navbar-collapse collapse">
 
-                            <ul class="nav navbar-nav">
+                            <ul class="nav navbar-nav animSiteFadeInSlow">
                             
                                 <li class="lienChefDesFourneaux"><a  href="<?=LINK_ROOT.'recette/index'?>">Categories</a></li>
                                 <li class="lienChefDesFourneaux"><a  href="<?=LINK_ROOT.'recette/indexchef'?>">Recettes de chef</a></li>
@@ -65,7 +65,7 @@
                                 <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Produits en ventes</a></li>
                                 <li class="dropdown lienChefDesFourneaux">
                                     <?php if(empty($_SESSION['user'])):?>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">S'inscrire / Se connecter <span class="caret"></span></a>
+                                    <a href="#" class="dropdown-toggle animSiteFadeInSlow" data-toggle="dropdown" role="button" aria-expanded="false">S'inscrire / Se connecter <span class="caret"></span></a>
                                     <?php else :?>
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bienvenue <?=$_SESSION['user']['pseudo']?> <span class="caret"></span></a>
                                     <?php endif ;?>
@@ -100,7 +100,7 @@
 
                         </div> <!-- Fin navbar-header --> 
                         <div id="wrapperSearchBar">
-                            <input type="text" list="dataListSearch" id="inputTextSearch" />
+                            <input type="text" list="dataListSearch" id="inputTextSearch"  class=""/>
                             <datalist id="dataListSearch">
                             </datalist>
                             <div id="divSearchResult"></div>
@@ -116,16 +116,16 @@
 
         <!-- Marketing messaging and featurettes
         ================================================== -->
-        <div class="container marketing">
+        <div class="container marketing ">
             
-            <div class="content_view" id="content_view">
+            <div class="content_view " id="content_view">
                 <img src="<?=IMG_LINK_ROOT.'bandeauhaut.png'?>" style="margin-left:467px">
                 <?=$content_view?>
                 <img src="<?=IMG_LINK_ROOT.'bandeaubas.png'?>" style="margin-left:467px">
             </div>
   
             <!-- FOOTER -->
-            <footer>
+            <footer class="">
             <p><a href="<?=LINK_ROOT?>">Retour à l'accueil</a></p> 
             <p class="pull-right"><a href="#">Back to top</a></p>
             <p>&copy; 2015 chef des fourneaux, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
