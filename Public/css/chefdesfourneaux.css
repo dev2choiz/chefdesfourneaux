@@ -1,15 +1,10 @@
+/* NAVBAR */
+
 .containerNav{
 	background-color: #FFF;
 	font-weight: bold;
-	height: 200px;
+	height: 250px;
 }
-
-.content_view{
-	margin-top: 50px;
-	margin-bottom: 50px;
-}
-
-/* NAVBAR */
 .navbar-nav {
   margin-top: 15px;
   background-color: #d8ecf2;
@@ -19,7 +14,7 @@
 	padding-top: 0px;
 }
 .lienChefDesFourneaux img{
-	width:63%; 
+	width:75%; 
 	top:0;
 }
 .lienChefDesFourneaux:hover{
@@ -31,41 +26,47 @@
 	border-radius: 10px;
 } */
 
+/* SEARCH BAR */
+#wrapperSearchBar{
+	background-color: #d8ecf2;
+	margin-top: 10px;
+	padding: 6px;
+
+}
+#inputTextSearch{
+	border-color: #d8ecf2;
+}
+/* END SEARCH BAR */
+
 /* END NAVBAR */
 
 .separator{
 	height: 200px;
 }
 
+/* CONTENT VIEW */
+.content_view{
+	margin-top: 70px;
+	margin-bottom: 50px;
+}
 
-/* PopUp */
+/* END CONTENT VIEW */
+
+
+/* POPUP */
 
 #showDivContainer{ /* Fond translucide */
 	width: 400px;
 	height: auto;
-	/* top: 0;
-	left: 0;
-	margin: 0;
-	padding: 0;
-	 */
 	background-color: rgba(255,255,255,0.5);
-	/* position: fixed; 
-	z-index: 1;*/
 	display: none;
 }
 
 #inputShowDiv{
 	background-color: rgba(255,255,255,1);
-	/* display: none; 
-	margin: auto; */
 	color: #FFF;
-	/*margin-top: 15%;
-	width: 40%;
-	height: 30%;*/
 	background-color: #000;
 	border: 3px;
-	/*position: relative;
-	 z-index: 2000;	 */
 }
 
 .inputTextShowDiv{
@@ -86,7 +87,7 @@
 	text-align: center;
 }
 
-/* Fin Popup */
+/* END POPUP */
 
 /* Mise en forme des ingredients*/
 
@@ -98,7 +99,7 @@
 
 /* Mise en forme Panier*/
 .lienPanier{
-	margin-left: 350px; 
+	margin-left: 330px; 
 }
 #panier{
 	/*background-color: rgba(222,222,222,1);*/

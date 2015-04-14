@@ -99,8 +99,12 @@
                             </ul>
 
                         </div> <!-- Fin navbar-header --> 
-                        <div id="wrapperSearchBar" class="animSiteShowSlow">
-                            <input type="text" list="dataListSearch" id="inputTextSearch"  class=""/>
+
+                        <div class="animSiteShowSlow input-group col-md-6 col-md-offset-3" id="wrapperSearchBar">
+                            <input class="form-control" type="text" list="dataListSearch" id="inputTextSearch" placeholder="Recherche..." />
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" id="buttonSearch" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
                             <datalist id="dataListSearch">
                             </datalist>
                             <div id="divSearchResult"></div>
@@ -118,10 +122,9 @@
         ================================================== -->
         <div class="container marketing ">
             
-            <div class="content_view " id="content_view">
-                <img src="<?=IMG_LINK_ROOT.'bandeauhaut.png'?>" style="margin-left:467px">
+
+            <div class="content_view" id="content_view">
                 <?=$content_view?>
-                <img src="<?=IMG_LINK_ROOT.'bandeaubas.png'?>" style="margin-left:467px">
             </div>
   
             <!-- FOOTER -->

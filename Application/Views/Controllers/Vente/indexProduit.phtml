@@ -5,7 +5,7 @@
 	<p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'user/inscription'?>" role="button">Inscription</a></p>
 
 <?php endif;?>
-
+<br/>
 <!-- Si l'utilisateur est admin -->
 <?php if(!empty($_SESSION['user']) && $_SESSION['user']['role'] == "admin" ): ?>
 	<div id="WrapperAddProduit">
@@ -62,7 +62,7 @@
 <br class="featurette-divider">
 <?php endif; ?>
 
-
+<br class="featurette-divider">
 <div id="WrapperProduits">
 	<div class="row">
 		<div class="col-md-4" id="labelProduits">Produits</div>

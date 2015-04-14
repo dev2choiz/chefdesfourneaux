@@ -164,7 +164,6 @@ class Recette extends \Library\Controller\Controller{
 				} /*else {	//	nbrResult>1 
 					//on affiche la liste des 
 					//recettes selectionnées
-					
 				}
 				
 				//		 

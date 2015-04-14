@@ -14,9 +14,22 @@ function animerSite(anim){
   slow=5000;
   normal=3500;
   fast=1500;
-  $(".animSiteFadeInSlow").fadeIn(slow, function(){
-    //alert("un trouvé");
-  });
+  //t'es la??
+  //oui
+  //voila c'est ca
+  //c"est des classes 
+  // Et tu veux que je fasse quoi ?
+  // que tu regarde que effet correspondrait a tel ou tel div ou autre balise
+  // euh que je réfléchisse à où il fausrait mettre les trucs? 
+  // ouJa'aii vu ton animation du menu
+  // Chey moi, c'est très lent, chez toi aussi?
+  // je sais pas
+  // j'ai pas reagdé sur le bon ecran
+  // attend
+  // non ca passe en direct
+  // 
+  // 
+  $(".animSiteFadeInSlow").fadeIn(slow);
   $(".animSiteFadeInNormal").fadeIn(normal);
   $(".animSiteFadeInFast").fadeIn(fast);
 
