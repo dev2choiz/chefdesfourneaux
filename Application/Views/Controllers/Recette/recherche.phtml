@@ -1,4 +1,21 @@
-<?=$tinyMCECommentaire?>
-<?=$message?>
+ <?=$message?>
+ 
+ 
+<?php
+var_dump($recettes);
+?>
+
+
+
+<div class="row">
+    <div class="row">
+        <!-- Si desproduits sont liés à la recette -->
+        <?php if(!empty($recettes)): foreach ($recettes as $recette): ?>
+            <div id="produitRecette">
+                <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>"><?=$recette['titre']?></a>
+            </div>
+        <?php endforeach; endif; ?>
+    </div>
+</div>
 
 
