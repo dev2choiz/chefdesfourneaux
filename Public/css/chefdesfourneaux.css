@@ -14,7 +14,7 @@
 	padding-top: 0px;
 }
 .lienChefDesFourneaux img{
-	width:63%; 
+	width:75%; 
 	top:0;
 }
 .lienChefDesFourneaux:hover{
@@ -26,6 +26,7 @@
 	border-radius: 10px;
 } */
 
+/* SEARCH BAR */
 #wrapperSearchBar{
 	background-color: #d8ecf2;
 	margin-top: 10px;
@@ -35,6 +36,7 @@
 #inputTextSearch{
 	border-color: #d8ecf2;
 }
+/* END SEARCH BAR */
 
 /* END NAVBAR */
 
@@ -97,7 +99,7 @@
 
 /* Mise en forme Panier*/
 .lienPanier{
-	margin-left: 350px; 
+	margin-left: 330px; 
 }
 #panier{
 	/*background-color: rgba(222,222,222,1);*/

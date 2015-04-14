@@ -161,11 +161,9 @@ class Recette extends \Library\Controller\Controller{
 					//on redirige ver la page qui affiche la recette
 					header('location: '.LINK_ROOT.'recette/categorie/'.$resultRecherche[0]['id_recette']);
 
-				} /*else {	//	>1 
-					//on dirige vers une page qui affiche la liste des 
-					//recettes
-					//selectionnées
-					
+				} /*else {	//	nbrResult>1 
+					//on affiche la liste des 
+					//recettes selectionnées
 				}
 				
 				//		 
