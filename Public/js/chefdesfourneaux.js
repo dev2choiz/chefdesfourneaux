@@ -14,7 +14,9 @@ function animerSite(anim){
   slow=5000;
   normal=3500;
   fast=1500;
-  $(".animSiteFadeInSlow").fadeIn(slow);
+  $(".animSiteFadeInSlow").fadeIn(slow, function(){
+    //alert("un trouvé");
+  });
   $(".animSiteFadeInNormal").fadeIn(normal);
   $(".animSiteFadeInFast").fadeIn(fast);
 
@@ -70,7 +72,7 @@ $(document).ready(function(){
   });
 
   $('#inputTextSearch').autocomplete({
-   5   source : function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
+      source : function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
         jsonData = {
           'service'     : 'Recherche',
           'method'      : 'getAutoCompletion',
