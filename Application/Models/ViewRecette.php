@@ -21,7 +21,7 @@ class ViewRecette extends \Library\Model\Model{
 
 		$opts = array('http' =>
 		    array(
-		        'method'  => 'POST',
+		        'method'  => 'GET',
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
@@ -47,21 +47,17 @@ class ViewRecette extends \Library\Model\Model{
 		$tabVR=array();
 
 		foreach ($tabId as $id) {
-			$re7=$this->getViewRecette($id);
-			if($re7['error']){
-				$re7=false;
+			$recettes = $this->getViewRecette($id);
+			if($recettes['error']){
+				$recettes = false;
 			}else{
-				echo ($re7['page'])."<br>";
-				$re7=$re7['response'];
+				echo ($recettes['page'])."<br>";
+				$recettes = $recettes['response'];
 			}
-			//var_dump($re7);
-
-			$tabVR[$id+'']=$re7;
+			$tabVR[$id+''] = $recettes;
 
 		}
-
 		return $tabVR;
-		//var_dump($tabVR);
 	}
 
 
@@ -74,7 +70,7 @@ class ViewRecette extends \Library\Model\Model{
 
 		$opts = array('http' =>
 		    array(
-		        'method'  => 'POST',
+		        'method'  => 'GET',
 		        'header'  => 'Content-type: application/x-www-form-urlencoded',
 		        'content' => http_build_query(
 								array(
@@ -87,6 +83,7 @@ class ViewRecette extends \Library\Model\Model{
 		
 		$context  = stream_context_create($opts);
 		return  $this->convEnTab(json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ) ;
+		//$this->webserviceRequest('GET', 'ViewRecette', 'getAllViewRecettes', array());
 
 	}
 

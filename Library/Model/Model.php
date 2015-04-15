@@ -14,6 +14,38 @@ abstract class Model{
 	}
 
 
+	/**
+	 * Permet de faire les appels au webservice
+	 * @param  string $httpMethod Méthode HTTP
+	 * @param  string $service Service 
+	 * @param  string $method  Méthode 
+	 * @param  array $params  paramètres éventuels
+	 * @return array          [description]
+	 */
+	public function webserviceRequest($httpMethod, $service, $method, $params){
+
+	  	$params['service'] = $service;
+	  	$params['method'] = $method;
+
+
+
+		$options = array('http' =>
+		    array(
+		        'method'  => $httpMethod,
+		        'header'  => 'Content-type: application/x-www-form-urlencoded',
+		        'content' => http_build_query($params)
+		        )
+		);
+
+		$context  = stream_context_create($options);
+		
+		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
+		
+	}
+
+
+
+
 
 	/**
 	 * [convEnTab converti les objets et sous objets en tableau]

@@ -17,22 +17,8 @@ class Commentaire extends \Library\Model\Model{
 
 	public function getCommentaires($idRecette){
 
-		$params["id_recette"] = $idRecette;
-		$params["service"] = "Commentaire";
-		$params["method"]  = "getCommentaires";
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query($params)
-		        )
-		);
-
-		$context  = stream_context_create($opts);
-		
-		return $this->convEnTab(json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) );
-
+		//$params["id_recette"] = $idRecette;
+		$this->webserviceRequest("Commentaire","getCommentaires",array("id_recette", $idRecette));
 	}
 
 	/**
