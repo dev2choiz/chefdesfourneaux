@@ -1,11 +1,13 @@
-<div class="row " id="WrapperProduit<?= $produit['id_produit']?>">
-	<div class="col-md-8">
-		<img class="featurette-image img-responsive" src="<?= IMG_LINK_ROOT.$produit['img']?>" alt="<?=$produit['value']?>">
+<div class="containerView">
+	<div class="row " id="WrapperProduit<?= $produit['id_produit']?>">
+		<div class="col-md-8">
+			<img class="featurette-image img-responsive" src="<?= IMG_LINK_ROOT.$produit['img']?>" alt="<?=$produit['value']?>">
+		</div>
+		<ul class="col-md-4 list-group produitList">
+			<li class="list-group-item"><h1><?= $produit['value']?></h1></li>
+			<li class="list-group-item">Prix : <?= $produit['prix']?> €</li>
+			<li class="list-group-item">Référence : <?= $produit['ref']?></li>
+			<button class='btn btn-success btnAcheterProduit' id="btnAcheterProduit"  >Mettre ce produit dans mon panier <?=$produit['acheterpopup']?></button>
+		</ul>
 	</div>
-	<ul class="col-md-4 list-group produitList">
-		<li class="list-group-item"><h1><?= $produit['value']?></h1></li>
-		<li class="list-group-item">Prix : <?= $produit['prix']?> €</li>
-		<li class="list-group-item">Référence : <?= $produit['ref']?></li>
-		<button class='btn btn-success btnAcheterProduit' id="btnAcheterProduit"  >Mettre ce produit dans mon panier <?=$produit['acheterpopup']?></button>
-	</ul>
 </div>

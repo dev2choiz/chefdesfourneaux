@@ -120,14 +120,10 @@ class Vente extends \Library\Controller\Controller{
 
 	public function indexLivreAction(){
 		
-
-
-		$modelAjax 	= new \Application\Models\Ajax('localhost');
 		
 
 		$this->setDataView(array(
-			"pageTitle" => "Livres de Cuisine",
-			"ajax" => $ajax
+			"pageTitle" => "Livres de Cuisine"
 			)
 		);
 	}
@@ -139,13 +135,8 @@ class Vente extends \Library\Controller\Controller{
 	public function indexRestaurantAction(){
 		
 
-
-		$modelAjax 	= new \Application\Models\Ajax('localhost');
-		
-
 		$this->setDataView(array(
-			"pageTitle" => "Nos restaurants partenaires",
-			"ajax" => $ajax
+			"pageTitle" => "Nos restaurants partenaires"
 			)
 		);
 

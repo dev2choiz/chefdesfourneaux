@@ -1,31 +1,34 @@
 <?=$message?>
 
 <!-- START THE FEATURETTES -->
-<div class="row">
-<?php foreach($recettes as $recette): ?>
-	<?php if($recette['id_cat'] == 6 || $recette['id_cat'] == 4): ?>
-	<div class="col-md-6">	
-        <a class="linkCat" href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> 
-        	<h1><?=$recette['value']?></h1>
-        </a>
-        <img class="img-responsive img-thumbnail img headCat" src="<?= IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['value']?>">	
- 	</div>
-<?php endif; endforeach;?>
-</div>
-
-<div class="row">
-<?php foreach($recettes as $recette): ?> 
-	<?php if($recette['id_cat'] != 4 && $recette['id_cat'] != 6): ?>		
-	<div class="col-md-4">	
-        <a href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> 
-	        <h1><?=$recette['value']?> 
-	        <span class="text-muted"></span>
-	        </h1>
-        </a>
-        <p class="lead"><img class=" img-thumbnail img-responsive" src="<?= IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['value']?>"></p>
+<div class="container containerView">
+	<div class="row">
+	<?php foreach($recettes as $recette): ?>
+		<?php if($recette['id_cat'] == 6 || $recette['id_cat'] == 4): ?>
+		<div class="col-md-6">	
+	        <a class="linkCat" href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> 
+	        	<h1><?=$recette['value']?></h1>
+	        </a>
+	        <img class="img-responsive img-thumbnail img headCat" src="<?= IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['value']?>">	
+	 	</div>
+	<?php endif; endforeach;?>
 	</div>
-<?php endif; endforeach;?>
-</div>
+
+	<div class="row">
+	<?php foreach($recettes as $recette): ?> 
+		<?php if($recette['id_cat'] != 4 && $recette['id_cat'] != 6): ?>		
+		<div class="col-md-4">	
+	        <a href="<?=LINK_ROOT.'recette/indexcategorie/'.$recette['id_cat']?>"> 
+		        <h1><?=$recette['value']?> 
+		        <span class="text-muted"></span>
+		        </h1>
+	        </a>
+	        <p class="lead"><img class=" img-thumbnail img-responsive" src="<?= IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['value']?>"></p>
+		</div>
+	<?php endif; endforeach;?>
+	</div><!-- /.row -->
+</div><!-- /.container -->
+
 
  <!-- /END THE FEATURETTES --> 
     

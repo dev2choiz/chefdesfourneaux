@@ -1,276 +1,171 @@
 <?=$tinyMCERecette?>
 <?=$message?>
-<?php
+
+<div class="container containerView">
+    <form class=""  id="formRecette"  enctype="multipart/form-data"  method="post">
+        <h2 class="form-signin-heading">
+            <?=$pageTitle?>
+        </h2>
+        <table>
+            <tr>
+                
+                <td>
+                    <label for="titre">Titre de la recette que vous souhaitez ajouter : </label>
+                    <input type="text" name="titre" id="titre" value="<?=$viewrecette['titre']?>" required>
+                    <div id="wrapperImgRecette">
+                        <img id='imgRecette'  alt='Image recette' style='width:150px; height:150px;' />
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group">
+                        <label for="inputFile"></label>
+                        <input type="file" id="inputFile" name="img" >
+                        <p class="help-block">Votre nom d'image doit être identique à celui de votre recette (exemple : tarteauxcitrons.jpg)</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <textarea name="value" autofocus style="width: 100%;"><?=$viewrecette['value']?></textarea>
+
+        <table>
+            <tr><td>categorie</td>
+                <td>
+                    <select name="id_cat" id="id_cat">
+                      <?php foreach ($categories as $categorie) {
+                            if($categorie['value'] == $viewrecette['categorie'] ){
+                                $txt=" selected ";
+                            }else{
+                                $txt="";
+                            }
+                       ?>
+                          <option value="<?=$categorie['id_cat']?>"  <?=$txt?> ><?=$categorie['value']?></option> 
+
+                      <?php } ?>
+                    </select>
+                </td>
+            </tr>
 
 
-//var_dump("haut de la view >>viewrecette",$viewrecette);
+            <tr>
+                <td colspan="2">
+                    <div id="">
+                        Votre catégorie n'est pas dans la liste?
+                        <?=$ajaxCategorieButton?>
+                    </div>
+                    <?=$ajaxCategorieScript?>
+                </td>
+            </tr>
 
 
+            <tr>
+                <td>temps de cuisson</td>
+                <td><input type="text"  name="tps_cuisson"  value="<?=$viewrecette['tps_cuisson']?>" ></td>
+            </tr>
+            <tr>
+                <td>cout</td>
+                <td><input type="text"  name="cout"   value="<?=$viewrecette['cout']?>"  /></td>
+            </tr>
+            <tr>
+                <td>difficulté</td>
+                <td>
+                    <select name="difficulte">
+                        <?php
+                        for ($i=1; $i < 6; $i++) { 
+                            if($i== $viewrecette['difficulte'] ){
+                                $txt=" selected ";
+                            }else{
+                                $txt="";
+                            }
+                            echo "<option value='$i' $txt >$i</option>";
+                         } 
+                        
+                       ?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>
+                    <select name="type">
+                        <?php
+
+                            if($viewrecette['type']=="entrée" ){
+                                $txt1=" selected "; $txt2=""; $txt3="";
+                            }elseif($viewrecette['type']=="plat"){
+                                $txt1=""; $txt2=" selected "; $txt3="";
+                            }else{
+                                $txt1=""; $txt2=""; $txt3=" selected ";
+                            }
+                       ?>
+                        <option value="Entrée" <?=$txt1?> >Entrée</option>
+                        <option value="Plat"  <?=$txt2?> >Plat</option>
+                        <option value="Dessert"  <?=$txt3?> >Dessert</option>
+                    </select> 
+                </td>
+            </tr>
+        </table>
 
 
-?>
+        <?php
 
 
+            $diabete = ($viewrecette['diabete']?" checked ":"");
+            $ble = ($viewrecette['ble']?" checked ":"");
+            $lait = ($viewrecette['lait']?" checked ":"");
+            $oeuf = ($viewrecette['oeuf']?" checked ":"");
+            $arachide = ($viewrecette['arachide']?" checked ":"");
+            $soja = ($viewrecette['soja']?" checked ":"");
+            $gluten = ($viewrecette['gluten']?" checked ":"");
 
+        ?>
+        <label for="diabete">diabete</label>
+        <input type="checkbox" name="diabete" id="diabete" value="0" <?=$diabete?> >
 
+        <label for="ble">ble</label>
+        <input type="checkbox" name="ble" id="ble" value="1" <?=$ble?> >
 
+        <label for="lait">lait</label>
+        <input type="checkbox" name="lait" id="lait" value="0" <?=$lait?> >
 
-<form class=""  id="formRecette"  enctype="multipart/form-data"  method="post">
-    <h2 class="form-signin-heading">
-        <?=$pageTitle?>
-    </h2>
-    <table>
-        <tr>
-            
-            <td>
-                <label for="titre">Titre de la recette que vous souhaitez ajouter : </label>
-                <input type="text" name="titre" id="titre" value="<?=$viewrecette['titre']?>" required>
-                <div id="wrapperImgRecette">
-                    <img id='imgRecette'  alt='Image recette' style='width:150px; height:150px;' />
-                </div>
+        <label for="oeuf">oeuf</label>
+        <input type="checkbox" name="oeuf" id="oeuf" value="0" <?=$oeuf?> >
 
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="form-group">
-                    <label for="inputFile"></label>
-                    <input type="file" id="inputFile" name="img" >
-                    <p class="help-block">Votre nom d'image doit être identique à celui de votre recette (exemple : tarteauxcitrons.jpg)</p>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <textarea name="value" autofocus style="width: 100%;"><?=$viewrecette['value']?></textarea>
+        <label for="arachide">arachide</label>
+        <input type="checkbox" name="arachide" id="arachide" value="0" <?=$arachide?> >
 
-    <table>
-        <tr><td>categorie</td>
-            <td>
-                <select name="id_cat" id="id_cat">
-                  <?php foreach ($categories as $categorie) {
-                        if($categorie['value'] == $viewrecette['categorie'] ){
-                            $txt=" selected ";
-                        }else{
-                            $txt="";
-                        }
-                   ?>
-                      <option value="<?=$categorie['id_cat']?>"  <?=$txt?> ><?=$categorie['value']?></option> 
+        <label for="soja">soja</label>
+        <input type="checkbox" name="soja" id="soja" value="0" <?=$soja?> >
 
-                  <?php } ?>
-                </select>
-            </td>
-        </tr>
-
-
-        <tr>
-            <td colspan="2">
-                <div id="">
-                    Votre catégorie n'est pas dans la liste?
-                    <?=$ajaxCategorieButton?>
-                </div>
-                <?=$ajaxCategorieScript?>
-            </td>
-        </tr>
-
-
-        <tr>
-            <td>temps de cuisson</td>
-            <td><input type="text"  name="tps_cuisson"  value="<?=$viewrecette['tps_cuisson']?>" ></td>
-        </tr>
-        <tr>
-            <td>cout</td>
-            <td><input type="text"  name="cout"   value="<?=$viewrecette['cout']?>"  /></td>
-        </tr>
-        <tr>
-            <td>difficulté</td>
-            <td>
-                <select name="difficulte">
-                    <?php
-                    for ($i=1; $i < 6; $i++) { 
-                        if($i== $viewrecette['difficulte'] ){
-                            $txt=" selected ";
-                        }else{
-                            $txt="";
-                        }
-                        echo "<option value='$i' $txt >$i</option>";
-                     } 
-                    
-                   ?>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>type</td>
-            <td>
-                <select name="type">
-                    <?php
-
-                        if($viewrecette['type']=="entrée" ){
-                            $txt1=" selected "; $txt2=""; $txt3="";
-                        }elseif($viewrecette['type']=="plat"){
-                            $txt1=""; $txt2=" selected "; $txt3="";
-                        }else{
-                            $txt1=""; $txt2=""; $txt3=" selected ";
-                        }
-                   ?>
-                    <option value="Entrée" <?=$txt1?> >Entrée</option>
-                    <option value="Plat"  <?=$txt2?> >Plat</option>
-                    <option value="Dessert"  <?=$txt3?> >Dessert</option>
-                </select> 
-            </td>
-        </tr>
-    </table>
-
-
-    <?php
-
-
-        $diabete=($viewrecette['diabete']?" checked ":"");
-        $ble=($viewrecette['ble']?" checked ":"");
-        $lait=($viewrecette['lait']?" checked ":"");
-        $oeuf=($viewrecette['oeuf']?" checked ":"");
-        $arachide=($viewrecette['arachide']?" checked ":"");
-        $soja=($viewrecette['soja']?" checked ":"");
-        $gluten=($viewrecette['gluten']?" checked ":"");
-
-    ?>
-    <label for="diabete">diabete</label>
-    <input type="checkbox" name="diabete" id="diabete" value="0" <?=$diabete?> >
-
-    <label for="ble">ble</label>
-    <input type="checkbox" name="ble" id="ble" value="1" <?=$ble?> >
-
-    <label for="lait">lait</label>
-    <input type="checkbox" name="lait" id="lait" value="0" <?=$lait?> >
-
-    <label for="oeuf">oeuf</label>
-    <input type="checkbox" name="oeuf" id="oeuf" value="0" <?=$oeuf?> >
-
-    <label for="arachide">arachide</label>
-    <input type="checkbox" name="arachide" id="arachide" value="0" <?=$arachide?> >
-
-    <label for="soja">soja</label>
-    <input type="checkbox" name="soja" id="soja" value="0" <?=$soja?> >
-
-    <label for="gluten">gluten</label>
-    <input type="checkbox" name="gluten" id="gluten" value="0" <?=$gluten?> >
+        <label for="gluten">gluten</label>
+        <input type="checkbox" name="gluten" id="gluten" value="0" <?=$gluten?> >
 
 
 
-    <!-- Ne marche plus car j'ai essayé d'utiliser l'ajax directement dans la popup -->
-    <div id="ingredient">
-        Votre ingrédient n'est pas dans la liste?
-        <!--input type='button' value='Ajouter un ingrédient' id="ajouterIngredientBdd" -->
-        <?=$ajaxIngredientButton?>
-    </div>
-    <?=$ajaxIngredientScript?>
+        <!-- Ne marche plus car j'ai essayé d'utiliser l'ajax directement dans la popup -->
+        <div id="ingredient">
+            Votre ingrédient n'est pas dans la liste?
+            <!--input type='button' value='Ajouter un ingrédient' id="ajouterIngredientBdd" -->
+            <?=$ajaxIngredientButton?>
+        </div>
+        <?=$ajaxIngredientScript?>
+
+
+
+
+           
 
 
 
 
        
+        <div class="dv_ingredients">  
+            <select  id="allingredients" multiple size="form-control"   onclick="ajouterIngredient();"  style="min-width:150px;">
+                <?php
 
-
-
-
-   
-    <div class="dv_ingredients">  
-        <select  id="allingredients" multiple size="form-control"   onclick="ajouterIngredient();"  style="min-width:150px;">
-            <?php
-
-            function ingredientIsUsed( $id, $tabIng ){
-
-                foreach ($tabIng as  $ing) {
-
-                    if ($ing['id_ingredient']===$id) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-
-            foreach ($ingredients as $ingredient) {
-                //var_dump($ingredient);
-                if( !ingredientIsUsed( $ingredient['id_ingredient'], $viewrecette['ingredients'] ) ){
-                    echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
-                }
-            }
-
-            ?>
-        </select>
-    </div>
-
-    <div class="dv_ingredients">
-        Ingrédients de <?=$viewrecette['titre']?> : 
-        <select id="ingredients"  name="ingredients[]"  multiple size="form-control" onclick="retirerIngredient();"  style="min-width:150px;">
-
-            <?php
-              foreach ($viewrecette['ingredients'] as $ingredient) {
-                echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['ingredients']."</option>";
-              }
-            ?>
-        </select>
-    </div>
-
-    
-    <div class="dv_ingredients">
-        <select id="allunites" style="min-width:150px;">
-            <?php foreach ($unites as $unite) {?>
-                <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option>
-            <?php } ?>
-        </select>
-        <input type="button" onclick="definirUnite();" value="definir cette unité" id="boutonunite">
-    </div>
-
-
-
-    
-    <div class="dv_ingredients">
-        <select id="unites"  name="unites[]" multiple size="form-control" onclick="actualiserQuantite();"     style="min-width:150px;" onBlur="" onFocus="afficher();">
-        </select>
-
-        <input type="text" id="quantite">
-        <input type="button" id="okquantite" onclick="definirQuantite();" value="ok">
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-    <!-- <table  border="0">
-        <tr><td collspan="4">Ingredients</td></tr>
-            <tr><td>
-            </td>
-            <td>
-            </td>
-            <td>
-                <select id="allunites"     style="min-width:150px;">
-                  <?php foreach ($unites as $unite) {?>
-                      <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option> 
-                  <?php } ?>
-                </select>
-            </td>
-            <td>
-                <input type="button" onclick="definirUnite();" value="definir" id="boutonunite">
-            </td>
-
-        </tr>      
-
-
-        <tr>
-            <td>
-                    
-                <select  id="allingredients" multiple size="8"   onclick="ajouterIngredient();"  style="min-width:150px;">
-                  <?php
-                  
-                 /* function ingredientIsUsed( $id, $tabIng ){
+                function ingredientIsUsed( $id, $tabIng ){
 
                     foreach ($tabIng as  $ing) {
 
@@ -279,68 +174,162 @@
                         }
                     }
                     return false;
-                  }*/
+                }
 
 
-                  /*foreach ($ingredients as $ingredient) {
-                     var_dump($ingredient);
+                foreach ($ingredients as $ingredient) {
+                    //var_dump($ingredient);
                     if( !ingredientIsUsed( $ingredient['id_ingredient'], $viewrecette['ingredients'] ) ){
                         echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
                     }
-                  }*/
-
-
-
-                  ?>
-                </select>
-                    
-            </td>
-            <td>
-                
-                <select id="ingredients"  name="ingredients[]" multiple size="8"   onclick="retirerIngredient();"  style="min-width:150px;">
-                <?php
-
-                  /*foreach ($viewrecette['ingredients'] as $ingredient) {
-                    echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['ingredients']."</option>";
-                  }*/
-
+                }
 
                 ?>
-                </select>
-            </td>
+            </select>
+        </div>
 
-            <td>
-                <select id="unites"  name="unites[]" multiple size="8" onclick="actualiserQuantite();"     style="min-width:150px;" onBlur="" onFocus="afficher();">
-                </select>    
-            </td>
-            <td>
-                <input type="text" id="quantite">
-                <input type="button" id="okquantite" onclick="definirQuantite();" value="ok">
-            </td>
-        </tr>
+        <div class="dv_ingredients">
+            Ingrédients de <?=$viewrecette['titre']?> : 
+            <select id="ingredients"  name="ingredients[]"  multiple size="form-control" onclick="retirerIngredient();"  style="min-width:150px;">
 
-    </table> -->
+                <?php
+                  foreach ($viewrecette['ingredients'] as $ingredient) {
+                    echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['ingredients']."</option>";
+                  }
+                ?>
+            </select>
+        </div>
 
-
-
-
-
-
-
-
-    <input type="hidden"  name="id_livre"  value="1">
-    <input type="hidden"  name="id_resto"  value="1">
-
-    <BR>
+        
+        <div class="dv_ingredients">
+            <select id="allunites" style="min-width:150px;">
+                <?php foreach ($unites as $unite) {?>
+                    <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option>
+                <?php } ?>
+            </select>
+            <input type="button" onclick="definirUnite();" value="definir cette unité" id="boutonunite">
+        </div>
 
 
 
+        
+        <div class="dv_ingredients">
+            <select id="unites"  name="unites[]" multiple size="form-control" onclick="actualiserQuantite();"     style="min-width:150px;" onBlur="" onFocus="afficher();">
+            </select>
 
-    <button name="btn" style="float:right;" class="col-md-4 btn btn-lg btn-primary" type="submit"><?=$pageTitle?></button><BR>
+            <input type="text" id="quantite">
+            <input type="button" id="okquantite" onclick="definirQuantite();" value="ok">
+        </div>
 
-    <a href="<?=LINK_ROOT?>">Retour à l'accueil</a>
 
-</form style="min-width: 150px;">
+
+
+
+
+
+
+
+
+
+        <!-- <table  border="0">
+            <tr><td collspan="4">Ingredients</td></tr>
+                <tr><td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <select id="allunites"     style="min-width:150px;">
+                      <?php foreach ($unites as $unite) {?>
+                          <option value="<?=$unite['id_unite']?>" ><?=$unite['value']?></option> 
+                      <?php } ?>
+                    </select>
+                </td>
+                <td>
+                    <input type="button" onclick="definirUnite();" value="definir" id="boutonunite">
+                </td>
+
+            </tr>      
+
+
+            <tr>
+                <td>
+                        
+                    <select  id="allingredients" multiple size="8"   onclick="ajouterIngredient();"  style="min-width:150px;">
+                      <?php
+                      
+                     /* function ingredientIsUsed( $id, $tabIng ){
+
+                        foreach ($tabIng as  $ing) {
+
+                            if ($ing['id_ingredient']===$id) {
+                                return true;
+                            }
+                        }
+                        return false;
+                      }*/
+
+
+                      /*foreach ($ingredients as $ingredient) {
+                         var_dump($ingredient);
+                        if( !ingredientIsUsed( $ingredient['id_ingredient'], $viewrecette['ingredients'] ) ){
+                            echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['value']."</option>";
+                        }
+                      }*/
+
+
+
+                      ?>
+                    </select>
+                        
+                </td>
+                <td>
+                    
+                    <select id="ingredients"  name="ingredients[]" multiple size="8"   onclick="retirerIngredient();"  style="min-width:150px;">
+                    <?php
+
+                      /*foreach ($viewrecette['ingredients'] as $ingredient) {
+                        echo "<option value='".$ingredient['id_ingredient']."' >".$ingredient['ingredients']."</option>";
+                      }*/
+
+
+                    ?>
+                    </select>
+                </td>
+
+                <td>
+                    <select id="unites"  name="unites[]" multiple size="8" onclick="actualiserQuantite();"     style="min-width:150px;" onBlur="" onFocus="afficher();">
+                    </select>    
+                </td>
+                <td>
+                    <input type="text" id="quantite">
+                    <input type="button" id="okquantite" onclick="definirQuantite();" value="ok">
+                </td>
+            </tr>
+
+        </table> -->
+
+
+
+
+
+
+
+
+        <input type="hidden"  name="id_livre"  value="1">
+        <input type="hidden"  name="id_resto"  value="1">
+
+        <BR>
+
+
+
+
+        <button name="btn" style="float:right;" class="col-md-4 btn btn-lg btn-primary" type="submit"><?=$pageTitle?></button><BR>
+
+        <a href="<?=LINK_ROOT?>">Retour à l'accueil</a>
+
+    </form style="min-width: 150px;">
+</div>
+
 
 
 

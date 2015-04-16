@@ -24,10 +24,10 @@
     ================================================== -->
     <body>
         <div class="navbar-wrapper">
-            <div class="container">
+            <!-- <div class="container"> -->
                 
                 <nav class="navbar navbar-inverse navbar-static-top">
-                    <div class="container containerNav">
+                    <div class="containerNav">
 
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -60,9 +60,10 @@
                                 <li class="lienChefDesFourneaux"><a  href="<?=LINK_ROOT.'recette/index'?>">Categories</a></li>
                                 <li class="lienChefDesFourneaux"><a  href="<?=LINK_ROOT.'recette/indexchef'?>">Recettes de chef</a></li>
                                 <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'recette/indexcategorie/3'?>">Forme et santé</a></li>
-                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexlivre'?>">Livres de cuisine</a></li>
-                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexrestaurant'?>">Restaurants de nos chefs</a></li>
-                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Produits en ventes</a></li>
+                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexlivre'?>">Livres</a></li>
+                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexrestaurant'?>">Restaurants</a></li>
+                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Ustensiles de cuisine</a></li>
+                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Vidéos</a></li>
                                 <li class="dropdown lienChefDesFourneaux">
                                     <?php if(empty($_SESSION['user'])):?>
                                     <a href="#" class="dropdown-toggle animSiteFadeInNormal" data-toggle="dropdown" role="button" aria-expanded="false">S'inscrire / Se connecter <span class="caret"></span></a>
@@ -89,9 +90,9 @@
                                         <li class="dropdown-header">Administration du site</li>
                                         
                                         <li><a href="<?=LINK_ROOT.'admin/index'?>">Recettes</a></li>
-                                        <li><a href="<?=LINK_ROOT.'adminproduit/index'?>">Produits</a></li>
-                                        <li><a href="<?=LINK_ROOT.'admin/restaurant'?>">Restaurant</a></li>
-                                        <li><a href="<?=LINK_ROOT.'admin/livre'?>">Livres de cuisine</a></li>
+                                        <li><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Produits</a></li>
+                                        <li><a href="<?=LINK_ROOT.'vente/indexrestaurant'?>">Restaurant</a></li>
+                                        <li><a href="<?=LINK_ROOT.'vente/indexlivre'?>">Livres de cuisine</a></li>
                                         <?php endif; ?>
                                         
                                     </ul> 
@@ -112,7 +113,7 @@
                     </div> <!-- Fin container -->
 
                 </nav>
-            </div> <!-- Fin container -->
+            <!-- </div> Fin container -->
         </div> <!-- Fin navbar-wrapper --> 
 
         <div id="separator" class="separator"></div>
@@ -120,7 +121,7 @@
 
         <!-- Marketing messaging and featurettes
         ================================================== -->
-        <div class="container marketing ">
+        <div class="marketing ">
             
 
             <div class="content_view" id="content_view">

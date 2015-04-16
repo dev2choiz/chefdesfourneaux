@@ -1,9 +1,15 @@
-/* NAVBAR */
+.content_view{
+	background-color: #F7D7C8;
+}
+.containerView{
+	background-color: #FFF;
+}
 
+/* NAVBAR */
 .containerNav{
 	background-color: #FFF;
 	font-weight: bold;
-	height: 250px;
+	height: 200px;
 }
 .navbar-nav {
   margin-top: 15px;
@@ -142,14 +148,6 @@
   z-index: 10000;
   display: none;
 }
-
-
-
-
-
-
-
-
 
 
 /*Responsive*/
