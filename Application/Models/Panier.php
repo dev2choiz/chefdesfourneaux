@@ -17,42 +17,19 @@ class Panier extends \Library\Model\Model{
 
 	public function existeDansPanier($idUser, $idPanier){
 
-		$params = array('service' => 'Panier',
-						'method' => 'existeDansPanier',
-						'id_user' => $idUser,
-						'id_panier' => $idPanier
-						 );
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query($params)
-		        )
+		$params = array(
+			'id_user' => $idUser,
+			'id_panier' => $idPanier
 		);
-
-		$context  = stream_context_create($opts);
+		return $this->webserviceRequest("GET", "Panier","existeDansPanier",$params);
 		
-		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
 	}
 
 	public function getPanier($idUser){
 
-		$params = array('service' => 'Panier',
-						'method' => 'getPanier',
-						'id_panier' => $idUser );
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query($params)
-		        )
-		);
-
-		$context  = stream_context_create($opts);
+		$params = array( 'id_panier' => $idUser );
+		return $this->webserviceRequest("GET", "Panier","getPanier",$params);
 		
-		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
 	}
 
 	/**
@@ -62,24 +39,7 @@ class Panier extends \Library\Model\Model{
 	 * @return [boolean]              [description]
 	 */
 	public function insertPanier($params){
-
-
-		//$params["id_user"] = $idUser;
-		$params["service"] = "Panier";
-		$params["method"]  = "insertPanier";
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query($params)
-		        )
-		);
-
-		$context  = stream_context_create($opts);
-		
-		return $this->convEnTab(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) );
-		
+		return $this->webserviceRequest("POST", "Panier","insertPanier",$params);
 	}
 
 
@@ -92,23 +52,8 @@ class Panier extends \Library\Model\Model{
 	 */
 	public function updatePanier($params, $idPanier){
 		
-
 		$params["id_panier"] = $idPanier;
-		$params["service"] = "Panier";
-		$params["method"]  = "updatePanier";
-//var_dump("dan model",$params);
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query($params)
-		        )
-		);
-
-		$context  = stream_context_create($opts);
-		
-		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) );
+		return $this->webserviceRequest("PUT", "Panier", "insertPanier", $params);
 		
 	}
 
@@ -125,44 +70,18 @@ class Panier extends \Library\Model\Model{
 
 		$params["id_user"] = $idUser;
 		$params["id_panier"] = $idPanier;
-		$params["service"] = "Panier";
-		$params["method"]  = "deletePanier";
-
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query($params)
-		        )
-		);
-
-		$context  = stream_context_create($opts);
 		
-		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) );
+
+		return $this->webserviceRequest("DELETE", "Panier", "deletePanier", $params);
 		
 	}
 
 
 public function viderPanier($iUser){
 		
-
 		$params["id_user"] = $idUser;
-		$params["service"] = "Panier";
-		$params["method"]  = "viderPanier";
 
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query($params)
-		        )
-		);
-
-		$context  = stream_context_create($opts);
-		
-		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) );
+		return $this->webserviceRequest("DELETE", "Panier", "viderPanier", $params);
 		
 	}
 

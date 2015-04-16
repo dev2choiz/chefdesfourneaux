@@ -24,23 +24,29 @@ abstract class Model{
 	 */
 	public function webserviceRequest($httpMethod, $service, $method, $params){
 
-	  	$params['service'] = $service;
-	  	$params['method'] = $method;
+		if($httpMethod==='GET'){
+		  	$params['service'] = $service;
+		  	$params['method'] = $method;
+			
+			return $this->convEnTab( json_decode( file_get_contents( WEBSERVICE_ROOT.'/index.php?'. http_build_query($params) ) ) );
+		}else{
+		  	$params['service'] = $service;
+		  	$params['method'] = $method;
+		  	
+			$options = array('http' =>
+			    array(
+			        'method'  => $httpMethod,
+			        'header'  => 'Content-type: application/x-www-form-urlencoded',
+			        'content' => http_build_query($params)
+			        )
+			);
 
+			var_dump($options);
 
-
-		$options = array('http' =>
-		    array(
-		        'method'  => $httpMethod,
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query($params)
-		        )
-		);
-
-		$context  = stream_context_create($options);
-		
-		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
-		
+			$context  = stream_context_create($options);
+			
+			return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
+		}
 	}
 
 

@@ -160,24 +160,10 @@ class User extends \Library\Controller\Controller{
 			
 			$user = $modelUser->convEnTab($modelUser->login($_POST['mail'], $_POST['password']) );
 			
-			/*object(stdClass)[9]
-			  public 'response' => 
-			    array (size=1)
-			      0 => 
-			        object(stdClass)[10]
-			          public 'id' => int 13
-			          public 'nom' => string 'nom1' (length=4)
-			          public 'prenom' => string 'prenom1' (length=7)
-			          public 'mail' => string 'mail1@hotmail.com' (length=17)
-			          public 'password' => string 'b4136225ae3ffed43874cec08fcf7330' (length=32)
-			          public 'update' => string '2015-02-01 09:06:40' (length=19)
-			  public 'apiError' => boolean false
-			  public 'apiErrorMessage' => string '' (length=0)
-			  public 'serverError' => boolean false
-			  public 'serverErrorMessage' => string '' (length=0)
-			*/
+			
 
-			//var_dump($user);die();
+			//var_dump($user);
+			echo $user['page'];
 			if(empty($user)){	//s'il y a une erreur
 				$this->message->addError("Erreur au niveau du webservice !");
 			}elseif ($user['apiError'] ) {
@@ -188,14 +174,7 @@ class User extends \Library\Controller\Controller{
 				$this->message->addError("Mail/Password non valide !"); // ou couple d'id/pwd en double
 			}else{			//tout roule
 				$user=$user['response'][0];
-					/*array (size=x)
-				          'id' => int 13
-				           'nom' => string 'nom1' (length=4)
-				           'prenom' => string 'prenom1' (length=7)
-				           'mail' => string 'mail1@hotmail.com' (length=17)
-				           'password' => string 'b4136225ae3ffed43874cec08fcf7330' (length=32)
-				           'update' => string '2015-02-01 09:06:40' (length=19)
-				    */
+				
 					
 				$_SESSION['user'] = $user;
 				header('location: '.LINK_ROOT);

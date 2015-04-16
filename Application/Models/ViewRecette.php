@@ -19,22 +19,10 @@ class ViewRecette extends \Library\Model\Model{
 	 */
 	public function getViewRecette($id){
 
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'GET',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query(
-								array(
-							        'service' => 'ViewRecette',				
-							        'method' => 'getViewRecette',
-							        'id_recette' => $id
-							    )
-		    				)
-		        )
-		);
+		return $this->webserviceRequest("GET", "ViewRecette","getViewRecette",array(
+			"id_recette"=>$id
+		));
 
-		$context  = stream_context_create($opts);
-		return  $this->convEnTab(json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ) ;
 	}
 
 	/**
@@ -68,22 +56,7 @@ class ViewRecette extends \Library\Model\Model{
 	 */
 	public function getAllViewRecettes(){
 
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'GET',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query(
-								array(
-							        'service' => 'ViewRecette',				
-							        'method' => 'getAllViewRecettes',
-							    )
-		    				)
-		        )
-		);
-		
-		$context  = stream_context_create($opts);
-		return  $this->convEnTab(json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ) ;
-		//$this->webserviceRequest('GET', 'ViewRecette', 'getAllViewRecettes', array());
+		return $this->webserviceRequest("GET", "ViewRecette","getAllViewRecettes",array());
 
 	}
 
@@ -93,25 +66,12 @@ class ViewRecette extends \Library\Model\Model{
 	 * @return [array]              [description]
 	 */
 	public function getRecherche($recherche, $champs){
+
 		$data =array(
-			        'service' 				=> 'Recherche',				
-			        'method' 				=> 'getRecherche',
 			        'recherche'				=> $recherche,
         			'ou'					=> $champs
 	  	);
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query($data)
-		        )
-		);
-
-		$context  = stream_context_create($opts);
-		
-		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
-		
+		return $this->webserviceRequest("GET", "ViewRecette","getRecherche",$data);
 	}
 
 
