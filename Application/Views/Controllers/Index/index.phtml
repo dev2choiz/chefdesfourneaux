@@ -43,13 +43,13 @@
         <?php endif; endforeach; ?>
         </div> <!-- /.item -->
         <div class="item">
-        <?php foreach($produits as $produit): ?>
-            <?php if($produit['top'] == 1): ?>
-            <img src="<?=IMG_LINK_ROOT.$produit['img']?>" alt="<?=$produit['value']?>">
+        <?php foreach($recettes as $recette): ?>
+            <?php if($recette['top'] == 3): ?>
+            <img src="<?=IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['titre']?>">
             <div class="container">
                 <div class="carousel-caption">
                     <h1>Envie de plus de recettes?</h1>
-                    <p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>" role="button"><?=$produit['value']?></a></p>
+                    <p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'recette/index'?>" role="button">Voir toutes les recettes</a></p>
                 </div> <!-- /.carousel-caption -->
             </div> <!-- /.container -->
         <?php endif; endforeach; ?>

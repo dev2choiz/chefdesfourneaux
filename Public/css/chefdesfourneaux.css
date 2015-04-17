@@ -47,12 +47,11 @@
 /* END NAVBAR */
 
 .separator{
-	height: 200px;
+	height: 100px;
 }
-
 /* CONTENT VIEW */
 .content_view{
-	margin-top: 70px;
+	/* margin-top: 70px; */
 	margin-bottom: 50px;
 }
 
