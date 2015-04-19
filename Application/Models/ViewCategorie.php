@@ -18,23 +18,9 @@ class ViewCategorie extends \Library\Model\Modelview{
 	 * @return [array] 
 	 */
 	public function getViewCategorie($idCat){
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query(
-								array(
-							        'service' => 'ViewCategorie',				
-							        'method' => 'getViewCategorie',
-							        'id_cat' => $idCat
-							    )
-		    				)
-		        )
-		);
-
-		$context  = stream_context_create($opts);
-		return  $this->convEnTab(json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ) ;
+		return $this->webserviceRequest("GET", "ViewCategorie", "getViewCategorie", array(
+				'id_cat' 				=> $idCat
+		));
 	}
 
 

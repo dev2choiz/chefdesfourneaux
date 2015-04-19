@@ -63,7 +63,10 @@ class ViewRecette extends \Library\Model\Model{
 
 
 	/**
-	 * @return [array]              [description]
+	 * getRecherche effectue une recherche dans un champ de la table recette
+	 * @param  string $recherche la chaine à rechercher
+	 * @param  type $champs    dans quel champ de la table recette on cherche
+	 * @return array comme reponse du webservice
 	 */
 	public function getRecherche($recherche, $champs){
 

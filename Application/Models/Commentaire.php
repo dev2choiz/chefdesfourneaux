@@ -61,7 +61,7 @@ class Commentaire extends \Library\Model\Model{
 		
 
 		$params["id_commentaire"] = $idCommentaire;
-		return $this->webserviceRequest("PUT", "Commentaire", "deleteCommentaire", $params);
+		return $this->webserviceRequest("DELETE", "Commentaire", "deleteCommentaire", $params);
 	}
 
 

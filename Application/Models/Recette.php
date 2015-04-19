@@ -16,8 +16,8 @@ class Recette extends \Library\Model\Model{
 
 
 	public function getRecettes(){
+		return $this->webserviceRequest("GET", "Recette", "getRecettes", array());
 		
-		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php?service=recette&method=getrecettes')) );
 	}
 
 	/**
@@ -27,24 +27,9 @@ class Recette extends \Library\Model\Model{
 	 * @return [boolean]              [description]
 	 */
 	public function insertRecette($params, $idUser){
-
-
+		$params= array();
 		$params["id_user"] = $idUser;
-		$params["service"] = "Recette";
-		$params["method"]  = "insertRecette";
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query($params)
-		        )
-		);
-
-		$context  = stream_context_create($opts);
-		
-		return $this->convEnTab(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) );
-		
+		return $this->webserviceRequest("POST", "Recette", "insertRecette", $params);
 	}
 
 
@@ -56,25 +41,9 @@ class Recette extends \Library\Model\Model{
 	 * @return [boolean]              [description]
 	 */
 	public function updateRecette($params, $idRecette){
-		
-
+		$params= array();
 		$params["id_recette"] = $idRecette;
-		$params["service"] = "Recette";
-		$params["method"]  = "updateRecette";
-//var_dump("dan model",$params);
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query($params)
-		        )
-		);
-
-		$context  = stream_context_create($opts);
-		
-		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) );
-		
+		return $this->webserviceRequest("PUT", "Recette", "updateRecette", $params);
 	}
 
 
@@ -86,25 +55,9 @@ class Recette extends \Library\Model\Model{
 	 * @return [boolean]              [description]
 	 */
 	public function deleteRecette($idRecette){
-		
-
+		$params= array();
 		$params["id_recette"] = $idRecette;
-		$params["service"] = "Recette";
-		$params["method"]  = "deleteRecette";
-
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query($params)
-		        )
-		);
-
-		$context  = stream_context_create($opts);
-		
-		return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) );
-		
+		return $this->webserviceRequest("DELETE", "Recette", "deleteRecette", $params);	
 	}
 
 

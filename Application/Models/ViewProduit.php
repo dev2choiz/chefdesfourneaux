@@ -18,23 +18,9 @@ class ViewProduit extends \Library\Model\Model{
 	 * @return [array] 
 	 */
 	public function getViewProduit($id){
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query(
-								array(
-							        'service' => 'ViewProduit',				
-							        'method' => 'getViewProduit',
+		return $this->webserviceRequest("GET", "ViewProduit", "getViewProduit", array(
 							        'id_produit' => $id
-							    )
-		    				)
-		        )
-		);
-
-		$context  = stream_context_create($opts);
-		return  $this->convEnTab(json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ) ;
+		));
 	}
 
 	/**
@@ -42,7 +28,7 @@ class ViewProduit extends \Library\Model\Model{
 	 * @param  [array] $tabId [tableau d'ids de produits]
 	 * @return [array]	Retourne un tableau (dont les key sont les id des produits)
 	 *                  contenant les views qui sont elles meme des tableaux
-	 */
+	 */    //A EFFACER ou à tester
 	public function getViewProduits($tabId){
 		$tabVR=array();
 
@@ -51,7 +37,7 @@ class ViewProduit extends \Library\Model\Model{
 			if($prod8['error']){
 				$prod8=false;
 			}else{
-				echo ($prod8['page'])."<br>";
+				//echo ($prod8['page'])."<br>";
 				$prod8=$prod8['response'];
 			}
 			//var_dump($prod8);
@@ -71,23 +57,7 @@ class ViewProduit extends \Library\Model\Model{
 	 * @return [array]	Retourne un tableau contenant toutes les views
 	 */
 	public function getAllViewProduits(){
-
-		$opts = array('http' =>
-		    array(
-		        'method'  => 'POST',
-		        'header'  => 'Content-type: application/x-www-form-urlencoded',
-		        'content' => http_build_query(
-								array(
-							        'service' => 'ViewProduit',				
-							        'method' => 'getAllViewProduits',
-							    )
-		    				)
-		        )
-		);
-		
-		$context  = stream_context_create($opts);
-		return  $this->convEnTab(json_decode( file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ) ) ;
-
+		return $this->webserviceRequest("GET", "ViewProduit", "getAllViewProduits", array());
 	}
 
 

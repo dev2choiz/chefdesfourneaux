@@ -8,8 +8,8 @@ class Admin
 	private $message;
 	private $tinyMCE;
 	private $modelRecette;
-	private $modelCategorie; // A compléter
-	private $modelIngredient; // A compléter
+	private $modelCategorie;
+	private $modelIngredient;
 	private $modelShowDiv;
 	private $modelAjax;
 

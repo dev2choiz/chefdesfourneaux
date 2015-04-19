@@ -4,10 +4,7 @@
 $(document).ready(function(){
 
         $('#addCommentaire').click(function(){
-           //document.getElementById("commValue").text="fjskfjd";
-            
             if (tinyMCE.get('commValue').getContent()!=="") {
-                alert("dans le if"+$("#noteValue").val());
                 ajouterCommentaire(tinyMCE.get('commValue').getContent(), $("#noteValue").val());
             }
         });
@@ -33,16 +30,17 @@ function ajouterCommentaire(value, note){
         type: 'POST',
         data: jsonData,
         url: urlWebService,
-        dataType: 'jsonp',
-        jsonpCallback: 'callback',
-        async :true,
+        dataType: 'json',
+        async :false,
         success: function(data) {
-            //console.log(data.response);
             idComm = parseInt((data.response));
-            //console.log("id du comm",idComm);
-            alert("dans succces ajout"+idComm);
-            //console.log(data.response,"id insert :"+idComm);
-            ajouterCommDansDiv(idComm);
+            
+            if(idCom>0){
+                ajouterCommDansDiv(idComm);
+            }else{
+                alert("erreur pendant l'ajout du commentaire");
+            }
+            
         }
 
     });
@@ -66,8 +64,7 @@ function ajouterCommDansDiv(idComm){
         type: 'POST',
         data: jsonData,
         url: urlWebService,
-        dataType: 'jsonp',
-        jsonpCallback: 'callback',
+        dataType: 'json',
         success: function(data) {
             console.log(data.response);
 
