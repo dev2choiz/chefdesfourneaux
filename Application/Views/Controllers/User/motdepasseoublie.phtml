@@ -5,13 +5,12 @@
     	<?=$pageTitle?>
     </h2>
     
-    <input name="mail" type="email" class="form-control" placeholder="Email address" required autofocus>
+    <input name="mail" id="mail" type="email" class="form-control" placeholder="Email address" required autofocus>
     <p>Repondre &agrave; la question pour recevoir votre nouveau mot de passe par mail</p>
     <select name="id_questionsecrete" id="id_questionsecrete">
         <?php
         foreach ($questionSecretes as $questionSecrete) {?>
-            <option value="<?=$questionSecrete['id_questionsecrete']?>" <?=$selOuPas?> ><?=$questionSecrete['value']?></option>
-            }
+            <option value="<?=$questionSecrete['id_questionsecrete']?>" ><?=$questionSecrete['value']?></option>
         <?php } ?>
     </select>
 

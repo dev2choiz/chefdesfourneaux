@@ -1,55 +1,107 @@
 
-function changerImage(idInput) {
-    input=document.getElementById(idInput);
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        alert("onload"+e.target.result);
-        $('#imgProduit').attr('src',e.target.result);
-        return true;
-    };
-    reader.readAsDataURL(input.files[0]);
-
-  }
-}
-
-
 
 $(document).ready(function(){
 
-    $("#inputFileImgProduitModifier").change(function(){
-        //alert("on change hors cond");
-        if (document.getElementById('inputFileImgProduitModifier').value!=='') {
-            //alert("on change dans cond");
-            changerImage('inputFileImgProduitModifier') ;
+        $('#id_questionsecrete').hide();
+        $( "#id_questionsecrete" ).prop( "disabled", true );
+
+        alert("dkj");
+        $('#mail').blur(function(){
+            
+            mail=$('#mail').val();
+
+            
+            if (true /*Verif format mail ici*/) {
+
+                alert(mail);
+                idQuestUser=questionUser(mail);
+                console.log("idq",idQuestUser);
+                if(idQuestUser>0 ){
+
+                    $('#id_questionsecrete option[value="'+idQuestUser+'"]').prop('selected', true);
+                    $("#id_questionsecrete").show('slow');
+
+                    //chargerQuestions(mail, idQuestUser);
+                }else{
+                    alert("le mail n'existe pas dans la base");
+                }
+
+            } else{
+                alert("le format du mail n'est pas bon");
+            };
+            
+            
+
+        });
+    }
+);
+
+
+
+
+
+
+function questionUser(mail){
+    //
+
+    jsonData = 
+    {
+        'service'       : 'QuestionSecrete',
+        'method'        : 'getQuestionSecreteUser',
+        'mail'        : mail
+    };
+
+
+    var retour=null;
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        async:false,
+        success: function(data) {
+            console.log("sa question",data.response);
+            retour=data.response;
         }
     });
 
-});
-
-
-
-
-function finUpload(error,idProd) {
-
-    if (error === 'non' && idProd>0) {
-        //var prod=document.getElementById('');
-        alert("donnees envoyées" );
-
-        script = recupererScriptNewProduit(idProd) ;
-
-        $("#WrapperProduits").append(script);
-
-    } else {
-        alert(error);
-    }
+    return retour;
 }
 
-$( "#formImgProduit" ).submit(function( event ) {
-    //alert($('#inputFileImgProduitModifier').val()+' avan le test $Filehfh');
-    if ($('#inputFileImgProduitModifier').val()==='') {
-        alert('veuillez selectionner une image');
-        event.preventDefault();
-    }
-});
+function chargerQuestions(mail, idQuestUser){
+
+
+    jsonData = 
+    {
+        'service'       : 'QuestionSecrete',
+        'method'        : 'getQuestionSecretes',
+        'id_com'        : mail
+    };
+
+
+
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        async:false,
+        success: function(data) {
+            console.log("les question",data.response);
+            $("#id_questionsecrete").empty();
+            for (var i = 0; i < data.response.length; i++) {
+                $("#id_questionsecrete").append("<option value='"+data.response[i]['id_questionsecrete']+"'>"+data.response[i]['value']+"</option>");
+            };
+
+            $('#id_questionsecrete option[value="'+idQuestUser+'"]').prop('selected', true);
+            $("#id_questionsecrete").show('slow');
+            
+            
+
+        }
+    });
+
+    return true;
+}
+
 

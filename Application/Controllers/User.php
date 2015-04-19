@@ -325,10 +325,10 @@ public function motDePasseOublieAction(){
 		$modelMailer = new \Application\Models\Mailer('localhost');		
 
 		$modelQuestionSecrete = new \Application\Models\QuestionSecrete('localhost');
-		$questionSecretes = $this->convEnTab( $modelQuestionSecrete->getQuestionSecretes() );
-
+		$questionSecretes =  $modelQuestionSecrete->getQuestionSecretes() ;
+		//var_dump("sdjfk",$questionSecretes);
 		$questionSecretes=$questionSecretes['response'];
-		
+		//var_dump("sdjfk",$questionSecretes);
 
 
 		$this->setDataView(array("pageTitle" => "Mot de passe oubli&eacute;","message" => ""));
