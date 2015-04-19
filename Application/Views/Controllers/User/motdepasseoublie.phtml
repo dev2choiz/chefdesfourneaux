@@ -7,20 +7,9 @@
     
     <input name="mail" type="email" class="form-control" placeholder="Email address" required autofocus>
     <p>Repondre &agrave; la question pour recevoir votre nouveau mot de passe par mail</p>
-    <select name="id_questionsecrete">
+    <select name="id_questionsecrete" id="id_questionsecrete">
         <?php
-
-
-        foreach ($questionSecretes as $questionSecrete) {
-            $selOuPas="";
-            if ( !empty($userView) ) {
-                if($userView['id_questionsecrete']===$questionSecrete['id_questionsecrete']){
-                    $selOuPas=" selected ";
-                }
-            }
-            
-
-            ?>
+        foreach ($questionSecretes as $questionSecrete) {?>
             <option value="<?=$questionSecrete['id_questionsecrete']?>" <?=$selOuPas?> ><?=$questionSecrete['value']?></option>
             }
         <?php } ?>

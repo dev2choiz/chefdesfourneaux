@@ -8,8 +8,8 @@ class ListIngredients extends \Library\Model\Model{
 
 	
 
-	public function __construct($connexionName){
-		parent::__construct($connexionName);
+	public function __construct(){
+		parent::__construct();
 	}
 
 
@@ -24,7 +24,9 @@ class ListIngredients extends \Library\Model\Model{
 			        'id_recette'			=>	$idrecette,
 			        'quantites'				=>	json_encode($quantites)
 	  	);
-		//var_dump("samrojtmj",$data);
+
+		
+
 		$opts = array('http' =>
 		    array(
 		        'method'  => 'POST',

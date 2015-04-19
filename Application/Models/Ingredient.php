@@ -8,8 +8,8 @@ class Ingredient extends \Library\Model\Model{
 
 	
 
-	public function __construct($connexionName){
-		parent::__construct($connexionName);
+	public function __construct(){
+		parent::__construct();
 	}
 
 
@@ -36,6 +36,9 @@ class Ingredient extends \Library\Model\Model{
 		
 	}
 
+
+
+	//??????? ne sert a rien ????????
 	public function insertIngredients($tabIngred, $recette){
 		$data =array(
 			        'service' 				=> 'Ingredient',

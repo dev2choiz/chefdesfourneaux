@@ -150,20 +150,18 @@ class Recette extends \Library\Controller\Controller{
 
 
 		$resultRecherche  	= $this->convEnTab($this->modelViewRecette->getRecherche($search, 'titre') );
+		echo "<br><br><br><br><br><br><br><br><br><br><br><br>";
+		var_dump($resultRecherche);
 		$resultRecherche 	= $resultRecherche['response'];
+
 		if (!empty($resultRecherche)) {
-				//2 cas:
-				//		1 resulat
 				if (count($resultRecherche)==1 ) {
-					//var_dump($resultRecherche);
 					//on redirige ver la page qui affiche la recette
 					header('location: '.LINK_ROOT.'recette/categorie/'.$resultRecherche[0]['id_recette']);
-
 				}
-			
 		}
-		
 
+		//s'il ya plusieurs resultats, on les affiche
 		$this->setDataView(array(
 			"pageTitle" 		=> "Recettes ",
 			"message" 			=> $this->message->showMessages(),

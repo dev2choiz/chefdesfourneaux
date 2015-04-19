@@ -7,8 +7,8 @@ namespace Application\Models;
 class ViewPanier extends \Library\Model\Modelview{
 
 
-	public function __construct($connexionName){
-		parent::__construct($connexionName);
+	public function __construct(){
+		parent::__construct();
 	}
 
 

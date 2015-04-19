@@ -5,8 +5,8 @@ namespace Library\Model;
 abstract class Modelview extends Model{
 
 
-	public function __construct($connexionName){
-		parent::__construct($connexionName);
+	public function __construct(){
+		parent::__construct();
 	}
 
 	public function delete($where){

@@ -10,8 +10,8 @@ class Commentaire extends \Library\Model\Model{
 
 	
 
-	public function __construct($connexionName){
-		parent::__construct($connexionName);
+	public function __construct(){
+		parent::__construct();
 	}
 
 

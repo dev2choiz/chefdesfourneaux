@@ -7,8 +7,8 @@ namespace Application\Models;
 class ViewRecette extends \Library\Model\Model{
 
 
-	public function __construct($connexionName){
-		parent::__construct($connexionName);
+	public function __construct(){
+		parent::__construct();
 	}
 
 
@@ -68,10 +68,10 @@ class ViewRecette extends \Library\Model\Model{
 	public function getRecherche($recherche, $champs){
 
 		$data =array(
-			        'recherche'				=> $recherche,
+			        'Recherche'				=> $recherche,
         			'ou'					=> $champs
 	  	);
-		return $this->webserviceRequest("GET", "ViewRecette","getRecherche",$data);
+		return $this->webserviceRequest("GET", "Recherche","getRecherche",$data);
 	}
 
 

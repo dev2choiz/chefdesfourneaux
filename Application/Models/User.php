@@ -5,8 +5,8 @@ namespace Application\Models;
 class User extends \Library\Model\Model{
 
 
-	public function __construct($connexionName){
-		parent::__construct($connexionName);
+	public function __construct(){
+		parent::__construct();
 	}
 
 
@@ -21,7 +21,6 @@ class User extends \Library\Model\Model{
 
 	public function updateUser($id, $mail , $password, $params){
 	
-		$params['verifid_user'] = $id;
 		$params['verifmail'] = $mail;
 		$params['verifpassword'] = $password;
 

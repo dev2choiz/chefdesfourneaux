@@ -27,7 +27,6 @@ class User extends \Library\Controller\Controller{
 		$this->setDataView(array("message" => ""));
 
 		if(isset($_POST['btn'])){
-
 			if(empty($_POST['nom'])){
 				$this->message->addError("Nom vide !");
 			}elseif(strlen($_POST['nom'])>50){
@@ -75,16 +74,13 @@ class User extends \Library\Controller\Controller{
 			$user=$modelUser->convEnTab($user);
 			var_dump("dqdf", $user);
 			$user=$user['response'][0];
-			//var_dump("dqdf", $user);
 			if(!empty($user)){
 
-
-				unset( $_POST['btn'],$_POST['password'], $_POST['confpassword'], $_POST['currentpassword'], $listMessage);
+				unset( $_POST['btn'],$_POST['password'], $_POST['currentpassword'], $listMessage);
 
 				$_POST['password']=$password;		//<== new password
-				var_dump($_POST);
+				var_dump('###########################################',$_POST);
 				$res=$modelUser->convEnTab($modelUser->updateUser($_SESSION['user']["id_user"],$_SESSION['user']["mail"] , $currentPassword, $_POST));
-				//echo "############".$res['page']."#############";
 				var_dump("resulta", $res);
 				echo $res['page'];
 				$res=$res['response'];
@@ -241,7 +237,7 @@ class User extends \Library\Controller\Controller{
 			
 
 
-			$_POST['role']='membre';
+			
 			$_POST['date_naissance']=$_POST['date_naissance'];
 
 			$modelUser = new \Application\Models\User('localhost');
@@ -273,7 +269,7 @@ class User extends \Library\Controller\Controller{
 			$this->setRedirect(LINK_ROOT);
 		}
 
-		$this->setDataView(array("pageTitle" => "Delete"));
+		$this->setDataView(array("pageTitle" => "Suppression de votre compte"));
 
 
 		if(isset($_POST['btn'])){
@@ -297,6 +293,7 @@ class User extends \Library\Controller\Controller{
 			$_POST['id_user']=$_SESSION['user']['id_user'];
 
 			$modelUser = new \Application\Models\User('localhost');
+			var_dump($_POST);
 			$res=$modelUser->convEnTab($modelUser->deleteUser($_POST));
 
 			$res=$res['response'];
@@ -305,9 +302,10 @@ class User extends \Library\Controller\Controller{
 
 			
 			if($res){
+				$this->setRedirect(LINK_ROOT);
 				$this->message->addSuccess("Compte supprimé");
 				unset($_SESSION['user']);
-				$this->setRedirect(LINK_ROOT.'user/login'); 	
+				 	
 			}else{
 				$this->message->addError("mot de passe erroné  !");
 
