@@ -1,19 +1,19 @@
-.content_view{
-	background-color: #F7D7C8;
-}
+/* .content_view{
+	background-color: #FBEACC;
+} */
 .containerView{
 	background-color: #FFF;
 }
 
 /* NAVBAR */
 .containerNav{
-	background-color: #FFF;
+	background-color: #FDF3E9;
 	font-weight: bold;
 	height: 200px;
 }
 .navbar-nav {
   margin-top: 15px;
-  background-color: #d8ecf2;
+  /* background-color: #FBEACC; */
   border-radius: 10px;
 }
 .lienChefDesFourneaux{
@@ -33,21 +33,23 @@
 } */
 
 /* SEARCH BAR */
+/*#FBEACC*/
 #wrapperSearchBar{
-	background-color: #d8ecf2;
+	margin-top: 20px;
+	background-color: #FFF;
 	margin-top: 10px;
 	padding: 6px;
 
 }
 #inputTextSearch{
-	border-color: #d8ecf2;
+	border-color: #FBEACC;
 }
 /* END SEARCH BAR */
 
 /* END NAVBAR */
 
 .separator{
-	height: 100px;
+	height: 250px;
 }
 /* CONTENT VIEW */
 .content_view{
