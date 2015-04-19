@@ -7,7 +7,7 @@
     <input value="<?=(isset($_SESSION['user']['nom']))?$_SESSION['user']['nom']:''?>" name="nom" type="text" class="form-control" placeholder="Nom" required autofocus>
     <input value="<?=(isset($_SESSION['user']['prenom']))?$_SESSION['user']['prenom']:''?>" name="prenom" type="text" class="form-control" placeholder="Prénom" required>
     <input value="<?=(isset($_SESSION['user']['pseudo']))?$_SESSION['user']['pseudo']:''?>" name="pseudo" type="text" class="form-control" placeholder="Pseudo" required>
-    <input value="<?=(isset($_SESSION['user']['mail']))?$_SESSION['user']['mail']:''?>" name="mail" type="email" class="form-control" placeholder="Adresse Mail" required>
+    <input value="<?=(isset($_SESSION['user']['mail']))?$_SESSION['user']['mail']:''?>" name="mail" type="email" class="form-control" placeholder="Adresse Mail">
 
     <fieldset>
         <legend>Update Password</legend>

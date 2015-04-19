@@ -28,8 +28,31 @@
                 
                 <nav class="navbar navbar-inverse navbar-static-top">
                     <div class="containerNav">
-
-                        <div class="navbar-header">
+                        <div class="row">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand lienChefDesFourneaux activeLink col-md-4" href="<?=LINK_ROOT?>"><img src="<?=IMG_LINK_ROOT?>chefdesfourneauxlogo.png"></a>
+                                <div class="navbar panier col-md-4" id="panier">                                
+                                    <?php if(!empty($_SESSION['user'])): ?> 
+                                    <a class="btn btn-default lienPanier " href="<?=LINK_ROOT.'panier/indexpanier/'.$_SESSION['user']['id_user']?>">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span> 
+                                        Votre Panier : 
+                                        <div class="panierContent" id="panierContent">0 </div>
+                                        articles
+                                    </a>
+                                    <?php else: ?>
+                                        <a class="btn btn-default lienPanier animSiteFadeInSlow" href="<?=LINK_ROOT.'vente/indexproduit/'?>"> Acheter des produits</a>
+                                    <?php endif; ?>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- <div class="navbar-header">
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                                 <span class="sr-only">Toggle navigation</span>
                                 <span class="icon-bar"></span>
@@ -50,7 +73,7 @@
                                 <?php endif; ?>
                             </div>
                             
-                        </div>
+                        </div> -->
                         
 
                         <div id="navbar" class="navbar-collapse collapse">
@@ -60,10 +83,10 @@
                                 <li class="lienChefDesFourneaux"><a  href="<?=LINK_ROOT.'recette/index'?>">Categories</a></li>
                                 <li class="lienChefDesFourneaux"><a  href="<?=LINK_ROOT.'recette/indexchef'?>">Recettes de chef</a></li>
                                 <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'recette/indexcategorie/3'?>">Forme et santé</a></li>
-                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexlivre'?>">Livres</a></li>
-                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexrestaurant'?>">Restaurants</a></li>
+                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Livres</a></li>
+                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Restaurants</a></li>
                                 <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Ustensiles de cuisine</a></li>
-                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Vidéos</a></li>
+                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Vidéos</a></li>
                                 <li class="dropdown lienChefDesFourneaux">
                                     <?php if(empty($_SESSION['user'])):?>
                                     <a href="#" class="dropdown-toggle animSiteFadeInNormal" data-toggle="dropdown" role="button" aria-expanded="false">S'inscrire / Se connecter <span class="caret"></span></a>
