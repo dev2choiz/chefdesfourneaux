@@ -71,7 +71,7 @@ class ViewRecette extends \Library\Model\Model{
 	public function getRecherche($recherche, $champs){
 
 		$data =array(
-			        'Recherche'				=> $recherche,
+			        'recherche'				=> $recherche,
         			'ou'					=> $champs
 	  	);
 		return $this->webserviceRequest("GET", "Recherche","getRecherche",$data);

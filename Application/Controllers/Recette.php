@@ -148,17 +148,15 @@ class Recette extends \Library\Controller\Controller{
 
 	public function rechercheAction($search){
 
-
 		$resultRecherche  	= $this->convEnTab($this->modelViewRecette->getRecherche($search, 'titre') );
-		echo "<br><br><br><br><br><br><br><br><br><br><br><br>";
-		var_dump($resultRecherche);
-		$resultRecherche 	= $resultRecherche['response'];
 
+		$resultRecherche 	= $resultRecherche['response'];
 		if (!empty($resultRecherche)) {
-				if (count($resultRecherche)==1 ) {
+				if (count($resultRecherche) == 1 ) {
+
 					//on redirige ver la page qui affiche la recette
 					header('location: '.LINK_ROOT.'recette/categorie/'.$resultRecherche[0]['id_recette']);
-				}
+				}else{echo "########et pas dedans<br>";}
 		}
 
 		//s'il ya plusieurs resultats, on les affiche
