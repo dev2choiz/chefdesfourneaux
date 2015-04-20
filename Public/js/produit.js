@@ -44,14 +44,9 @@ function ajouterProduit(){
             ids = parseInt((data.response));
             script = recupererScriptNewProduit(ids) ;
 
-
-            console.log(script);
-
-
-
 			$("#WrapperProduits").append(script);
-			//$("#WrapperProduits").html("##########"+script);
-			//document.getElementById("WrapperProduits").innerHTML="##########"+script;
+			alert("produit ajouté");
+			
         }
 
     });
@@ -127,7 +122,7 @@ function recupererScriptNewProduit(idProd){
 		'id_produit' 	: idProd
 	};
 	
-		alert("dans recuperer script");
+		//alert("dans recuperer script");
    	$.ajax({
         type: 'POST',
         data: jsonData,
@@ -137,7 +132,7 @@ function recupererScriptNewProduit(idProd){
         success: function(data) {
 
         	console.log(data.response);
-        	alert('console looog');
+        	
         	alors = data.response;
 
         }
