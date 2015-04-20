@@ -8,14 +8,19 @@
     <input value="<?=(isset($_POST['pseudo']))?$_POST['pseudo']:''?>" name="pseudo" type="text" class="form-control" placeholder="Pseudo" required>
     <input value="<?=(isset($_POST['mail']))?$_POST['mail']:''?>" name="mail" type="email" class="form-control" placeholder="Adresse email" required>
 
-    <!--select>
-        <option value="">Monsieur</option>
-        <option value="">Madame</option>
-    </select-->
 
+
+    
+    
     <input value="<?=(isset($_POST['date_naissance']))?$_POST['date_naissance']:''?>" name="date_naissance" type="date" class="form-control" placeholder="Date de naissance" required   > (AAAA/MM/JJ)
-    <!--input value="<?=(isset($_POST['mail']))?$_POST['mail']:''?>" name="mail" type="email" class="form-control" placeholder="Email address" required>
-    <input value="<?=(isset($_POST['mail']))?$_POST['mail']:''?>" name="mail" type="email" class="form-control" placeholder="Email address" required-->
+
+    <select  class="form-control" name="id_questionsecrete" required>
+    <?php foreach ($questionSecretes as $qs): ?>
+        <option value="<?=$qs['id_questionsecrete']?>" ><?=$qs['value']?></option>
+    <?php endforeach; ?>
+    </select>
+    <input value="<?=(isset($_POST['reponsesecrete']))?$_POST['reponsesecrete']:''?>" name="reponsesecrete" type="text" class="form-control" placeholder="reponse secrete" required>
+
     <input name="password" type="password" class="form-control form-password" placeholder="Password" required>
     <input name="confpassword" type="password" class="form-control" placeholder="Confirm Password" required>
     <button name="btn" class="btn btn-lg btn-primary btn-block" type="submit"><?=$pageTitle?></button>

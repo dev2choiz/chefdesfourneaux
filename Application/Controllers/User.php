@@ -243,7 +243,7 @@ class User extends \Library\Controller\Controller{
 			$modelUser = new \Application\Models\User('localhost');
 			$res=$modelUser->convEnTab($modelUser->insertUser($_POST));
 
-			echo $res['page'];
+			//echo $res['page'];
 
 
 			//var_dump("dskj",$res, $_POST);
@@ -256,7 +256,17 @@ class User extends \Library\Controller\Controller{
 
 			}
 		}
-		$this->setDataView(array("message" => $this->message->showMessages()));	
+
+
+		$modelQS = new \Application\Models\QuestionSecrete('localhost');
+
+		$qSecretes = $modelQS->getQuestionSecretes();
+		$qSecretes=$qSecretes['response'];
+		
+		$this->setDataView(array(
+			"message"			 => $this->message->showMessages(),
+			"questionSecretes"	 => $qSecretes
+			));	
 	}
 
 
