@@ -13,6 +13,7 @@
         <![endif]-->
 
         <!-- Styles -->
+        <link href="<?=WEB_ROOT?>/css/reset.css" rel="stylesheet">
         <link href="<?=WEB_ROOT?>/css/bootstrap.min.css" rel="stylesheet">
         <link href="<?=WEB_ROOT?>/css/layouts/carousel.css" rel="stylesheet">
         <link href="<?=WEB_ROOT?>/css/chefdesfourneaux.css" rel="stylesheet">
@@ -23,21 +24,58 @@
         <!-- NAVBAR
     ================================================== -->
     <body>
-        <div class="navbar-wrapper">
-            <!-- <div class="container"> -->
-                
-                <nav class="navbar navbar-inverse navbar-static-top">
-                    <div class="containerNav">
+    <div class="menu">
+        <div class="navbar-wrapper">     
+            <nav class="navbar navbar-static-top">
+                <div class="containerNav">
+                    <div class="container">
                         <div class="row">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                                <a class="navbar-brand lienChefDesFourneaux activeLink col-md-4" href="<?=LINK_ROOT?>"><img src="<?=IMG_LINK_ROOT?>chefdesfourneauxlogo.png"></a>
-                                <div class="navbar panier col-md-4" id="panier">                                
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div class="col-md-6 logo">
+                                <a class="navbar-brand lienChefDesFourneaux " href="<?=LINK_ROOT?>"><img src="<?=IMG_LINK_ROOT?>chefdesfourneauxlogo.png"></a>
+                                Les meilleures recettes pour tous les goûts !
+                            </div>
+                            
+                            <div class="buttonNav col-md-6">
+                                <div class="col-md-6" id="connection">                               
+                                    <button class="btn btn-default dropdown">
+                                        <?php if(empty($_SESSION['user'])):?>
+                                        <div class="dropdown-toggle animSiteFadeInNormal" data-toggle="dropdown" role="button" aria-expanded="false">S'inscrire / Se connecter <span class="caret"></span></div>
+                                        <?php else :?>
+                                        <div class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bienvenue <?=$_SESSION['user']['pseudo']?> <span class="caret"></span></div>
+                                        <?php endif ;?>
+
+                                        <ul class="dropdown-menu" role="menu">
+                                            <?php if(empty($_SESSION['user'])): ?>
+                                            <li><a href="<?=LINK_ROOT.'user/inscription'?>">Inscription</a></li>
+                                            <li><a href="<?=LINK_ROOT.'user/login'?>">Connexion</a></li>
+                                            <?php else :?>
+                                            <li><a href="<?=LINK_ROOT.'user/profil'?>">
+                                                    <span class="glyphicon glyphicon-user"></span>
+                                                    Profil
+                                                </a>
+                                            </li>
+                                            <li><a class="blog-nav-item" href="<?=LINK_ROOT.'user/logout'?>">Deconnexion</a></li>
+                                            <?php endif; 
+                                            if((!empty($_SESSION['user'])) && $_SESSION['user']['role'] == "admin"): ?>
+                                            <li class="divider"></li>
+                                            <li class="dropdown-header">Administration du site</li>
+                                            
+                                            <li><a href="<?=LINK_ROOT.'admin/index'?>">Recettes</a></li>
+                                            <li><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Produits</a></li>
+                                            <li><a href="<?=LINK_ROOT.'vente/indexrestaurant'?>">Restaurant</a></li>
+                                            <li><a href="<?=LINK_ROOT.'vente/indexlivre'?>">Livres de cuisine</a></li>
+                                            <?php endif; ?>
+                                            
+                                        </ul> 
+                                    </button>
+                                </div>
+                                <div class="panier col-md-6" id="panier">                                
                                     <?php if(!empty($_SESSION['user'])): ?> 
                                     <a class="btn btn-default lienPanier " href="<?=LINK_ROOT.'panier/indexpanier/'.$_SESSION['user']['id_user']?>">
                                         <span class="glyphicon glyphicon-shopping-cart"></span> 
@@ -49,116 +87,99 @@
                                         <a class="btn btn-default lienPanier animSiteFadeInSlow" href="<?=LINK_ROOT.'vente/indexproduit/'?>"> Acheter des produits</a>
                                     <?php endif; ?>
                                 </div>
-                                
+                            </div> 
+                        </div><!-- Fin navbar-header -->
+                    
+                    
+                        <div class="row">
+                            <div id="navbar" class="navbar-collapse collapse menuLiens">
+                                <ul class="nav navbar-nav animSiteFadeInSlow">
+                                    <li class="lienChefDesFourneaux1"><a href="<?=LINK_ROOT.'recette/index'?>">Categories</a></li>
+                                    <li class="lienChefDesFourneaux2"><a href="<?=LINK_ROOT.'recette/indexchef'?>">Recettes de chef</a></li>
+                                    <li class="lienChefDesFourneaux3"><a href="<?=LINK_ROOT.'recette/indexcategorie/3'?>">Forme et santé</a></li>
+                                    <li class="lienChefDesFourneaux4"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Livres</a></li>
+                                    <li class="lienChefDesFourneaux5"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Restaurants</a></li>
+                                    <li class="lienChefDesFourneaux6"><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Ustensiles de cuisine</a></li>
+                                    <li class="lienChefDesFourneaux7"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Vidéos</a></li>  
+                                </ul>
                             </div>
                         </div>
-                        <!-- <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand lienChefDesFourneaux activeLink" href="<?=LINK_ROOT?>"><img src="<?=IMG_LINK_ROOT?>chefdesfourneauxlogo.png"></a>
-                            <div class="navbar panier col-xs-6 col-md-4" id="panier">                                
-                                <?php if(!empty($_SESSION['user'])): ?> 
-                                <a class="btn btn-default lienPanier " href="<?=LINK_ROOT.'panier/indexpanier/'.$_SESSION['user']['id_user']?>">
-                                    <span class="glyphicon glyphicon-shopping-cart"></span> 
-                                    Votre Panier : 
-                                    <div class="panierContent" id="panierContent">0 </div>
-                                    articles
-                                </a>
-                                <?php else: ?>
-                                    <a class="btn btn-default lienPanier animSiteFadeInSlow" href="<?=LINK_ROOT.'vente/indexproduit/'?>"> Acheter des produits</a>
-                                <?php endif; ?>
-                            </div>
-                            
-                        </div> -->
-                        
+                    </div> 
+                </div> <!-- Fin containerNav -->
+            </nav>
+        </div> <!-- Fin navbar-wrapper -->
+    </div>
+         
 
-                        <div id="navbar" class="navbar-collapse collapse">
-
-                            <ul class="nav navbar-nav animSiteFadeInSlow">
-                            
-                                <li class="lienChefDesFourneaux"><a  href="<?=LINK_ROOT.'recette/index'?>">Categories</a></li>
-                                <li class="lienChefDesFourneaux"><a  href="<?=LINK_ROOT.'recette/indexchef'?>">Recettes de chef</a></li>
-                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'recette/indexcategorie/3'?>">Forme et santé</a></li>
-                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Livres</a></li>
-                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Restaurants</a></li>
-                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Ustensiles de cuisine</a></li>
-                                <li class="lienChefDesFourneaux"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Vidéos</a></li>
-                                <li class="dropdown lienChefDesFourneaux">
-                                    <?php if(empty($_SESSION['user'])):?>
-                                    <a href="#" class="dropdown-toggle animSiteFadeInNormal" data-toggle="dropdown" role="button" aria-expanded="false">S'inscrire / Se connecter <span class="caret"></span></a>
-                                    <?php else :?>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bienvenue <?=$_SESSION['user']['pseudo']?> <span class="caret"></span></a>
-                                    <?php endif ;?>
-
-
-
-                                    <ul class="dropdown-menu" role="menu">
-                                        <?php if(empty($_SESSION['user'])): ?>
-                                        <li><a href="<?=LINK_ROOT.'user/inscription'?>">Inscription</a></li>
-                                        <li><a href="<?=LINK_ROOT.'user/login'?>">Connexion</a></li>
-                                        <?php else :?>
-                                        <li><a href="<?=LINK_ROOT.'user/profil'?>">
-                                                <span class="glyphicon glyphicon-user"></span>
-                                                Profil
-                                            </a>
-                                        </li>
-                                        <li><a class="blog-nav-item" href="<?=LINK_ROOT.'user/logout'?>">Deconnexion</a></li>
-                                        <?php endif; 
-                                        if((!empty($_SESSION['user'])) && $_SESSION['user']['role'] == "admin"): ?>
-                                        <li class="divider"></li>
-                                        <li class="dropdown-header">Administration du site</li>
-                                        
-                                        <li><a href="<?=LINK_ROOT.'admin/index'?>">Recettes</a></li>
-                                        <li><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Produits</a></li>
-                                        <li><a href="<?=LINK_ROOT.'vente/indexrestaurant'?>">Restaurant</a></li>
-                                        <li><a href="<?=LINK_ROOT.'vente/indexlivre'?>">Livres de cuisine</a></li>
-                                        <?php endif; ?>
-                                        
-                                    </ul> 
-                                </li>
-                            </ul>
-
-                        </div> <!-- Fin navbar-header --> 
-
-                        <div class="animSiteShowFast input-group col-md-6 col-md-offset-3" id="wrapperSearchBar">
-                            <input class="form-control" type="text" list="dataListSearch" id="inputTextSearch" placeholder="Recherche..." />
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" id="buttonSearch" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                            </span>
-                            <datalist id="dataListSearch">
-                            </datalist>
-                            <div id="divSearchResult"></div>
-                        </div>  
-                    </div> <!-- Fin container -->
-
-                </nav>
-            <!-- </div> Fin container -->
-        </div> <!-- Fin navbar-wrapper --> 
-
-        <div id="separator" class="separator"></div>
+        <!-- <div id="separator" class="separator"></div> -->
         
 
         <!-- Marketing messaging and featurettes
         ================================================== -->
-        <div class="marketing ">
-            
-
-            <div class="content_view" id="content_view">
+        <div class="marketing">
+            <div class="contentView" id="contentView">
+                <div class="animSiteShowFast input-group col-md-6 col-md-offset-3" id="wrapperSearchBar">
+                    <input class="form-control" type="text" list="dataListSearch" id="inputTextSearch" placeholder="Recherche..." />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" id="buttonSearch" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                    <datalist id="dataListSearch">
+                    </datalist>
+                    <div id="divSearchResult"></div>
+                </div> 
                 <?=$content_view?>
             </div>
-  
-            <!-- FOOTER -->
-            <footer class="">
-            <p><a href="<?=LINK_ROOT?>">Retour à l'accueil</a></p> 
-            <p class="pull-right"><a href="#">Back to top</a></p>
-            <p>&copy; 2015 chef des fourneaux, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-            </footer>
+            
+        </div><!-- /.marketing -->
+        <div id="row affiliation">
+                <div class="col-md-4">
+                    <a href="#">
+                        <img src="<?=IMG_LINK_ROOT?>affiliation/auchandrive.jpg" alt="utiliser auchan drive pour acheter vos ingrédients">
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#">
+                        <img src="<?=IMG_LINK_ROOT?>affiliation/ecogourmet.png" alt="Eco gourmet">
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#">
+                        <img src="<?=IMG_LINK_ROOT?>affiliation/plaisdesthes.jpg" alt="Plais du thé">
+                    </a>
+                </div>
+            </div>
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p>
+                Chef des fourneaux est disponible sur Android 
+                <a href="#"><img src="<?=IMG_LINK_ROOT?>icons/android128.png" alt="télécharger l'application android chef des fourneaux"></a>
+            </p>
+            <br>
+            <p>
+                Suivez-nous !!!
+                <a href="https://www.facebook.com/pages/Chef-des-Fourneaux/791557667596027"><img src="<?=IMG_LINK_ROOT?>icons/facebook128.png" alt="suivre chef des fourneaux sur facebook"></a>
+                <a href="#"><img src="<?=IMG_LINK_ROOT?>icons/twitter128.png" alt="suivre chef des fourneaux sur twitter"></a>
+                <a href="#"><img src="<?=IMG_LINK_ROOT?>icons/google128.png" alt="suivre chef des fourneaux sur google +"></a>
+                <a href="#"><img src="<?=IMG_LINK_ROOT?>icons/pinterest128.png" alt="suivre chef des fourneaux sur pinterest"></a>
+                <a href="#"><img src="<?=IMG_LINK_ROOT?>icons/youtube128.png" alt="suivre chef des fourneaux sur youtube"></a>
+            </p>
+            <hr>
+            <p>
+                <a href="<?=LINK_ROOT?>">Retour à l'accueil</a>
+            </p> 
+            <p class="pull-right">
+                <a href="#">Haut de page</a>
+            </p>
+            <p>
+                <a href="#">Qui sommes nous</a> - 
+                <a href="#">Contact</a> - 
+                <a href="#">Newsletter</a> - 
+                <a href="#">Mentions légales</a> -  
+                &copy; 2015 chef des fourneaux
+            </p>
+        </footer>
 
-        </div><!-- /.container -->
+        
 
 
         
@@ -176,6 +197,6 @@
 
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="<?=WEB_ROOT?>/js/ie10-viewport-bug-workaround.js"></script>
+        <script src="<?=WEB_ROOT?>/js/bootstrap/ie10-viewport-bug-workaround.js"></script>
     </body>
 </html>
