@@ -18,6 +18,8 @@
                 </div> <!-- /.carousel-caption -->
             </div> <!-- /.container -->
         </div> <!-- /.item -->
+
+        <!-- Affiche l'image de la recette ayant le top 1 en base -->
         <div class="item">
         <?php foreach($recettes as $recette): ?>
             <?php if($recette['top'] == 1): ?>
@@ -30,6 +32,8 @@
             </div> <!-- /.container -->
         <?php endif; endforeach; ?>
         </div> <!-- /.item -->
+
+        <!-- Affiche l'image de la recette ayant le top 2 en base -->
         <div class="item">
         <?php foreach($recettes as $recette): ?>
             <?php if($recette['top'] == 2): ?>
@@ -42,6 +46,8 @@
             </div> <!-- /.container -->
         <?php endif; endforeach; ?>
         </div> <!-- /.item -->
+
+        <!-- Affiche l'image de la recette ayant le top 3 en base -->
         <div class="item">
         <?php foreach($recettes as $recette): ?>
             <?php if($recette['top'] == 3): ?>
@@ -51,9 +57,11 @@
                     <h1>Envie de plus de recettes?</h1>
                     <p><a class="btn btn-lg btn-primary" href="<?=LINK_ROOT.'recette/index'?>" role="button">Voir toutes les recettes</a></p>
                 </div> <!-- /.carousel-caption -->
+
             </div> <!-- /.container -->
         <?php endif; endforeach; ?>
         </div> <!-- /.item -->
+        
     </div> <!-- /.carousel-inner -->
     <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -65,80 +73,118 @@
     </a>
 </div><!-- /.carousel -->
 
-<br/>
 <div class="container containerView">
+
+    <div class="row textHoverImg">
+        <strong>
+            <h3>Vous trouverez ici nos meilleures recettes de chef, 
+            <p>ainsi que des recettes de grands livres de cuisine afin ne pas rater vos plats</p></h3>
+        </strong>
+    </div>
+
     <!-- Entrées / Plats / Desserts -->
     <div class="row">
         <div class="col-lg-4">
-            <img class="img-circle" src="<?=WEB_ROOT?>/img/type/entree.jpg" alt="entrée, chef des fourneaux" style="width: 160px; height: 160px;">
-            <h2>Entrée</h2>
-            <p><a class="btn btn-default" href="<?=LINK_ROOT.'recette/type/entree'?>" role="button">Voir toutes les entrées &raquo;</a></p>
+            <a class="btn btn-default" href="<?=LINK_ROOT.'recette/type/entree'?>"><img class="img-circle" src="<?=WEB_ROOT?>/img/type/entree.jpg" alt="entrée, chef des fourneaux"></a>
+            <h3>Entrée</h3>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-            <img class="img-circle" src="<?=WEB_ROOT?>/img/type/plat.jpg" alt="plat, chef des fourneaux" style="width: 160px; height: 160px;">
-            <h2>Plats</h2>
+            <img class="img-circle" src="<?=WEB_ROOT?>/img/type/plat.jpg" alt="plat, chef des fourneaux">
+            <h3>Plats</h3>
             <p><a class="btn btn-default" href="<?=LINK_ROOT.'recette/type/plat'?>" role="button">Voir tous les plats &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-            <img class="img-circle" src="<?=WEB_ROOT?>/img/type/dessert.jpg" alt="dessert, chef des fourneaux" style="width: 160px; height: 160px;">
-            <h2>Desserts</h2>
+            <img class="img-circle" src="<?=WEB_ROOT?>/img/type/dessert.jpg" alt="dessert, chef des fourneaux">
+            <h3>Desserts</h3>
             <p><a class="btn btn-default" href="<?=LINK_ROOT.'recette/type/dessert'?>" role="button">Voir tous les desserts &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
 
+        <div class="legendeImg">
+            <h3>Les tops recettes du mois, tartines fêta tomates, recettes de sushis et makis.</h3>
+        </div>
+    </div><!-- /.row -->
     <hr/>
+    
+    <!-- Entrées / Plats / Desserts -->
+    <div class="row">
+        <div class="col-lg-4">
+            <img class="img-circle" src="<?=WEB_ROOT?>/img/type/entree.jpg" alt="entrée, chef des fourneaux">
+            <h3>Entrée</h3>
+            <p><a class="btn btn-default" href="<?=LINK_ROOT.'recette/type/entree'?>" role="button">Voir toutes les entrées &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="<?=WEB_ROOT?>/img/type/plat.jpg" alt="plat, chef des fourneaux">
+            <h3>Plats</h3>
+            <p><a class="btn btn-default" href="<?=LINK_ROOT.'recette/type/plat'?>" role="button">Voir tous les plats &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="<?=WEB_ROOT?>/img/type/dessert.jpg" alt="dessert, chef des fourneaux">
+            <h3>Desserts</h3>
+            <p><a class="btn btn-default" href="<?=LINK_ROOT.'recette/type/dessert'?>" role="button">Voir tous les desserts &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="legendeImg">
+            <h3>C'est bientôt l'été, le temps des régimes ! Faites vous plaisir en gardant la ligne avec nos recettes minceurs !</h3>
+        </div>
+    </div><!-- /.row -->
+    <hr/>
+
+    <!-- Entrées / Plats / Desserts -->
+    <div class="row">
+        <div class="col-lg-4">
+            <img class="img-circle" src="<?=WEB_ROOT?>/img/type/entree.jpg" alt="entrée, chef des fourneaux">
+            <h3>Entrée</h3>
+            <p><a class="btn btn-default" href="<?=LINK_ROOT.'recette/type/entree'?>" role="button">Voir toutes les entrées &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="<?=WEB_ROOT?>/img/type/plat.jpg" alt="plat, chef des fourneaux">
+            <h3>Plats</h3>
+            <p><a class="btn btn-default" href="<?=LINK_ROOT.'recette/type/plat'?>" role="button">Voir tous les plats &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="<?=WEB_ROOT?>/img/type/dessert.jpg" alt="dessert, chef des fourneaux">
+            <h3>Desserts</h3>
+            <p><a class="btn btn-default" href="<?=LINK_ROOT.'recette/type/dessert'?>" role="button">Voir tous les desserts &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="legendeImg"><h3>Découvrez les recettes de nos chefs à la une Olivier Streiff, Maité Ordonnez et Sébastien Zozaya</h3></div>
+    </div><!-- /.row -->
+</div><!-- /.container -->
+
+<img src="<?=IMG_LINK_ROOT?>produit/imgproduits1600.png">
+
+<div class="container containerView">
+    <div class="row textHoverImg">
+        <strong>
+            <h3>Devenez un vrai chef cuisinier chez vous ! 
+            <p>Découvrez nos produits professionnels pour faire vos recettes parfaitement</p><h3>
+        </strong>
+    </div>
     <!-- Produits -->
     <div class="row">
         <?php foreach($produits as $produit): ?>
             <?php if($produit['top'] == 1): ?>
                 <div class="col-lg-4">
-                    <img class="img-circle" src="<?=IMG_LINK_ROOT.$produit['img']?>" alt="<?= $produit['value']?>" style="width: 140px; height: 140px;">
-                    <h2><?= $produit['value']?></h2>
+                    <img class="img-circle" src="<?=IMG_LINK_ROOT.$produit['img']?>" alt="<?= $produit['value']?>">
+                    <h3><?= $produit['value']?></h3>
                     <p></p>
                     <p><a class="btn btn-default" href="<?=LINK_ROOT.'vente/produit'.$produit['id_produit']?>" role="button">Voir ce produit  &raquo;</a></p>
                 </div><!-- /.col-lg-4 -->
             <?php endif; ?>
             <?php if($produit['top'] == 2): ?>
                 <div class="col-lg-4">
-                    <img class="img-circle" src="<?=IMG_LINK_ROOT.$produit['img']?>" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-                    <h2><?= $produit['value']?></h2>
+                    <img class="img-circle" src="<?=IMG_LINK_ROOT.$produit['img']?>" alt="Generic placeholder image">
+                    <h3><?= $produit['value']?></h3>
                     <p></p>
                     <p><a class="btn btn-default" href="<?=LINK_ROOT.'vente/produit'.$produit['id_produit']?>" role="button">Voir toutes les entrées &raquo;</a></p>
                 </div><!-- /.col-lg-4 -->
             <?php endif; ?>
             <?php if($produit['top'] == 3): ?>
                 <div class="col-lg-4">
-                    <img class="img-circle" src="<?=IMG_LINK_ROOT.$produit['img']?>" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-                    <h2><?= $produit['value']?></h2>
+                    <img class="img-circle" src="<?=IMG_LINK_ROOT.$produit['img']?>" alt="Generic placeholder image">
+                    <h3><?= $produit['value']?></h3>
                     <p></p>
                     <p><a class="btn btn-default" href="<?=LINK_ROOT.'vente/produit'.$produit['id_produit']?>" role="button">Voir toutes les entrées &raquo;</a></p>
                 </div><!-- /.col-lg-4 -->
             <?php endif; ?>
         <?php endforeach; ?>
     </div><!-- /.row -->
-
-    <hr/>
-    <!-- Recettes des chefs -->
-    <div class="row">
-        <div class="col-lg-4">
-            <img class="img-circle" src="<?=WEB_ROOT?>/img/entree2.jpg" alt="Generic placeholder image" style="width: 160px; height: 160px;">
-            <h2>Chef 1</h2>
-            <p></p>
-            <p><a class="btn btn-default" href="#" role="button">Voir toutes les entrées &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-            <img class="img-circle" src="<?=WEB_ROOT?>/img/plat1.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-            <h2>Chef 2</h2>
-            <p>Trouver des trucs à raconter sur les plats</p>
-            <p><a class="btn btn-default" href="#" role="button">Voir tous les plats &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-            <img class="img-circle" src="<?=WEB_ROOT?>/img/dessert2.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-            <h2>Chef 3</h2>
-            <p>Trouver des trucs à raconter sur les desserts</p>
-            <p><a class="btn btn-default" href="#" role="button">Voir tous les desserts &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
 </div><!-- /.container -->
-
-

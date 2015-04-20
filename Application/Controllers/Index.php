@@ -41,6 +41,8 @@ class Index extends \Library\Controller\Controller
 			"recettes" => $viewAllRecettes,
 			"produits" => $produitsAll
 		));
+
+		$this->setStyleView('index.css');
 	}
 
 }

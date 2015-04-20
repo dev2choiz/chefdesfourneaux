@@ -1,0 +1,28 @@
+
+
+/* SLIDER */
+.carousel-indicators{
+	bottom: 30px;
+}
+/* END SLIDER */
+
+.img-circle{
+	width: 200px;
+	height: 200px;
+}
+
+.textHoverImg{
+	font-family: 'Origin';
+	/* font-size: 22px; */
+	text-align: center;
+	height: 40px;
+	background-color: #FFF;
+	position: relative;
+	z-index: 20;
+	margin-bottom: 0px;
+	bottom: 40px;
+}
+
+.legendeImg{
+	text-align: center;
+}
