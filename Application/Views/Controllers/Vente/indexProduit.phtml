@@ -82,7 +82,7 @@
 					<p>Référence : <span id="labelRefProduit"><?= $produit['ref']?></span></p>
 				</div>
 				<div class="col-md-4">
-					<span id="labelPrixProduit"><?= number_format($produit['prix'], 2, ',', ' ') ?></span> €
+					<span id="labelPrixProduit"><?= number_format($produit['prix'], 2, '.', ' ') ?></span> €
 				</div>
 				<div class="col-md-4">
 					<button class='btn btn-success btnAcheterProduit' id="btnAcheterProduit">Mettre ce produit dans mon panier <?=$produit['acheterpopup']?></button>

@@ -27,14 +27,10 @@ class Admin
 
 
 	public function indexAction(){
-				echo "<BR><BR><BR>";
 		if($_SESSION['user']['role'] !== "admin"){
 			$this->setRedirect(LINK_ROOT);
 		}
-		//$viewR = $this->modelVR->getRecettes();
 		$viewRs = $this->modelVR->getAllViewRecettes();
-		//var_dump("dfjk", $viewRs);
-		//var_dump($viewRs['page']."fdgfd");
 
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
@@ -47,7 +43,6 @@ class Admin
 	public function creerRecetteAction(){
 		
 
-		//echo "creer    ".LINK_ROOT."recette/creer";
 		if($_SESSION['user']['role'] !== "admin"){
 			header('location: '.LINK_ROOT);
 			die();
@@ -61,13 +56,6 @@ class Admin
 
 		
 		if(isset($_POST['btn'])){
-			//var_dump($_POST, $_FILES);
-
-			
-			
-
-
-			
 			if(empty($_POST['value'])){
 				$this->message->addError("Recette vide !");
 			}

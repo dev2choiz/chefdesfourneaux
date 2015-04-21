@@ -21,7 +21,7 @@ class PopUpProduit extends \Library\PopUp\PopUp{
 				<input type='hidden' value='$id' id='id_produit' name='id_produit'>
 				<div class='col-md-6'>Prix :</div>
 				<div class='col-md-6'>
-					<input name='prix' type='text' id='prix' value='$prix €'>
+					<input name='prix' type='text' id='prix' value='".number_format($prix, 2, '.', ' ')." €'>
 				</div>
 				<div class='col-md-6'>Ref :</div>
 				<div class='col-md-6'>

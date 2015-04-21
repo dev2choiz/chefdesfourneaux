@@ -1,13 +1,10 @@
 
 
 <div class="container containerView" id="WrapperProduits">
-<!-- <div class="row">
-	<div class="col-md-4" id="labelProduits">Produits</div>
-	<div class="col-md-4" id="labelPrix">Prix</div>
-</div> -->
+
 <h1>Liste des Produits de votre panier</h1>
+
 <?php 
-//var_dump($viewPanier);
 $somme = 0;
 foreach ($viewPanier as $produit):?>
 	<hr>
@@ -45,7 +42,7 @@ endforeach; ?>
 
 
 	<div >
-		<form method="post" action="<?=LINK_ROOT.'/vente/payer'?>">
+		<form method="post" action="<?=LINK_ROOT.'/panier/payer'?>">
 			<input type="hidden" name="id_user" value="<?= $_SESSION['user']['id_user'] ?>">
 			<button class='btn btn-success col-md-3 col-md-offset-3 btnAcheterProduit' id="btnPasserCommande">Finaliser la commande</button>
 		</form>

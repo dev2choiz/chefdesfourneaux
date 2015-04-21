@@ -85,8 +85,7 @@ class Vente extends \Library\Controller\Controller{
 		$produit = $produit['response'][0];
 		$viewProduits = $this->modelViewProduits->getViewListProduitsByProduit($idProduit);
 
-		var_dump($viewProduits);
-		//var_dump($produit);
+
 		// Ajoute les infos du produits au html
 		$produit['acheterpopup'] = $this->modelPopUpProduit->getAcheterPopup(
 														$produit['id_produit'], 
@@ -102,16 +101,6 @@ class Vente extends \Library\Controller\Controller{
 		);
 
 		$this->setStyleView('produit.css');
-
-	}
-
-
-	public function payerAction(){
-
-		$this->setDataView(array(
-			"pageTitle" => "Paiement, Finalisation de votre commande",
-			)
-		);
 
 	}
 

@@ -2,9 +2,9 @@ body{
 	max-width: 1600px;
 	margin: 0 auto;
 }
-/* .contentView{
+.contentView{
 	background-color: #222;
-} */
+}
 
 .containerView{
 	background-color: #FFF;

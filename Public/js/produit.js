@@ -10,7 +10,6 @@ $(document).ready(function(){
 
 		$('#apercuImageProduit').css('display', 'none');
 
-		//cache toi ici
 		$('#frameImgProduit').css('display', 'none');
 
 		$('#btnAjouterProduit').click(function(){
@@ -65,12 +64,12 @@ function mettreAjourProduit(idProd){
 		'method' 		: 'updateProduit',
 		'id_produit' 	: $('#popupContainer'+idProd+' #id_produit').val(),
 		'value' 		: $('#popupContainer'+idProd+' #value').val(),
-		'prix' 			: parseInt( $('#popupContainer'+idProd+' #prix').val() ),
+		'prix' 			: parseFloat( $('#popupContainer'+idProd+' #prix').val() ),
 		'ref' 			: $('#popupContainer'+idProd+' #ref').val()
 	};
 
     $.ajax({
-        type: 'POST',
+        type: 'PUT',
         data: jsonData,
         url: urlWebService,
         dataType: 'json',
@@ -79,7 +78,7 @@ function mettreAjourProduit(idProd){
 			$('#popupContainer'+idProd).css('display', 'none');
 			
 			$('#WrapperProduit'+idProd+" #labelValueProduit" ).html( $('#popupContainer'+idProd+' #value').val() );
-			$('#WrapperProduit'+idProd+" #labelPrixProduit" ).html( parseInt( $('#popupContainer'+idProd+' #prix').val() ) );
+			$('#WrapperProduit'+idProd+" #labelPrixProduit" ).html( parseFloat( $('#popupContainer'+idProd+' #prix').val() ) );
 			$('#WrapperProduit'+idProd+" #labelRefProduit" ).html( $('#popupContainer'+idProd+' #ref').val() );
 
 
@@ -98,15 +97,14 @@ function supprimerProduit(idProd){
 	console.log(jsonData);
 
     $.ajax({
-        type: 'POST',
+        type: 'DELETE',
         data: jsonData,
         url: urlWebService,
         dataType: 'json',
         success: function(data) {
-
+        	console.log(data);
         	$('#WrapperProduit'+idProd).remove();	//supprime le produit dans la liste
         	$('#popupContainer'+idProd).remove();	//supprime le popup du produit
-
         }
     });
 }
@@ -121,10 +119,9 @@ function recupererScriptNewProduit(idProd){
 		'method' 		: 'recupererScriptNewProduit',
 		'id_produit' 	: idProd
 	};
-	
-		//alert("dans recuperer script");
+
    	$.ajax({
-        type: 'POST',
+        type: 'GET',
         data: jsonData,
         url: urlWebService,
         dataType: 'json',
@@ -137,7 +134,7 @@ function recupererScriptNewProduit(idProd){
 
         }
     });
-    alert(alors);
+    //alert(alors);
     return alors;
 
 }

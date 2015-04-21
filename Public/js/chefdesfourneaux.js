@@ -66,7 +66,7 @@ $(document).ready(function(){
   $("#inputTextSearch").keypress(function(e) {
 
       if(e.which == 13 && $("#inputTextSearch").val()!==""  ) {
-        alert("entré");
+        //alert("entré");
         $(location).attr('href',"http://localhost/fourneaux/recette/recherche/"+$("#inputTextSearch").val());
       }
   });
@@ -124,7 +124,7 @@ function redirigerVers(ouCa, id){
   } else if(ouCa==="produit"){
     ouCa="vente/produit/";
   }
-  alert("on essaye de rediriger");
+  //alert("on essaye de rediriger");
   $(location).attr('href',"http://localhost/fourneaux/"+ouCa+id);
 
 }
@@ -149,12 +149,8 @@ function ajouterAuPanier(idUser, idProd){
         dataType: 'json',
         async:false,
         success: function(data) {
-			console.log(data);
-			/*if (data['response']>0) {
-				$('#WrapperProduit'+idProd+" #btnAcheterProduit" ).css("visibility", "hidden");
-			}else{
-				$('#WrapperProduit'+idProd+" #btnAcheterProduit" ).css("visibility", "visible");
-			}*/
+			//console.log(data);
+      alert("produit ajouté");
 			actualiserPanier(idUser);
 			
 		}
