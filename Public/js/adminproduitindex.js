@@ -1,4 +1,4 @@
-
+/* ficher a effacer  avec la methode index du controller adminproduit  */
 function changerImage(idInput) {
     input=document.getElementById(idInput);
   if (input.files && input.files[0]) {
@@ -9,7 +9,6 @@ function changerImage(idInput) {
         return true;
     };
     reader.readAsDataURL(input.files[0]);
-
   }
 }
 

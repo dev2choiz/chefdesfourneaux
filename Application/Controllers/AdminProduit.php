@@ -32,7 +32,7 @@ class AdminProduit extends \Library\Controller\Controller{
 		$this->modelAjax 			= new \Application\Models\Ajax();
 	}
 
-
+	//a effacer
 	public function indexAction(){
 
 		if( !$this->isConnected() || $_SESSION['user']['role'] !== "admin" ){
@@ -57,6 +57,7 @@ class AdminProduit extends \Library\Controller\Controller{
 		
 		
 		$this->setDataView(array(
+			'message' => $this->message->showMessages(),
 			'pageTitle' => "Vente d'ustensile de cuisine, vente d'électroménager semi-pro",
 			'produits' => $produits
 			)

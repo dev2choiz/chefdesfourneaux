@@ -16,7 +16,7 @@
 				<button class='btn btn-primary btn-xs col-xs-12 col-sm-6 col-md-8' id="btnAjouterProduitShowDiv">Ajouter un Produit</button>
 			</div>
 			<br/>
-			<div class="ajouterProduitShowDiv">
+			<div class="ajouterProduitShowDiv"  id="ajouterProduitShowDiv" >
 
 				<form id="formImgProduit" enctype="multipart/form-data" action="<?= WEBSERVICE_ROOT.'/index.php' ?>" target="frameImgProduit" method="post">
 					<div class="row">
@@ -51,11 +51,12 @@
 
 
 					<div class="row">
+						<!-- Ici, l'id c'est uploadSubmitProd-->
 						<input class="btn btn-warning col-md-4" type="submit" value="Ajouter ce produit" id="uploadSubmitProd">
 					</div>
 				</form>
-				<iframe  src="#" name="frameImgProduit"   id="frameImgProduit" >
-		        </iframe>	
+				<iframe  src="#" name="frameImgProduit"   id="frameImgProduit" style=" display:block; width:800px;height:600px;background-color:#CCC;">
+		        </iframe>
 			</div>
 
 		</div> <!-- fin de wrapperAddProduits-->

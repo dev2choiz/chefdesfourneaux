@@ -1,4 +1,8 @@
 // Définitions de constantes utilisables dans tout le fichier
+MONNAIE="€";
+
+
+
 var jusqua=30;
 var cmptARebours=jusqua;
 var sTime=null;
@@ -325,5 +329,39 @@ var easterEgg = function() {
 };
 
 
+/**
+ * formatFloat nettoie un string contenant un float
+ * @param  [string, float] num
+ * @return string
+ */
+function formatFloat(num){
+  num=num+"";
+  num=num.replace(/\s/g,"ZZZ");
+  num=num.replace(/,/g,".");
+  num=num.replace(/[a-zA-Z]/g,"");
+  num=num.replace(/€/g,"");
+  num=num.replace(/\$/g,"");
+  return num;
+}
 
 
+function formatMoney( num , localize, fixedDecimalLength ){
+    num=formatFloat(num)+"";
+    
+    var str=num;
+    var reg=new RegExp(/(\D*)(\d*(?:[\.|,]\d*)*)(\D*)/g);
+  if(reg.test(num)){
+    var pref=RegExp.$1;
+    var suf=RegExp.$3;
+    var part=RegExp.$2;
+    if(fixedDecimalLength/1)part=(part/1).toFixed(fixedDecimalLength/1);
+    if(localize)part=(part/1).toLocaleString();
+    str= pref +part.match(/(\d{1,3}(?:[\.|,]\d*)?)(?=(\d{3}(?:[\.|,]\d*)?)*$)/g ).join(' ')+suf;
+  };
+  return str;
+}
+
+/*alert(formatMoney("1 2 34  5 6 7 89,12 3 4 56 7 8 9",false, 2));
+alert(formatMoney("123 456789 , 12 3456789",false, 2));
+alert(formatMoney( "    123456789,1234   56789",false, 2));
+*/

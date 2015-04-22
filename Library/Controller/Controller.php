@@ -215,15 +215,19 @@ abstract class Controller implements iController
 
 
 		
-		$strIdUser="rien";
+		$strIdUser="";
+		$typeIdUser = "";
 		if( !empty($_SESSION['user']) ){
-			$strIdUser=$_SESSION['user']['id_user'];
+			$strIdUser = $_SESSION['user']['id_user'];
+			$typeIdUser = $_SESSION['user']['role'];
 		}
 		$html = str_replace('</body>', "
 			<script type='text/javascript'>
 				idUser ='$strIdUser'; 
+				typeUser ='$typeIdUser'; 
 				urlImg='".IMG_ROOT."';
 				urlWebService='".WEBSERVICE_ROOT."index.php';
+				LINK_ROOT='".LINK_ROOT."';
 			</script>
 			</body>", $html);
 

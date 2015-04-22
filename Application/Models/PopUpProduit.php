@@ -47,16 +47,16 @@ class PopUpProduit extends \Library\PopUp\PopUp{
 				// La popup apparaît quand on clique sur le bouton Modifier le produit
 				$('#popupProduit$id')
 					.click(function(){
-						$('#popupContainer$id').css('display', 'block');
-						$('#popup$id').css('display', 'block');	
+						$('#popupContainer$id').show('slow');
+						$('#popup$id').show('slow');
 
 					});
 
 				// Le bouton annuler permet de faire disparaître la popup
 				$('#btnCancel$id')
 					.click(function(){
-						$('#popupContainer$id').css('display', 'none');
-						//$('#popup$id').css('display', 'none');
+						$('#popupContainer$id').hide('slow');
+						//$('#popup$id').hide('slow');
 					})
 
 

@@ -28,25 +28,27 @@ abstract class PopUp extends \Library\Ajax\Ajax{
 					$('#$idDiv')
 						.click(function(){
 							/*if( $('#popupContainer').css('display') == 'block' ){
-								$('#popupContainer').css('display', 'none');
-								$('#inputPopup').css('display', 'none');
+								$('#popupContainer').hide('slow');
+								$('#inputPopup').hide('slow');
 							}else{
-								$('#popupContainer').css('display', 'block');	
-								$('#inputPopup').css('display', 'block');
+								$('#popupContainer').show('slow');
+								$('#inputPopup').show('slow');
 							}*/
-							$('#popupContainer').css('display', 'block');	
-							$('#inputPopup').css('display', 'block');
+							$('#popupContainer').show('slow');
+							$('#inputPopup').show('slow');
 						});
 
 					$('#inputPopup')
 						.click(function(){
-							$('#inputPopup').css('display', 'block');
+							$('#inputPopup').show('slow');
 						})
 
 					$('#btnCancel')
 						.click(function(){
-							$('#popupContainer').css('display', 'none');
-							$('#inputPopup').css('display', 'none');
+							$('#popupContainer').hide('slow');
+							$('#inputPopup').hide('slow');
+							//$('#popupContainer').css('display', 'none');
+							//$('#inputPopup').css('display', 'none');
 						})
 
 					
@@ -65,7 +67,7 @@ abstract class PopUp extends \Library\Ajax\Ajax{
 					 });
 
 					$('#popupContainer').click(function(){
-					$('#popupContainer').css('display', 'none');
+					$('#popupContainer').hide('slow');
 					});*/   
 				});
 				
