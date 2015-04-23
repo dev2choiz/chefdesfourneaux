@@ -27,7 +27,6 @@ class Recette extends \Library\Model\Model{
 	 * @return [boolean]              [description]
 	 */
 	public function insertRecette($params, $idUser){
-		$params= array();
 		$params["id_user"] = $idUser;
 		return $this->webserviceRequest("POST", "Recette", "insertRecette", $params);
 	}
@@ -41,7 +40,6 @@ class Recette extends \Library\Model\Model{
 	 * @return [boolean]              [description]
 	 */
 	public function updateRecette($params, $idRecette){
-		$params= array();
 		$params["id_recette"] = $idRecette;
 		return $this->webserviceRequest("PUT", "Recette", "updateRecette", $params);
 	}
@@ -55,7 +53,6 @@ class Recette extends \Library\Model\Model{
 	 * @return [boolean]              [description]
 	 */
 	public function deleteRecette($idRecette){
-		$params= array();
 		$params["id_recette"] = $idRecette;
 		return $this->webserviceRequest("DELETE", "Recette", "deleteRecette", $params);	
 	}

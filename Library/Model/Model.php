@@ -41,7 +41,7 @@ abstract class Model{
 			        )
 			);
 
-			var_dump($options);
+			
 
 			$context  = stream_context_create($options);
 			

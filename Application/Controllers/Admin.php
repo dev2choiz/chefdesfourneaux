@@ -41,7 +41,7 @@ class Admin
 
 
 	public function creerRecetteAction(){
-		
+			//echo '<br><br><br><br><br><br>';
 
 		if($_SESSION['user']['role'] !== "admin"){
 			header('location: '.LINK_ROOT);
@@ -90,12 +90,12 @@ class Admin
 
 
 			$modelRecette 	= new \Application\Models\Recette('localhost');
-			
+			var_dump($_POST,  $_SESSION['user']['id_user']);
 			$res = $modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
-
-			$res = get_object_vars(json_decode($res));
+			echo $res['page'];
+			//$res = $res;
 			$res = $res['response'];
-
+			var_dump("res",$res);
 
 
 	        $root = $_FILES['img']['tmp_name'];
@@ -117,10 +117,11 @@ class Admin
 				
 				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
 
+
 				$res =$modelListIngredients->insertListIngredients($ingreds, $unites , $res, $quantites );
 				
 					//aucune verif la flemme
-				if($res->response){
+				if($res['response']){
 					$this->message->addSuccess("Recette ajoutée");
 				}else{
 					$this->message->addSuccess("Recette ajoutée sans les ingredients");
@@ -129,8 +130,8 @@ class Admin
 
 
 			}else{
-				$this->message->addError($user->apiErrorMessage);
-				$this->message->addError($user->serverErrorMessage);
+				$this->message->addError($res['apiErrorMessage']);
+				$this->message->addError($res['serverErrorMessage']);
 			}
 			
 		}
