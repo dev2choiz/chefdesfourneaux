@@ -2,19 +2,25 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: rgba(255,255,255,0.5);
-  background-image:url(/fourneaux/Public/img/fondinscription.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-attachment: fixed; 
+  /* background-image:url(/fourneaux/Public/img/fondinscription.jpg); */
+   
 }
 .backgroundImage{
-  
+  opacity: 0.5;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+/*   background-size: 100%;
+background-repeat: no-repeat;
+background-attachment: fixed; */
 }
 
 .form-signin {
+  background-color: transparent;
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
+  z-index: 2;
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {

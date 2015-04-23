@@ -81,12 +81,6 @@ class Admin
 			$_POST["gluten"]	=	(isset($_POST["gluten"])?1:0);
 
 
-			//$_POST["cout"]	=	$_POST["cout"]+0;
-			
-			//var_dump($_POST);
-
-
-
 
 			$ingreds=$_POST["ingredients"];		unset($_POST["ingredients"]);
 			$unites=$_POST["unites"];			unset($_POST["unites"]);
@@ -156,10 +150,10 @@ class Admin
 		$ing=$modelIngredient->getIngredients();
 
 
-		$ing=$ing->response;
+		$ing=$ing['response'];
 
 
-		$ing=$modelIngredient->convEnTab($ing);
+		//$ing=$modelIngredient->convEnTab($ing);
 
 
 		$this->setDataView(array("ingredients" =>  $ing));
@@ -170,8 +164,8 @@ class Admin
 		$modelUnite 	= new \Application\Models\Unite('localhost');
 		$unit=$modelUnite->getUnites();
 
-		$unit=$unit->response;
-		$unit=$modelUnite->convEnTab($unit);
+		$unit=$unit['response'];
+		//$unit=$modelUnite->convEnTab($unit);
 
 		$this->setDataView(array(
 			"unites" =>  $unit, 
