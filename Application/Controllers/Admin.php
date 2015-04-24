@@ -2,8 +2,7 @@
  
 namespace Application\Controllers;
 
-class Admin
- extends \Library\Controller\Controller{
+class Admin extends \Library\Controller\Controller{
 
 	private $message;
 	private $tinyMCE;
@@ -262,20 +261,17 @@ class Admin
 
 
 			
-			$res =$modelRecette->convEnTab($modelRecette->updateRecette($_POST, $idRecette ) );
+			$res =$modelRecette->updateRecette($_POST, $idRecette ) ;
 
-			$res=$res['response'];
 			
-			if ($res){			//res est un bool
+			//$res=$res['response'];
 
-	
+			if ($res['response']){			//res est un bool
+				
 				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
 				//echo "<br><br><br><br>";
 				//var_dump("ing",$ingreds, $unites , $idRecette, $quantites );
-				$res =$modelListIngredients->convEnTab( $modelListIngredients->updateListIngredients($ingreds, $unites , $idRecette, $quantites ) );
-
-				
-
+				$res = $modelListIngredients->updateListIngredients($ingreds, $unites , $idRecette, $quantites ) ;
 
 				if($res['response']){
 					$this->message->addSuccess("Recette modifiée");
@@ -286,8 +282,8 @@ class Admin
 
 
 			}else{
-				$this->message->addError($user->apiErrorMessage);
-				$this->message->addError($user->serverErrorMessage);
+				$this->message->addError($res['apiErrorMessage']);
+				$this->message->addError($res['serverErrorMessage']);
 			}
 		}
 
@@ -305,8 +301,8 @@ class Admin
 		//recherche des ingredients
 		$modelIngredient 	= new \Application\Models\Ingredient('localhost');
 		$ings=$modelIngredient->getIngredients();
-		$ings=$ings->response;
-		$ing=$modelIngredient->convEnTab($ings);
+		$ings=$ings['response'];
+		
 
 		$ingRecherche = '';
 
@@ -329,8 +325,8 @@ class Admin
 		//recherche des Unites
 		$modelUnite 	= new \Application\Models\Unite('localhost');
 		$unit=$modelUnite->getUnites();
-		$unit=$unit->response;
-		$unit=$modelUnite->convEnTab($unit);
+		$unit=$unit['response'];
+		
 
 
 
@@ -405,7 +401,7 @@ class Admin
 		$this->setDataView(array(
 			"message" => $this->message->showMessages(),
 			"categories" =>  $cat,
-			"ingredients" =>  $ing,
+			"ingredients" =>  $ings,
 			"unites" =>  $unit,
 			"viewrecette" =>  $viewR,
 			"ajaxIngredientButton" => $viewButtonShowDivIngredient,
