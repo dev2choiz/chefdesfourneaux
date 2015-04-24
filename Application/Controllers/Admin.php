@@ -29,8 +29,9 @@ class Admin extends \Library\Controller\Controller{
 		if($_SESSION['user']['role'] !== "admin"){
 			$this->setRedirect(LINK_ROOT);
 		}
+		//echo "<br><br><br><br><br><br><br><br><br><br>";
 		$viewRs = $this->modelVR->getAllViewRecettes();
-
+		//var_dump("vue",$viewRs);
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
