@@ -3,7 +3,7 @@
 ## http://localhost/recette/Public/css/style.css
 
 RewriteEngine On
-RewriteBase /fourneaux/Public
+RewriteBase /chefdesfourneaux/Public
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php?page=$1 [L] 

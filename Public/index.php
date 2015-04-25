@@ -6,7 +6,7 @@ session_start();
  */
 require_once('../Library/Loader/Autoloader.php');
 $autoload = \Library\Loader\Autoloader::getInstance();
-$autoload::setBasePath("c:/wamp/www/fourneaux/");
+$autoload::setBasePath("c:/wamp/www/chefdesfourneaux/");
 
 
 /**

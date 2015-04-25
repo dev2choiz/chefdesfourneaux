@@ -71,7 +71,7 @@ $(document).ready(function(){
 
       if(e.which == 13 && $("#inputTextSearch").val()!==""  ) {
         //alert("entré");
-        $(location).attr('href',"http://localhost/fourneaux/recette/recherche/"+$("#inputTextSearch").val());
+        $(location).attr('href',"http://localhost/chefdesfourneaux/recette/recherche/"+$("#inputTextSearch").val());
       }
   });
 
@@ -129,7 +129,7 @@ function redirigerVers(ouCa, id){
     ouCa="vente/produit/";
   }
   //alert("on essaye de rediriger");
-  $(location).attr('href',"http://localhost/fourneaux/"+ouCa+id);
+  $(location).attr('href',"http://localhost/chefdesfourneaux/"+ouCa+id);
 
 }
 

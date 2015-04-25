@@ -49,7 +49,7 @@ class Settings
 
 		define('SALT_PASSWORD', 'X_ ##8[+VN7hWcmeOhHzbhaP$_I|C{-7=8Oy$W^VH(?}bRGndcM{%2r]}d?NH]6N');
 		
-		define('WEBSERVICE_ROOT', str_replace('/fourneaux/Public/index.php', '/webservice/Public/', self::$baseUrl . $_SERVER["SCRIPT_NAME"]));
+		define('WEBSERVICE_ROOT', str_replace('/chefdesfourneaux/Public/index.php', '/webservice/Public/', self::$baseUrl . $_SERVER["SCRIPT_NAME"]));
 		//define('WEBSERVICE_ROOT', 'http://chefdesfourneaux-api.16mb.com/webservice/Public/');
 		
 	}

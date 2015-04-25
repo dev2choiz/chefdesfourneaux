@@ -188,7 +188,7 @@ class Admin extends \Library\Controller\Controller{
 	
 	/**
 	 * [mettreAJourRecetteAction : l'addresse fini avec un parametre get : ]
-	 * 							http://localhost/fourneaux/admin/mettreajourrecette/12
+	 * 							http://localhost/chefdesfourneaux/admin/mettreajourrecette/12
 	 * @return [type] [description]
 	 */
 	public function mettreAJourRecetteAction($idRecette){

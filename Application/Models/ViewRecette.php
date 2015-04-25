@@ -17,7 +17,7 @@ class ViewRecette extends \Library\Model\Model{
 	 * @param  [int] $id [id de la recette]
 	 * @return [array] 
 	 */
-	public function getViewRecette($id, $droit='premium'){
+	public function getViewRecette($id, $droit='classique'){
 
 		return $this->webserviceRequest("GET", "ViewRecette","getViewRecette",array(
 			"id_recette"=>$id,
@@ -32,7 +32,7 @@ class ViewRecette extends \Library\Model\Model{
 	 * @return [array]	Retourne un tableau (dont les key sont les id des recettes)
 	 *                  contenant les views qui sont elles meme des tableaux
 	 */
-	public function getViewRecettes($tabId, $droit='premium'){
+	public function getViewRecettes($tabId, $droit='classique'){
 		$tabVR=array();
 
 		foreach ($tabId as $id) {
@@ -55,7 +55,7 @@ class ViewRecette extends \Library\Model\Model{
 	 * Obtenir toutes les views
 	 * @return [array]	Retourne un tableau contenant toutes les views
 	 */
-	public function getAllViewRecettes( $droit='premium'){
+	public function getAllViewRecettes( $droit='classique'){
 
 		return $this->webserviceRequest("GET", "ViewRecette","getAllViewRecettes", array("droit"=>$droit));
 
@@ -69,7 +69,7 @@ class ViewRecette extends \Library\Model\Model{
 	 * @param  type $champs    dans quel champ de la table recette on cherche
 	 * @return array comme reponse du webservice
 	 */
-	public function getRecherche($recherche, $champs, $droit='premium'){
+	public function getRecherche($recherche, $champs, $droit='classique'){
 
 		$data =array(
 			        'recherche'				=> $recherche,
