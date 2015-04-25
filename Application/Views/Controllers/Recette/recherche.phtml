@@ -7,7 +7,7 @@
         <?php foreach ($recettes as $recette): ?>
 
         
-            <a class="list-group-item" href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>">
+            <a class="list-group-item" href="<?=LINK_ROOT.'recette/categorie/'.$recette['slugtitre']?>">
             <h4 class="list-group-item-heading"><?=$recette['titre']?></h4>
             <p class="list-group-item-text">Categorie : <?=$recette['categorie']?></p>
             </a> 

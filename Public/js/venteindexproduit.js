@@ -115,7 +115,7 @@ function creerVueNouveauProduit(idProd){
     if (typeUser==="admin") {
         strHtml+="<button class='btn btn-primary btnPopupProduit' id='popupProduit1' >Modifier ce Produit</button>";
     }
-    strHtml+="<div class='row'><!-- div bizarre -->\
+    strHtml+="<div class='row'>\
     \
     "+popupProd+"\
             </div>\

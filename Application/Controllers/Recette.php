@@ -60,13 +60,18 @@ class Recette extends \Library\Controller\Controller{
 			"titreCat"			=> $titreCat
 		));
 	}
-	public function categorieAction($idRecette){
+	public function categorieAction($slugTitre){
 
 
+		$viewRecette 	 	= $this->modelViewRecette->getViewRecetteBySlug($slugTitre);
+		$viewRecette 	 	= $viewRecette['response'];
+
+		$idRecette=$viewRecette['id_recette'];
 		$viewRecette 	 	= $this->modelViewRecette->getViewRecette($idRecette);
+		//$viewRecette 	 	= $this->modelViewRecette->getViewRecette($idRecette);
 		$viewRecette 		= $viewRecette['response'];
 
-		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
+		$modelCommentaire 	= new \Application\Models\Commentaire();
 			
 		//declare la variable jsIdRecette
 		$this->setJsConfigAvant("variable", "IdRecette", $idRecette );			
@@ -79,7 +84,7 @@ class Recette extends \Library\Controller\Controller{
 		//################## données pour la view ############################
 
 		//recherche des commentaires
-		$modelCommentaire 	= new \Application\Models\Commentaire('localhost');
+		$modelCommentaire 	= new \Application\Models\Commentaire();
 		$viewComms = $modelCommentaire->getCommentaires($idRecette);
 
 		$viewComms = $viewComms['response'];
@@ -155,7 +160,7 @@ class Recette extends \Library\Controller\Controller{
 				if (count($resultRecherche) == 1 ) {
 
 					//on redirige ver la page qui affiche la recette
-					header('location: '.LINK_ROOT.'recette/categorie/'.$resultRecherche[0]['id_recette']);
+					header('location: '.LINK_ROOT.'recette/categorie/'.$resultRecherche[0]['slugtitre']);
 				}else{echo "########et pas dedans<br>";}
 		}
 

@@ -95,9 +95,11 @@ $(document).ready(function(){
                 
                 success : function(donnee){
                     $('#dataListSearch').empty();
+                    console.log(donnee);
                     $.map(donnee.response, function(objet){
                         nbrRes++;
-                        $('#dataListSearch').append("<option value='"+objet.titre+"'  onclick='redirigerVers(\"recette\","+objet.id_recette+");'   >"+objet.titre+" </option>");
+                        //console.log(objet);
+                        $('#dataListSearch').append("<option value='"+objet.titre+"' >"+objet.titre+" </option>");
                     });
                 }
         });
@@ -122,16 +124,16 @@ $(document).ready(function(){
 
 
 
-function redirigerVers(ouCa, id){
+/*function redirigerVers(ouCa, slugtitre){
   if (ouCa==="recette") {
     ouCa="recette/categorie/";
   } else if(ouCa==="produit"){
     ouCa="vente/produit/";
   }
   //alert("on essaye de rediriger");
-  $(location).attr('href',"http://localhost/chefdesfourneaux/"+ouCa+id);
+  $(location).attr('href',"http://localhost/chefdesfourneaux/"+ouCa+slugtitre);
 
-}
+}*/
 
 
 // On pourra acheter dans indexproduit et produit

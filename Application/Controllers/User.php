@@ -45,8 +45,12 @@ class User extends \Library\Controller\Controller{
 				$this->message->addError("Mail non valide !");
 			}
 
-			$currentPassword	=	$_POST['currentpassword'];
+			$date = new \Datetime($_POST['date_naissance']);
+			$_POST['date_naissance'] = $date->format('Y-m-d');
+			var_dump($date);
 
+			$currentPassword	=	$_POST['currentpassword'];
+			
 			if(!empty($_POST['password'])){
   				if(isset($_POST['confpassword']) && $_POST['password'] !== $_POST['confpassword']){
 					$this->message->addError("Confirmation password non valide !");
@@ -236,11 +240,12 @@ class User extends \Library\Controller\Controller{
 			unset($_POST['btn'], $_POST['confpassword'], $listMessage);
 			
 
-
+			$date = new \Datetime($_POST['date_naissance']);
 			
-			$_POST['date_naissance']=$_POST['date_naissance'];
+			$_POST['date_naissance'] = $date->format('Y-m-d');
 
 			$modelUser = new \Application\Models\User('localhost');
+			
 			$res=$modelUser->convEnTab($modelUser->insertUser($_POST));
 
 			//echo $res['page'];

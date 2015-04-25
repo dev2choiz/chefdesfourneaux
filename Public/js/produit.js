@@ -26,8 +26,14 @@ $(document).ready(function(){
 function ajouterProduit(){
 	alert("dans ajouter");
 
+    
 
 	$('#WrapperAddProduit #prix').val( formatFloat( $('#WrapperAddProduit #prix').val() ) );
+	if ($('#WrapperAddProduit #prix').val()+0>2000000) {
+		event.preventDefault();
+		alert('le prix est trop élevé');
+	}
+	
 
 /*	jsonData = 
 	{

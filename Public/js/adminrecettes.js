@@ -252,6 +252,86 @@ $(document).ready(function(){
         }
     });
 
+
+    $("#btnAjouterCategorie").click(function(){
+        ajouterCategorie($("#categorieValue").val());
+    });
+
+
+    $("#btnAjouterIngredient").click(function(){
+        ajouterIngredient($("#ingredientValue").val());
+    });
+
+
 });
 
 
+
+
+
+function ajouterCategorie(valueCat){
+
+    
+    jsonData={
+        service : 'Categorie',
+        method : 'insertCategorie',
+        value : valueCat
+    }
+
+    console.log(jsonData);
+
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+            val = data.response;     //test à faire : si >0 ==> insertion faite
+            if(val>0){
+                label=$('#categorieValue').val();
+                $('#id_cat').append('<option value=\"'+val+'\" selected>'+label+'</option>');
+                $('#btnCancelCategorie').click();
+            }else{
+                alert(data.apiErrorMessage);
+            }
+        }
+    }); 
+}
+
+
+function ajouterIngredient(valueIng){
+
+    
+    jsonData={
+        service : 'Ingredient',
+        method : 'insertIngredients',
+        value : valueIng
+    }
+
+    console.log(jsonData);
+
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+            val = data.response;     //test à faire : si >0 ==> insertion faite
+            if(val>0){
+                label=$('#ingredientValue').val();
+                $('#ingredients').append('<option value=\"'+val+'\" selected>'+label+'</option>');
+                $('#unites').append('<option value=\"'+val+'\" selected>...</option>');
+
+                //tab
+                tabUnit.push('rien');
+                tabQuant.push(1);
+
+                $('#btnCancelIngredient').click();
+            }else{
+                alert(data.apiErrorMessage);
+            }
+        }
+    }); 
+}

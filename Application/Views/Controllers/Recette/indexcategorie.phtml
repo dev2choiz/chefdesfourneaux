@@ -19,7 +19,7 @@
                 </p>
                 <?php foreach($recettes as $recette): if($recette['type'] == 'entree'):?>
                     <p class="lead">
-                        <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>">
+                        <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['slugtitre']?>">
                             <?=$recette['titre']?>
                         </a>
                     </p>
@@ -30,7 +30,7 @@
                 <p class="text-muted">Plat :</p>
                 <?php foreach($recettes as $recette): if($recette['type'] == 'plat'):?>
                     <p class="lead">
-                        <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>"> 
+                        <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['slugtitre']?>"> 
                             <?=$recette['titre']?>
                         </a>
                     </p>
@@ -41,7 +41,7 @@
                 <p class="text-muted">Dessert :</p>
                 <?php foreach($recettes as $recette): if($recette['type'] == 'dessert'):?>
                     <p class="lead">
-                        <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>">
+                        <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['slugtitre']?>">
                             <?=$recette['titre']?>
                         </a>
                     </p>

@@ -423,5 +423,26 @@ abstract class Controller implements iController
     }
 
 
+    public function getImageExtension($type){
+    	switch ($type) {
+    		case 'image/png':
+    			return 'png';
+    			break;
+    		case 'image/jpeg':
+    			return 'jpeg';
+    			break;
+    		case 'image/jpg':
+    			return 'jpg';
+    			break;
+    		case 'image/tiff':
+    			return 'tiff';
+    			break;
+    		default:
+    			return 'erreur';
+    			break;
+    	}
+    }
+
+
 
 }

@@ -80,5 +80,16 @@ class ViewRecette extends \Library\Model\Model{
 	}
 
 
+
+	public function getViewRecetteBySlug($slugTitre, $droit='classique'){
+
+		return $this->webserviceRequest("GET", "ViewRecette","getViewRecetteBySlug",array(
+			"slugtitre"=>$slugTitre,
+			'droit'		=> $droit
+		));
+
+	}
+
+
 }
 

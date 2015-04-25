@@ -71,6 +71,9 @@ class Admin extends \Library\Controller\Controller{
 			unset($_POST['btn'], $listMessage);
 
 
+			$slugTitre = str_replace( ' ','-', $this->retirerCaractereSpeciaux($_POST["titre"]) );
+			$_POST["slugtitre"] = strtolower($slugTitre);
+
 
   			$_POST["diabete"]	=	(isset($_POST["diabete"])? 1:0);
 			$_POST["ble"]		=	(isset($_POST["ble"])?1:0);
@@ -90,26 +93,30 @@ class Admin extends \Library\Controller\Controller{
 
 
 			$modelRecette 	= new \Application\Models\Recette('localhost');
-			var_dump($_POST,  $_SESSION['user']['id_user']);
 			$res = $modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
-			echo $res['page'];
-			//$res = $res;
+
 			$res = $res['response'];
-			var_dump("res",$res);
 
+	        if(!empty($_FILES['img'])){
+		        $root = $_FILES['img']['tmp_name'];
 
-	        $root = $_FILES['img']['tmp_name'];
-	        $img = IMG_ROOT.$res.$_FILES['img']['name'];
+		        $type = $this->getImageExtension($_FILES['img']['type']);
 
-	        if(copy($root, $img )){
-	        	$_POST['img'] = '/img/'.$res.$_FILES['img']['name'];
-	        }else{
-	        	$this->message->addError("Pb avec l'insertion de l'image");
-	        }
+		        if ($type === "erreur") {
+		        	$this->message->addError("Le format de l'image n'est pas correct (jpeg, png, tiff), l'image n'a pas été envoyée");
+		        } else {
+			        $img = IMG_ROOT.'recette/'. $slugTitre.".$type";
+
+			        if(copy($root, $img )){
+			        	$_POST['img'] = 'recette/'.  $slugTitre.".$type";
+			        }else{
+			        	unset($_POST['img']);
+			        	$this->message->addError("Pb avec la mise a jour de l'image");
+			        }
+		        }
+		        
+			}
 	        $modelRecette->updateRecette($_POST, $res);
-			//echo "<img src='{$_POST['img']}'>"; 
-			
-			
 			
 			if ($res > 0 ) {
 				
@@ -178,7 +185,7 @@ class Admin extends \Library\Controller\Controller{
 
 		
 
-		$this->setScriptView("creerunerecette.js");
+		$this->setScriptView("adminrecettes.js");
 
 
 
@@ -225,6 +232,10 @@ class Admin extends \Library\Controller\Controller{
 
 			unset($_POST['btn'], $listMessage);
 
+			$slugTitre = str_replace( ' ','-', $this->retirerCaractereSpeciaux($_POST["titre"]) );
+			$_POST["slugtitre"] = strtolower($slugTitre);
+
+
   			$_POST["diabete"]	=	(isset($_POST["diabete"])? 1:0);
 			$_POST["ble"]		=	(isset($_POST["ble"])?1:0);
 			$_POST["lait"]		=	(isset($_POST["lait"])?1:0);
@@ -246,21 +257,33 @@ class Admin extends \Library\Controller\Controller{
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 
 				echo "<br><br><br><br><br><br><br><br><br><br>";
-			var_dump($_FILES, $_POST);
+			var_dump($_FILES['img']);
 			//######################## Copie et met a jour dans la base
-	        $root = $_FILES['img']['tmp_name'];
-	        $img = IMG_ROOT.$this->retirerCaractereSpeciaux($_POST["titre"].".jpg");
+	        if(!empty($_FILES['img'])){
+		        $root = $_FILES['img']['tmp_name'];
 
+		        $type = $this->getImageExtension($_FILES['img']['type']);
+				var_dump($_FILES['img'],$type);
 
-	        	var_dump($root, $img);
-	        if(copy($root, $img )){
-	        	$_POST['img'] = '/img/'.$this->retirerCaractereSpeciaux($_POST["titre"]).".jpg";
-	        }else{
-	        	$_POST['img'] ="";
-	        	$this->message->addError("Pb avec la mise a jour de l'image");
-	        }
+		        if ($type === "erreur") {
+		        	$this->message->addError("Le format de l'image n'est pas correct (jpeg, png, tiff), l'image n'a pas été envoyée");
+		        } else {
+		        	
 
+			        //$img = IMG_ROOT. preg_replace('/\s\s+/','-', $this->retirerCaractereSpeciaux($_POST["titre"]).".$type");
+			        $img = IMG_ROOT.'recette/'. $slugTitre.'.$type';
+			        echo $img."<=======================";
+			        	// var_dump($root, $img);
+			        if(copy($root, $img )){
+			        	$_POST['img'] = 'recette/'.  $slugTitre.".$type";
+			        }else{
+			        	unset($_POST['img']);
+			        	$this->message->addError("Problème avec la mise a jour de l'image");
+			        }
+		        }
+		        
 
+			}
 			
 			$res =$modelRecette->updateRecette($_POST, $idRecette ) ;
 
@@ -352,7 +375,7 @@ class Admin extends \Library\Controller\Controller{
 
 
 		//script ajax permettant d'ajouter un ingredient a la bdd puis de le prendre en compte
-		$successfonc="
+		/*$successfonc="
 			console.log(data);
 			val=data['response'];		//test à faire : si >0 ==> insertion faite
 			label=document.getElementById('DivContainerIngredientValue').value;
@@ -396,7 +419,7 @@ class Admin extends \Library\Controller\Controller{
 
 		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("DivContainerCategorie", "d'une catégorie", "Catégorie", "cette catégorie");
 
-		$codeAjaxCategorie=$viewShowDivHtml."".$viewShowDivScript;
+		$codeAjaxCategorie=$viewShowDivHtml."".$viewShowDivScript;*/
 		
 		
 		$this->setDataView(array(
@@ -404,11 +427,11 @@ class Admin extends \Library\Controller\Controller{
 			"categories" =>  $cat,
 			"ingredients" =>  $ings,
 			"unites" =>  $unit,
-			"viewrecette" =>  $viewR,
-			"ajaxIngredientButton" => $viewButtonShowDivIngredient,
+			"viewrecette" =>  $viewR
+			/*"ajaxIngredientButton" => $viewButtonShowDivIngredient,
 			"ajaxIngredientScript" =>	$codeAjaxIngredient,
 			"ajaxCategorieButton" => $viewButtonShowDivCategorie,
-			"ajaxCategorieScript" =>	$codeAjaxCategorie
+			"ajaxCategorieScript" =>	$codeAjaxCategorie*/
 		));
 
 
@@ -419,7 +442,7 @@ class Admin extends \Library\Controller\Controller{
 		//$this->setJsConfig("code" , "actualiserImageFormRecette( jsIdRecette );", "" );
 		$this->setJsConfigApres("code" , "actualiserImageFormRecette( jsIdRecette );" );
 
-		$this->setScriptView("creerunerecette.js");
+		$this->setScriptView("adminrecettes.js");
 
 
 	}

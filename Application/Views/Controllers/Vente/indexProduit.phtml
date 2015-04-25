@@ -91,6 +91,9 @@
 
 					<!-- Si l'utilisateur est admin -->
 					<?php if(!empty($_SESSION['user']) && $_SESSION['user']['role'] == "admin" ): ?>
+						<!-- <button type="button" class="btn btn-primary btn-lg btnShowPopupProduit" id="btnShowPopupProduit" data-toggle="modal" data-target="#myModal" onclick="">
+						 	Modifier ce produit
+						</button> -->
 						<button class='btn btn-primary btnPopupProduit' id="popupProduit<?=$produit['id_produit']?>" >Modifier ce Produit</button>
 						<div class="row">
 							<?=$produit['modifierpopup']?>
@@ -102,10 +105,45 @@
 			<hr>
 		<?php endforeach; ?>
 	</div>	<!-- fin de wrapperProduits-->
+<!-- Button trigger modal -->
 
 
-	<!-- <a href="<?=LINK_ROOT.'vente/produit/'.$produit['id_produit']?>">Produit : <span id="labelValueProduit"><?= $produit['value']?></span></a>
-	 -->
+	<!-- Modal -->
+	<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content popup" id="popup">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Modification d'un produit</h4>
+				</div>
+				<div class="modal-body">
+	
+	
+	
+	            <input type='hidden' value="" id='id_produit' name='id_produit'>\
+	            <div class='col-md-6'>Prix :</div>\
+	            <div class='col-md-6'>\
+	                <input name='prix' type='text' id='prix' value=''>\
+	            </div>\
+	            <div class='col-md-6'>Ref :</div>\
+	            <div class='col-md-6'>\
+	                <input name='ref' type='text' id='ref' value=''>\
+	            </div>\
+	            <div class='col-md-6'>Nom du produit : </div>\
+	            <div class='col-md-6'>\
+	                <input name='value' type='text' id='value' value=''>\
+	            </div>\
+	            <button class='col-md-4 btn btn-default' id='btnCancelPopUp' name='btnSupprimerProduit'>Annuler</button>\
+	            <button class='col-md-4 btn btn-danger' id='btnSupprimerProduit1' name='btnSupprimerProduit'>Supprimer</button>\
+	            <button class='col-md-4 btn btn-success' id='btnMettreAjourProduit1' name='btnMiseAjourProduit'>Mettre à jour</button>
+	
+	
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div> -->
 </div>
-
-

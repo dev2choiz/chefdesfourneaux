@@ -51,11 +51,18 @@
 
             <tr>
                 <td colspan="2">
-                    <div id="">
-                        Votre catégorie n'est pas dans la liste?
-                        <?=$ajaxCategorieButton?>
+                    Votre catégorie n'est pas dans la liste?
+                    <input type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divContainerCategorie" aria-expanded="false" aria-controls="DivContainerCategorie" value="Ajouter une catégorie">
+            
+                    <div class="collapse" id="divContainerCategorie">
+                        <div class="well">
+                            <label name='labelValue' id='labelValue'>Catégorie : </label>
+                            <input type='text' id='categorieValue'>
+                            <input  class='btn btn-cancel' id='btnCancelCategorie' value='Annuler'  data-target="#divContainerCategorie" data-toggle="collapse" >
+                            <input id='btnAjouterCategorie' class='btn btn-primary' value='Valider l ajout de cette catégorie'>
+
+                        </div>
                     </div>
-                    <?=$ajaxCategorieScript?>
                 </td>
             </tr>
 
@@ -144,13 +151,17 @@
 
 
 
-        <!-- Ne marche plus car j'ai essayé d'utiliser l'ajax directement dans la popup -->
-        <div id="ingredient">
-            Votre ingrédient n'est pas dans la liste?
-            <!--input type='button' value='Ajouter un ingrédient' id="ajouterIngredientBdd" -->
-            <?=$ajaxIngredientButton?>
+        <input type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divContainerIngredient" aria-expanded="false" aria-controls="DivContainerIngredient" value="ajouter une ingredient">
+            
+        <div class="collapse" id="divContainerIngredient">
+            <div class="well">
+                <label name='labelValue' id='labelValue'>Ingrédient : </label>
+                <input type='text' id='ingredientValue'>
+                <input  class='btn btn-cancel' id='btnCancelIngredient' value='Annuler'  data-target="#divContainerIngredient" data-toggle="collapse" >
+                <input id='btnAjouterIngredient' class='btn btn-primary' value='Valider l ajout de cette ingredient'>
+
+            </div>
         </div>
-        <?=$ajaxIngredientScript?>
 
 
 
@@ -223,13 +234,11 @@
 
 
 
-
         <select id="droit"  name="droit" >
-            <option value="classique"></option>
-            <option value="premium"></option>
-            <option value="privée"></option>
+            <option value="classique">Classique</option>
+            <option value="premium">Premium</option>
+            <option value="privée">Privée</option>
         </select>
-
 
 
 

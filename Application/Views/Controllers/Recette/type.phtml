@@ -10,7 +10,7 @@
 				<?php foreach($recettes as $recette): ?>
 				<?php if($recette['type'] == $type): ?>
 					
-				<a class="linkCat" href="<?=LINK_ROOT.'recette/categorie/'.$recette['id_recette']?>"> 
+				<a class="linkCat" href="<?=LINK_ROOT.'recette/categorie/'.$recette['slugtitre']?>"> 
 				<h4><?=$recette['titre']?></h4>
 				</a>
 
