@@ -22,6 +22,7 @@
 }
 
 .textHoverImg{
+	
 	font-family: 'Origin';
 	/* font-size: 22px; */
 	text-align: center;
@@ -31,6 +32,9 @@
 	z-index: 20;
 	margin-bottom: 0px;
 	bottom: 70px;
+}
+.textHoverImg h3{
+	line-height: 1.5;
 }
 
 .legendeImg{

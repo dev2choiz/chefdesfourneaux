@@ -2,9 +2,9 @@ body{
 	max-width: 1600px;
 	margin: 0 auto;
 }
-.contentView{
+/* .contentView{
 	background-color: #222;
-}
+} */
 
 .containerView{
 	background-color: #FFF;
@@ -28,9 +28,9 @@ body{
 	width:64%; 
 	top:0;
 }
-.lienMenuChefDesFourneaux{
+/* .lienMenuChefDesFourneaux{
 	width:14.2%;
-}
+} */
 
 .dropdown-menu{
 	width: 100%;
@@ -66,9 +66,9 @@ body{
 
 }
 /* CONTENT VIEW */
-.content_view{
+/* .content_view{
 	margin-bottom: 50px;
-}
+} */
 
 /* END CONTENT VIEW */
 
@@ -139,21 +139,6 @@ body{
 
 }
 /* Mise en forme Panier*/
-/* #panier{
-	background-color: rgba(222,222,222,1);
-	position: inherit;
-	z-index: 2000;
-	right: 0;
-	height: 50px;
-	font-size: 18px;
-	line-height: 20px;
-	display: block;
-	float: right;
-} */
-/* #panier .btn{
-	line-height: 2.5;
-} */
-
 
 #panierContent{
 	display: inline;
@@ -180,6 +165,7 @@ body{
 
 footer{
 	text-align: center;
+	margin-top: 100px;
 }
 
 footer img{
