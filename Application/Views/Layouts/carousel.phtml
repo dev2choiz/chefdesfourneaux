@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Site de recettes de cuisine et de vente d'électroménager">
         <title><?=$pageTitle?></title>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -75,7 +76,7 @@
                                             
                                         </ul> 
                                     </button>
-                                </div>
+                                </div> <!-- /#connection -->
                                 <div class="panier col-md-6" id="panier">                                
                                     <?php if(!empty($_SESSION['user'])): ?> 
                                     <a class="btn btn-default lienPanier" href="<?=LINK_ROOT.'panier/indexpanier/'.$_SESSION['user']['id_user']?>">
@@ -88,8 +89,8 @@
                                         <a class="btn btn-default lienPanier" href="<?=LINK_ROOT.'vente/indexproduit/'?>"> Acheter des produits</a>
                                     <?php endif; ?>
                                 </div>
-                            </div> 
-                        </div><!-- Fin navbar-header -->
+                            </div> <!-- /.buttonNav-->
+                        </div> <!-- /.row (.navbar-header) -->
                     
                     
                         <div class="row">
@@ -103,36 +104,28 @@
                                     <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Ustensiles de cuisine</a></li>
                                     <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Vidéos</a></li>  
                                 </ul>
-                            </div>
-                        </div>
-                    </div> 
-                </div> <!-- Fin containerNav -->
+                            </div> <!-- /.menuLiens -->
+                        </div> <!-- /.row -->
+                    </div> <!-- /.container -->
+                </div> <!-- /.containerNav -->
             </nav>
-        </div> <!-- Fin navbar-wrapper -->
-    </div>
-         
-
-        <!-- <div id="separator" class="separator"></div> -->
+        </div> <!-- /.navbar-wrapper -->
+    </div> <!-- /.menu -->
         
 
         <!-- Marketing messaging and featurettes
         ================================================== -->
         <div class="marketing">
             <div class="contentView" id="contentView">
-                
+                <!-- Input de recherche -->                
                 <div class="animSiteShowFast input-group input-group-sm col-md-6 col-md-offset-3" id="wrapperSearchBar">
                     <span class="input-group-addon" id="loupe">
                         <span class="glyphicon glyphicon-search"></span>
                     </span>
                     <input class="form-control" type="text" list="dataListSearch" id="inputTextSearch" placeholder="Rechercher une recette..." style="font-style:italic;" aria-describedby="loupe" />
-                    <!-- <span class="input-group-btn">
-                        <button class="btn btn-default" id="buttonSearch" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                    </span> -->
-                    <datalist id="dataListSearch">
-                    </datalist>
-                    <div id="divSearchResult"></div>
-                    
-                </div> 
+                    <datalist id="dataListSearch"></datalist>
+                    <div id="divSearchResult"></div>   
+                </div> <!-- /#wrapperSearchBar -->
                 <?=$content_view?>
             </div>
             
@@ -153,7 +146,8 @@
                     <img src="<?=IMG_LINK_ROOT?>affiliation/plaisdesthes.jpg" alt="Plais du thé">
                 </a>
             </div>
-        </div>
+        </div> <!-- /.affiliation -->
+
         <!-- FOOTER -->
         <footer class="footer">
             <p>
@@ -163,7 +157,9 @@
             <br>
             <p>
                 Suivez-nous !!!
-                <a href="https://www.facebook.com/pages/Chef-des-Fourneaux/791557667596027"><img src="<?=IMG_LINK_ROOT?>icons/facebook128.png" alt="suivre chef des fourneaux sur facebook"></a>
+                <a href="https://www.facebook.com/pages/Chef-des-Fourneaux/791557667596027">
+                    <img src="<?=IMG_LINK_ROOT?>icons/facebook128.png" alt="suivre chef des fourneaux sur facebook">
+                </a>
                 <a href="https://twitter.com/ChefdFourneaux"><img src="<?=IMG_LINK_ROOT?>icons/twitter128.png" alt="suivre chef des fourneaux sur twitter"></a>
                 <a href="https://plus.google.com/u/0/b/116720301370410735975/116720301370410735975/about"><img src="<?=IMG_LINK_ROOT?>icons/google128.png" alt="suivre chef des fourneaux sur google +"></a>
                 <a href="https://fr.pinterest.com/chefdfourneaux/"><img src="<?=IMG_LINK_ROOT?>icons/pinterest128.png" alt="suivre chef des fourneaux sur pinterest"></a>
