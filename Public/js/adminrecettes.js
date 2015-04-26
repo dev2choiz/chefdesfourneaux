@@ -254,12 +254,12 @@ $(document).ready(function(){
 
 
     $("#btnAjouterCategorie").click(function(){
-        ajouterCategorie($("#categorieValue").val());
+        ajouterCategorieBase($("#categorieValue").val());
     });
 
 
     $("#btnAjouterIngredient").click(function(){
-        ajouterIngredient($("#ingredientValue").val());
+        ajouterIngredientBase($("#ingredientValue").val());
     });
 
 
@@ -269,7 +269,7 @@ $(document).ready(function(){
 
 
 
-function ajouterCategorie(valueCat){
+function ajouterCategorieBase(valueCat){
 
     
     jsonData={
@@ -300,7 +300,7 @@ function ajouterCategorie(valueCat){
 }
 
 
-function ajouterIngredient(valueIng){
+function ajouterIngredientBase(valueIng){
 
     
     jsonData={

@@ -26,6 +26,8 @@ class Index extends \Library\Controller\Controller
 			$this->message->addError("Erreur dans la récupération des recettes");
 		}
 
+
+
 		// Récupération des produits
 		$produitsAll = $this->modelProduits->getAllProduits();
 		if(!empty($produitsAll['response'])){

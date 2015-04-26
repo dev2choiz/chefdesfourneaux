@@ -41,7 +41,6 @@ class Admin extends \Library\Controller\Controller{
 
 
 	public function creerRecetteAction(){
-			//echo '<br><br><br><br><br><br>';
 
 		if($_SESSION['user']['role'] !== "admin"){
 			header('location: '.LINK_ROOT);
@@ -71,8 +70,8 @@ class Admin extends \Library\Controller\Controller{
 			unset($_POST['btn'], $listMessage);
 
 
-			$slugTitre = str_replace( ' ','-', $this->retirerCaractereSpeciaux($_POST["titre"]) );
-			$_POST["slugtitre"] = strtolower($slugTitre);
+			$slugTitre = strtolower(str_replace( ' ','-', $this->retirerCaractereSpeciaux($_POST["titre"]) ));
+			$_POST["slugtitre"] = $slugTitre;
 
 
   			$_POST["diabete"]	=	(isset($_POST["diabete"])? 1:0);
@@ -125,16 +124,21 @@ class Admin extends \Library\Controller\Controller{
 				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
 
 
-				$res =$modelListIngredients->insertListIngredients($ingreds, $unites , $res, $quantites );
+				$resIng = $modelListIngredients->insertListIngredients($ingreds, $unites , $res, $quantites );
 				
-					//aucune verif la flemme
-				if($res['response']){
+				if($resIng['response']){
 					$this->message->addSuccess("Recette ajoutée");
 				}else{
 					$this->message->addSuccess("Recette ajoutée sans les ingredients");
 				}
 
-
+				//echo '<br><br><br><br><br><br><br><br>';
+				$modelRecette 	= new \Application\Models\Recette('localhost');
+				$recetteCree = $modelRecette->getRecetteBySlug($slugTitre);
+				//var_dump("recettecree",$recetteCree);
+				$slugRecetteCree = $recetteCree['response'][0]['slugtitre'];
+				//var_dump($slugRecetteCree);
+				$this->setRedirect(LINK_ROOT.'recette/categorie/'.$slugRecetteCree);
 
 			}else{
 				$this->message->addError($res['apiErrorMessage']);
@@ -363,63 +367,6 @@ class Admin extends \Library\Controller\Controller{
 			$viewR 		= $modelVR->getViewRecette($idRecette);
 			$viewR 		= $viewR['response'];
 		}
-
-
-
-
-
-
-
-
-
-
-
-		//script ajax permettant d'ajouter un ingredient a la bdd puis de le prendre en compte
-		/*$successfonc="
-			console.log(data);
-			val=data['response'];		//test à faire : si >0 ==> insertion faite
-			label=document.getElementById('DivContainerIngredientValue').value;
-			$('#ingredients').append('<option value=\"'+val+'\" selected>'+label+'</option>');
-			$('#unites').append('<option value=\"'+val+'\" selected>...</option>');
-
-			//tab
-        	tabUnit.push('rien');
-        	tabQuant.push(1);
-
-			alert('ingredient ajouté');
-		";
-		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerIngredientValue"),"ingredient", "insertingredients", array(), "ajouterIngredientBdd", $successfonc);
-
-		$viewButtonShowDivIngredient = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterIngredientBdd", "Ajouter un ingrédient");
-
-		$viewShowDivScript = $this->modelShowDiv->getScriptShowDiv("DivContainerIngredient",	"ajouterIngredientBdd", $scriptAjax, "ajouterIngredientBdd");
-
-		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("DivContainerIngredient", "d'un ingrédient", "Ingrédient", "cet ingrédient");
-
-		$codeAjaxIngredient=$viewShowDivHtml."".$viewShowDivScript;
-
-
-
-
-		//script ajax permettant d'ajouter une categorie a la bdd puis de la prendre en compte
-		$successfonc="
-			console.log(data);
-			val = data['response'];		//test à faire : si >0 ==> insertion faite
-			label=document.getElementById('DivContainerCategorieValue').value;
-			$('#id_cat').append('<option value=\"'+val+'\" selected>'+label+'</option>');
-			
-
-			alert('categorie ajoutée');
-		";
-		$scriptAjax = $this->modelAjax->getAjaxPost(array("value"=>"DivContainerCategorieValue"),"categorie", "insertcategorie", array(), "ajouterCategorieBdd", $successfonc);
-
-		$viewButtonShowDivCategorie = $this->modelShowDiv->getHtmlButtonShowDiv(	"ajouterCategorieBdd", "Ajouter une catégorie");
-
-		$viewShowDivScript = $this->modelShowDiv->getScriptShowDiv("DivContainerCategorie",	"ajouterCategorieBdd", $scriptAjax, "ajouterCategorieBdd");
-
-		$viewShowDivHtml = $this->modelShowDiv->getHtmlShowDiv("DivContainerCategorie", "d'une catégorie", "Catégorie", "cette catégorie");
-
-		$codeAjaxCategorie=$viewShowDivHtml."".$viewShowDivScript;*/
 		
 		
 		$this->setDataView(array(
@@ -428,10 +375,6 @@ class Admin extends \Library\Controller\Controller{
 			"ingredients" =>  $ings,
 			"unites" =>  $unit,
 			"viewrecette" =>  $viewR
-			/*"ajaxIngredientButton" => $viewButtonShowDivIngredient,
-			"ajaxIngredientScript" =>	$codeAjaxIngredient,
-			"ajaxCategorieButton" => $viewButtonShowDivCategorie,
-			"ajaxCategorieScript" =>	$codeAjaxCategorie*/
 		));
 
 
@@ -439,7 +382,6 @@ class Admin extends \Library\Controller\Controller{
 		$this->setJsConfigAvant("variable", "IdRecette", $viewR['id_recette'] );
 
 		//ajoute le code qui  lance une fonction ... avec comme parametre la variable créée ci dessus
-		//$this->setJsConfig("code" , "actualiserImageFormRecette( jsIdRecette );", "" );
 		$this->setJsConfigApres("code" , "actualiserImageFormRecette( jsIdRecette );" );
 
 		$this->setScriptView("adminrecettes.js");

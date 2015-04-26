@@ -21,6 +21,7 @@
         <!-- Affiche l'image de la recette ayant le top 1 en base -->
         <div class="item">
         <?php foreach($recettes as $recette): ?>
+
             <?php if($recette['top'] == 1): ?>
             <img src="<?=IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['titre']?>">
             <div class="container">

@@ -20,6 +20,11 @@ class Recette extends \Library\Model\Model{
 		
 	}
 
+	public function getRecetteBySlug($slug){
+		return $this->webserviceRequest("GET", "Recette", "getRecetteBySlug", array("slugtitre" => $slug));
+		
+	}
+
 	/**
 	 * @param  [String] $recette     [description]
 	 * @param  [int] $idUser      [description]
