@@ -308,21 +308,17 @@ class User extends \Library\Controller\Controller{
 			$_POST['id_user']=$_SESSION['user']['id_user'];
 
 			$modelUser = new \Application\Models\User('localhost');
-			var_dump($_POST);
-			$res=$modelUser->convEnTab($modelUser->deleteUser($_POST));
-
-			$res=$res['response'];
-			//echo $res['page'];
+			$res=$modelUser->deleteUser($_POST);
 
 
 			
-			if($res){
+			if($res['response']){
 				$this->setRedirect(LINK_ROOT);
 				$this->message->addSuccess("Compte supprimé");
 				unset($_SESSION['user']);
 				 	
 			}else{
-				$this->message->addError("mot de passe erroné  !");
+				$this->message->addError(" Mot de passe non supprimé<br>" + $res['apiErrorMessage']);
 
 			}
 		}
