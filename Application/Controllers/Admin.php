@@ -9,8 +9,6 @@ class Admin extends \Library\Controller\Controller{
 	private $modelRecette;
 	private $modelCategorie;
 	private $modelIngredient;
-	private $modelShowDiv;
-	private $modelAjax;
 
 
 	public function __construct(){
@@ -227,7 +225,6 @@ class Admin extends \Library\Controller\Controller{
 
 		// Appuyer sur btn Modifier Recette
 		if(isset($_POST['btn'])){
-			//var_dump($_POST);
 
 			if(empty($_POST['value'])){
 				$this->message->addError("Recette vide !");
@@ -266,8 +263,6 @@ class Admin extends \Library\Controller\Controller{
 			
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 
-				echo "<br><br><br><br><br><br><br><br><br><br>";
-			var_dump($_FILES['img']);
 			//######################## Copie et met a jour dans la base
 	        if(!empty($_FILES['img'])){
 		        $root = $_FILES['img']['tmp_name'];
@@ -278,12 +273,7 @@ class Admin extends \Library\Controller\Controller{
 		        if ($type === "erreur") {
 		        	$this->message->addError("Le format de l'image n'est pas correct (jpeg, png, tiff), l'image n'a pas été envoyée");
 		        } else {
-		        	
-
-			        //$img = IMG_ROOT. preg_replace('/\s\s+/','-', $this->retirerCaractereSpeciaux($_POST["titre"]).".$type");
 			        $img = IMG_ROOT.'recette/'. $slugTitre.'.$type';
-			        echo $img."<=======================";
-			        	// var_dump($root, $img);
 			        if(copy($root, $img )){
 			        	$_POST['img'] = 'recette/'.  $slugTitre.".$type";
 			        }else{
@@ -294,17 +284,11 @@ class Admin extends \Library\Controller\Controller{
 		        
 
 			}
-			
-			$res =$modelRecette->updateRecette($_POST, $idRecette ) ;
-
-			
-			//$res=$res['response'];
+			$res = $modelRecette->updateRecette($_POST, $idRecette ) ;
 
 			if ($res['response']){			//res est un bool
 				
 				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
-				//echo "<br><br><br><br>";
-				//var_dump("ing",$ingreds, $unites , $idRecette, $quantites );
 				$res = $modelListIngredients->updateListIngredients($ingreds, $unites , $idRecette, $quantites ) ;
 
 				if($res['response']){
@@ -312,25 +296,16 @@ class Admin extends \Library\Controller\Controller{
 				}else{
 					$this->message->addSuccess("Recette modifiée sans les ingredients");
 				}
-
-
-
 			}else{
 				$this->message->addError($res['apiErrorMessage']);
 				$this->message->addError($res['serverErrorMessage']);
 			}
 		}
 
-
-		
-
-
-
 		//recherche des categories
 		$modelCategorie 	= new \Application\Models\Categorie('localhost');
 		$cat=$modelCategorie->getCategories();
 		$cat=$cat['response'];
-
 
 		//recherche des ingredients
 		$modelIngredient 	= new \Application\Models\Ingredient('localhost');
@@ -354,21 +329,15 @@ class Admin extends \Library\Controller\Controller{
 			}
 			
 		}
-
-
 		//recherche des Unites
 		$modelUnite 	= new \Application\Models\Unite('localhost');
 		$unit=$modelUnite->getUnites();
 		$unit=$unit['response'];
 		
 
-
-
-
-		if( $idRecette>0 ){		//condition qui  sert a rien
+		if( $idRecette > 0 ){
 			
 			//## prepare les données pour afficher la recette
-			
 			$modelVR 	= new \Application\Models\ViewRecette('localhost');
 			$viewR 		= $modelVR->getViewRecette($idRecette);
 			$viewR 		= $viewR['response'];
@@ -383,7 +352,6 @@ class Admin extends \Library\Controller\Controller{
 			"viewrecette" =>  $viewR
 		));
 
-
 		//ajoute la declaration de la variable idRecette au js (exemple : jsIdRecette=1)
 		$this->setJsConfigAvant("variable", "IdRecette", $viewR['id_recette'] );
 
@@ -394,7 +362,13 @@ class Admin extends \Library\Controller\Controller{
 
 
 	}
-
+	/**
+	 * supprimerRecetteAction($idRecette) 		
+	 * Controller de la page de suppression des recettes
+	 * 
+	 * @param  int $idRecette 		id de la recette à supprimer
+	 * @return void
+	 */
 	public function supprimerRecetteAction($idRecette){
 		if($_SESSION['user']['role'] !== "admin"){
 			$this->setRedirect(LINK_ROOT);
