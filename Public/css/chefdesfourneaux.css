@@ -28,9 +28,10 @@ body{
 	width:64%; 
 	top:0;
 }
-/* .lienMenuChefDesFourneaux{
-	width:14.2%;
-} */
+.lienMenuChefDesFourneaux a{
+	text-decoration: none;
+	color: #333;
+} 
 
 .dropdown-menu{
 	width: 100%;
@@ -39,11 +40,19 @@ body{
 	text-align: center; 
 	position: relative;
 	top: 27px;
+
+}
+
+.menuLiens ul li{
+	margin: 0 auto;
 }
 
 .menuLiens li a{
 	padding-left: 30px;
 	padding-right: 30px;
+}
+.containerMenuUl{
+
 }
 /* END NAVBAR */
 
@@ -176,74 +185,20 @@ footer img{
 }
 
 
-/* 
-@media only screen and (max-width:1200px){
-    body{
-        background: #000;
-    }
-    .wrapper{
-        width: 960px;
-    }
-} */
+/* Responsive */
 
-
-
-
-
-/* Responsive
-@media (max-width: 1200px) {
-	.lienPanier{
-		margin-left: 230px;
+@media (max-width: 1164px) {
+	.menu{
+		height: 209px;
 	}
 }
 
-@media (max-width: 990px) {
-	.lienPanier{
-		margin-left: 160px;
+@media (max-width: 994px) {
+	.menu{
+		height: 288px;
+	}
+	.buttonNav{
+		top:26px;
 	}
 }
-
-@media (max-width: 768px) {
-	.panier{
-		margin-right: 314px;
-		padding-top: 9px;
-	}
-	
-	.lienPanier{
-		margin-left: 0px;
-		margin-right: 0px;
-		top: 0;
-		left: 0;
-		float: left;
-	}
-}
-
-@media (max-width: 322px) {
-	.panier{
-		margin-right: 145px;
-		padding-top: 9px;
-	}
-	
-	.lienPanier{
-		margin-left: 0px;
-		margin-right: 0px;
-		top: 0;
-		left: 0;
-		float: left;
-	}
-}
-@media (max-width: 300px) {
-	.panier{
-		margin-left: 30px;
-		margin-right: 135px;
-		padding-top: 9px;
-	}
-	.lienPanier{
-		margin-left: 0px;
-		margin-right: 0px;
-		top: 0;
-		left: 0;
-		float: left;
-	}
-}
-Fin Responsive */
+/* Fin responsive */

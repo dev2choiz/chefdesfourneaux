@@ -20,18 +20,18 @@ class Admin extends \Library\Controller\Controller{
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelRecette 		= new \Application\Models\Recette('localhost');
 		$this->modelVR 				= new \Application\Models\ViewRecette('localhost');
-		$this->modelShowDiv 		= new \Application\Models\ShowDiv();
-		$this->modelAjax 			= new \Application\Models\Ajax();
 	}
 
-
+	/**
+	 * indexAction Controller de la page index de Admin
+	 *
+	 * @return void 
+	 */
 	public function indexAction(){
 		if($_SESSION['user']['role'] !== "admin"){
 			$this->setRedirect(LINK_ROOT);
 		}
-		//echo "<br><br><br><br><br><br><br><br><br><br>";
 		$viewRs = $this->modelVR->getAllViewRecettes();
-		//var_dump("vue",$viewRs);
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
@@ -39,12 +39,16 @@ class Admin extends \Library\Controller\Controller{
 		));
 	}
 
-
+	/**
+	 * creerRecetteAction 		controller de la page creerrecette
+	 *
+	 * adresse : http://localhost/chefdesfourneaux/admin/creerrecette
+	 * @return void
+	 */
 	public function creerRecetteAction(){
 
 		if($_SESSION['user']['role'] !== "admin"){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 		
 		$this->setDataView(array(
@@ -53,17 +57,18 @@ class Admin extends \Library\Controller\Controller{
 		));
 
 
-		
+		// En appuyant sur Créer recette
 		if(isset($_POST['btn'])){
+
+			// Vérification que la recette n'est pas vide
 			if(empty($_POST['value'])){
 				$this->message->addError("Recette vide !");
 			}
 
-			
 			$listMessage = $this->message->getMessages("error");
+
 			if(!empty($listMessage)){
 				$this->setDataView(array("message" => $this->message->showMessages()));
-
 				return false;
 			}
 
@@ -84,12 +89,11 @@ class Admin extends \Library\Controller\Controller{
 
 
 
-			$ingreds=$_POST["ingredients"];		unset($_POST["ingredients"]);
-			$unites=$_POST["unites"];			unset($_POST["unites"]);
-
-			$quantites=$_POST["quantites"];			unset($_POST["quantites"]);
+			$ingreds 			= $_POST["ingredients"];		
+			$unites 			= $_POST["unites"];			
+			$quantites 			= $_POST["quantites"];			
+			unset($_POST["quantites"], $_POST["ingredients"], $_POST["unites"]);
 			
-
 
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			$res = $modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
@@ -198,9 +202,11 @@ class Admin extends \Library\Controller\Controller{
 
 	
 	/**
-	 * [mettreAJourRecetteAction : l'addresse fini avec un parametre get : ]
-	 * 							http://localhost/chefdesfourneaux/admin/mettreajourrecette/12
-	 * @return [type] [description]
+	 * mettreAJourRecetteAction($idRecette)
+	 * Controller de la page mettreajourrecette
+	 * 
+	 * ex : http://localhost/chefdesfourneaux/admin/mettreajourrecette/12
+	 * @return void
 	 */
 	public function mettreAJourRecetteAction($idRecette){
 
@@ -451,17 +457,6 @@ class Admin extends \Library\Controller\Controller{
 			}
 
 			unset($_POST['btn'], $listMessage);
-
-
-
-
-
-
-
-
-
-
-
 		}	//fin if(btn)
 
 
@@ -474,15 +469,15 @@ class Admin extends \Library\Controller\Controller{
 
 		//recherche des ingredients
 		$modelIngredient 	= new \Application\Models\Ingredient('localhost');
-		$ings=$modelIngredient->getIngredients();
-		$ings=$ings->response;
-		$ings=$modelIngredient->convEnTab($ings);
+		$ings = $modelIngredient->getIngredients();
+		$ings = $ings['response'];
+		//$ings=$modelIngredient->convEnTab($ings);
 
 		//recherche des Unites
 		$modelUnite 	= new \Application\Models\Unite('localhost');
-		$unit=$modelUnite->getUnites();
-		$unit=$unit->response;
-		$unit=$modelUnite->convEnTab($unit);
+		$unit = $modelUnite->getUnites();
+		$unit = $unit['response'];
+		//$unit=$modelUnite->convEnTab($unit);
 
 
 

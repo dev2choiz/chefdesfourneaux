@@ -1,10 +1,15 @@
 <?=$message?>
 <form class="form-signin" method="post">
-    <h2 class="form-signin-heading">
+    <p>
+        <a href="<?=LINK_ROOT?>">
+            <img class="logoImg" src="<?=IMG_LINK_ROOT?>chefdesfourneauxlogo.png">
+        </a>
+    </p>
+    <h1 class="form-signin-heading">
     	<?=$pageTitle?>
-    </h2>
-    <input value="<?=(isset($_POST['nom']))?$_POST['nom']:''?>" name="nom" type="text" class="form-control" placeholder="Prénom" required autofocus>
-    <input value="<?=(isset($_POST['prenom']))?$_POST['prenom']:''?>" name="prenom" type="text" class="form-control" placeholder="Nom de famille" required>
+    </h1>
+    <input value="<?=(isset($_POST['nom']))?$_POST['nom']:''?>" name="prenom" type="text" class="form-control" placeholder="Prénom" required autofocus>
+    <input value="<?=(isset($_POST['prenom']))?$_POST['prenom']:''?>" name="nom" type="text" class="form-control" placeholder="Nom de famille" required>
     <input value="<?=(isset($_POST['pseudo']))?$_POST['pseudo']:''?>" name="pseudo" type="text" class="form-control" placeholder="Pseudo" required>
     <input value="<?=(isset($_POST['mail']))?$_POST['mail']:''?>" name="mail" type="email" class="form-control" placeholder="Adresse email" required>
 
@@ -12,7 +17,7 @@
 
 
 
-    <input value="<?=(isset($_POST['date_naissance']))?$_POST['date_naissance']:''?>" name="date_naissance" type="date" class="form-control" placeholder="Date de naissance" required   > (AAAA/MM/JJ)
+    <input value="<?=(isset($_POST['date_naissance']))?$_POST['date_naissance']:''?>" name="date_naissance" type="date" class="form-control" placeholder="Date de naissance" required   > 
 
     <select  class="form-control" name="id_questionsecrete" required>
     <?php foreach ($questionSecretes as $qs): ?>

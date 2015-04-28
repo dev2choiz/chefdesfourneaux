@@ -2,19 +2,38 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: rgba(255,255,255,0.5);
-  /* background-image:url(/fourneaux/Public/img/fondinscription.jpg); */
    
 }
 .backgroundImage{
-  opacity: 0.5;
+  opacity: 0.4;
   width: 100%;
   position: absolute;
   z-index: 1;
-/*   background-size: 100%;
-background-repeat: no-repeat;
-background-attachment: fixed; */
+  position: fixed;
+  top: 0;
 }
 
+h1, p{
+  text-align: center;
+}
+
+h1{
+  font-family: "Origin", Helvetica, Arial, sans-serif;
+}
+
+a{
+  color: #63431D;
+}
+
+.logoImg{
+  text-align: center;
+  position: relative;
+  margin-bottom: 48px;
+
+}
+
+
+/* Pages login, inscription, profil, delete */
 .form-signin {
   background-color: transparent;
   max-width: 330px;
@@ -22,7 +41,9 @@ background-attachment: fixed; */
   margin: 0 auto;
   z-index: 20;
   position: relative;
+  text-align: center;
 }
+
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
@@ -54,4 +75,20 @@ background-attachment: fixed; */
 }
 .form-signin input.form-password{
   margin-bottom: 0;
+}
+
+.btn{
+  background-color: #E39942;
+  border-color: #E39942;
+}
+.btn:hover{
+  background-color: #E39942;
+  border-color: #E39942;
+}
+
+
+/* Page En construction */
+.enconstruction{
+  position: relative;
+  z-index: 20;
 }

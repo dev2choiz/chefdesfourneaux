@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Site de recettes de cuisine et de vente d'électroménager">
+        <link rel="shortcut icon" type="image/x-icon" href="<?=IMG_LINK_ROOT?>chefdesfourneauxlogo.png" />
         <title><?=$pageTitle?></title>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -95,15 +96,17 @@
                     
                         <div class="row">
                             <div id="navbar" class="navbar-collapse collapse menuLiens">
-                                <ul class="nav navbar-nav animSiteFadeInSlow col-md-12">
-                                    <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'recette/index'?>">Categories</a></li>
-                                    <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'recette/indexchef'?>">Recettes de chef</a></li>
-                                    <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'recette/indexcategorie/3'?>">Forme et santé</a></li>
-                                    <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Livres</a></li>
-                                    <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Restaurants</a></li>
-                                    <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Ustensiles de cuisine</a></li>
-                                    <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Vidéos</a></li>  
-                                </ul>
+                                <div class="containerMenuUl">
+                                    <ul class="nav navbar-nav animSiteFadeInSlow">
+                                        <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'recette/index'?>">Categories</a></li>
+                                        <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'recette/indexchef'?>">Recettes de chef</a></li>
+                                        <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'recette/indexcategorie/3'?>">Forme et santé</a></li>
+                                        <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Livres</a></li>
+                                        <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Restaurants</a></li>
+                                        <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'vente/indexproduit'?>">Ustensiles de cuisine</a></li>
+                                        <li class="lienMenuChefDesFourneaux"><a href="<?=LINK_ROOT.'error/enconstruction'?>">Vidéos</a></li>  
+                                    </ul>
+                                </div>
                             </div> <!-- /.menuLiens -->
                         </div> <!-- /.row -->
                     </div> <!-- /.container -->

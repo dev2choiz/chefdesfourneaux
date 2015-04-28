@@ -112,7 +112,7 @@ function deleteListProduit(idRecette, idProduit){
         dataType: 'json',
         async :false,
         success: function(data) {
-            alert("supprimé");
+            alert("dissocié ");
         }
     });
 

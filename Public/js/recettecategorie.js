@@ -1,24 +1,22 @@
 
 
 $(document).ready(function(){
-
         $('#addCommentaire').click(function(){
             if (tinyMCE.get('commValue').getContent()!=="") {
-                ajouterCommentaire(tinyMCE.get('commValue').getContent(), $("#noteValue").val());
+                ajouterCommentaire(tinyMCE.get('commValue').getContent());
             }
         });
     }
 );
 
 
-function ajouterCommentaire(value, note){
-    //alert(value+ "   "+ note);
+function ajouterCommentaire(value){
+
     jsonData = 
     {
         'service'   : 'Commentaire',
         'method'    : 'insertCommentaire',
         'value'     : value,
-        'note'      : note,
         'id_recette': jsIdRecette,
         'id_user'   : idUser
     };
@@ -95,7 +93,7 @@ function ajouterCommDansDiv(idComm){
                         "+data.response[0].value+"\
                             <p>"+data.response[0].update+"</p>\
                     </div>\
-                </div>
+                </div>\
                 ";
 
             $('#WrapperComms').append(html);
