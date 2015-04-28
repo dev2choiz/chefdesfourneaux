@@ -82,7 +82,7 @@ class Vente extends \Library\Controller\Controller{
 	public function produitAction($idProduit){
 		
 		$produit = $this->modelProduits->getProduit($idProduit);
-		$produit = $produit['response'][0];
+		$produit = $produit['response'];
 		$viewProduits = $this->modelViewProduits->getViewListProduitsByProduit($idProduit);
 
 
