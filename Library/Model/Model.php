@@ -27,13 +27,13 @@ abstract class Model{
 	public function webserviceRequest($httpMethod, $service, $method, $params){
 
 		if($httpMethod === 'GET'){
-
+			// Si la méthode http est un GET, les données sont mises directement dans l'url
 		  	$params['service'] = $service;
 		  	$params['method'] = $method;
 			return $this->convEnTab( json_decode( file_get_contents( WEBSERVICE_ROOT.'/index.php?'. http_build_query($params) ) ) );
 		
 		}else{
-
+			// Si la méthode http n'est pas un GET, les données sont mises dans un tableau
 		  	$params['service'] = $service;
 		  	$params['method'] = $method;
 			$options = array('http' =>
@@ -43,7 +43,10 @@ abstract class Model{
 			        'content' => http_build_query($params)
 			        )
 			);
+
+			//Transformation des données en contexte
 			$context  = stream_context_create($options);
+			// Envoie la requète au webservice en utilisant le contexte ci-dessus
 			return $this->convEnTab(json_decode(file_get_contents(WEBSERVICE_ROOT.'/index.php', false, $context) ));
 		
 		}

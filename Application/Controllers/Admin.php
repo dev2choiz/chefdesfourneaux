@@ -469,15 +469,15 @@ class Admin extends \Library\Controller\Controller{
 
 		//recherche des ingredients
 		$modelIngredient 	= new \Application\Models\Ingredient('localhost');
+
 		$ings = $modelIngredient->getIngredients();
 		$ings = $ings['response'];
-		//$ings=$modelIngredient->convEnTab($ings);
-
+		
 		//recherche des Unites
 		$modelUnite 	= new \Application\Models\Unite('localhost');
 		$unit = $modelUnite->getUnites();
 		$unit = $unit['response'];
-		//$unit=$modelUnite->convEnTab($unit);
+
 
 
 
