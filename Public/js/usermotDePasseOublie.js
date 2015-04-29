@@ -19,11 +19,13 @@ $(document).ready(function(){
                     $("#id_questionsecrete").show('slow');
                     
                 }else{
-                    alert("le mail n'existe pas dans la base");
+                    $("#msgError").html("le mail n'existe pas dans la base");
+                    
                 }
 
             } else{
-                alert("le format du mail n'est pas bon");
+                $("#msgError").html("le format du mail n'est pas bon");
+                
             };
             
             

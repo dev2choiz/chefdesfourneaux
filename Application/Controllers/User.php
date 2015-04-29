@@ -47,7 +47,7 @@ class User extends \Library\Controller\Controller{
 
 			$date = new \Datetime($_POST['date_naissance']);
 			$_POST['date_naissance'] = $date->format('Y-m-d');
-			var_dump($date);
+			
 
 			$currentPassword	=	$_POST['currentpassword'];
 			
@@ -76,17 +76,16 @@ class User extends \Library\Controller\Controller{
 			$user = $modelUser->login($_SESSION['user']['mail'], $_POST['currentpassword']);
 			//$user=$modelUser->convEnTab($user['response'][0]);
 			$user=$modelUser->convEnTab($user);
-			var_dump("dqdf", $user);
+			//var_dump("dqdf", $user);
 			$user=$user['response'][0];
 			if(!empty($user)){
 
 				unset( $_POST['btn'],$_POST['password'], $_POST['currentpassword'], $listMessage);
 
 				$_POST['password']=$password;		//<== new password
-				var_dump('###########################################',$_POST);
+				//var_dump('###########################################',$_POST);
 				$res=$modelUser->convEnTab($modelUser->updateUser($_SESSION['user']["id_user"],$_SESSION['user']["mail"] , $currentPassword, $_POST));
-				var_dump("resulta", $res);
-				echo $res['page'];
+
 				$res=$res['response'];
 
 				//var_dump("fdf",$res, $_POST ,"df");
@@ -376,7 +375,7 @@ public function motDePasseOublieAction(){
 			
 			
 			if( $res ){
-				$this->message->addSuccess("votre nouveau pot de passe est <strong>$newPwd</strong>");
+				$this->message->addSuccess("votre nouveau mot de passe est <strong>$newPwd</strong>");
 			}else{
 				$this->message->addError("le mail et la reponse ne correnspondent pas  !");
 			}

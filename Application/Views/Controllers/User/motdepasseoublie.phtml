@@ -11,17 +11,21 @@
     	<?=$pageTitle?>
     </h1>
 
+
     <!-- Mail -->
+    <div id="msgError"></div>
+
     <input name="mail" id="mail" type="email" class="form-control" placeholder="Email address" required autofocus>
-    <p>Repondre &agrave; la question pour recevoir votre nouveau mot de passe par mail</p>
+    <p>Repondre &agrave; la question pour recevoir votre nouveau mot de passe</p>
     <select name="id_questionsecrete" id="id_questionsecrete">
         <?php
+        var_dump($questionSecretes);
         foreach ($questionSecretes as $questionSecrete) {?>
             <option value="<?=$questionSecrete['id_questionsecrete']?>" ><?=$questionSecrete['value']?></option>
         <?php } ?>
     </select>
 
-    <input value="" name="reponsesecrete" type="password" class="form-control" placeholder="reponse secrete" required>
+    <input value="" name="reponsesecrete" type="text" class="form-control" placeholder="reponse secrete" required>
 
     <button name="btn" class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
 
