@@ -268,7 +268,6 @@ class Admin extends \Library\Controller\Controller{
 		        $root = $_FILES['img']['tmp_name'];
 
 		        $type = $this->getImageExtension($_FILES['img']['type']);
-				var_dump($_FILES['img'],$type);
 
 		        if ($type === "erreur") {
 		        	$this->message->addError("Le format de l'image n'est pas correct (jpeg, png, tiff), l'image n'a pas été envoyée");

@@ -7,11 +7,11 @@
         <h1><?=$recette['categorie']?></h1>
         <div class="col-md-5">
             <img class="featurette-image  img-responsive" src="<?=IMG_LINK_ROOT.$recette['img']?>" alt="<?=$recette['titre']?>">
-            <h3>Liste des Ingrédients</h3>
+            <h3>Liste des Ingrédients : </h3>
 
             <!-- Si des ingrédients sont liés à la recette -->
             <?php if(!empty($recette['ingredients'])): foreach ($recette['ingredients'] as $ing): ?>
-                <p class="lead"><?=$ing['ingredients']?> : <?=$ing['value']?> <?=$ing['unite']?></p>
+                <p><?=$ing['ingredients']?> : <?=$ing['value']?> <?=$ing['unite']?></p>
             <?php endforeach; endif; ?>
 
         </div>
