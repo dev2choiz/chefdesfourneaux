@@ -15,6 +15,6 @@ class Error extends \Library\Controller\Controller{
 		header("HTTP/1.0 404 Not Found");
 	}
 	public function enconstructionAction(){
-		echo "<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>";
+		
 	}
 }

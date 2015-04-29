@@ -9,8 +9,6 @@ class Admin extends \Library\Controller\Controller{
 	private $modelRecette;
 	private $modelCategorie;
 	private $modelIngredient;
-	private $modelShowDiv;
-	private $modelAjax;
 
 
 	public function __construct(){
@@ -20,18 +18,18 @@ class Admin extends \Library\Controller\Controller{
 		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
 		$this->modelRecette 		= new \Application\Models\Recette('localhost');
 		$this->modelVR 				= new \Application\Models\ViewRecette('localhost');
-		$this->modelShowDiv 		= new \Application\Models\ShowDiv();
-		$this->modelAjax 			= new \Application\Models\Ajax();
 	}
 
-
+	/**
+	 * indexAction Controller de la page index de Admin
+	 *
+	 * @return void 
+	 */
 	public function indexAction(){
 		if($_SESSION['user']['role'] !== "admin"){
 			$this->setRedirect(LINK_ROOT);
 		}
-		//echo "<br><br><br><br><br><br><br><br><br><br>";
 		$viewRs = $this->modelVR->getAllViewRecettes();
-		//var_dump("vue",$viewRs);
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),
@@ -39,12 +37,16 @@ class Admin extends \Library\Controller\Controller{
 		));
 	}
 
-
+	/**
+	 * creerRecetteAction 		controller de la page creerrecette
+	 *
+	 * adresse : http://localhost/chefdesfourneaux/admin/creerrecette
+	 * @return void
+	 */
 	public function creerRecetteAction(){
 
 		if($_SESSION['user']['role'] !== "admin"){
-			header('location: '.LINK_ROOT);
-			die();
+			$this->setRedirect(LINK_ROOT);
 		}
 		
 		$this->setDataView(array(
@@ -53,17 +55,18 @@ class Admin extends \Library\Controller\Controller{
 		));
 
 
-		
+		// En appuyant sur Créer recette
 		if(isset($_POST['btn'])){
+
+			// Vérification que la recette n'est pas vide
 			if(empty($_POST['value'])){
 				$this->message->addError("Recette vide !");
 			}
 
-			
 			$listMessage = $this->message->getMessages("error");
+
 			if(!empty($listMessage)){
 				$this->setDataView(array("message" => $this->message->showMessages()));
-
 				return false;
 			}
 
@@ -84,12 +87,11 @@ class Admin extends \Library\Controller\Controller{
 
 
 
-			$ingreds=$_POST["ingredients"];		unset($_POST["ingredients"]);
-			$unites=$_POST["unites"];			unset($_POST["unites"]);
-
-			$quantites=$_POST["quantites"];			unset($_POST["quantites"]);
+			$ingreds 			= $_POST["ingredients"];		
+			$unites 			= $_POST["unites"];			
+			$quantites 			= $_POST["quantites"];			
+			unset($_POST["quantites"], $_POST["ingredients"], $_POST["unites"]);
 			
-
 
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 			$res = $modelRecette->insertRecette($_POST,  $_SESSION['user']['id_user']);
@@ -198,9 +200,11 @@ class Admin extends \Library\Controller\Controller{
 
 	
 	/**
-	 * [mettreAJourRecetteAction : l'addresse fini avec un parametre get : ]
-	 * 							http://localhost/chefdesfourneaux/admin/mettreajourrecette/12
-	 * @return [type] [description]
+	 * mettreAJourRecetteAction($idRecette)
+	 * Controller de la page mettreajourrecette
+	 * 
+	 * ex : http://localhost/chefdesfourneaux/admin/mettreajourrecette/12
+	 * @return void
 	 */
 	public function mettreAJourRecetteAction($idRecette){
 
@@ -221,7 +225,6 @@ class Admin extends \Library\Controller\Controller{
 
 		// Appuyer sur btn Modifier Recette
 		if(isset($_POST['btn'])){
-			//var_dump($_POST);
 
 			if(empty($_POST['value'])){
 				$this->message->addError("Recette vide !");
@@ -260,8 +263,6 @@ class Admin extends \Library\Controller\Controller{
 			
 			$modelRecette 	= new \Application\Models\Recette('localhost');
 
-				echo "<br><br><br><br><br><br><br><br><br><br>";
-			var_dump($_FILES['img']);
 			//######################## Copie et met a jour dans la base
 	        if(!empty($_FILES['img'])){
 		        $root = $_FILES['img']['tmp_name'];
@@ -272,12 +273,7 @@ class Admin extends \Library\Controller\Controller{
 		        if ($type === "erreur") {
 		        	$this->message->addError("Le format de l'image n'est pas correct (jpeg, png, tiff), l'image n'a pas été envoyée");
 		        } else {
-		        	
-
-			        //$img = IMG_ROOT. preg_replace('/\s\s+/','-', $this->retirerCaractereSpeciaux($_POST["titre"]).".$type");
 			        $img = IMG_ROOT.'recette/'. $slugTitre.'.$type';
-			        echo $img."<=======================";
-			        	// var_dump($root, $img);
 			        if(copy($root, $img )){
 			        	$_POST['img'] = 'recette/'.  $slugTitre.".$type";
 			        }else{
@@ -288,17 +284,11 @@ class Admin extends \Library\Controller\Controller{
 		        
 
 			}
-			
-			$res =$modelRecette->updateRecette($_POST, $idRecette ) ;
-
-			
-			//$res=$res['response'];
+			$res = $modelRecette->updateRecette($_POST, $idRecette ) ;
 
 			if ($res['response']){			//res est un bool
 				
 				$modelListIngredients 	= new \Application\Models\ListIngredients('localhost');
-				//echo "<br><br><br><br>";
-				//var_dump("ing",$ingreds, $unites , $idRecette, $quantites );
 				$res = $modelListIngredients->updateListIngredients($ingreds, $unites , $idRecette, $quantites ) ;
 
 				if($res['response']){
@@ -306,25 +296,16 @@ class Admin extends \Library\Controller\Controller{
 				}else{
 					$this->message->addSuccess("Recette modifiée sans les ingredients");
 				}
-
-
-
 			}else{
 				$this->message->addError($res['apiErrorMessage']);
 				$this->message->addError($res['serverErrorMessage']);
 			}
 		}
 
-
-		
-
-
-
 		//recherche des categories
 		$modelCategorie 	= new \Application\Models\Categorie('localhost');
 		$cat=$modelCategorie->getCategories();
 		$cat=$cat['response'];
-
 
 		//recherche des ingredients
 		$modelIngredient 	= new \Application\Models\Ingredient('localhost');
@@ -348,21 +329,15 @@ class Admin extends \Library\Controller\Controller{
 			}
 			
 		}
-
-
 		//recherche des Unites
 		$modelUnite 	= new \Application\Models\Unite('localhost');
 		$unit=$modelUnite->getUnites();
 		$unit=$unit['response'];
 		
 
-
-
-
-		if( $idRecette>0 ){		//condition qui  sert a rien
+		if( $idRecette > 0 ){
 			
 			//## prepare les données pour afficher la recette
-			
 			$modelVR 	= new \Application\Models\ViewRecette('localhost');
 			$viewR 		= $modelVR->getViewRecette($idRecette);
 			$viewR 		= $viewR['response'];
@@ -377,7 +352,6 @@ class Admin extends \Library\Controller\Controller{
 			"viewrecette" =>  $viewR
 		));
 
-
 		//ajoute la declaration de la variable idRecette au js (exemple : jsIdRecette=1)
 		$this->setJsConfigAvant("variable", "IdRecette", $viewR['id_recette'] );
 
@@ -388,7 +362,13 @@ class Admin extends \Library\Controller\Controller{
 
 
 	}
-
+	/**
+	 * supprimerRecetteAction($idRecette) 		
+	 * Controller de la page de suppression des recettes
+	 * 
+	 * @param  int $idRecette 		id de la recette à supprimer
+	 * @return void
+	 */
 	public function supprimerRecetteAction($idRecette){
 		if($_SESSION['user']['role'] !== "admin"){
 			$this->setRedirect(LINK_ROOT);
@@ -451,17 +431,6 @@ class Admin extends \Library\Controller\Controller{
 			}
 
 			unset($_POST['btn'], $listMessage);
-
-
-
-
-
-
-
-
-
-
-
 		}	//fin if(btn)
 
 
@@ -474,14 +443,14 @@ class Admin extends \Library\Controller\Controller{
 
 		//recherche des ingredients
 		$modelIngredient 	= new \Application\Models\Ingredient('localhost');
-		$ings=$modelIngredient->getIngredients();
-		$ings=$ings['response'];
-		
 
+		$ings = $modelIngredient->getIngredients();
+		$ings = $ings['response'];
+		
 		//recherche des Unites
 		$modelUnite 	= new \Application\Models\Unite('localhost');
-		$unit=$modelUnite->getUnites();
-		$unit=$unit['response'];
+		$unit = $modelUnite->getUnites();
+		$unit = $unit['response'];
 
 
 

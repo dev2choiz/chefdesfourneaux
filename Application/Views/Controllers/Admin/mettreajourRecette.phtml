@@ -177,7 +177,7 @@
                 <?php
 
                 function ingredientIsUsed( $id, $tabIng ){
-
+                    var_dump($tabIng);
                     foreach ($tabIng as  $ing) {
 
                         if ($ing['id_ingredient']===$id) {
@@ -380,6 +380,6 @@
     
 
 ?>
-console.log(tabUnit +" ## "+ tabQuant);
+console.log(tabUnit +" ######################## "+ tabQuant);
  
 </script>

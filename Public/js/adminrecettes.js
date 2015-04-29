@@ -12,11 +12,8 @@ function ajouterIngredient(){
         $('#unites').append('<option value="'+val+'" selected="selected">...</option>');
 
         $('#allingredients option:selected').remove();
-
         tabUnit.push("rien");
         tabQuant.push(1);
-        
-        console.log(tabUnit+ "  ## "+tabQuant);
 
     }
 }
@@ -24,7 +21,7 @@ function ajouterIngredient(){
 function retirerIngredient(){
     var val=$( "#ingredients option:selected" ).val();
     var lab=$( "#ingredients option:selected" ).text();
-    if($('#ingredients option').length!==0 ){
+    if($('#ingredients option').length !== 0 ){
 
         //$('#unites option:eq(3)').prop('selected', true);
         var ing = document.getElementById("ingredients");
@@ -84,12 +81,17 @@ function definirQuantite(){
  
 $( "form" ).submit(function( event ) {
     event.preventDefault();
-    alors=false;
-    for( i=0; i<tabUnit.length; i++ ){
+    alors = false;
+    for( i = 0; i < tabUnit.length; i++ ){
         if(tabUnit[i]==="rien"){
-            alors=true;
+            alors = true;
         }
     }
+        if(tabUnit.length == 0){
+            alors = true;
+        }
+
+
 
     if (alors) {    //verifie si chaque ingredient
         alert("veuillez selectionner une unité pour chaque ingredient");

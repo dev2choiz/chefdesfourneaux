@@ -1,9 +1,13 @@
 <?=$message?>
-
 <form class="form-signin" method="post">
-    <h2 class="form-signin-heading">
+    <p>
+        <a href="<?=LINK_ROOT?>">
+            <img class="logoImg" src="<?=IMG_LINK_ROOT?>chefdesfourneauxlogo.png">
+        </a>
+    </p>
+    <h1 class="form-signin-heading">
     	<?=$pageTitle?>
-    </h2>
+    </h1>
     <!-- Nom -->
     <input value="<?=(isset($_SESSION['user']['nom']))?$_SESSION['user']['nom']:''?>" name="nom" type="text" class="form-control" placeholder="Nom" required autofocus>
     <!-- Prénom -->
@@ -24,7 +28,8 @@
         <input name="confpassword" type="password" class="form-control" placeholder="Confirmer nouveau mot de passe">
     </fieldset>
 
-    
+
     <button name="btn" class="btn btn-lg btn-primary btn-block" type="submit"><?=$pageTitle?></button>
+    <a href="<?=LINK_ROOT?>">Retour au site</a> -
     <a href="<?=LINK_ROOT?>user/delete">Supprimer mon compte</a>
 </form>

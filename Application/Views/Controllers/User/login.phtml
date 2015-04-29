@@ -1,12 +1,17 @@
 <?=$message?>
 <form class="form-signin" method="post">
-    <h2 class="form-signin-heading">
-    	<?=$pageTitle?>
-    </h2>
-    <input name="mail" type="email" class="form-control" placeholder="Email address" required autofocus>
-    <input name="password" type="password" class="form-control" placeholder="Password" required>
-    <button name="btn" class="btn btn-lg btn-primary btn-block" type="submit"><?=$pageTitle?></button>
-    <a href="<?=LINK_ROOT?>">Retour au site</a> - 
-    <a href="<?=LINK_ROOT?>user/inscription">Inscription</a>
-    <a href="<?=LINK_ROOT?>user/motdepasseoublie">Mot de passe oubli&eacute;</a>
+	<p>
+        <a href="<?=LINK_ROOT?>">
+            <img class="logoImg" src="<?=IMG_LINK_ROOT?>chefdesfourneauxlogo.png">
+        </a>
+    </p>
+	<h1 class="form-signin-heading">
+		<?=$pageTitle?>
+	</h1>
+	<input name="mail" type="email" class="form-control" placeholder="Email address" required autofocus>
+	<input name="password" type="password" class="form-control" placeholder="Password" required>
+	<button name="btn" class="btn btn-lg btn-primary btn-block" type="submit"><?=$pageTitle?></button>
+	<a href="<?=LINK_ROOT?>">Retour au site</a> - 
+	<a href="<?=LINK_ROOT?>user/inscription">Inscription</a> -
+	<a href="<?=LINK_ROOT?>user/motdepasseoublie">Mot&nbsp;de&nbsp;passe&nbsp;oubli&eacute;</a>
 </form>
