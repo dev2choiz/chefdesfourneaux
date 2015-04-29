@@ -49,11 +49,11 @@ class Sitemap{
 
 
 
-	    $pf = fopen ($this->file, "w");
+	    /*$pf = fopen ($this->file, "w");
 	    if (!$pf){
 			$this->strLog= "cannot create $file\n";
 			return ;
-	    }
+	    }*/
 
 
 		$this->strSitemap.="<?xml version=\"1.0\" encoding=\"UTF-8\"?>
@@ -66,9 +66,10 @@ class Sitemap{
 <url>
   <loc>{$this->url}/</loc>
   <changefreq>daily</changefreq>
+  <priority>1</priority>
 </url>
 ";
-	    fwrite ($pf,"<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+	    /*fwrite ($pf,"<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <urlset
       xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"
       xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
@@ -79,7 +80,7 @@ class Sitemap{
   <loc>{$this->url}/</loc>
   <changefreq>daily</changefreq>
 </url>
-");
+");*/
 
 
 
@@ -91,10 +92,10 @@ class Sitemap{
 		$this->strSitemap .= $this->scan ($this->url);
 		//var_dump("apres",$this->scanned);
 
-		fwrite ($pf, "</urlset>\n");
+		// fwrite ($pf, "</urlset>\n");
 		$this->strSitemap.="</urlset>\n";
 
-		fclose ($pf);
+		// fclose ($pf);
 
 		//echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>" . htmlentities($this->strSitemap) . "<<<@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@";
 		//$this->strSitemap = $result;
@@ -163,7 +164,7 @@ class Sitemap{
 				//var_export($hrefparts2); echo "<==hrefparts2<br>"; echo "<hr>";
 
 				$href = str_replace ("\"", "", $hrefparts2[0]);
-				$this->strLog.= "<br>###".$href."{{{{{{{{{{{{<br>";
+				//$this->strLog.= "<br>###".$href."{{{{{{{{{{{{<br>";
 				//echo "#".$href."#<br>";
 				//On vérifie
 				
@@ -193,7 +194,10 @@ class Sitemap{
 					if ( (strpos ($href, "call-user-func-array") > 0) ) {
 						$ignore = true;
 			    	//echo "ignoré";
-			    }
+			    	}
+			    	if ( $href=== "http://localhost/chefdesfourneaux/" || $href=== "http://localhost/chefdesfourneaux"  ) {
+							$ignore = true;
+					}
 
 					/*echo $href. " dan ".$this->extension."<br>";
 					if ( (strpos ($href, $this->extension) > 0) ) {
@@ -206,16 +210,19 @@ class Sitemap{
 					
 				    if ((!$ignore) && (!in_array ($href, $this->scanned)) /*&& (strpos ($href, $this->extension) > 0)*/){
 
+				    	
 
-						if ( $href=== "http://localhost/chefdesfourneaux/" || $href=== "http://localhost/chefdesfourneaux"  ) {
-							$this->priority="1.0";
-						}else if ( (strpos (" ".$href, "http://localhost/chefdesfourneaux/recette/") > 0) ) {
+						if ( (strpos (" ".$href, "http://localhost/chefdesfourneaux/recette/") > 0) ) {
+							$this->freq = "monthly";
 							$this->priority="0.8";
 						}else if ( (strpos (" ".$href, "http://localhost/chefdesfourneaux/recette/indexcategorie/") > 0) ) {
+							$this->freq = "monthly";
 							$this->priority="1.0";
 						}if ( (strpos (" ".$href, "http://localhost/chefdesfourneaux/vente/indexproduit") > 0) ) {
+							$this->freq = "monthly";
 							$this->priority="0.7";
 						}else{
+							$this->freq = "monthly";
 							$this->priority="0.5";
 						}
 
@@ -228,7 +235,7 @@ class Sitemap{
 							     htmlentities("  <changefreq>{$this->freq}</changefreq>\n").
 							     htmlentities("  <priority>{$this->priority}</priority>\n</url>\n");
 						//echo 				$href. "\n";
-						$this->strSitemap .= 	"Le premier href".$href. "\n";
+						$this->strSitemap .="\n";
 						 $this->strSitemap .= $this->scan ($href);
 
 				    }
