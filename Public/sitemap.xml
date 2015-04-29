@@ -95,6 +95,30 @@
 </url>
 
 <url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit/44</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit/45</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit/46</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit/47</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
   <loc>http://localhost/chefdesfourneaux/vente/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>
@@ -119,13 +143,19 @@
 </url>
 
 <url>
+  <loc>http://localhost/chefdesfourneaux/recette/categorie/cotelette-de-veau</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
   <loc>http://localhost/chefdesfourneaux/recette/categorie/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>
 </url>
 
 <url>
-  <loc>http://localhost/chefdesfourneaux/recette/categorie/hfolh</loc>
+  <loc>http://localhost/chefdesfourneaux/recette/categorie/saumon-en-croute-de-sel</loc>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>
 </url>
@@ -138,6 +168,18 @@
 
 <url>
   <loc>http://localhost/chefdesfourneaux/recette/categorie/cupcake</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/categorie/gateau-aux-poires</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/categorie/macarons-a-la-rose</loc>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>
 </url>
@@ -156,12 +198,6 @@
 
 <url>
   <loc>http://localhost/chefdesfourneaux/vente/produit41</loc>
-  <changefreq>monthly</changefreq>
-  <priority>0.5</priority>
-</url>
-
-<url>
-  <loc>http://localhost/chefdesfourneaux/recette/indexcategorie/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>
 </url>
@@ -204,6 +240,12 @@
 
 <url>
   <loc>http://localhost/chefdesfourneaux/recette/indexcategorie/9</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.5</priority>
+</url>
+
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/indexcategorie/10</loc>
   <changefreq>monthly</changefreq>
   <priority>0.5</priority>
 </url>

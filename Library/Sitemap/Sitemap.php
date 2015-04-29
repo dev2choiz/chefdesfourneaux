@@ -150,12 +150,12 @@ class Sitemap{
 			//$this->strLog.= "<br>###".$a."<===aaaa<br>";
 
 			$aparts = explode ("href=", $a);
-			/*var_export($aparts);
-			echo "<===aparts$a<br>";*/
+			var_dump($aparts);
+			echo "<===aparts$a<br>";
 			
 
 			if($aparts[0]!="<!DOCTYPE html"){
-				
+				echo "iciiii				<br><br><hr><hr>";
 				$hrefparts = explode (" ", $aparts[1]);
 				//echo "";
 				//var_export($hrefparts); echo "<==hrefparts<br>";
