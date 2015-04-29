@@ -1,0 +1,216 @@
+    <?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>http://localhost/chefdesfourneaux/</loc>
+  <changefreq>daily</changefreq>
+</url>
+<url>
+  <loc>http://localhost/chefdesfourneaux/</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/indexproduit/</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/indexproduit/
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/index</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/index
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/indexchef</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/indexchef
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/indexcategorie/3</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/indexcategorie/3
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/indexproduit</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/indexproduit
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit/1</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/produit/1
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit/</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/produit/
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit/2</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/produit/2
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit/3</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/produit/3
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit/4</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/produit/4
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit/5</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/produit/5
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit/6</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/produit/6
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit/41</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/produit/41
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit/43</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/produit/43
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/type/entree</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/type/entree
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/type/</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/type/
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/type/plat</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/type/plat
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/categorie/</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/categorie/
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/categorie/hfolh</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/categorie/hfolh
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/type/dessert</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/type/dessert
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/categorie/cupcake</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/categorie/cupcake
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit5</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/produit5
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit6</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/produit6
+<url>
+  <loc>http://localhost/chefdesfourneaux/vente/produit41</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/vente/produit41
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/indexcategorie/<br</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/indexcategorie/<br
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/indexcategorie/</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/indexcategorie/
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/indexcategorie/4</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/indexcategorie/4
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/indexcategorie/6</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/indexcategorie/6
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/indexcategorie/1</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/indexcategorie/1
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/indexcategorie/2</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/indexcategorie/2
+<url>
+  <loc>http://localhost/chefdesfourneaux/recette/indexcategorie/9</loc>
+  <changefreq>daily</changefreq>
+  <priority>0.5</priority>
+</url>
+Le premier hrefhttp://localhost/chefdesfourneaux/recette/indexcategorie/9
+</urlset>
