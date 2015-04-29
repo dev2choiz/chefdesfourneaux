@@ -6,8 +6,23 @@ $(document).ready(function(){
                 ajouterCommentaire(tinyMCE.get('commValue').getContent());
             }
         });
-    }
-);
+        actualiserNoteRecette();
+
+        var maNote=getNoteUser(idUser);
+        if(maNote>0) $('#noteValue').val(maNote);
+
+        $('#noteValue').change(function(){
+            result=updateNoteUser( $('#noteValue').val() );
+            console.log("reuslt update note",result);
+            if ( result ) {
+                alert("note prise en compte");
+                actualiserNoteRecette();
+            } else{
+                alert("note non prise en compte");
+            }
+            ;
+        });
+});
 
 
 function ajouterCommentaire(value){
@@ -58,21 +73,7 @@ function ajouterCommDansDiv(idComm){
     };
 
 
-/* <div class="panel panel-default headerCom">
-                <div class="panel-heading">
-                    Na 
-                    <span class="badge">
-                        1 / 5
-                    </span>
-                </div>
-                <div class="panel-body">
-                    <p><p>nouveau com3</p></p>
-                    
-                                        <p>19-04-2015  16:23</p>
-                    <p></p>
-                </div>
-            </div>
-*/
+
     $.ajax({
         type: 'POST',
         data: jsonData,
@@ -104,3 +105,85 @@ function ajouterCommDansDiv(idComm){
 }
 
 
+
+function getNoteUser(idUser){
+
+    jsonData = {
+        'service'   : 'Note',
+        'method'    : 'getNote',
+        'id_user'   : idUser,
+        'id_recette': jsIdRecette
+    };
+
+    $retour="";
+    //alert(urlWebService);
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        async :false,
+        success: function(data) {
+            $retour=data.response;
+        }
+
+    });
+    return $retour;
+}
+
+
+
+
+function updateNoteUser(note){
+
+    jsonData = {
+        'service'   : 'Note',
+        'method'    : 'updateNote',
+        'id_user'   : idUser,
+        'value'     : note,
+        'id_recette': jsIdRecette
+    };
+
+    $retour="";
+    //alert(urlWebService);
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        async :false,
+        success: function(data) {
+            $retour=data.response;
+        }
+
+    });
+    return $retour;
+}
+
+
+
+function actualiserNoteRecette(){
+
+    jsonData = {
+        'service'   : 'Note',
+        'method'    : 'getMoyenneNote',
+        'id_recette': jsIdRecette
+    }
+
+    
+    
+    $.ajax({
+        type: 'POST',
+        data: jsonData,
+        url: urlWebService,
+        dataType: 'json',
+        async :false,
+        success: function(data) {
+            if (data.response>0) {
+                $("#noteRecette").html(data.response);
+            }
+        }
+
+    });
+    
+}
