@@ -1,21 +1,5 @@
 <?php
 
-/*************************************************************
-
- Simple site crawler to create a search engine XML sitemap
- Version 0.2
- Free to use, without any warranty
- Written by Elmar Hanlhofer http://www.plop.at 01/Feb/2012
-
- ChangeLog:
- ----------
- Version 0.2 2013-01-16  
-
-     * curl support - by Emanuel Ulses
-     * write url, then scan url - by Elmar Hanlhofer
-
-*************************************************************/
-
 
 namespace Library\Sitemap;
 
@@ -23,11 +7,11 @@ class Sitemap{
 
 
 
-    public $file;		// output file
-    public $url;	// url to scan
-    public $extension;		// scan files with extension
-    public $freq;			// scan frequency
-    public $priority;			// site priority
+    public $file;	
+    public $url;	
+    public $extension;
+    public $freq;	
+    public $priority;
 
 	public $scanned;
 
@@ -40,20 +24,15 @@ class Sitemap{
 	public function __construct(){
 
 
-	    $this->file = "sitemap.xml";						// output file
-	    $this->url = "http://localhost/chefdesfourneaux";	// url to scan
+	    $this->file = "sitemap.xml";
+	    $this->url = "http://localhost/chefdesfourneaux";
 
-		// here is https used, use
-		// http:// for non ssl pages
 
-		// ignore urls starting with
-		//$skip[0] = "https://www.plop.at/print"; 
-		//$skip[1] = "https://www.plop.at/slide";
 		
-		$this->extension = ".phtml";		// scan files with extension
+		$this->extension = ".phtml";
 
-		$this->freq = "daily";			// scan frequency
-		$this->priority = "0.5";			// site priority
+		$this->freq = "daily";
+		$this->priority = "0.5";
 
 
 
