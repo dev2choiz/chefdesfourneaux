@@ -51,6 +51,17 @@ body {
   z-index: 10;
   bottom: 200px;
 }
+.carousel-caption a{
+  background-color: #E39942;
+  border-color: #E39942;
+  font-weight: bold;
+}
+
+.carousel-caption a:hover{
+  background-color: #E39942;
+  border-color: #E39942;
+  font-weight: bold;
+}
 
 /* Declare heights because of positioning of img element */
 .carousel .item {

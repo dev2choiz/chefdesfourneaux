@@ -24,7 +24,7 @@ $(document).ready(function(){
 
 
 function ajouterProduit(){
-	alert("dans ajouter");
+	//alert("dans ajouter");
 
     
 

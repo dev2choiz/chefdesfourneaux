@@ -7,7 +7,7 @@ $(document).ready(function(){
 
 	$('#apercuImageCat').css('display', 'none');
 
-	//cache toi ici
+
 	//$('#frameImgCat').css('display', 'none');
 	
 
@@ -62,7 +62,7 @@ $(document).ready(function(){
 		 if (input.files && input.files[0]) {
 		    var reader = new FileReader();
 		    reader.onload = function (e) {
-		        alert(e.target.result);
+		        //alert(e.target.result);
 		        $('#imgCat').attr('src',e.target.result);
 		        return true;
 			};
