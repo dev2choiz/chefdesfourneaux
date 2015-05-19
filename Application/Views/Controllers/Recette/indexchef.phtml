@@ -15,7 +15,7 @@
                     <p class="text-muted">
                         Entrees :
                     </p>
-                    <?php foreach($recettes as $recette): if($recette['type'] == 'entree' && $recette['chef'] == 1):?>
+                    <?php foreach($recettes as $recette): if($recette['type'] == 'entrée' && $recette['chef'] == 1):?>
                         <p class="lead">
                             <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['slugtitre']?>">
                                 <?=$recette['titre']?>

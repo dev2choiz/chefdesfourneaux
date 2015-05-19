@@ -3,7 +3,7 @@ function changerImage(idInput) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
     reader.onload = function (e) {
-        alert("onload"+e.target.result);
+        //alert("onload"+e.target.result);
         $('#wrapperImgProduit').css('display', 'block');
         $('#imgProduit').attr('src',e.target.result);
         return true;
@@ -40,7 +40,7 @@ $( "#formImgProduit" ).submit(function( event ) {
 
 
 function finUpload(error,idProd) {
-    alert("finupload   "+error+"  ###"+ idProd);
+    //alert("finupload   "+error+"  ###"+ idProd);
 
     //remet le prix au format monetaire
     $('#WrapperAddProduit #prix').val( formatMoney( $('#WrapperAddProduit #prix').val() ) );
@@ -57,7 +57,7 @@ function finUpload(error,idProd) {
 
 
 function creerVueNouveauProduit(idProd){
-    alert("dans success de creernewprod");
+    //alert("dans success de creernewprod");
 
 
     

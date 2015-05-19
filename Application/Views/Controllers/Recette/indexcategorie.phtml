@@ -15,9 +15,9 @@
 
                 <!-- Affichage des entrées de la catégorie -->
                 <p class="text-muted">
-                    Entree :
+                    Entrée :
                 </p>
-                <?php foreach($recettes as $recette): if($recette['type'] == 'entree'):?>
+                <?php foreach($recettes as $recette): if($recette['type'] == 'entrée'):?>
                     <p class="lead">
                         <a href="<?=LINK_ROOT.'recette/categorie/'.$recette['slugtitre']?>">
                             <?=$recette['titre']?>
