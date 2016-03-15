@@ -1,19 +1,24 @@
 
 
 $(document).ready(function(){
+
         $('#addCommentaire').click(function(){
             if (tinyMCE.get('commValue').getContent()!=="") {
                 ajouterCommentaire(tinyMCE.get('commValue').getContent());
             }
         });
-        actualiserNoteRecette();
 
+        actualiserNoteRecette();
+        
         var maNote=getNoteUser(idUser);
+
         if(maNote>0) $('#noteValue').val(maNote);
 
+
+
+        
         $('#noteValue').change(function(){
             result=updateNoteUser( $('#noteValue').val() );
-            console.log("reuslt update note",result);
             if ( result ) {
                 alert("note prise en compte");
                 actualiserNoteRecette();
@@ -116,6 +121,7 @@ function getNoteUser(idUser){
     };
 
     $retour="";
+    console.log("dans getnoteuser1");
     //alert(urlWebService);
     $.ajax({
         type: 'POST',
@@ -124,6 +130,8 @@ function getNoteUser(idUser){
         dataType: 'json',
         async :false,
         success: function(data) {
+            console.log("dans getnoteuser");
+            console.log(data);
             $retour=data.response;
         }
 
@@ -135,7 +143,7 @@ function getNoteUser(idUser){
 
 
 function updateNoteUser(note){
-
+    alert(note+" dans update");
     jsonData = {
         'service'   : 'Note',
         'method'    : 'updateNote',

@@ -15,7 +15,7 @@ class Admin extends \Library\Controller\Controller{
 		parent::__construct();
 		$this->setLayout("carousel");
 		$this->message 				= new \Library\Message\Message();
-		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
+		$this->tinyMCE 				= new \Library\TinyMCE\TinyMCE();
 		$this->modelRecette 		= new \Application\Models\Recette('localhost');
 		$this->modelVR 				= new \Application\Models\ViewRecette('localhost');
 	}
@@ -30,6 +30,7 @@ class Admin extends \Library\Controller\Controller{
 			$this->setRedirect(LINK_ROOT);
 		}
 		$viewRs = $this->modelVR->getAllViewRecettes();
+		
 		$this->setDataView(array(
 			"pageTitle" => "Catégories de recettes, cuisine du monde, recettes authentique, santé, cuisine légère",
 			"message" => $this->message->showMessages(),

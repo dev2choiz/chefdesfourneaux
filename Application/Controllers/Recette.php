@@ -13,7 +13,7 @@ class Recette extends \Library\Controller\Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->setLayout("carousel");
-		$this->tinyMCE				= new \Library\tinyMCE\tinyMCE();
+		$this->tinyMCE				= new \Library\TinyMCE\TinyMCE();
 		$this->message 				= new \Library\Message\Message();
 		$this->modelCat 			= new \Application\Models\Categorie('localhost');
 		$this->modelViewCat 		= new \Application\Models\ViewCategorie('localhost');

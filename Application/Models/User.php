@@ -12,7 +12,7 @@ class User extends \Library\Model\Model{
 
 	public function login($mail, $password){
 
-		return $this->webserviceRequest("GET", "User", "authentification", array(
+		return $this->webserviceRequest("POST", "User", "authentification", array(
 							        'mail'=> $mail,
 							        'password'=>$password
 		));

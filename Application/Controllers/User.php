@@ -162,7 +162,7 @@ class User extends \Library\Controller\Controller{
 			
 
 			//var_dump($user);
-			echo $user['page'];
+			//echo $user['page'];
 			if(empty($user)){	//s'il y a une erreur
 				$this->message->addError("Erreur au niveau du webservice !");
 			}elseif ($user['apiError'] ) {
@@ -174,7 +174,6 @@ class User extends \Library\Controller\Controller{
 			}else{			//tout roule
 				$user=$user['response'][0];
 				
-					
 				$_SESSION['user'] = $user;
 				header('location: '.LINK_ROOT);
 				die();
@@ -205,7 +204,7 @@ class User extends \Library\Controller\Controller{
 
 		if(isset($_POST['btn'])){
 
-			var_dump($_POST);
+			//var_dump($_POST);
 			if(empty($_POST['nom'])){
 				$this->message->addError("Nom vide !");
 			}elseif(strlen($_POST['nom'])>50){
@@ -247,13 +246,10 @@ class User extends \Library\Controller\Controller{
 			
 			$res=$modelUser->convEnTab($modelUser->insertUser($_POST));
 
-			//echo $res['page'];
 
-
-			//var_dump("dskj",$res, $_POST);
 			if($res){
 				$this->message->addSuccess("Inscription valide");
-				header('location: '.LINK_ROOT.'user/login');
+				header('Location: '.LINK_ROOT.'user/login');
 				die();
 			}else{
 				$this->message->addError("erreur pendant l'inscription !");

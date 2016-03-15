@@ -1,9 +1,13 @@
-##
-## http://localhost/recette/controller/action[/param1/param2/param3/.....]
-## http://localhost/recette/Public/css/style.css
-
 RewriteEngine On
+
+################ En ligne ######################
+# RewriteBase /Public
+
+##### Local dans wamp/www/chefdesfourneaux/ ####
 RewriteBase /chefdesfourneaux/Public
 
+####### Local dans wamp/www/PROD/site/ #########
+# RewriteBase /PROD/site/Public
+
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ index.php?page=$1 [L] 
+RewriteRule ^(.*)$ index.php?page=$1 [L]

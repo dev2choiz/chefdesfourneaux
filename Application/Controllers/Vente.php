@@ -18,7 +18,7 @@ class Vente extends \Library\Controller\Controller{
 
 		$this->setLayout("carousel");
 		$this->message 				= new \Library\Message\Message();
-		$this->tinyMCE 				= new \Library\TinyMCE\tinyMCE();
+		$this->tinyMCE 				= new \Library\TinyMCE\TinyMCE();
 		$this->modelProduits 		= new \Application\Models\Produit('localhost');
 		$this->modelViewProduits 	= new \Application\Models\ViewListProduits('localhost');
 		$this->modelPanier			= new \Application\Models\Panier('localhost');
@@ -33,6 +33,8 @@ class Vente extends \Library\Controller\Controller{
 	
 
 	public function indexProduitAction(){
+
+		
 
 		$produits = $this->modelProduits->getAllProduits();
 		$produits = $produits['response'];
@@ -63,7 +65,7 @@ class Vente extends \Library\Controller\Controller{
 			}
 		}
 
-		
+				
 		
 		$this->setDataView(array(
 			'message' => $this->message->showMessages(),
@@ -76,7 +78,7 @@ class Vente extends \Library\Controller\Controller{
 		$this->setStyleView('produit.css');
 
 		$this->setScriptView('produit.js');
-
+		//die("dsjfdk");
 	}
 
 	public function produitAction($idProduit){

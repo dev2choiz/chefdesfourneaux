@@ -40,7 +40,6 @@ class ViewRecette extends \Library\Model\Model{
 			if($recettes['error']){
 				$recettes = false;
 			}else{
-				echo ($recettes['page'])."<br>";
 				$recettes = $recettes['response'];
 			}
 			$tabVR[$id+''] = $recettes;

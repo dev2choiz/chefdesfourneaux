@@ -44,15 +44,22 @@
                             </div>
                             
                             <div class="animSiteFadeInNormal buttonNav col-md-6" >
-                                <div class="col-md-6" id="connection">                               
-                                    <button class="btn btn-default dropdown">
-                                        <?php if(empty($_SESSION['user'])):?>
-                                        <div class="dropdown-toggle animSiteFadeInNormal" data-toggle="dropdown" role="button" aria-expanded="false">S'inscrire / Se connecter <span class="caret"></span></div>
-                                        <?php else :?>
-                                        <div class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bienvenue <?=$_SESSION['user']['pseudo']?> <span class="caret"></span></div>
-                                        <?php endif ;?>
 
-                                        <ul class="dropdown-menu" role="menu">
+
+
+
+                                <div class="col-md-6" id="connection">
+
+
+
+                                    <div class="  dropdown animSiteFadeInNormal">
+                                        <?php if(empty($_SESSION['user'])):?>
+                                        <button class="btn btn-default dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="false" type="button" id="dropdownMenu2" >S'inscrire / Se connecter <span class="caret"></span></button>
+                                        <?php else :?>
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" type="button" id="dropdownMenu2" >Bienvenue <?=$_SESSION['user']['pseudo']?> <span class="caret"></span></button>
+                                        <?php endif ;?>
+                                    
+                                        <ul class="dropdown-menu" role="menu"  aria-labelledby="dropdownMenu2">
                                             <?php if(empty($_SESSION['user'])): ?>
                                             <li><a href="<?=LINK_ROOT.'user/inscription'?>">Inscription</a></li>
                                             <li><a href="<?=LINK_ROOT.'user/login'?>">Connexion</a></li>
@@ -76,8 +83,15 @@
                                             <?php endif; ?>
                                             
                                         </ul> 
-                                    </button>
+                                    </div>
+
+
                                 </div> <!-- /#connection -->
+
+
+
+
+
                                 <div class="panier col-md-6" id="panier">                                
                                     <?php if(!empty($_SESSION['user'])): ?> 
                                     <a class="btn btn-default lienPanier" href="<?=LINK_ROOT.'panier/indexpanier/'.$_SESSION['user']['id_user']?>">

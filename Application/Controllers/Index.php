@@ -45,7 +45,7 @@ class Index extends \Library\Controller\Controller
 		));
 
 		$this->setStyleView('index.css');
-		$this->setScriptView('index.js');
+		//$this->setScriptView('index.js');
 	}
 
 }

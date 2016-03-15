@@ -75,6 +75,11 @@ $(document).ready(function(){
       }
   });
 
+  /*$("#inputTextSearch").focusin(function(e) {
+      $("#inputTextSearch").css('border-color', '#e9af66');
+  });*/
+
+
   $('#inputTextSearch').autocomplete({
       source : function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
         jsonData = {
